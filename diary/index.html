@@ -21,73 +21,7 @@
         </div>
     </div>
     
-    <script src="../assets/js/leancloud.js"></script>
-    <script>
-        initLeanCloud();
-        
-        async function loadDiary() {
-            try {
-                const response = await fetch('data/diary.json');
-                const diaries = await response.json();
-                renderDiary(diaries);
-            } catch (error) {
-                console.error('加载失败:', error);
-            }
-        }
-       // ❌ 删除旧的 renderDiary 函数，替换为：
-
-function renderDiary(diaries) {
-    const container = document.getElementById('diary-container');
-    container.innerHTML = diaries.map(diary => `
-        <div class="diary-card" data-id="${diary.id}">
-            <div class="diary-header">
-                <h3>${diary.title}</h3>
-                <span class="diary-date">${diary.date}</span>
-            </div>
-            <div class="diary-category">
-                <span class="category-badge">${diary.category}</span>
-            </div>
-            <div class="diary-content">
-                ${diary.content.replace(/\n/g, '<br>')}
-            </div>
-            ${diary.achievement ? `
-                <div class="diary-achievement">
-                    <h4>🏆 成就</h4>
-                    <p>${diary.achievement}</p>
-                </div>
-            ` : ''}
-            ${diary.reflection ? `
-                <div class="diary-reflection">
-                    <h4>💭 反思</h4>
-                    <p>${diary.reflection}</p>
-                </div>
-            ` : ''}
-            <div class="diary-tags">
-                ${diary.tags.map(tag => `<span class="tag">#${tag}</span>`).join('')}
-            </div>
-            <div class="moment-actions">
-                <button class="like-btn" onclick="handleLike('diary', '${diary.id}')">
-                    👍 <span class="like-count">0</span>
-                </button>
-                <button class="comment-btn" onclick="showComments('${diary.id}')">
-                    💬 评论
-                </button>
-            </div>
-            <div id="comments-${diary.id}" class="comments-section" style="display:none;">
-                <!-- 评论区 -->
-            </div>
-        </div>
-    `).join('');
-    
-    diaries.forEach(diary => {
-        loadInteractions('diary', diary.id);
-    });
-}
-        loadDiary();
-    </script>
-        </nav>
-    
-    <!-- 添加Footer -->
+    <!-- Footer -->
     <footer class="social-footer">
         <div class="container">
             <div class="social-links">
@@ -108,7 +42,111 @@ function renderDiary(diaries) {
         </div>
     </footer>
 
-</body>
-</html>
+    <script src="../assets/js/leancloud.js"></script>
+    <script>
+        initLeanCloud();
+        
+        async function loadDiary() {
+            try {
+                console.log('开始加载日记数据...');
+                const response = await fetch('data/diary.json');
+                
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const diaries = await response.json();
+                console.log('日记数据:', diaries);
+                renderDiary(diaries);
+            } catch (error) {
+                console.error('加载失败:', error);
+                
+                // 如果加载失败，显示示例数据
+                const sampleDiaries = [
+                    {
+                        "id": "diary-20241225",
+                        "date": "2024-12-25",
+                        "title": "今天完成了重要的学习目标",
+                        "category": "学习成长",
+                        "content": "今天花了整个下午系统学习了新的编程技术，虽然过程有点累，但是收获很大。完成了3个练习项目，代码能力又提升了一个台阶。",
+                        "achievement": "掌握了新的编程技术栈",
+                        "reflection": "坚持的力量是巨大的，每天的积累都会变成未来的收获。",
+                        "tags": ["学习", "编程", "进步"]
+                    }
+                ];
+                renderDiary(sampleDiaries);
+            }
+        }
+        
+        function renderDiary(diaries) {
+            const container = document.getElementById('diary-container');
+            
+            if (!diaries || diaries.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #999;">暂无日记内容</p>';
+                return;
+            }
+            
+            container.innerHTML = diaries.map(diary => `
+                <div class="diary-card" data-id="${diary.id}">
+                    <div class="diary-header">
+                        <h3>${diary.title}</h3>
+                        <span class="diary-date">${diary.date}</span>
+                    </div>
+                    ${diary.category ? `
+                        <div class="diary-category">
+                            <span class="category-badge">${diary.category}</span>
+                        </div>
+                    ` : ''}
+                    <div class="diary-content">
+                        ${diary.content.replace(/\n/g, '<br>')}
+                    </div>
+                    ${diary.achievement ? `
+                        <div class="diary-achievement">
+                            <h4>🏆 成就</h4>
+                            <p>${diary.achievement}</p>
+                        </div>
+                    ` : ''}
+                    ${diary.reflection ? `
+                        <div class="diary-reflection">
+                            <h4>💭 反思</h4>
+                            <p>${diary.reflection}</p>
+                        </div>
+                    ` : ''}
+                    ${diary.tags && diary.tags.length > 0 ? `
+                        <div class="diary-tags">
+                            ${diary.tags.map(tag => `<span class="tag">#${tag}</span>`).join('')}
+                        </div>
+                    ` : ''}
+                    <div class="moment-actions">
+                        <button class="like-btn" onclick="handleLike('diary', '${diary.id}')">
+                            👍 <span class="like-count">0</span>
+                        </button>
+                        <button class="comment-btn" onclick="showComments('${diary.id}')">
+                            💬 评论
+                        </button>
+                    </div>
+                    <div id="comments-${diary.id}" class="comments-section" style="display:none;">
+                        <!-- 评论区 -->
+                    </div>
+                </div>
+            `).join('');
+            
+            // 加载互动数据
+            diaries.forEach(diary => {
+                if (typeof loadInteractions === 'function') {
+                    loadInteractions('diary', diary.id);
+                }
+            });
+        }
+        
+        // 页面加载完成后调用
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM加载完成，开始加载日记');
+            loadDiary();
+        });
+        
+        // 作为备用方案
+        loadDiary();
+    </script>
 </body>
 </html>
