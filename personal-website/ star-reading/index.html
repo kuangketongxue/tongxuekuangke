@@ -1,1 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>星空阅读室</title>
+  <link rel="stylesheet" href="../shared/global.css">
+  <link rel="stylesheet" href="reading.css">
+</head>
+<body>
+  <iframe src="../shared/nav.html" width="100%" height="70" frameborder="0" scrolling="no"></iframe>
 
+  <div class="container">
+    <h2>星空阅读室</h2>
+    <div class="article-list" id="article-list"></div> <!-- 文章列表 -->
+    <div class="article-content" id="article-content" style="margin-top: 30px;"></div> <!-- 文章内容 -->
+  </div>
+
+  <!-- 引入Markdown渲染库 -->
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="reading.js"></script>
+</body>
+</html>
