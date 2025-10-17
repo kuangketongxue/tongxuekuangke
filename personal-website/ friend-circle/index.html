@@ -1,1 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>私人朋友圈</title>
+  <link rel="stylesheet" href="../shared/global.css">
+  <link rel="stylesheet" href="circle.css">
+</head>
+<body>
+  <!-- 导航栏 -->
+  <iframe src="../shared/nav.html" width="100%" height="70" frameborder="0" scrolling="no"></iframe>
 
+  <div class="container">
+    <h2>私人朋友圈</h2>
+    <button onclick="window.location.href='publish.html'">发布新动态</button>
+    <div id="post-list"></div> <!-- 动态列表 -->
+  </div>
+
+  <script src="../shared/leancloud-init.js"></script>
+  <script src="circle.js"></script>
+</body>
+</html>
