@@ -555,3 +555,15 @@ header h1 {
 }
 
 /* 确保图
+/* ==================== 响应式设计 ==================== */
+@media (max-width: 768px) {
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .member-tip {
+        white-space: normal;
+        font-size: 0.7em;
+    }
+}
