@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>星空书柜</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --accent-1: #38bdf8;
+      --accent-2: #8b5cf6;
+      --text-primary: #f8fafc;
+      --shadow: 0 8px 30px rgba(56, 189, 248, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      background-image: 
+        radial-gradient(circle at 20% 30%, rgba(139, 92, 246, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 80% 70%, rgba(56, 189, 248, 0.1) 0%, transparent 20%);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 2rem 1rem;
+      position: relative; /* 为返回按钮的绝对定位提供参考 */
+    }
+
+    /* 新增：返回按钮样式 */
+    .back-btn {
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      padding: 0.5rem 1rem;
+      background: linear-gradient(135deg, var(--accent-2), var(--accent-1));
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      box-shadow: 0 4px 8px rgba(139, 92, 246, 0.2);
+      transition: all 0.2s ease;
+    }
+
+    .back-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 12px rgba(139, 92, 246, 0.3);
+    }
+
+    .page-header {
+      text-align: center;
+      margin-bottom: 3rem;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      /* 给头部加 padding-top，避免被返回按钮遮挡（尤其小屏幕） */
+      padding-top: 1rem;
+    }
+
+    .page-header h1 {
+      font-size: 2.2rem;
+      background: linear-gradient(90deg, var(--accent-1), var(--accent-2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      margin-bottom: 0.5rem;
+    }
+
+    .page-header p {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1rem;
+    }
+
+    .books-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 2.5rem;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .book-card {
+      position: relative;
+      transition: all 0.3s ease;
+      perspective: 1000px;
+    }
+
+    .book-card:hover {
+      transform: translateY(-8px);
+    }
+
+    .book-cover {
+      width: 100%;
+      height: 320px;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      position: relative;
+      background: linear-gradient(135deg, var(--bg-secondary), #2d3748);
+      transition: all 0.3s ease;
+    }
+
+    .book-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      opacity: 0.9;
+      transition: opacity 0.3s ease;
+    }
+
+    .book-title {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    .book-card:hover .book-title {
+      color: var(--accent-1);
+    }
+
+    .book-actions {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 1.5rem 1rem 1rem;
+      background: linear-gradient(transparent, rgba(15, 23, 42, 0.95));
+      display: flex;
+      gap: 0.8rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.3s ease;
+    }
+
+    .book-card:hover .book-actions {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .book-btn {
+      flex: 1;
+      padding: 0.6rem 0;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-pdf {
+      background: rgba(56, 189, 248, 0.9);
+      color: white;
+    }
+
+    .btn-pdf:hover {
+      background: var(--accent-1);
+      transform: scale(1.05);
+    }
+
+    .btn-notes {
+      background: rgba(139, 92, 246, 0.9);
+      color: white;
+    }
+
+    .btn-notes:hover {
+      background: var(--accent-2);
+      transform: scale(1.05);
+    }
+
+    @media (max-width: 768px) {
+      .books-container {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .book-cover {
+        height: 240px;
+      }
+
+      .page-header h1 {
+        font-size: 1.8rem;
+      }
+
+      /* 小屏幕调整返回按钮位置 */
+      .back-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+        left: 0.8rem;
+        top: 0.8rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- 新增：左上角返回按钮 -->
+  <a href="reading.html" class="back-btn">
+    <i class="fas fa-arrow-left"></i> 回到书摘室
+  </a>
+
+  <header class="page-header">
+    <h1>星空书柜</h1>
+    <p>探索认知边界 · 记录思考轨迹</p>
+  </header>
+
+  <main class="books-container">
+    <!-- 书籍1：财富的真相 -->
+    <div class="book-card">
+      <div class="book-cover">
+        <img src="images/wealth-truth.jpg" alt="财富的真相">
+        <div class="book-actions">
+          <a href="https://zh.101enfj.ru/book/27562625/fceee0/%E8%B4%A2%E5%AF%8C%E7%9A%84%E7%9C%9F%E7%9B%B8.html" class="book-btn btn-pdf" target="_blank">
+            <i class="fas fa-file-pdf"></i> PDF
+          </a>
+          <a href="https://wvwp6ekrk9f.feishu.cn/share/base/view/shrcnKX0UdYz9cVcnJsyPpW8tuf" class="book-btn btn-notes"target="_blank">
+            <i class="fas fa-book-open"></i> 笔记
+          </a>
+        </div>
+      </div>
+      <h3 class="book-title">财富的真相</h3>
+    </div>
+
+    <!-- 书籍2：专注的真相 -->
+    <div class="book-card">
+      <div class="book-cover">
+        <img src="images/focus-truth.jpg" alt="专注的真相">
+        <div class="book-actions">
+          <a href="pdfs/focus-truth.pdf" class="book-btn btn-pdf" target="_blank">
+            <i class="fas fa-file-pdf"></i> PDF
+          </a>
+          <a href="notes/focus-truth.html" class="book-btn btn-notes">
+            <i class="fas fa-book-open"></i> 笔记
+          </a>
+        </div>
+      </div>
+      <h3 class="book-title">专注的真相</h3>
+    </div>
+
+    <!-- 书籍3：请辩 -->
+    <div class="book-card">
+      <div class="book-cover">
+        <img src="images/qingbian.jpg" alt="请辩">
+        <div class="book-actions">
+          <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzI0MDg5ODA2NQ==&scene=124#wechat_redirect" class="book-btn btn-pdf" target="_blank">
+            <i class="fas fa-file-pdf"></i> PDF
+          </a>
+          <a href="notes/qingbian.html" class="book-btn btn-notes">
+            <i class="fas fa-book-open"></i> 笔记
+          </a>
+        </div>
+      </div>
+      <h3 class="book-title">请辩</h3>
+    </div>
+
+    <!-- 书籍4：蔡叔的财富秘籍 -->
+    <div class="book-card">
+      <div class="book-cover">
+        <img src="images/cai-wealth.jpg" alt="蔡叔的财富秘籍">
+        <div class="book-actions">
+          <a href="pdfs/cai-wealth.pdf" class="book-btn btn-pdf" target="_blank">
+            <i class="fas fa-file-pdf"></i> PDF
+          </a>
+          <a href="notes/cai-wealth.html" class="book-btn btn-notes">
+            <i class="fas fa-book-open"></i> 笔记
+          </a>
+        </div>
+      </div>
+      <h3 class="book-title">蔡叔的财富秘籍</h3>
+    </div>
+
+    <!-- 书籍5-10：预留空位（结构不变） -->
+    <div class="book-card">
+      <div class="book-cover">
+        <img src="images/book-placeholder.jpg" alt="书籍封面">
+        <div class="book-actions">
+          <a href="pdfs/book5.pdf" class="book-btn btn-pdf" target="_blank">
+            <i class="fas fa-file-pdf"></i> PDF
+          </a>
+          <a href="notes/book5.html" class="book-btn btn-notes">
+            <i class="fas fa-book-open"></i> 笔记
+          </a>
+        </div>
+      </div>
+      <h3 class="book-title">[书籍名称5]</h3>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">
+        <img src="images/book-placeholder.jpg" alt="书籍封面">
+        <div class="book-actions">
+          <a href="pdfs/book6.pdf" class="book-btn btn-pdf" target="_blank">
+            <i class="fas fa-file-pdf"></i> PDF
+          </a>
+          <a href="notes/book6.html" class="book-btn btn-notes">
+            <i class="fas fa-book-open"></i> 笔记
+          </a>
+        </div>
+      </div>
+      <h3 class="book-title">[书籍名称6]</h3>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">
+        <img src="images/book-placeholder.jpg" alt="书籍封面">
+        <div class="book-actions">
+          <a href="pdfs/book7.pdf" class="book-btn btn-pdf" target="_blank">
+            <i class="fas fa-file-pdf"></i> PDF
+          </a>
+          <a href="notes/book7.html" class="book-btn btn-notes">
+            <i class="fas fa-book-open"></i> 笔记
+          </a>
+        </div>
+      </div>
+      <h3 class="book-title">[书籍名称7]</h3>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">
+        <img src="images/book-placeholder.jpg" alt="书籍封面">
+        <div class="book-actions">
+          <a href="pdfs/book8.pdf" class="book-btn btn-pdf" target="_blank">
+            <i class="fas fa-file-pdf"></i> PDF
+          </a>
+          <a href="notes/book8.html" class="book-btn btn-notes">
+            <i class="fas fa-book-open"></i> 笔记
+          </a>
+        </div>
+      </div>
+      <h3 class="book-title">[书籍名称8]</h3>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">
+        <img src="images/book-placeholder.jpg" alt="书籍封面">
+        <div class="book-actions">
+          <a href="pdfs/book9.pdf" class="book-btn btn-pdf" target="_blank">
+            <i class="fas fa-file-pdf"></i> PDF
+          </a>
+          <a href="notes/book9.html" class="book-btn btn-notes">
+            <i class="fas fa-book-open"></i> 笔记
+          </a>
+        </div>
+      </div>
+      <h3 class="book-title">[书籍名称9]</h3>
+    </div>
+
+    <div class="book-card">
+      <div class="book-cover">
+        <img src="images/book-placeholder.jpg" alt="书籍封面">
+        <div class="book-actions">
+          <a href="pdfs/book10.pdf" class="book-btn btn-pdf" target="_blank">
+            <i class="fas fa-file-pdf"></i> PDF
+          </a>
+          <a href="notes/book10.html" class="book-btn btn-notes">
+            <i class="fas fa-book-open"></i> 笔记
+          </a>
+        </div>
+      </div>
+      <h3 class="book-title">[书籍名称10]</h3>
+    </div>
+  </main>
+   <footer class="social-footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://mp.weixin.qq.com/mp/profile_ext?action=home&__biz=MzkxNzcyMjAzNQ==&scene=124#wechat_redirect"
+                   target="_blank" class="social-link wechat" title="微信公众号" rel="noopener noreferrer">
+                    <i class="fab fa-weixin"></i>
+                </a>
+                <a href="https://github.com/kuangketongxue" target="_blank" class="social-link github" title="GitHub" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://x.com/kuangketongxue" target="_blank" class="social-link x" title="X (前 Twitter)" rel="noopener noreferrer">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+            </div>
+            <p class="copyright">© 2025 狂客·银河 版权所有</p>
+        </div>
+    </footer>
+</body>
+</html>
