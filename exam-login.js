@@ -1,107 +1,85 @@
-// 配置项
+// 配置区域 - 在这里修改密码和外部链接
 const CONFIG = {
-    password: 'qingyin', // 设置你的密码
-    sessionKey: 'examAccess',
-    subjects: {
-        chinese: '',    // 在这里填入语文资料链接
-        math: '',       // 在这里填入数学资料链接
-        english: '',    // 在这里填入英语资料链接
-        chemistry: '',  // 在这里填入化学资料链接
-        politics: '',   // 在这里填入政治资料链接
-        physics: ''     // 在这里填入物理资料链接
+    // 访问密码（可以修改）
+    password: "exam2024",
+    
+    // 会话有效期（24小时，单位：毫秒）
+    sessionDuration: 24 * 60 * 60 * 1000,
+    
+    // 外部链接配置
+    links: {
+        // 高考科目链接
+        gaokao: {
+            chinese: "https://example.com/gaokao/chinese",      // 语文
+            math: "https://example.com/gaokao/math",           // 数学
+            english: "https://example.com/gaokao/english",     // 英语
+            chemistry: "https://example.com/gaokao/chemistry", // 化学
+            politics: "https://example.com/gaokao/politics",   // 政治
+            physics: "https://example.com/gaokao/physics"      // 物理
+        },
+        // 考研资源链接
+        kaoyan: {
+            "kaoyan-1": "https://example.com/kaoyan/resource1",
+            "kaoyan-2": "https://example.com/kaoyan/resource2",
+            "kaoyan-3": "https://example.com/kaoyan/resource3"
+        }
     }
 };
 
-// 页面加载时检查登录状态
-window.addEventListener('DOMContentLoaded', function() {
-    const isLoggedIn = sessionStorage.getItem(CONFIG.sessionKey);
+// 检查登录状态
+function checkLoginStatus() {
+    const loginTime = localStorage.getItem('examLoginTime');
+    const currentTime = new Date().getTime();
     
-    if (isLoggedIn === 'true') {
-        // 已登录，显示主内容
-        showMainContent();
-    } else {
-        // 未登录，显示登录框
-        showLoginModal();
-    }
-
-    // 回车键登录
-    document.getElementById('passwordInput').addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-            verifyPassword();
+    if (loginTime) {
+        const timeElapsed = currentTime - parseInt(loginTime);
+        
+        // 如果在有效期内，直接显示主内容
+        if (timeElapsed < CONFIG.sessionDuration) {
+            showMainContent();
+            return true;
+        } else {
+            // 会话过期，清除登录状态
+            localStorage.removeItem('examLoginTime');
         }
-    });
-});
+    }
+    
+    return false;
+}
 
-// 显示登录模态框
-function showLoginModal() {
-    document.getElementById('loginModal').style.display = 'flex';
-    document.getElementById('mainContent').style.display = 'none';
-    document.getElementById('passwordInput').focus();
+// 密码验证函数
+function checkPassword() {
+    const passwordInput = document.getElementById('password');
+    const errorMessage = document.getElementById('errorMessage');
+    const inputPassword = passwordInput.value;
+    
+    if (inputPassword === CONFIG.password) {
+        // 密码正确，保存登录时间
+        const currentTime = new Date().getTime();
+        localStorage.setItem('examLoginTime', currentTime.toString());
+        
+        // 隐藏错误信息
+        errorMessage.style.display = 'none';
+        
+        // 显示主内容
+        showMainContent();
+        
+        // 清空密码输入框
+        passwordInput.value = '';
+    } else {
+        // 密码错误
+        errorMessage.style.display = 'block';
+        passwordInput.value = '';
+        passwordInput.focus();
+        
+        // 添加抖动效果
+        passwordInput.style.animation = 'shake 0.5s';
+        setTimeout(() => {
+            passwordInput.style.animation = '';
+        }, 500);
+    }
 }
 
 // 显示主内容
 function showMainContent() {
-    document.getElementById('loginModal').style.display = 'none';
-    document.getElementById('mainContent').style.display = 'block';
-}
-
-// 验证密码
-function verifyPassword() {
-    const inputPassword = document.getElementById('passwordInput').value;
-    const errorMessage = document.getElementById('errorMessage');
-    
-    if (inputPassword === CONFIG.password) {
-        // 密码正确
-        sessionStorage.setItem(CONFIG.sessionKey, 'true');
-        errorMessage.style.display = 'none';
-        showMainContent();
-        
-        // 清空密码输入框
-        document.getElementById('passwordInput').value = '';
-    } else {
-        // 密码错误
-        errorMessage.style.display = 'block';
-        document.getElementById('passwordInput').value = '';
-        document.getElementById('passwordInput').focus();
-        
-        // 3秒后隐藏错误提示
-        setTimeout(() => {
-            errorMessage.style.display = 'none';
-        }, 3000);
-    }
-}
-
-// 退出登录
-function logout() {
-    if (confirm('确定要退出吗？')) {
-        sessionStorage.removeItem(CONFIG.sessionKey);
-        showLoginModal();
-    }
-}
-
-// 打开科目链接
-function openSubject(subjectId, event) {
-    event.preventDefault();
-    
-    const link = CONFIG.subjects[subjectId];
-    
-    if (link && link.trim() !== '') {
-        // 如果链接存在，在新标签页打开
-        window.open(link, '_blank');
-    } else {
-        // 如果链接为空，提示用户
-        alert('该科目资料链接尚未配置，请联系管理员添加！');
-    }
-}
-
-// 防止页面后退到登录状态
-window.addEventListener('pageshow', function(event) {
-    if (event.persisted) {
-        const isLoggedIn = sessionStorage.getItem(CONFIG.sessionKey);
-        if (isLoggedIn === 'true') {
-            showMainContent();
-        } else {
-            showLoginModal();
-        }
-    }
-});
+    const loginContainer =
