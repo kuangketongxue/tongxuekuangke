@@ -1,4 +1,284 @@
- [
+// moments-data.js - 朋友圈数据管理（本地优先+LeanCloud云端补充）
+
+// ==================== 工具函数（新增：用于时间实时计算） ====================
+const TimeUtils = {
+    // 生成指定时间差的ISO时间字符串（用于模拟历史动态的具体时间）
+    getPastTime(diffHours = 0) {
+        const date = new Date();
+        date.setHours(date.getHours() - diffHours);
+        return date.toISOString(); // 输出如 "2025-10-15T10:30:00.000Z"
+    },
+
+    // 实时计算时间差描述（替代固定字符串）
+    formatRealTime(dateString) {
+        const date = new Date(dateString);
+        const now = new Date();
+        const diff = now - date;
+
+        // 时间差单位（毫秒）
+        const second = 1000;
+        const minute = 60 * second;
+        const hour = 60 * minute;
+        const day = 24 * hour;
+        const week = 7 * day;
+        const month = 30 * day;
+
+        // 实时计算并返回描述
+        if (diff < 30 * second) return '刚刚';
+        if (diff < minute) return `${Math.floor(diff / second)}秒前`;
+        if (diff < hour) return `${Math.floor(diff / minute)}分钟前`;
+        if (diff < day) return `${Math.floor(diff / hour)}小时前`;
+        if (diff < week) return `${Math.floor(diff / day)}天前`;
+        if (diff < month) return `${Math.floor(diff / week)}周前`;
+        return `${Math.floor(diff / month)}个月前`;
+    }
+};
+
+// ==================== LeanCloud 数据管理 ====================
+class MomentsData {
+    constructor() {
+        this.className = 'Moments';
+    }
+
+    // 获取所有朋友圈数据（本地优先，时间实时计算）
+    async getAllMoments() {
+        try {
+            // 优先使用本地数据，同时处理实时时间
+            if (window.localMomentsData && window.localMomentsData.length > 0) {
+                console.log('使用本地朋友圈数据（实时时间）');
+                // 对本地数据的时间进行实时计算，不修改原数据
+                return window.localMomentsData.map(item => ({
+                    ...item,
+                    timestamp: TimeUtils.formatRealTime(item.rawTime) // 用rawTime计算实时描述
+                }));
+            }
+
+            // 云端数据逻辑（保持不变，时间自动实时）
+            if (typeof AV !== 'undefined') {
+                const query = new AV.Query(this.className);
+                query.descending('createdAt');
+                query.include('author');
+                const results = await query.find();
+                
+                if (results.length === 0) {
+                    return await this.getUserMoments();
+                }
+                return this.formatMoments(results);
+            } else {
+                console.log('LeanCloud未初始化，使用默认数据（实时时间）');
+                return this.getDefaultMoments();
+            }
+        } catch (error) {
+            console.error('获取朋友圈数据失败:', error);
+            return this.getDefaultMoments();
+        }
+    }
+
+    // 从_User表获取用户数据（头像统一，时间实时）
+    async getUserMoments() {
+        try {
+            if (typeof AV === 'undefined') {
+                return this.getDefaultMoments();
+            }
+
+            const query = new AV.Query('_User');
+            const users = await query.find();
+            
+            return users.map((user, index) => {
+                const userData = user.toJSON();
+                // 计算实时时间（基于用户创建时间或模拟时间）
+                const rawTime = userData.createdAt || TimeUtils.getPastTime(index * 2); // 模拟时间差
+                return {
+                    id: userData.objectId || `user-${index}`,
+                    username: userData.username || '用户' + (index + 1),
+                    avatar: 'images/favicon.ico', // 统一头像
+                    content: userData.bio || '这是我的第一条朋友圈！',
+                    images: userData.images || [],
+                    category: this.getRandomCategory(),
+                    rawTime: rawTime, // 存储原始时间，用于实时计算
+                    timestamp: TimeUtils.formatRealTime(rawTime), // 实时时间描述
+                    likes: Math.floor(Math.random() * 50),
+                    comments: Math.floor(Math.random() * 20),
+                    isLiked: false
+                };
+            });
+        } catch (error) {
+            console.error('获取用户数据失败:', error);
+            return this.getDefaultMoments();
+        }
+    }
+
+    // 默认数据（头像统一，时间实时）
+    getDefaultMoments() {
+        const defaultRawTime = TimeUtils.getPastTime(1); // 模拟1小时前
+        return [
+            {
+                id: 'default-1',
+                username: '狂客同学',
+                avatar: 'images/favicon.ico', // 统一头像
+                content: '🌟 欢迎来到狂客·银河朋友圈！\n\n这里是分享生活点滴、记录美好时光的地方。无论是日常琐事、学习心得还是旅行见闻，都可以在这里分享。\n\n让我们一起在这片星空中，记录属于自己的精彩瞬间！✨',
+                images: [],
+                category: '生活日常',
+                rawTime: defaultRawTime, // 原始时间
+                timestamp: TimeUtils.formatRealTime(defaultRawTime), // 实时描述
+                likes: 42,
+                comments: 8,
+                isLiked: false
+            }
+        ];
+    }
+
+    // 随机获取分类（保持不变）
+    getRandomCategory() {
+        const categories = ['生活日常', '美食分享', '旅行见闻', '工作相关', '学习成长'];
+        return categories[Math.floor(Math.random() * categories.length)];
+    }
+
+    // 根据分类获取数据（时间实时计算）
+    async getMomentsByCategory(category) {
+        try {
+            // 本地数据+实时时间
+            if (window.localMomentsData && window.localMomentsData.length > 0) {
+                const processedData = window.localMomentsData.map(item => ({
+                    ...item,
+                    timestamp: TimeUtils.formatRealTime(item.rawTime)
+                }));
+                return category === 'all' 
+                    ? processedData 
+                    : processedData.filter(moment => moment.category === category);
+            }
+
+            // 云端数据逻辑（保持不变）
+            if (typeof AV !== 'undefined') {
+                const query = new AV.Query(this.className);
+                if (category !== 'all') {
+                    query.equalTo('category', category);
+                }
+                query.descending('createdAt');
+                query.include('author');
+                const results = await query.find();
+                
+                if (results.length === 0) {
+                    const userMoments = await this.getUserMoments();
+                    return category === 'all' ? userMoments : 
+                           userMoments.filter(moment => moment.category === category);
+                }
+                return this.formatMoments(results);
+            } else {
+                const defaultMoments = this.getDefaultMoments();
+                return category === 'all' ? defaultMoments : 
+                       defaultMoments.filter(moment => moment.category === category);
+            }
+        } catch (error) {
+            console.error('按分类获取数据失败:', error);
+            return this.getDefaultMoments();
+        }
+    }
+
+    // 格式化云端数据（头像统一，时间实时）
+    formatMoments(results) {
+        return results.map(item => {
+            const data = item.toJSON();
+            const author = data.author || {};
+            const rawTime = data.createdAt || TimeUtils.getPastTime(); // 原始时间
+            return {
+                id: data.objectId,
+                username: author.username || '匿名用户',
+                avatar: 'images/favicon.ico', // 统一头像
+                content: data.content || '分享了一条内容',
+                images: data.images || [],
+                category: data.category || '生活日常',
+                rawTime: rawTime, // 存储原始时间
+                timestamp: TimeUtils.formatRealTime(rawTime), // 实时描述
+                likes: data.likes || 0,
+                comments: data.commentCount || 0,
+                isLiked: false
+            };
+        });
+    }
+
+    // 点赞（保持不变，云端存储）
+    async likeMoment(momentId) {
+        try {
+            if (typeof AV !== 'undefined') {
+                const moment = AV.Object.createWithoutData(this.className, momentId);
+                moment.increment('likes');
+                await moment.save();
+            }
+            return true;
+        } catch (error) {
+            console.error('点赞失败:', error);
+            return false;
+        }
+    }
+
+    // 取消点赞（保持不变，云端存储）
+    async unlikeMoment(momentId) {
+        try {
+            if (typeof AV !== 'undefined') {
+                const moment = AV.Object.createWithoutData(this.className, momentId);
+                moment.increment('likes', -1);
+                await moment.save();
+            }
+            return true;
+        } catch (error) {
+            console.error('取消点赞失败:', error);
+            return false;
+        }
+    }
+
+    // 创建新的朋友圈（头像统一，时间实时）
+    async createMoment(content, images = [], category = '生活日常') {
+        try {
+            const rawTime = new Date().toISOString(); // 实时创建时间
+            if (typeof AV !== 'undefined') {
+                const Moment = AV.Object.extend(this.className);
+                const moment = new Moment();
+                
+                moment.set('content', content);
+                moment.set('images', images);
+                moment.set('category', category);
+                moment.set('likes', 0);
+                moment.set('commentCount', 0);
+                
+                const currentUser = AV.User.current();
+                if (currentUser) {
+                    moment.set('author', currentUser);
+                }
+                
+                await moment.save();
+                const data = moment.toJSON();
+                // 返回时补充实时时间和统一头像
+                return {
+                    ...data,
+                    avatar: 'images/favicon.ico',
+                    rawTime: rawTime,
+                    timestamp: TimeUtils.formatRealTime(rawTime)
+                };
+            }
+            // 本地创建时的返回格式
+            return {
+                id: TimeUtils.getPastTime().replace(/\D/g, ''), // 用时间生成唯一ID
+                username: '狂客同学',
+                avatar: 'images/favicon.ico',
+                content: content,
+                images: images,
+                category: category,
+                rawTime: rawTime,
+                timestamp: TimeUtils.formatRealTime(rawTime),
+                likes: 0,
+                comments: 0,
+                isLiked: false
+            };
+        } catch (error) {
+            console.error('创建朋友圈失败:', error);
+            throw error;
+        }
+    }
+}
+
+// ==================== 本地朋友圈数据（头像统一+实时时间） ====================
+const localMomentsData = [
     {
         id: 22,
         username: '狂客同学',
@@ -285,4 +565,21 @@
         comments: 2,
         isLiked: false
     }
-]
+];
+
+// ==================== 全局暴露（保持与script.js兼容） ====================
+if (typeof window !== 'undefined') {
+    window.TimeUtils = TimeUtils; // 暴露时间工具函数（可选扩展）
+    window.localMomentsData = localMomentsData;
+    window.MomentsData = MomentsData;
+    window.momentsData = new MomentsData();
+    console.log('朋友圈数据加载完成（头像统一+实时时间）:', localMomentsData.length, '条记录');
+}
+
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        TimeUtils,
+        MomentsData,
+        localMomentsData
+    };
+}
