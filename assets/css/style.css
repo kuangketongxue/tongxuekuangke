@@ -360,3 +360,114 @@ header h1 {
         grid-template-columns: repeat(2, 1fr);
     }
 }
+/* 分类徽章 */
+.category-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    margin-bottom: 15px;
+}
+
+/* 成就部分 */
+.diary-achievement {
+    background: linear-gradient(135deg, #fff9e6 0%, #ffe4b3 100%);
+    border-left: 4px solid #ffd700;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 8px;
+}
+
+.diary-achievement h4 {
+    color: #d4af37;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+.diary-achievement p {
+    color: #8b6914;
+    line-height: 1.6;
+}
+
+/* 反思部分 */
+.diary-reflection {
+    background: linear-gradient(135deg, #e6f7ff 0%, #bae7ff 100%);
+    border-left: 4px solid #1890ff;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 8px;
+}
+
+.diary-reflection h4 {
+    color: #1890ff;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+.diary-reflection p {
+    color: #0050b3;
+    line-height: 1.6;
+}
+
+/* 标签样式增强 */
+.diary-tags {
+    margin: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tag {
+    display: inline-block;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: 500;
+    transition: transform 0.2s;
+}
+
+.tag:hover {
+    transform: translateY(-2px);
+}
+
+/* 日记卡片增强 */
+.diary-card {
+    background: white;
+    border-radius: 20px;
+    padding: 30px;
+    margin-bottom: 25px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    border: 1px solid #f0f0f0;
+    transition: all 0.3s;
+}
+
+.diary-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+/* 日记内容样式 */
+.diary-content {
+    color: #333;
+    line-height: 1.9;
+    font-size: 1.05em;
+    margin: 20px 0;
+    padding: 20px;
+    background: #fafafa;
+    border-radius: 12px;
+    border-left: 4px solid #667eea;
+}
+
+/* 日期样式 */
+.diary-date {
+    background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    color: #666;
+    font-weight: 500;
+}
