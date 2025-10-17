@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-    max-width: 900px;
+    max-width: 1100px; /* 增加容器宽度以容纳4个卡片 */
     margin: 0 auto;
     background: white;
     border-radius: 20px;
@@ -48,7 +48,7 @@ header h1 {
     text-decoration: underline;
 }
 
-/* 导航卡片 */
+/* ==================== 导航卡片 ==================== */
 .nav-section {
     margin-bottom: 40px;
 }
@@ -56,11 +56,20 @@ header h1 {
 .nav-section h2 {
     margin-bottom: 20px;
     color: #333;
+    font-size: 1.6em;
 }
 
-.nav-grid {
+/* 免费专区 - 2x2 网格 */
+.nav-section.free .nav-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* 会员专区 - 2x2 网格 */
+.nav-section.premium .nav-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
 
@@ -72,6 +81,9 @@ header h1 {
     text-decoration: none;
     transition: all 0.3s;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 150px;
 }
 
 .nav-card:hover {
@@ -89,8 +101,10 @@ header h1 {
 .nav-card p {
     color: #666;
     font-size: 0.95em;
+    flex-grow: 1;
 }
 
+/* 会员卡片特殊样式 */
 .premium-card {
     border-color: #ffd700;
     background: linear-gradient(135deg, #fff9e6 0%, #ffe4b3 100%);
@@ -102,13 +116,14 @@ header h1 {
     right: 10px;
     background: #ffd700;
     color: #333;
-    padding: 5px 10px;
+    padding: 5px 12px;
     border-radius: 20px;
     font-size: 0.8em;
     font-weight: bold;
+    box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
 }
 
-/* 朋友圈/日记卡片 */
+/* ==================== 朋友圈/日记卡片 ==================== */
 .moment-card, .diary-card {
     background: #f9f9f9;
     border-radius: 15px;
@@ -153,7 +168,7 @@ header h1 {
     cursor: pointer;
 }
 
-/* 标签 */
+/* ==================== 标签 ==================== */
 .diary-tags {
     margin: 15px 0;
 }
@@ -168,7 +183,7 @@ header h1 {
     margin-right: 8px;
 }
 
-/* 互动按钮 */
+/* ==================== 互动按钮 ==================== */
 .moment-actions {
     display: flex;
     gap: 15px;
@@ -192,7 +207,7 @@ header h1 {
     background: #f0f0f0;
 }
 
-/* 评论区 */
+/* ==================== 评论区 ==================== */
 .comments-section {
     margin-top: 20px;
     padding-top: 20px;
@@ -255,7 +270,7 @@ header h1 {
     line-height: 1.6;
 }
 
-/* 文章卡片 */
+/* ==================== 文章卡片 ==================== */
 .article-card {
     background: white;
     border: 1px solid #e0e0e0;
@@ -306,7 +321,7 @@ header h1 {
     text-decoration: underline;
 }
 
-/* 分类按钮 */
+/* ==================== 分类按钮 ==================== */
 .reading-categories {
     display: flex;
     gap: 10px;
@@ -335,32 +350,14 @@ header h1 {
     border-color: #667eea;
 }
 
-/* 加载动画 */
+/* ==================== 加载动画 ==================== */
 .loading {
     text-align: center;
     padding: 40px;
     color: #999;
 }
 
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .container {
-        padding: 20px;
-    }
-    
-    header h1 {
-        font-size: 1.8em;
-    }
-    
-    .nav-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .moment-images {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}
-/* 分类徽章 */
+/* ==================== 分类徽章 ==================== */
 .category-badge {
     display: inline-block;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -371,7 +368,7 @@ header h1 {
     margin-bottom: 15px;
 }
 
-/* 成就部分 */
+/* ==================== 成就部分 ==================== */
 .diary-achievement {
     background: linear-gradient(135deg, #fff9e6 0%, #ffe4b3 100%);
     border-left: 4px solid #ffd700;
@@ -391,7 +388,7 @@ header h1 {
     line-height: 1.6;
 }
 
-/* 反思部分 */
+/* ==================== 反思部分 ==================== */
 .diary-reflection {
     background: linear-gradient(135deg, #e6f7ff 0%, #bae7ff 100%);
     border-left: 4px solid #1890ff;
@@ -411,7 +408,7 @@ header h1 {
     line-height: 1.6;
 }
 
-/* 标签样式增强 */
+/* ==================== 标签样式增强 ==================== */
 .diary-tags {
     margin: 20px 0;
     display: flex;
@@ -434,7 +431,7 @@ header h1 {
     transform: translateY(-2px);
 }
 
-/* 日记卡片增强 */
+/* ==================== 日记卡片增强 ==================== */
 .diary-card {
     background: white;
     border-radius: 20px;
@@ -450,7 +447,7 @@ header h1 {
     box-shadow: 0 10px 30px rgba(0,0,0,0.15);
 }
 
-/* 日记内容样式 */
+/* ==================== 日记内容样式 ==================== */
 .diary-content {
     color: #333;
     line-height: 1.9;
@@ -462,7 +459,7 @@ header h1 {
     border-left: 4px solid #667eea;
 }
 
-/* 日期样式 */
+/* ==================== 日期样式 ==================== */
 .diary-date {
     background: linear-gradient(135deg, #f5f5f5 0%, #e8e8e8 100%);
     padding: 6px 12px;
@@ -471,10 +468,8 @@ header h1 {
     color: #666;
     font-weight: 500;
 }
-/* ==================== Footer 样式 ==================== */
 
 /* ==================== Footer 样式 ==================== */
-
 .social-footer {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
@@ -535,88 +530,4 @@ header h1 {
     border-color: #000;
 }
 
-/* 确保图标正常显示 */
-.social-link i {
-    display: block;
-    line-height: 1;
-}
-
-.social-link svg {
-    display: block;
-}
-
-.copyright {
-    font-size: 0.95em;
-    color: rgba(255, 255, 255, 0.95);
-    margin: 20px 0 0 0;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.3);
-    letter-spacing: 0.5px;
-}
-
-/* 响应式设计 */
-@media (max-width: 768px) {
-    .social-links {
-        gap: 20px;
-    }
-    
-    .social-link {
-        width: 45px;
-        height: 45px;
-        font-size: 20px;
-    }
-    
-    .copyright {
-        font-size: 0.85em;
-    }
-}
-
-@media (max-width: 480px) {
-    .social-footer {
-        padding: 30px 15px;
-    }
-    
-    .social-links {
-        gap: 15px;
-    }
-    
-    .social-link {
-        width: 40px;
-        height: 40px;
-        font-size: 18px;
-    }
-}
-/* 成就样式 */
-.diary-achievement, .diary-reflection {
-    background: #f0f9ff;
-    border-left: 4px solid #3b82f6;
-    padding: 15px;
-    margin: 15px 0;
-    border-radius: 8px;
-}
-
-.diary-achievement h4, .diary-reflection h4 {
-    color: #3b82f6;
-    margin-bottom: 8px;
-    font-size: 1.1em;
-}
-
-.diary-achievement p, .diary-reflection p {
-    color: #4b5563;
-    line-height: 1.6;
-    margin: 0;
-}
-
-/* 分类标签 */
-.diary-category {
-    margin: 10px 0;
-}
-
-.category-badge {
-    background: #8b5cf6;
-    color: white;
-    padding: 4px 12px;
-    border-radius: 15px;
-    font-size: 0.85em;
-    font-weight: 500;
-}
+/* 确保图
