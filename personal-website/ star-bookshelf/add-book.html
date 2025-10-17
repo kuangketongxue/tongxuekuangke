@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>添加书籍</title>
+  <link rel="stylesheet" href="../shared/global.css">
+</head>
+<body>
+  <iframe src="../shared/nav.html" width="100%" height="70" frameborder="0" scrolling="no"></iframe>
+
+  <div class="container">
+    <h2>添加书籍到书柜</h2>
+    <input type="text" id="title" placeholder="书名（必填）"><br>
+    <input type="text" id="author" placeholder="作者"><br>
+    <input type="text" id="coverUrl" placeholder="封面图片URL（可选）"><br>
+    <select id="status">
+      <option value="want">想读</option>
+      <option value="reading">在读</option>
+      <option value="read">已读</option>
+    </select><br>
+    <button onclick="addBook()">保存</button>
+    <button onclick="window.location.href='index.html'">取消</button>
+  </div>
+
+  <script src="../shared/leancloud-init.js"></script>
+  <script>
+    if (!AV.User.current()) {
+      alert('请先登录！');
+      window.location.href = '../shared/login.html';
+    }
+
+    function addBook() {
+      const title = document.getElementById('title').value.trim();
+      if (!title) { alert('请输入书名！'); return; }
+      
+      const Book = AV.Object.extend('Book');
+      const book = new Book();
+      book.set('title', title);
+      book.set('author', document.getElementById('author').value);
+      book.set('coverUrl', document.getElementById('coverUrl').value);
+      book.set('status', document.getElementById('status').value);
+      
+      book.save().then(() => {
+        alert('添加成功！');
+        window.location.href = 'index.html';
+      }).catch(err => alert('添加失败：' + err.message));
+    }
+  </script>
+</body>
+</html>
