@@ -471,3 +471,105 @@ header h1 {
     color: #666;
     font-weight: 500;
 }
+/* ==================== Footer 样式 ==================== */
+
+.social-footer {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 40px 20px;
+    margin-top: 60px;
+    text-align: center;
+    border-top: 3px solid #667eea;
+}
+
+.social-footer .container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.social-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    font-size: 24px;
+    transition: all 0.3s ease;
+    border: 2px solid white;
+}
+
+.social-link:hover {
+    background: white;
+    color: #667eea;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.social-link.wechat:hover {
+    border-color: #09b83e;
+    color: #09b83e;
+}
+
+.social-link.github:hover {
+    border-color: #333;
+    color: #333;
+}
+
+.social-link.x:hover {
+    border-color: #000;
+    color: #000;
+}
+
+.copyright {
+    font-size: 0.95em;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 20px 0 0 0;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .social-links {
+        gap: 15px;
+    }
+    
+    .social-link {
+        width: 45px;
+        height: 45px;
+        font-size: 20px;
+    }
+    
+    .copyright {
+        font-size: 0.85em;
+    }
+}
+
+@media (max-width: 480px) {
+    .social-footer {
+        padding: 30px 15px;
+    }
+    
+    .social-links {
+        gap: 10px;
+    }
+    
+    .social-link {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        border-width: 1px;
+    }
+}
