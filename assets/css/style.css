@@ -59,11 +59,25 @@ header h1 {
     font-size: 1.6em;
 }
 
-/* 免费专区 - 2x2 网格 */
+/* 免费专区 - 3列布局 */
 .nav-section.free .nav-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
+}
+
+/* 平板设备 */
+@media (max-width: 1024px) {
+    .nav-section.free .nav-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* 手机设备 */
+@media (max-width: 600px) {
+    .nav-section.free .nav-grid {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* 会员专区 - 2x2 网格 */
