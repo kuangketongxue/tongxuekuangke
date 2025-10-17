@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>私人朋友圈</title>
+    
+    <!-- Font Awesome 库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <link rel="stylesheet" href="../assets/css/style.css">
     <script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.15.0/dist/av-min.js"></script>
 </head>
@@ -21,6 +24,27 @@
         
         <div class="loading">加载中...</div>
     </div>
+    
+    <!-- Footer -->
+    <footer class="social-footer">
+        <div class="container">
+            <div class="social-links">
+                <a href="https://open.weixin.qq.com/qr/code?username=gh_ba5b6bb6bd89"
+                   target="_blank" class="social-link wechat" title="微信公众号" rel="noopener noreferrer">
+                    <i class="fab fa-weixin"></i>
+                </a>
+                <a href="https://github.com/kuangketongxue" target="_blank" class="social-link github" title="GitHub" rel="noopener noreferrer">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="https://x.com/kuangketongxue" target="_blank" class="social-link x" title="X (前 Twitter)" rel="noopener noreferrer">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                    </svg>
+                </a>
+            </div>
+            <p class="copyright">© 2025 狂客·银河 版权所有</p>
+        </div>
+    </footer>
     
     <script src="../assets/js/leancloud.js"></script>
     <script>
@@ -69,7 +93,6 @@
                 </div>
             `).join('');
             
-            // 加载点赞和评论数据
             moments.forEach(moment => {
                 loadInteractions('moments', moment.id);
             });
@@ -77,30 +100,5 @@
         
         loadMoments();
     </script>
-        </nav>
-    
-    <!-- 添加Footer -->
-    <footer class="social-footer">
-        <div class="container">
-            <div class="social-links">
-                <a href="https://open.weixin.qq.com/qr/code?username=gh_ba5b6bb6bd89"
-                   target="_blank" class="social-link wechat" title="微信公众号" rel="noopener noreferrer">
-                    <i class="fab fa-weixin"></i>
-                </a>
-                <a href="https://github.com/kuangketongxue" target="_blank" class="social-link github" title="GitHub" rel="noopener noreferrer">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://x.com/kuangketongxue" target="_blank" class="social-link x" title="X (前 Twitter)" rel="noopener noreferrer">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                    </svg>
-                </a>
-            </div>
-            <p class="copyright">© 2025 狂客·银河 版权所有</p>
-        </div>
-    </footer>
-
-</body>
-</html>
 </body>
 </html>
