@@ -33,40 +33,55 @@
                 console.error('加载失败:', error);
             }
         }
-        
-        function renderDiary(diaries) {
-            const container = document.getElementById('diary-container');
-            container.innerHTML = diaries.map(diary => `
-                <div class="diary-card" data-id="${diary.id}">
-                    <div class="diary-header">
-                        <h3>${diary.title}</h3>
-                        <span class="diary-date">${diary.date}</span>
-                    </div>
-                    <div class="diary-content">
-                        ${diary.content}
-                    </div>
-                    <div class="diary-tags">
-                        ${diary.tags.map(tag => `<span class="tag">#${tag}</span>`).join('')}
-                    </div>
-                    <div class="moment-actions">
-                        <button class="like-btn" onclick="handleLike('diary', '${diary.id}')">
-                            👍 <span class="like-count">0</span>
-                        </button>
-                        <button class="comment-btn" onclick="showComments('${diary.id}')">
-                            💬 评论
-                        </button>
-                    </div>
-                    <div id="comments-${diary.id}" class="comments-section" style="display:none;">
-                        <!-- 评论区 -->
-                    </div>
+       // ❌ 删除旧的 renderDiary 函数，替换为：
+
+function renderDiary(diaries) {
+    const container = document.getElementById('diary-container');
+    container.innerHTML = diaries.map(diary => `
+        <div class="diary-card" data-id="${diary.id}">
+            <div class="diary-header">
+                <h3>${diary.title}</h3>
+                <span class="diary-date">${diary.date}</span>
+            </div>
+            <div class="diary-category">
+                <span class="category-badge">${diary.category}</span>
+            </div>
+            <div class="diary-content">
+                ${diary.content.replace(/\n/g, '<br>')}
+            </div>
+            ${diary.achievement ? `
+                <div class="diary-achievement">
+                    <h4>🏆 成就</h4>
+                    <p>${diary.achievement}</p>
                 </div>
-            `).join('');
-            
-            diaries.forEach(diary => {
-                loadInteractions('diary', diary.id);
-            });
-        }
-        
+            ` : ''}
+            ${diary.reflection ? `
+                <div class="diary-reflection">
+                    <h4>💭 反思</h4>
+                    <p>${diary.reflection}</p>
+                </div>
+            ` : ''}
+            <div class="diary-tags">
+                ${diary.tags.map(tag => `<span class="tag">#${tag}</span>`).join('')}
+            </div>
+            <div class="moment-actions">
+                <button class="like-btn" onclick="handleLike('diary', '${diary.id}')">
+                    👍 <span class="like-count">0</span>
+                </button>
+                <button class="comment-btn" onclick="showComments('${diary.id}')">
+                    💬 评论
+                </button>
+            </div>
+            <div id="comments-${diary.id}" class="comments-section" style="display:none;">
+                <!-- 评论区 -->
+            </div>
+        </div>
+    `).join('');
+    
+    diaries.forEach(diary => {
+        loadInteractions('diary', diary.id);
+    });
+}
         loadDiary();
     </script>
 </body>
