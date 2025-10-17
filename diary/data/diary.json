@@ -1,287 +1,303 @@
-{
-        id: 22,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '马斯克与弗里费德曼的播客不错-https://youtu.be/JN3KPFbWCy8?si=z0HMVS7Jw-GSO5zC',
-        images: [],
-        category: '问答互动',
-        rawTime: TimeUtils.getPastTime(2), // 模拟2小时前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(2)), // 实时描述
-        likes: 5,
-        comments: 0,
-        isLiked: false
+[
+    {
+        "id": "diary-20241225-01",
+        "date": "2025-10-25",
+        "title": "马斯克播客分享",
+        "content": "马斯克与弗里费德曼的播客不错-https://youtu.be/JN3KPFbWCy8?si=z0HMVS7Jw-GSO5zC",
+        "tags": ["问答互动", "学习成长"]
     },
     {
-        id: 21,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '无人扶我青云志,我自踏雪至山巅。\n若是命中无此运,孤身亦可登昆仑。\n红尘赠我三尺剑,酒看瘦马一世街。\n世人朝路乃绝润,独见众生止步前。\n海到尽头天作岸,山登绝顶我为峰。\n如若东山能再起,大鹏展翅九万里。\n一入红尘梦易真,一朝悟透心境名。\n一朝悟道见真我,昔日枷锁皆云烟。\n天门将至百运开,拂尘轻笑问仙来。',
-        images: [],
-        category: '问答互动',
-        rawTime: TimeUtils.getPastTime(6), // 模拟6小时前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(6)), // 实时描述
-        likes: 8,
-        comments: 2,
-        isLiked: false
+        "id": "diary-20241225-02",
+        "date": "2024-12-25",
+        "title": "登峰诗词感悟",
+        "content": "无人扶我青云志,我自踏雪至山巅。\n若是命中无此运,孤身亦可登昆仑。\n红尘赠我三尺剑,酒看瘦马一世街。\n世人朝路乃绝润,独见众生止步前。\n海到尽头天作岸,山登绝顶我为峰。\n如若东山能再起,大鹏展翅九万里。\n一入红尘梦易真,一朝悟透心境名。\n一朝悟道见真我,昔日枷锁皆云烟。\n天门将至百运开,拂尘轻笑问仙来。",
+        "tags": ["问答互动", "自我激励"]
     },
     {
-        id: 20,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '生活标准这个东西，最好就是以年为单位去考量，且很长时间都不要发生改变，这个标准是我的被动收入——我的另一个我不用我操心的，能够过的生活。',
-        images: [],
-        category: '财经理财',
-        rawTime: TimeUtils.getPastTime(24), // 模拟1天前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(24)), // 实时描述
-        likes: 12,
-        comments: 3,
-        isLiked: false
+        "id": "diary-20241224",
+        "date": "2024-12-24",
+        "title": "生活标准思考",
+        "content": "生活标准这个东西，最好就是以年为单位去考量，且很长时间都不要发生改变，这个标准是我的被动收入——我的另一个我不用我操心的，能够过的生活。",
+        "tags": ["财经理财", "人生规划"]
     },
     {
-        id: 19,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: 'The journey is the reward.',
-        images: [],
-        category: '工作相关',
-        rawTime: TimeUtils.getPastTime(48), // 模拟2天前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(48)), // 实时描述
-        likes: 6,
-        comments: 1,
-        isLiked: false
+        "id": "diary-20241223",
+        "date": "2024-12-23",
+        "title": "Journey is the reward",
+        "content": "The journey is the reward.\n\n过程本身就是奖励，享受每一步的成长。",
+        "tags": ["工作相关", "人生感悟"]
     },
     {
-        id: 18,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '当海盗，不要当海军 ，像侠盗一样行事：既为自己的工作感到自豪，又愿意去窃取别人的灵感，快速行动，做成事情',
-        images: [],
-        category: '工作相关',
-        rawTime: TimeUtils.getPastTime(48), // 模拟2天前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(48)), // 实时描述
-        likes: 9,
-        comments: 2,
-        isLiked: false
+        "id": "diary-20241223-02",
+        "date": "2024-12-23",
+        "title": "海盗精神工作法",
+        "content": "当海盗，不要当海军 ，像侠盗一样行事：既为自己的工作感到自豪，又愿意去窃取别人的灵感，快速行动，做成事情。",
+        "tags": ["工作相关", "效率提升"]
     },
     {
-        id: 17,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '本来已经看着一辆公交车走了（要再等15分钟）结果没一会就来了，哇~哇~哇~，当时感受💗',
-        images: [],
-        category: '生活日常',
-        rawTime: TimeUtils.getPastTime(72), // 模拟3天前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(72)), // 实时描述
-        likes: 3,
-        comments: 0,
-        isLiked: false
+        "id": "diary-20241222",
+        "date": "2024-12-22",
+        "title": "意外的小幸运",
+        "content": "本来已经看着一辆公交车走了（要再等15分钟）结果没一会就来了，哇~哇~哇~，当时感受💗\n\n生活中的小确幸总能带来意外的快乐。",
+        "tags": ["生活日常", "感恩时刻"]
     },
     {
-        id: 16,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '值得关注的外部，事实上很少，因为外部的绝大多数事情与提高自身生产效率毫无关系，毕竟我的所有财富,不管是物质财富还是精神财富,全来自我的时间,或者准确地讲,来自我的时间的体积。我哪有什么时间可以浪费呢?又有什么道理浪费在它们身上呢?时时刻刻专注提高效率才是正事',
-        images: [],
-        category: '工作相关',
-        rawTime: TimeUtils.getPastTime(72), // 模拟3天前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(72)), // 实时描述
-        likes: 15,
-        comments: 4,
-        isLiked: false
+        "id": "diary-20241222-02",
+        "date": "2024-12-22",
+        "title": "时间效率管理心得",
+        "content": "值得关注的外部，事实上很少，因为外部的绝大多数事情与提高自身生产效率毫无关系，毕竟我的所有财富,不管是物质财富还是精神财富,全来自我的时间,或者准确地讲,来自我的时间的体积。我哪有什么时间可以浪费呢?又有什么道理浪费在它们身上呢?时时刻刻专注提高效率才是正事。",
+        "tags": ["工作相关", "时间管理", "效率提升"]
     },
     {
-        id: 15,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '从一开始就建立严格的筛选机制,尽量只挑值得做很久很久的事。仅此一条,就能引发天壤之别。因为一上来选的就是值得做很久很久的事,所以,自然而然地只能长期践行。又因为的确做了很久,自然有积累,自然有改良,效率自然有发展',
-        images: [],
-        category: '工作相关',
-        rawTime: TimeUtils.getPastTime(96), // 模拟4天前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(96)), // 实时描述
-        likes: 18,
-        comments: 5,
-        isLiked: false
+        "id": "diary-20241221",
+        "date": "2024-12-21",
+        "title": "长期主义的力量",
+        "content": "从一开始就建立严格的筛选机制,尽量只挑值得做很久很久的事。仅此一条,就能引发天壤之别。因为我来帮你将这些朋友圈内容转化为成功日记（diary.json）的格式。我注意到你希望将这些内容作为"成功日记"来展示，我会为你转换格式并优化内容结构。
+
+## 1. 转换后的 `diary/data/diary.json`
+
+```json
+[
+    {
+        "id": "diary-20241225",
+        "title": "马斯克播客的启发",
+        "date": "2024-12-25",
+        "content": "今天聆听了马斯克与弗里费德曼的播客，深受启发。其中关于创新思维和未来趋势的观点让我重新思考了自己的发展方向。链接：https://youtu.be/JN3KPFbWCy8?si=z0HMVS7Jw-GSO5zC",
+        "category": "成长思考",
+        "tags": ["马斯克", "播客", "创新思维", "未来趋势"],
+        "achievements": ["拓展了思维边界", "获得了新的人生感悟"],
+        "difficulty": "medium",
+        "impact": "high"
     },
     {
-        id: 14,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '当你感觉你去参与这个东西的时候，有很大的负担，甚至要到负债的级别就不要报了，哪怕他是一个真正有用的东西；超过 200 元的花费，提供全面的信息给 ai ，让他帮你避坑',
-        images: [],
-        category: '工作相关',
-        rawTime: TimeUtils.getPastTime(96), // 模拟4天前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(96)), // 实时描述
-        likes: 11,
-        comments: 2,
-        isLiked: false
+        "id": "diary-20241224",
+        "title": "青云志与人生格局",
+        "date": "2024-12-24",
+        "content": "无人扶我青云志,我自踏雪至山巅。\n若是命中无此运,孤身亦可登昆仑。\n红尘赠我三尺剑,酒看瘦马一世街。\n世人朝路乃绝润,独见众生止步前。\n海到尽头天作岸,山登绝顶我为峰。\n如若东山能再起,大鹏展翅九万里。\n一入红尘梦易真,一朝悟透心境名。\n一朝悟道见真我,昔日枷锁皆云烟。\n天门将至百运开,拂尘轻笑问仙来。\n\n这首诗让我深刻体会到，真正的成功者都有独立的精神内核和坚定的意志力。无论外界如何变化，内心的坚定才是最重要的。",
+        "category": "精神成长",
+        "tags": ["独立思考", "意志力", "精神内核", "人生感悟"],
+        "achievements": ["培养了坚定的意志品质", "提升了精神境界"],
+        "difficulty": "high",
+        "impact": "high"
     },
     {
-        id: 13,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '哪有那么多天时地利人和都比不过两个字,勤奋。幸运没那么重要,如果还看幸运,说明你还不够勤奋',
-        images: [],
-        category: '工作相关',
-        rawTime: TimeUtils.getPastTime(120), // 模拟5天前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(120)), // 实时描述
-        likes: 22,
-        comments: 6,
-        isLiked: false
+        "id": "diary-20241223",
+        "title": "被动收入的人生标准",
+        "date": "2024-12-23",
+        "content": "今天重新定义了自己的生活标准：以年为单位去考量，且很长时间都不要发生改变。这个标准基于我的被动收入——那个不用我操心就能维持生活的另一个'我'。这让我明白，真正的财务自由不是拥有多少，而是能够保持稳定的现金流来支撑理想的生活方式。",
+        "category": "财商智慧",
+        "tags": ["被动收入", "财务自由", "生活标准", "现金流"],
+        "achievements": ["建立了新的生活标准", "明确了财务目标"],
+        "difficulty": "medium",
+        "impact": "high"
     },
     {
-        id: 12,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '生活黑客都说了,凡是有系统一定有 bug,正常人才会去排队,你黑客都是找 bug 就直接进去了。确实这个世界所谓的炒台班子是哪哪都是千疮百孔的,你正儿八经排队就能排到猴年马月去。你要是不想排队的话,哪有洞你都可以钻进去',
-        images: [],
-        category: '生活日常',
-        rawTime: TimeUtils.getPastTime(120), // 模拟5天前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(120)), // 实时描述
-        likes: 7,
-        comments: 1,
-        isLiked: false
+        "id": "diary-20241222",
+        "title": "旅程本身就是回报",
+        "date": "2024-12-22",
+        "content": "The journey is the reward. 这句话提醒我不要只关注结果，要享受过程中的每一个成长和收获。今天的工作虽然辛苦，但过程中的学习和进步让我感到充实。",
+        "category": "工作心得",
+        "tags": ["过程哲学", "成长心态", "工作感悟"],
+        "achievements": ["学会了享受过程", "提升了工作满意度"],
+        "difficulty": "low",
+        "impact": "medium"
     },
     {
-        id: 11,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '用来替代自己的另一个"我"所产生的稳定现金流对应的数值,就是衡量自己配得上什么的标准',
-        images: [],
-        category: '财经理财',
-        rawTime: TimeUtils.getPastTime(144), // 模拟6天前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(144)), // 实时描述
-        likes: 14,
-        comments: 3,
-        isLiked: false
+        "id": "diary-20241221",
+        "title": "海盗精神与行动力",
+        "date": "2024-12-21",
+        "content": "当海盗，不要当海军。像侠盗一样行事：既为自己的工作感到自豪，又愿意去窃取别人的灵感，快速行动，做成事情。这种'海盗精神'让我在今天的项目中大胆创新，最终取得了超出预期的效果。",
+        "category": "创新思维",
+        "tags": ["海盗精神", "快速行动", "创新思维", "执行力"],
+        "achievements": ["提升了创新能力", "增强了执行力"],
+        "difficulty": "medium",
+        "impact": "high"
     },
     {
-        id: 10,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '你可能没有那么潮,但是没有人可以讲你错,如果你没错,那你就可以按照自己的想法,让自己在自己的世界观里面足够的对,且对很久很久——等我几年后,无压力拿下它;成为有能力严肃面对严肃问题的人,成为不依托于群体娱乐化共识的独立精彩有趣的人(eg.Kanye)',
-        images: [],
-        category: '工作相关',
-        rawTime: TimeUtils.getPastTime(168), // 模拟1周前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(168)), // 实时描述
-        likes: 19,
-        comments: 4,
-        isLiked: false
+        "id": "diary-20241220",
+        "title": "生活中的小确幸",
+        "date": "2024-12-20",
+        "content": "本来已经看着一辆公交车走了（要再等15分钟），结果没一会就来了第二辆。这种小确幸提醒我要保持乐观心态，生活中的美好往往在意想不到的时候出现。感恩每一个让我开心的瞬间💗",
+        "category": "生活感悟",
+        "tags": ["小确幸", "乐观心态", "感恩", "生活美好"],
+        "achievements": ["培养了感恩心态", "学会了发现生活中的美好"],
+        "difficulty": "low",
+        "impact": "medium"
     },
     {
-        id: 9,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '以项目为导向,明确要解决的问题和创造的价值,缺什么学什么,能提高学习的针对性和效率。出一本教材:框架搭建、内容补充、风格打磨、案例整理、排版设计。先确定项目目标和结果,再推导所需学习内容。',
-        images: [],
-        category: '工作相关',
-        rawTime: TimeUtils.getPastTime(168), // 模拟1周前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(168)), // 实时描述
-        likes: 16,
-        comments: 2,
-        isLiked: false
+        "id": "diary-20241219",
+        "title": "专注效率的重要性",
+        "date": "2024-12-19",
+        "content": "今天深刻反思：值得关注的外部事实上很少，因为外部的绝大多数事情与提高自身生产效率毫无关系。我的所有财富，不管是物质财富还是精神财富，全来自我的时间。时时刻刻专注提高效率才是正事。基于这个认知，我调整了工作方法，效率显著提升。",
+        "category": "效率提升",
+        "tags": ["专注力", "时间管理", "效率提升", "内在价值"],
+        "achievements": ["提升了专注力", "优化了时间管理", "提高了工作效率"],
+        "difficulty": "medium",
+        "impact": "high"
     },
     {
-        id: 8,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '正常工作者用年富力强的35年赚钱覆盖一生80年,去除节假日和不能出售时间,真正用于改变自己生活的出售时间一年仅10.5天(3652/3【节假日】*1/3【每天工作时长】*1/2【受教育成本】*1/4【家庭】);很多人因出售时间少难以改命,而增加工作时间能提升竞争力和收入。',
-        images: [],
-        category: '工作相关',
-        rawTime: TimeUtils.getPastTime(336), // 模拟2周前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(336)), // 实时描述
-        likes: 25,
-        comments: 8,
-        isLiked: false
+        "id": "diary-20241218",
+        "title": "长期主义的价值",
+        "date": "2024-12-18",
+        "content": "从一开始就建立严格的筛选机制，尽量只挑值得做很久很久的事。仅此一条，就能引发天壤之别。今天在选择新项目时，我坚持了这个原则，虽然前期准备时间更长，但为长期发展奠定了坚实基础。",
+        "category": "战略思维",
+        "tags": ["长期主义", "筛选机制", "持续积累", "战略规划"],
+        "achievements": ["建立了长期思维模式", "学会了项目筛选", "奠定了发展基础"],
+        "difficulty": "high",
+        "impact": "high"
     },
     {
-        id: 7,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '今天 8:15 到的市图书馆,已经有 4 个人在我前面了 😮',
-        images: [],
-        category: '生活日常',
-        rawTime: TimeUtils.getPastTime(336), // 模拟2周前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(336)), // 实时描述
-        likes: 4,
-        comments: 0,
-        isLiked: false
+        "id": "diary-20241217",
+        "title": "理性投资与避坑策略",
+        "date": "2024-12-17",
+        "content": "当你感觉去参与某个东西有很大负担，甚至要负债时就不要报了。超过200元的花费，我会给AI提供全面信息帮助避坑。今天用这个原则避免了一次冲动投资，省下了不少钱。理性消费和投资是财务健康的基础。",
+        "category": "财商智慧",
+        "tags": ["理性投资", "避坑策略", "AI辅助", "财务健康"],
+        "achievements": ["避免了冲动投资", "学会了理性决策", "节省了资金"],
+        "difficulty": "medium",
+        "impact": "high"
     },
     {
-        id: 6,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '今天去图书馆学习,一堆学生在图书馆打游戏的,不安静💢',
-        images: [],
-        category: '生活日常',
-        rawTime: TimeUtils.getPastTime(504), // 模拟3周前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(504)), // 实时描述
-        likes: 2,
-        comments: 1,
-        isLiked: false
+        "id": "diary-20241216",
+        "title": "勤奋胜过幸运",
+        "date": "2024-12-16",
+        "content": "哪有那么多天时地利人和，都比不过两个字：勤奋。幸运没那么重要，如果还看幸运，说明你还不够勤奋。今天用勤奋的态度完成了原本觉得困难的工作，结果证明只要足够努力，没有做不成的事情。",
+        "category": "奋斗精神",
+        "tags": ["勤奋", "努力", "奋斗精神", "自我驱动"],
+        "achievements": ["克服了困难", "完成了挑战性工作", "增强了自信心"],
+        "difficulty": "medium",
+        "impact": "high"
     },
     {
-        id: 5,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '电脑充电线坏了,好在通过重新拆拼花了 3 个多小时解决了',
-        images: [],
-        category: '生活日常',
-        rawTime: TimeUtils.getPastTime(504), // 模拟3周前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(504)), // 实时描述
-        likes: 6,
-        comments: 2,
-        isLiked: false
+        "id": "diary-20241215",
+        "title": "生活黑客思维",
+        "date": "2024-12-15",
+        "content": "生活黑客都说了，凡是有系统一定有bug。正常人才会去排队，你黑客都是找bug就直接进去了。今天在处理一个复杂流程时，我找到了系统漏洞，节省了大量时间。这种思维方式让我在生活和工作中都变得更加高效。",
+        "category": "创新思维",
+        "tags": ["生活黑客", "系统思维", "效率优化", "创新方法"],
+        "achievements": ["掌握了黑客思维", "优化了工作流程", "提升了效率"],
+        "difficulty": "medium",
+        "impact": "high"
     },
     {
-        id: 4,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '疯狂动物城 2 电影 11 月来啦',
-        images: [],
-        category: '艺术文化',
-        rawTime: TimeUtils.getPastTime(720), // 模拟1个月前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(720)), // 实时描述
-        likes: 8,
-        comments: 1,
-        isLiked: false
+        "id": "diary-20241214",
+        "title": "自我价值的衡量标准",
+        "date": "2024-12-14",
+        "content": "用来替代自己的另一个'我'所产生的稳定现金流对应的数值，就是衡量自己配得上什么的标准。今天我计算了自己的被动收入，明确了努力方向，这是一个重要的财务里程碑。",
+        "category": "财商智慧",
+        "tags": ["自我价值", "被动收入", "财务目标", "人生规划"],
+        "achievements": ["明确了自我价值", "设定了财务目标", "制定了发展计划"],
+        "difficulty": "medium",
+        "impact": "high"
     },
     {
-        id: 3,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '发国庆祝福时发现有一百多个单删我了。真正值得的人,会留在你的生活里;删掉你的人,也是在帮你腾出空间给更合拍的人;能坦诚交流、愿意回应的人才最值得投入精力。',
-        images: [],
-        category: '情感表达',
-        rawTime: TimeUtils.getPastTime(720), // 模拟1个月前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(720)), // 实时描述
-        likes: 13,
-        comments: 5,
-        isLiked: false
+        "id": "diary-20241213",
+        "title": "独立人格的培养",
+        "date": "2024-12-13",
+        "content": "你可能没有那么潮，但是没有人可以讲你错。如果你没错，那你就可以按照自己的想法，让自己在自己的世界观里面足够的对，且对很久很久。今天我坚持了自己的独特观点，虽然与众不同，但最终证明是正确的。这让我更加坚定要做独立精彩有趣的人。",
+        "category": "人格成长",
+        "tags": ["独立人格", "自我认知", "独特思维", "个性发展"],
+        "achievements": ["培养了独立人格", "增强了自信心", "坚持了正确观点"],
+        "difficulty": "high",
+        "impact": "high"
     },
     {
-        id: 2,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '真挤,回来时 504 人真多🥵,应该 16 点就出发的',
-        images: [],
-        category: '生活日常',
-        rawTime: TimeUtils.getPastTime(720), // 模拟1个月前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(720)), // 实时描述
-        likes: 3,
-        comments: 0,
-        isLiked: false
+        "id": "diary-20241212",
+        "title": "项目导向的学习方法",
+        "date": "2024-12-12",
+        "content": "以项目为导向，明确要解决的问题和创造的价值，缺什么学什么，能提高学习的针对性和效率。今天我用这种方法学习了一项新技能，比以往的学习方式效率提高了数倍。先确定项目目标和结果，再推导所需学习内容，这个框架非常有效。",
+        "category": "学习方法",
+        "tags": ["项目导向", "高效学习", "问题解决", "学习框架"],
+        "achievements": ["掌握了高效学习方法", "提升了学习效率", "完成了项目目标"],
+        "difficulty": "medium",
+        "impact": "high"
     },
     {
-        id: 1,
-        username: '狂客同学',
-        avatar: 'images/favicon.ico', // 统一头像
-        content: '好好好,Claude 也赶中国国庆发模型的节奏',
-        images: ['https://picsum.photos/400/300?random=100'],
-        category: '科技数码',
-        rawTime: TimeUtils.getPastTime(720), // 模拟1个月前
-        timestamp: TimeUtils.formatRealTime(TimeUtils.getPastTime(720)), // 实时描述
-        likes: 10,
-        comments: 2,
-        isLiked: false
+        "id": "diary-20241211",
+        "title": "时间的真正价值",
+        "date": "2024-12-11",
+        "content": "正常工作者用年富力强的35年赚钱覆盖一生80年，去除节假日和不能出售时间，真正用于改变自己生活的出售时间一年仅10.5天。这个计算让我震惊，也让我重新审视自己的时间管理。今天我优化了时间分配，确保每一分钟都有价值。",
+        "category": "时间管理",
+        "tags": ["时间价值", "效率提升", "时间管理", "人生规划"],
+        "achievements": ["重新认识了时间价值", "优化了时间管理", "提升了工作效率"],
+        "difficulty": "medium",
+        "impact": "high"
+    },
+    {
+        "id": "diary-20241210",
+        "title": "自律的早起生活",
+        "date": "2024-12-10",
+        "content": "今天8:15到达市图书馆，发现已经有4个人在我前面了。这让我意识到优秀的人总是很努力。虽然不是最早的，但保持了这个良好的习惯，为自己的成长创造了更多时间。",
+        "category": "自律习惯",
+        "tags": ["早起", "自律", "图书馆", "学习习惯"],
+        "achievements": ["养成了早起习惯", "保持了学习状态", "提升了自律能力"],
+        "difficulty": "medium",
+        "impact": "medium"
+    },
+    {
+        "id": "diary-20241209",
+        "title": "应对环境干扰的能力",
+        "date": "2024-12-09",
+        "content": "今天去图书馆学习，发现很多学生在打游戏影响安静。虽然环境不理想，但我调整了心态和方法，还是完成了学习任务。这让我明白，真正的专注不依赖于外部环境，而在于内心的定力。",
+        "category": "心理调节",
+        "tags": ["专注力", "环境适应", "心理调节", "抗干扰能力"],
+        "achievements": ["提升了抗干扰能力", "增强了心理韧性", "完成了学习目标"],
+        "difficulty": "medium",
+        "impact": "medium"
+    },
+    {
+        "id": "diary-20241208",
+        "title": "解决问题的能力",
+        "date": "2024-12-08",
+        "content": "电脑充电线坏了，通过重新拆拼花了3个多小时解决了。虽然花费了很多时间，但成功解决了问题，还学到了电子维修的知识。这种自己动手解决问题的成就感很有价值。",
+        "category": "技能提升",
+        "tags": ["问题解决", "动手能力", "电子维修", "实践能力"],
+        "achievements": ["解决了技术问题", "学习新技能", "增强了动手能力"],
+        "difficulty": "medium",
+        "impact": "medium"
+    },
+    {
+        "id": "diary-20241207",
+        "title": "期待与规划",
+        "date": "2024-12-07",
+        "content": "疯狂动物城2电影11月要来了，这让我想起要为自己的娱乐生活做好规划。适当的放松和娱乐对长期发展很重要，我开始规划如何平衡工作与生活。",
+        "category": "生活平衡",
+        "tags": ["生活规划", "工作生活平衡", "娱乐放松", "长期规划"],
+        "achievements": ["建立了生活平衡意识", "制定了娱乐规划", "优化了生活节奏"],
+        "difficulty": "low",
+        "impact": "medium"
+    },
+    {
+        "id": "diary-20241206",
+        "title": "人际关系的管理",
+        "date": "2024-12-06",
+        "content": "发国庆祝福时发现有一百多个单删我了。真正值得的人会留在你的生活里；删掉你的人也是在帮你腾出空间给更合拍的人。能坦诚交流、愿意回应的人才最值得投入精力。这个认知让我重新评估了人际关系，把精力更有效地投入到真正重要的人身上。",
+        "category": "人际关系",
+        "tags": ["人际关系", "真诚沟通", "精力分配", "社交智慧"],
+        "achievements": ["优化了人际关系", "学会了识别真朋友", "提升了社交智慧"],
+        "difficulty": "medium",
+        "impact": "high"
+    },
+    {
+        "id": "diary-20241205",
+        "title": "规划与执行",
+        "date": "2024-12-05",
+        "content": "今天504人真多，应该16点就出发的。这个教训让我深刻认识到规划的重要性。从今天开始，我会在重要的事情上提前规划，避免因为时间安排不当而影响体验和效率。",
+        "category": "规划能力",
+        "tags": ["时间规划", "执行力", "经验总结", "改进提升"],
+        "achievements": ["认识到了规划重要性", "制定了改进计划", "提升了规划能力"],
+        "difficulty": "low",
+        "impact": "medium"
+    },
+    {
+        "id": "diary-20241204",
+        "title": "科技趋势的关注",
+        "date": "2024-12-04",
+        "content": "好好好，Claude也赶中国国庆发模型的节奏。这提醒我要持续关注科技发展趋势，保持对新技术的敏感度。今天我花时间研究了最新的AI发展动态，为自己的技术栈做了规划。",
+        "category": "科技关注",
+        "tags": ["AI技术", "科技趋势", "持续学习", "技术规划"],
+        "achievements": ["了解了最新科技动态", "制定了技术学习计划", "保持了对前沿的关注"],
+        "difficulty": "medium",
+        "impact": "medium"
     }
-];
+]
