@@ -82,4 +82,88 @@ function checkPassword() {
 
 // 显示主内容
 function showMainContent() {
-    const loginContainer =
+    const loginContainer = document.getElementById('loginContainer');
+    const mainContainer = document.getElementById('mainContainer');
+    
+    // 隐藏登录界面
+    loginContainer.style.display = 'none';
+    
+    // 显示主内容
+    mainContainer.style.display = 'block';
+    
+    // 初始化链接
+    initializeLinks();
+}
+
+// 初始化所有链接
+function initializeLinks() {
+    // 获取所有科目链接
+    const subjectLinks = document.querySelectorAll('.subject-link');
+    
+    subjectLinks.forEach(link => {
+        const subject = link.getAttribute('data-subject');
+        
+        // 根据科目ID设置对应的外部链接
+        if (CONFIG.links.gaokao[subject]) {
+            link.href = CONFIG.links.gaokao[subject];
+            link.target = "_blank"; // 在新标签页打开
+        } else if (CONFIG.links.kaoyan[subject]) {
+            link.href = CONFIG.links.kaoyan[subject];
+            link.target = "_blank";
+        } else {
+            // 如果没有配置链接，点击时提示
+            link.href = "javascript:void(0)";
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                alert('该资源链接尚未配置，请联系管理员');
+            });
+        }
+    });
+}
+
+// 退出登录
+function logout() {
+    if (confirm('确定要退出登录吗？')) {
+        // 清除登录状态
+        localStorage.removeItem('examLoginTime');
+        
+        // 隐藏主内容
+        document.getElementById('mainContainer').style.display = 'none';
+        
+        // 显示登录界面
+        document.getElementById('loginContainer').style.display = 'block';
+        
+        // 清空密码输入框
+        document.getElementById('password').value = '';
+    }
+}
+
+// 支持回车键登录
+document.addEventListener('DOMContentLoaded', function() {
+    const passwordInput = document.getElementById('password');
+    
+    if (passwordInput) {
+        passwordInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+        
+        // 自动聚焦到密码输入框
+        passwordInput.focus();
+    }
+    
+    // 页面加载时检查登录状态
+    checkLoginStatus();
+});
+
+// 添加抖动动画的CSS（通过JavaScript动态添加）
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        10%, 30%, 50%, 70%, 90% { transform: translateX(-10px); }
+        20%, 40%, 60%, 80% { transform: translateX(10px); }
+    }
+`;
+document.head.appendChild(style);
