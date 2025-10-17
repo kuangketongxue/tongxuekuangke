@@ -586,3 +586,37 @@ header h1 {
         font-size: 18px;
     }
 }
+/* 成就样式 */
+.diary-achievement, .diary-reflection {
+    background: #f0f9ff;
+    border-left: 4px solid #3b82f6;
+    padding: 15px;
+    margin: 15px 0;
+    border-radius: 8px;
+}
+
+.diary-achievement h4, .diary-reflection h4 {
+    color: #3b82f6;
+    margin-bottom: 8px;
+    font-size: 1.1em;
+}
+
+.diary-achievement p, .diary-reflection p {
+    color: #4b5563;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* 分类标签 */
+.diary-category {
+    margin: 10px 0;
+}
+
+.category-badge {
+    background: #8b5cf6;
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.85em;
+    font-weight: 500;
+}
