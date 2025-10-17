@@ -1,1 +1,35 @@
+<!-- 导航栏，所有页面通过 iframe 或引入复用 -->
+<nav style="background: #333; padding: 15px; text-align: center;">
+  <a href="../index.html" style="color: white; margin: 0 10px; text-decoration: none;">首页</a>
+  <a href="../friend-circle/index.html" style="color: white; margin: 0 10px; text-decoration: none;">私人朋友圈</a>
+  <a href="../success-journal/index.html" style="color: white; margin: 0 10px; text-decoration: none;">成功日记</a>
+  <a href="../star-reading/index.html" style="color: white; margin: 0 10px; text-decoration: none;">星空阅读室</a>
+  <a href="../star-bookshelf/index.html" style="color: white; margin: 0 10px; text-decoration: none;">星空书柜</a>
+  <a href="../paid-ai-rss/index.html" style="color: white; margin: 0 10px; text-decoration: none;">AI前沿RSS（付费）</a>
+  <a href="../paid-exams/index.html" style="color: white; margin: 0 10px; text-decoration: none;">考试相关（付费）</a>
+  <span id="user-info" style="color: #ddd; margin-left: 20px;"></span>
+  <button id="login-btn" style="margin-left: 10px; padding: 5px 10px; cursor: pointer;">登录</button>
+</nav>
 
+<script src="leancloud-init.js"></script>
+<script>
+  // 显示当前登录状态
+  function updateUserInfo() {
+    const user = AV.User.current();
+    if (user) {
+      document.getElementById('user-info').textContent = `当前登录：${user.getUsername() || '用户'}`;
+      document.getElementById('login-btn').textContent = '退出登录';
+      document.getElementById('login-btn').onclick = () => {
+        AV.User.logOut();
+        location.reload();
+      };
+    } else {
+      document.getElementById('user-info').textContent = '';
+      document.getElementById('login-btn').textContent = '登录/注册';
+      document.getElementById('login-btn').onclick = () => {
+        window.location.href = '../shared/login.html';
+      };
+    }
+  }
+  updateUserInfo();
+</script>
