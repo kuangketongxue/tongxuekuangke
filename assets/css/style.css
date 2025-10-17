@@ -473,23 +473,26 @@ header h1 {
 }
 /* ==================== Footer 样式 ==================== */
 
+/* ==================== Footer 样式 ==================== */
+
 .social-footer {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     padding: 40px 20px;
-    margin-top: 60px;
+    margin-top: 0;
     text-align: center;
-    border-top: 3px solid #667eea;
+    border-top: none;
 }
 
-.social-footer .container {
-    max-width: 900px;
+.social-footer .footer-container {
+    max-width: 1200px;
     margin: 0 auto;
 }
 
 .social-links {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 30px;
     margin-bottom: 20px;
     flex-wrap: wrap;
@@ -508,42 +511,53 @@ header h1 {
     font-size: 24px;
     transition: all 0.3s ease;
     border: 2px solid white;
+    backdrop-filter: blur(10px);
 }
 
 .social-link:hover {
     background: white;
-    color: #667eea;
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px) scale(1.1);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
 }
 
 .social-link.wechat:hover {
-    border-color: #09b83e;
     color: #09b83e;
+    border-color: #09b83e;
 }
 
 .social-link.github:hover {
-    border-color: #333;
     color: #333;
+    border-color: #333;
 }
 
 .social-link.x:hover {
-    border-color: #000;
     color: #000;
+    border-color: #000;
+}
+
+/* 确保图标正常显示 */
+.social-link i {
+    display: block;
+    line-height: 1;
+}
+
+.social-link svg {
+    display: block;
 }
 
 .copyright {
     font-size: 0.95em;
-    color: rgba(255, 255, 255, 0.9);
+    color: rgba(255, 255, 255, 0.95);
     margin: 20px 0 0 0;
     padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.3);
+    letter-spacing: 0.5px;
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
     .social-links {
-        gap: 15px;
+        gap: 20px;
     }
     
     .social-link {
@@ -563,13 +577,12 @@ header h1 {
     }
     
     .social-links {
-        gap: 10px;
+        gap: 15px;
     }
     
     .social-link {
         width: 40px;
         height: 40px;
         font-size: 18px;
-        border-width: 1px;
     }
 }
