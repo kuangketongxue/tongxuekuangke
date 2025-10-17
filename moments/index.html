@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>私人朋友圈</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.15.0/dist/av-min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <a href="../" class="back-btn">← 返回首页</a>
+            <h1>💬 私人朋友圈</h1>
+        </header>
+        
+        <div id="moments-container" class="moments-list">
+            <!-- 动态加载内容 -->
+        </div>
+        
+        <div class="loading">加载中...</div>
+    </div>
+    
+    <script src="../assets/js/leancloud.js"></script>
+    <script>
+        // 初始化 LeanCloud
+        initLeanCloud();
+        
+        // 加载朋友圈数据
+        async function loadMoments() {
+            try {
+                const response = await fetch('data/moments.json');
+                const moments = await response.json();
+                renderMoments(moments);
+            } catch (error) {
+                console.error('加载失败:', error);
+            }
+        }
+        
+        function renderMoments(moments) {
+            const container = document.getElementById('moments-container');
+            container.innerHTML = moments.map(moment => `
+                <div class="moment-card" data-id="${moment.id}">
+                    <div class="moment-header">
+                        <span class="moment-date">${moment.date}</span>
+                    </div>
+                    <div class="moment-content">
+                        ${moment.content}
+                        ${moment.images ? `
+                            <div class="moment-images">
+                                ${moment.images.map(img => `
+                                    <img src="${img}" alt="图片">
+                                `).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="moment-actions">
+                        <button class="like-btn" onclick="handleLike('moments', '${moment.id}')">
+                            👍 <span class="like-count">0</span>
+                        </button>
+                        <button class="comment-btn" onclick="showComments('${moment.id}')">
+                            💬 评论
+                        </button>
+                    </div>
+                    <div id="comments-${moment.id}" class="comments-section" style="display:none;">
+                        <!-- 评论区 -->
+                    </div>
+                </div>
+            `).join('');
+            
+            // 加载点赞和评论数据
+            moments.forEach(moment => {
+                loadInteractions('moments', moment.id);
+            });
+        }
+        
+        loadMoments();
+    </script>
+</body>
+</html>
