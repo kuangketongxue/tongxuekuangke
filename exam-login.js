@@ -1,6 +1,6 @@
 // 配置项
 const CONFIG = {
-    password: 'exam2024', // 设置你的密码
+    password: 'qingyin', // 设置你的密码
     sessionKey: 'examAccess',
     subjects: {
         chinese: '',    // 在这里填入语文资料链接
