@@ -1,1 +1,53 @@
+/* 全局样式：所有页面通用 */
+body {
+  font-family: "Microsoft YaHei", sans-serif;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  background-color: #f9f9f9;
+}
 
+.container {
+  margin-top: 20px;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+button {
+  background: #4285f4;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 5px;
+}
+
+button:hover {
+  background: #3367d6;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+.post-item, .article-item, .book-item {
+  padding: 15px;
+  margin: 10px 0;
+  border: 1px solid #eee;
+  border-radius: 6px;
+}
+
+.comment-item {
+  margin-left: 20px;
+  padding: 10px;
+  border-left: 3px solid #4285f4;
+  background: #f0f7ff;
+}
