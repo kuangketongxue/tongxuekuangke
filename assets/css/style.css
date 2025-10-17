@@ -72,6 +72,30 @@ header h1 {
     grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
+/* ==================== 区域标题样式 ==================== */
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.section-header h2 {
+    margin-bottom: 0;
+    color: #333;
+    font-size: 1.6em;
+}
+
+.member-tip {
+    font-size: 0.75em;
+    color: #666;
+    font-weight: normal;
+    background: rgba(255, 215, 0, 0.15);
+    padding: 6px 12px;
+    border-radius: 15px;
+    border: 1px solid rgba(255, 215, 0, 0.3);
+    white-space: nowrap;
+}
 
 .nav-card {
     background: white;
