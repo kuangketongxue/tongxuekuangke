@@ -12,7 +12,7 @@ body {
 }
 
 .container {
-    max-width: 1100px; /* 增加容器宽度以容纳4个卡片 */
+    max-width: 1300px; /* 从1100px增加到1300px */
     margin: 0 auto;
     background: white;
     border-radius: 20px;
