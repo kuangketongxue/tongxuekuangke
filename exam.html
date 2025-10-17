@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📊 考霸 - 备考资料与技巧</title>
+    <title>📚 考霸 - 备考资料与技巧</title>
     <style>
         * {
             margin: 0;
@@ -12,201 +12,68 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .header {
+        /* 登录容器 */
+        .login-container {
             background: white;
             border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
         }
 
-        .header-left {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .header-left h1 {
-            font-size: 32px;
+        .login-container h1 {
             color: #333;
+            margin-bottom: 10px;
+            font-size: 32px;
         }
 
-        .header-left p {
+        .login-container .subtitle {
             color: #666;
-            font-size: 16px;
+            margin-bottom: 30px;
+            font-size: 14px;
         }
 
         .price-badge {
-            background: linear-gradient(135deg, #ffd700, #ffed4e);
+            background: #ffd700;
             color: #333;
-            padding: 12px 25px;
-            border-radius: 25px;
-            font-weight: bold;
-            font-size: 18px;
-            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
-        }
-
-        .logout-btn {
-            background: #ff4757;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-
-        .logout-btn:hover {
-            background: #ff3838;
-            transform: translateY(-2px);
-        }
-
-        .main-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-
-        .exam-section {
-            background: white;
+            padding: 8px 20px;
             border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-        }
-
-        .exam-section h2 {
-            font-size: 28px;
-            margin-bottom: 25px;
-            color: #333;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .subject-grid {
-            display: grid;
-            gap: 15px;
-        }
-
-        .subject-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 20px;
-            border-radius: 15px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            text-decoration: none;
-        }
-
-        .subject-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4);
-        }
-
-        .subject-card.disabled {
-            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
-            cursor: not-allowed;
-            opacity: 0.6;
-        }
-
-        .subject-card.disabled:hover {
-            transform: none;
-        }
-
-        .subject-name {
-            font-size: 20px;
+            display: inline-block;
             font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .subject-icon {
-            font-size: 24px;
-        }
-
-        .arrow {
-            font-size: 24px;
-        }
-
-        .coming-soon {
-            background: #f39c12;
-            color: white;
-            padding: 5px 12px;
-            border-radius: 8px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        @media (max-width: 768px) {
-            .main-content {
-                grid-template-columns: 1fr;
-            }
-
-            .header {
-                flex-direction: column;
-                gap: 15px;
-            }
-        }
-
-        /* 登录模态框样式 */
-        .login-modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .login-box {
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-            max-width: 400px;
-            width: 90%;
-        }
-
-        .login-box h2 {
-            text-align: center;
             margin-bottom: 30px;
-            color: #333;
+            font-size: 18px;
         }
 
         .input-group {
             margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
         }
 
         .input-group input {
             width: 100%;
-            padding: 15px;
-            border: 2px solid #ddd;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
             border-radius: 10px;
             font-size: 16px;
-            transition: border 0.3s;
+            transition: border-color 0.3s;
         }
 
         .input-group input:focus {
@@ -216,125 +83,270 @@
 
         .login-btn {
             width: 100%;
-            padding: 15px;
+            padding: 14px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
             border-radius: 10px;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: bold;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
         .login-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
         }
 
         .error-message {
-            color: #ff4757;
-            text-align: center;
+            color: #e74c3c;
             margin-top: 15px;
+            font-size: 14px;
             display: none;
+        }
+
+        /* 主内容容器 */
+        .main-container {
+            display: none;
+            max-width: 1200px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .header .badge {
+            background: #ffd700;
+            color: #333;
+            padding: 6px 16px;
+            border-radius: 15px;
+            display: inline-block;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .exam-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .exam-section h2 {
+            color: #333;
+            font-size: 28px;
+            margin-bottom: 25px;
+            text-align: center;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .subject-list {
+            list-style: none;
+        }
+
+        .subject-item {
+            background: white;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .subject-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .subject-link {
+            display: flex;
+            align-items: center;
+            padding: 18px 20px;
+            text-decoration: none;
+            color: #333;
+            font-size: 18px;
+            font-weight: 500;
+        }
+
+        .subject-icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 20px;
+        }
+
+        .subject-name {
+            flex: 1;
+        }
+
+        .subject-arrow {
+            color: #999;
+            font-size: 20px;
+        }
+
+        .logout-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+
+        @media (max-width: 768px) {
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 28px;
+            }
+
+            .exam-section h2 {
+                font-size: 24px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- 登录模态框 -->
-    <div class="login-modal" id="loginModal">
-        <div class="login-box">
-            <h2>🔐 会员验证</h2>
-            <div class="input-group">
-                <input type="password" id="passwordInput" placeholder="请输入密码" />
-            </div>
-            <button class="login-btn" onclick="verifyPassword()">验证</button>
-            <p class="error-message" id="errorMessage">密码错误，请重试</p>
+    <!-- 登录界面 -->
+    <div class="login-container" id="loginContainer">
+        <h1>📚 考霸</h1>
+        <p class="subtitle">备考资料与技巧</p>
+        <div class="price-badge">199元/年</div>
+        
+        <div class="input-group">
+            <label for="password">请输入访问密码</label>
+            <input type="password" id="password" placeholder="请输入密码" autocomplete="off">
         </div>
+        
+        <button class="login-btn" onclick="checkPassword()">进入学习</button>
+        
+        <p class="error-message" id="errorMessage">密码错误，请重试</p>
     </div>
 
     <!-- 主内容 -->
-    <div class="container" id="mainContent" style="display: none;">
+    <div class="main-container" id="mainContainer">
+        <button class="logout-btn" onclick="logout()">退出登录</button>
+        
         <div class="header">
-            <div class="header-left">
-                <div>
-                    <h1>📊 考霸</h1>
-                    <p>备考资料与技巧</p>
-                </div>
-            </div>
-            <div style="display: flex; gap: 15px; align-items: center;">
-                <span class="price-badge">199元/年</span>
-                <button class="logout-btn" onclick="logout()">退出</button>
-            </div>
+            <h1>📚 考霸资源中心</h1>
+            <span class="badge">已订阅</span>
         </div>
 
-        <div class="main-content">
-            <!-- 高考区域 -->
+        <div class="content-wrapper">
+            <!-- 高考板块 -->
             <div class="exam-section">
                 <h2>🎓 高考专区</h2>
-                <div class="subject-grid">
-                    <a href="#" class="subject-card" id="chinese" onclick="openSubject('chinese', event)">
-                        <div class="subject-name">
-                            <span class="subject-icon">📝</span>
-                            <span>语文</span>
-                        </div>
-                        <span class="arrow">→</span>
-                    </a>
-
-                    <a href="#" class="subject-card" id="math" onclick="openSubject('math', event)">
-                        <div class="subject-name">
-                            <span class="subject-icon">🔢</span>
-                            <span>数学</span>
-                        </div>
-                        <span class="arrow">→</span>
-                    </a>
-
-                    <a href="#" class="subject-card" id="english" onclick="openSubject('english', event)">
-                        <div class="subject-name">
-                            <span class="subject-icon">🔤</span>
-                            <span>英语</span>
-                        </div>
-                        <span class="arrow">→</span>
-                    </a>
-
-                    <a href="#" class="subject-card" id="chemistry" onclick="openSubject('chemistry', event)">
-                        <div class="subject-name">
-                            <span class="subject-icon">⚗️</span>
-                            <span>化学</span>
-                        </div>
-                        <span class="arrow">→</span>
-                    </a>
-
-                    <a href="#" class="subject-card" id="politics" onclick="openSubject('politics', event)">
-                        <div class="subject-name">
-                            <span class="subject-icon">🏛️</span>
-                            <span>政治</span>
-                        </div>
-                        <span class="arrow">→</span>
-                    </a>
-
-                    <a href="#" class="subject-card" id="physics" onclick="openSubject('physics', event)">
-                        <div class="subject-name">
-                            <span class="subject-icon">⚡</span>
-                            <span>物理</span>
-                        </div>
-                        <span class="arrow">→</span>
-                    </a>
-                </div>
+                <ul class="subject-list">
+                    <li class="subject-item">
+                        <a href="#" class="subject-link" data-subject="chinese">
+                            <div class="subject-icon">📖</div>
+                            <span class="subject-name">语文</span>
+                            <span class="subject-arrow">→</span>
+                        </a>
+                    </li>
+                    <li class="subject-item">
+                        <a href="#" class="subject-link" data-subject="math">
+                            <div class="subject-icon">🔢</div>
+                            <span class="subject-name">数学</span>
+                            <span class="subject-arrow">→</span>
+                        </a>
+                    </li>
+                    <li class="subject-item">
+                        <a href="#" class="subject-link" data-subject="english">
+                            <div class="subject-icon">🌍</div>
+                            <span class="subject-name">英语</span>
+                            <span class="subject-arrow">→</span>
+                        </a>
+                    </li>
+                    <li class="subject-item">
+                        <a href="#" class="subject-link" data-subject="chemistry">
+                            <div class="subject-icon">⚗️</div>
+                            <span class="subject-name">化学</span>
+                            <span class="subject-arrow">→</span>
+                        </a>
+                    </li>
+                    <li class="subject-item">
+                        <a href="#" class="subject-link" data-subject="politics">
+                            <div class="subject-icon">🏛️</div>
+                            <span class="subject-name">政治</span>
+                            <span class="subject-arrow">→</span>
+                        </a>
+                    </li>
+                    <li class="subject-item">
+                        <a href="#" class="subject-link" data-subject="physics">
+                            <div class="subject-icon">⚛️</div>
+                            <span class="subject-name">物理</span>
+                            <span class="subject-arrow">→</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
 
-            <!-- 考研区域 -->
+            <!-- 考研板块 -->
             <div class="exam-section">
                 <h2>🎯 考研专区</h2>
-                <div class="subject-grid">
-                    <a href="#" class="subject-card disabled" onclick="return false;">
-                        <div class="subject-name">
-                            <span class="subject-icon">📚</span>
-                            <span>考研资料</span>
-                        </div>
-                        <span class="coming-soon">即将开放</span>
-                    </a>
-                </div>
+                <ul class="subject-list">
+                    <li class="subject-item">
+                        <a href="#" class="subject-link" data-subject="kaoyan-1">
+                            <div class="subject-icon">📚</div>
+                            <span class="subject-name">考研资源1</span>
+                            <span class="subject-arrow">→</span>
+                        </a>
+                    </li>
+                    <li class="subject-item">
+                        <a href="#" class="subject-link" data-subject="kaoyan-2">
+                            <div class="subject-icon">📝</div>
+                            <span class="subject-name">考研资源2</span>
+                            <span class="subject-arrow">→</span>
+                        </a>
+                    </li>
+                    <li class="subject-item">
+                        <a href="#" class="subject-link" data-subject="kaoyan-3">
+                            <div class="subject-icon">✍️</div>
+                            <span class="subject-name">考研资源3</span>
+                            <span class="subject-arrow">→</span>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
