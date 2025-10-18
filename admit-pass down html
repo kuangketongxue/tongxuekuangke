@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🔐 考试系统管理后台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+            max-width: 600px;
+            width: 100%;
+        }
+
+        /* ========== 登录界面 ========== */
+        .login-section {
+            text-align: center;
+        }
+
+        .login-section.hidden {
+            display: none;
+        }
+
+        .login-section h1 {
+            color: #333;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .login-section .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .shield-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #2a5298;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-login {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+        }
+
+        .btn-login:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(42, 82, 152, 0.4);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            margin-top: 15px;
+            font-size: 14px;
+            display: none;
+            text-align: center;
+        }
+
+        /* ========== 密码显示界面 ========== */
+        .password-section {
+            display: none;
+        }
+
+        .password-section.show {
+            display: block;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 28px;
+        }
+
+        .logout-btn {
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+
+        .password-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: white;
+        }
+
+        .password-card .label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .password-display {
+            font-size: 42px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 4px;
+            margin: 20px 0;
+            user-select: all;
+            cursor: pointer;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .password-display:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.02);
+        }
+
+        .password-hint {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .info-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #e0e0e0;
+        }
+
+        .info-card .icon {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .info-card .label {
+            color: #666;
+            font-size: 12px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .info-card .value {
+            color: #333;
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .btn-copy {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-refresh {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-copy:hover, .btn-refresh:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 25px;
+        }
+
+        .warning-box .title {
+            color: #856404;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .warning-box ul {
+            color: #856404;
+            font-size: 14px;
+            margin-left: 20px;
+            line-height: 1.8;
+        }
+
+        /* ========== 提示框 ========== */
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+            font-weight: bold;
+            opacity: 0;
+            transform: translateX(400px);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            z-index: 1000;
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ========== 动画 ========== */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); }
+            20%, 40%, 60%, 80% { transform: translateX(8px); }
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+
+        /* ========== 响应式 ========== */
+        @media (max-width: 600px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .password-display {
+                font-size: 28px;
+                letter-spacing: 2px;
+            }
+
+            .btn-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ==================== 登录界面 ==================== -->
+        <div class="login-section" id="loginSection">
+            <div class="shield-icon">🛡️</div>
+            <h1>管理员登录</h1>
+            <p class="subtitle">仅限授权人员访问</p>
+
+            <div class="input-group">
+                <label for="adminPassword">
+                    <span>🔑</span> 管理员密码
+                </label>
+                <input 
+                    type="password" 
+                    id="adminPassword" 
+                    placeholder="请输入管理员密码"
+                    autocomplete="off"
+                >
+            </div>
+
+            <button class="btn btn-login" onclick="adminLogin()">
+                🚀 登录系统
+            </button>
+
+            <p class="error-message" id="loginError">
+                ❌ 密码错误，访问被拒绝
+            </p>
+        </div>
+
+        <!-- ==================== 密码显示界面 ==================== -->
+        <div class="password-section" id="passwordSection">
+            <div class="header">
+                <h1>🎯 当前密码</h1>
+                <button class="logout-btn" onclick="logout()">
+                    🚪 退出登录
+                </button>
+            </div>
+
+            <!-- 密码卡片 -->
+            <div class="password-card">
+                <div class="label">今日访问密码</div>
+                <div class="password-display" id="currentPassword" onclick="copyPassword()">
+                    加载中...
+                </div>
+                <div class="password-hint">💡 点击密码即可复制</div>
+            </div>
+
+            <!-- 信息卡片 -->
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="icon">📅</div>
+                    <div class="label">生成日期</div>
+                    <div class="value" id="generateDate">--</div>
+                </div>
+                <div class="info-card">
+                    <div class="icon">⏰</div>
+                    <div class="label">下次更新</div>
+                    <div class="value" id="nextUpdate">--</div>
+                </div>
+                <div class="info-card">
+                    <div class="icon">⏳</div>
+                    <div class="label">剩余时间</div>
+                    <div class="value" id="remainTime">--</div>
+                </div>
+            </div>
+
+            <!-- 操作按钮 -->
+            <div class="btn-group">
+                <button class="btn btn-copy" onclick="copyPassword()">
+                    📋 复制密码
+                </button>
+                <button class="btn btn-refresh" onclick="refreshPassword()">
+                    🔄 刷新页面
+                </button>
+            </div>
+
+            <!-- 警告提示 -->
+            <div class="warning-box">
+                <div class="title">⚠️ 安全提示</div>
+                <ul>
+                    <li>密码每天凌晨0点自动更新</li>
+                    <li>每个密码仅当天有效，过期自动失效</li>
+                    <li>请勿将此页面链接分享给他人</li>
+                    <li>建议每次使用后退出登录</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- 提示框 -->
+    <div class="toast" id="toast">✓ 操作成功</div>
+
+    <script>
+        // ==================== 配置区域 ====================
+        const CONFIG = {
+            // ⚠️ 管理员密码（请务必修改！）
+            adminPassword: "Tsinghua University2026",
+            
+            // ⚠️ 学生密码种子（必须与 exam-login.js 中的 seed 完全一致）
+            passwordSeed: "EXAM2024SECRET",
+            
+            // 会话有效期（小时）
+            sessionHours: 4
+        };
+
+        // ==================== 密码生成函数 ====================
+        function generateCurrentPassword() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
