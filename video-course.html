@@ -1,1 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>视频定制服务 - 狂客·冬之街</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 返回按钮 */
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* 顶部标题 */
+        .header {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 主要内容 */
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* 左侧特点 */
+        .features-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .features-section h2 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .features-section h2::before {
+            content: "🎬";
+            margin-right: 15px;
+            font-size: 1.1em;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feature-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-left: 4px solid #f5576c;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: #f0f0f0;
+            transform: translateX(5px);
+        }
+
+        .feature-item h3 {
+            color: #f5576c;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        .feature-item p {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        /* 右侧定价 */
+        .pricing-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .price-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+
+        .price-card h3 {
+            font-size: 1.4em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .price-text {
+            font-size: 2.2em;
+            color: #f5576c;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .price-desc {
+            color: #999;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+        }
+
+        .deliverables {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .deliverables p {
+            color: #555;
+            font-size: 0.9em;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .deliverables p::before {
+            content: "✓ ";
+            color: #f5576c;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .action-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(245, 87, 108, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #f5576c;
+            border: 2px solid #f5576c;
+        }
+
+        .btn-secondary:hover {
+            background: #f5576c;
+            color: white;
+        }
+
+        /* 案例展示 */
+        .portfolio-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            margin-bottom: 40px;
+        }
+
+        .portfolio-section h2 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .portfolio-section h2::before {
+            content: "🎥";
+            margin-right: 15px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .portfolio-item {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 30px;
+            border-radius: 12px;
+            color: white;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.3);
+        }
+
+        .portfolio-item .icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .portfolio-item h3 {
+            font-size: 1.2em;
+            margin-bottom: 8px;
+        }
+
+        .portfolio-item p {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+
+        /* 类型说明 */
+        .types-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            margin-bottom: 40px;
+        }
+
+        .types-section h2 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .types-section h2::before {
+            content: "📺";
+            margin-right: 15px;
+        }
+
+        .types-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .type-card {
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            border-left: 4px solid #f5576c;
+        }
+
+        .type-card h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .type-card p {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        /* 流程说明 */
+        .process-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            margin-bottom: 40px;
+        }
+
+        .process-section h2 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .process-section h2::before {
+            content: "🔄";
+            margin-right: 15px;
+        }
+
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .process-step h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .process-step p {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        /* FAQ */
+        .faq-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            margin-bottom: 40px;
+        }
+
+        .faq-section h2 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-section h2::before {
+            content: "❓";
+            margin-right: 15px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 20px;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-question::before {
+            content: "➤";
+            margin-right: 10px;
+            color: #f5576c;
+        }
+
+        .faq-answer {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 50px 40px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .cta-section h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: white;
+            color: #f5576c;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .process-timeline {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+
+        <!-- 顶部标题 -->
+        <div class="header">
+            <span class="badge">⭐ 专业定制服务</span>
+            <h1>视频定制服务</h1>
+            <p>由专业视频编导团队打造，为品牌和个人提供高品质视频制作方案</p>
+        </div>
+
+        <!-- 特点与定价 -->
+        <div class="content">
+            <!-- 左侧特点 -->
+            <div class="features-section">
+                <h2>我们的优势</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>🎞️ 专业制作团队</h3>
+                        <p>编导、摄影师、后期制作师，完整的专业团队</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>⚡ 快速交付</h3>
+                        <p>5个工作日内完成制作与后期，高效协作</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>♾️ 无限修改</h3>
+                        <p>服务周期内无限次修改，直到完全满意</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🎯 创意策划</h3>
+                        <p>不仅制作，还提供创意策划和内容优化</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>📞 专属顾问</h3>
+                        <p>一对一沟通，全程参与制作过程</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧定价 -->
+            <div class="pricing-section">
+                <div class="price-card">
+                    <h3>📹 标准版</h3>
+                    <div class="price-text">¥4,999</div>
+                    <p class="price-desc">适合产品展示、宣传视频</p>
+                    <div class="deliverables">
+                        <p>3-5分钟视频制作</p>
+                        <p>2套创意方案选择</p>
+                        <p>无限修改（5个工作日）</p>
+                        <p>专业背景音乐配置</p>
+                        <p>基础色彩分级</p>
+                        <p>MP4格式交付</p>
+                    </div>
+                    <div class="action-btns">
+                        <a href="https://wa.me/+8613800138000" class="btn btn-primary">立即咨询</a>
+                    </div>
+                </div>
+
+                <div class="price-card">
+                    <h3>🎬 高级版</h3>
+                    <div class="price-text">¥8,999</div>
+                    <p class="price-desc">适合企业宣传、品牌故事</p>
+                    <div class="deliverables">
+                        <p>8-12分钟视频制作</p>
+                        <p>4套创意方案选择</p>
+                        <p>无限修改（10个工作日）</p>
+                        <p>自定义配乐制作</p>
+                        <p>专业色彩分级 + VFX效果</p>
+                        <p>字幕/旁白制作</p>
+                        <p>多格式交付</p>
+                    </div>
+                    <div class="action-btns">
+                        <a href="https://wa.me/+8613800138000" class="btn btn-primary">立即咨询</a>
+                    </div>
+                </div>
+
+                <div class="price-card">
+                    <h3>🏆 豪华版</h3>
+                    <div class="price-text">¥15,999</div>
+                    <p class="price-desc">适合产品发布、大型宣传</p>
+                    <div class="deliverables">
+                        <p>15-20分钟视频制作</p>
+                        <p>6套创意方案选择</p>
+                        <p>无限修改（15个工作日）</p>
+                        <p>专业团队现场拍摄</p>
+                        <p>4K分辨率制作</p>
+                        <p>3D动画 + 特效设计</p>
+                        <p>专业配音 + 多语言字幕</p>
+                        <p>所有格式交付 + 源文件</p>
+                    </div>
+                    <div class="action-btns">
+                        <a href="https://wa.me/+8613800138000" class="btn btn-primary">立即咨询</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 视频类型 -->
+        <div class="types-section">
+            <h2>我们制作的视频类型</h2>
+            <div class="types-grid">
+                <div class="type-card">
+                    <h3>🎯 产品演示</h3>
+                    <p>清晰展示产品特点和优势，提升转化率</p>
+                </div>
+                <div class="type-card">
+                    <h3>🎬 品牌故事</h3>
+                    <p>深度讲述品牌理念和使命，打动人心</p>
+                </div>
+                <div class="type-card">
+                    <h3>📱 短视频内容</h3>
+                    <p>适配各大平台的爆款短视频制作</p>
+                </div>
+                <div class="type-card">
+                    <h3>🎤 访谈采访</h3>
+                    <p>专业采访、剪辑、后期处理</p>
+                </div>
+                <div class="type-card">
+                    <h3>🎓 在线课程</h3>
+                    <p>课程录制、剪辑、配字幕一站式服务</p>
+                </div>
+                <div class="type-card">
+                    <h3>📊 数据可视化</h3>
+                    <p>将复杂数据转化为生动的视频展示</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 案例展示 -->
+        <div class="portfolio-section">
+            <h2>成功案例</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="icon">🚀</div>
+                    <h3>产品发布</h3>
+                    <p>科技公司新品发布会视频，浏览量100万+</p>
+                </div>
+                <div class="portfolio-item">
+                    <div class="icon">🏢</div>
+                    <h3>企业宣传</h3>
+                    <p>大型企业形象宣传片，获得行业奖项</p>
+                </div>
+                <div class="portfolio-item">
+                    <div class="icon">💼</div>
+                    <h3>品牌故事</h3>
+                    <p>新兴品牌故事视频，成功融资</p>
+                </div>
+                <div class="portfolio-item">
+                    <div class="icon">📚</div>
+                    <h3>在线课程</h3>
+                    <p>制作200+节在线课程视频内容</p>
+                </div>
+                <div class="portfolio-item">
+                    <div class="icon">🎙️</div>
+                    <h3>访谈采访</h3>
+                    <p>行业大咖访谈系列，社交媒体爆款</p>
+                </div>
+                <div class="portfolio-item">
+                    <div class="icon">✨</div>
+                    <h3>高端定制</h3>
+                    <p>为500强企业定制高质量宣传视频</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 流程说明 -->
+        <div class="process-section">
+            <h2>服务流程</h2>
+            <div class="process-timeline">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>需求沟通</h3>
+                    <p>了解目标、预期效果和时间要求</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>策划创意</h3>
+                    <p>制作方案和创意脚本，提供多个选择</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>制作拍摄</h3>
+                    <p>执行拍摄或素材处理，搜集所有素材</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>后期处理</h3>
+                    <p>剪辑、配音、色彩分级、特效等处理</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <h3>反馈修改</h3>
+                    <p>根据反馈修改调整，直到完全满意</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">6</div>
+                    <h3>最终交付</h3>
+                    <p>交付各种格式和源文件</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="faq-section">
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <div class="faq-question">需要提供素材吗？</div>
+                <div class="faq-answer">可以提供也可以不提供。高级版和豪华版我们会上门采集素材。标准版可由您提供现有素材。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">支持几种视频格式？</div>
+                <div class="faq-answer">支持MP4、MOV、AVI、WebM等所有主流格式，并可针对不同平台（抖音、B站、YouTube等）进行优化。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">多久能完成？</div>
+                <div class="faq-answer">标准版5-7个工作日，高级版10-12个工作日，豪华版15-20个工作日（含采景时间）。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">后期可以修改吗？</div>
+                <div class="faq-answer">当然可以！在服务周期内提供无限次修改。超期后小幅修改收费，大幅改动重新计价。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">包含音乐版权吗？</div>
+                <div class="faq-answer">高级版和豪华版的配乐已获得版权许可，可商用。标准版如需商业使用请单独咨询。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">能否保证视频效果？</div>
+                <div class="faq-answer">我们提供的都是职业级制作，效果完全取决于您的需求和素材质量。提前沟通很重要！</div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h2>🎬 让你的故事动起来</h2>
+            <p>不仅仅是视频制作，而是创意传播和品牌表达<br>让我们用画面和声音为你讲述最精彩的故事</p>
+            <a href="https://wa.me/+8613800138000" class="cta-btn">立即联系我们 →</a>
+        </div>
+    </div>
+</body>
+</html>
