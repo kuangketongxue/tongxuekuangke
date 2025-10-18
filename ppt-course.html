@@ -1,1 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PPT定制服务 - 狂客·冬之街</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* 返回按钮 */
+        .back-btn {
+            display: inline-block;
+            margin-bottom: 30px;
+            padding: 10px 20px;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* 顶部标题 */
+        .header {
+            background: white;
+            padding: 50px 40px;
+            border-radius: 16px;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .header .badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.1em;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* 主要内容 */
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        /* 左侧特点 */
+        .features-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .features-section h2 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .features-section h2::before {
+            content: "✨";
+            margin-right: 15px;
+            font-size: 1.1em;
+        }
+
+        .feature-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .feature-item {
+            padding: 15px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .feature-item:hover {
+            background: #f0f0f0;
+            transform: translateX(5px);
+        }
+
+        .feature-item h3 {
+            color: #667eea;
+            font-size: 1.1em;
+            margin-bottom: 8px;
+        }
+
+        .feature-item p {
+            color: #666;
+            font-size: 0.95em;
+            line-height: 1.5;
+        }
+
+        /* 右侧定价 */
+        .pricing-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .price-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .price-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .price-card h3 {
+            font-size: 1.4em;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .price-text {
+            font-size: 2.2em;
+            color: #667eea;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .price-desc {
+            color: #999;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+        }
+
+        .deliverables {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .deliverables p {
+            color: #555;
+            font-size: 0.9em;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .deliverables p::before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .action-btns {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            padding: 12px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f0f0f0;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #667eea;
+            color: white;
+        }
+
+        /* 案例展示 */
+        .portfolio-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            margin-bottom: 40px;
+        }
+
+        .portfolio-section h2 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .portfolio-section h2::before {
+            content: "📁";
+            margin-right: 15px;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .portfolio-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px;
+            border-radius: 12px;
+            color: white;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .portfolio-item .icon {
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .portfolio-item h3 {
+            font-size: 1.2em;
+            margin-bottom: 8px;
+        }
+
+        .portfolio-item p {
+            font-size: 0.95em;
+            opacity: 0.9;
+        }
+
+        /* 流程说明 */
+        .process-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            margin-bottom: 40px;
+        }
+
+        .process-section h2 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .process-section h2::before {
+            content: "🔄";
+            margin-right: 15px;
+        }
+
+        .process-timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .process-step {
+            text-align: center;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 50%;
+            font-weight: 700;
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .process-step h3 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .process-step p {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        /* FAQ */
+        .faq-section {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+            margin-bottom: 40px;
+        }
+
+        .faq-section h2 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-section h2::before {
+            content: "❓";
+            margin-right: 15px;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
+            padding-bottom: 20px;
+        }
+
+        .faq-item:last-child {
+            border-bottom: none;
+        }
+
+        .faq-question {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-question::before {
+            content: "➤";
+            margin-right: 10px;
+            color: #667eea;
+        }
+
+        .faq-answer {
+            color: #666;
+            line-height: 1.6;
+            font-size: 0.95em;
+        }
+
+        /* CTA */
+        .cta-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 50px 40px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+        }
+
+        .cta-section h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+
+        .cta-section p {
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .process-timeline {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-btn">← 返回首页</a>
+
+        <!-- 顶部标题 -->
+        <div class="header">
+            <span class="badge">⭐ 专业定制服务</span>
+            <h1>PPT定制服务</h1>
+            <p>由专业设计师团队打造，为企业和个人提供高端PPT定制方案</p>
+        </div>
+
+        <!-- 特点与定价 -->
+        <div class="content">
+            <!-- 左侧特点 -->
+            <div class="features-section">
+                <h2>我们的优势</h2>
+                <div class="feature-list">
+                    <div class="feature-item">
+                        <h3>🎨 专业设计师团队</h3>
+                        <p>10年以上PPT设计经验，获奖设计师领衔</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>⚡ 快速交付</h3>
+                        <p>48小时内交付初稿，高效率团队协作</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>♾️ 无限修改</h3>
+                        <p>服务周期内无限次修改，直到满意为止</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>🎯 100%原创</h3>
+                        <p>每份作品都是量身定制，绝无模板</p>
+                    </div>
+                    <div class="feature-item">
+                        <h3>📞 专属顾问</h3>
+                        <p>一对一服务，全程沟通反馈无遗漏</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧定价 -->
+            <div class="pricing-section">
+                <div class="price-card">
+                    <h3>💼 标准版</h3>
+                    <div class="price-text">¥2,999</div>
+                    <p class="price-desc">适合初创企业、项目汇报</p>
+                    <div class="deliverables">
+                        <p>20-30页PPT制作</p>
+                        <p>3套配色方案选择</p>
+                        <p>无限修改（5个工作日）</p>
+                        <p>基础排版与设计</p>
+                        <p>源文件交付</p>
+                    </div>
+                    <div class="action-btns">
+                        <a href="https://wa.me/+8613800138000" class="btn btn-primary">立即咨询</a>
+                    </div>
+                </div>
+
+                <div class="price-card">
+                    <h3>🏆 高级版</h3>
+                    <div class="price-text">¥5,999</div>
+                    <p class="price-desc">适合融资路演、重要会议</p>
+                    <div class="deliverables">
+                        <p>40-50页PPT制作</p>
+                        <p>5套配色方案选择</p>
+                        <p>无限修改（10个工作日）</p>
+                        <p>高级动画效果设计</p>
+                        <p>配合视频/音频支持</p>
+                        <p>源文件 + 演讲稿交付</p>
+                    </div>
+                    <div class="action-btns">
+                        <a href="https://wa.me/+8613800138000" class="btn btn-primary">立即咨询</a>
+                    </div>
+                </div>
+
+                <div class="price-card">
+                    <h3>👑 豪华版</h3>
+                    <div class="price-text">¥9,999</div>
+                    <p class="price-desc">适合品牌展示、大型论坛</p>
+                    <div class="deliverables">
+                        <p>60+页PPT制作</p>
+                        <p>10+套配色方案选择</p>
+                        <p>无限修改（15个工作日）</p>
+                        <p>顶级动画交互设计</p>
+                        <p>3D视觉效果</p>
+                        <p>演讲技巧指导</p>
+                        <p>源文件 + 演讲稿 + 讲师稿</p>
+                    </div>
+                    <div class="action-btns">
+                        <a href="https://wa.me/+8613800138000" class="btn btn-primary">立即咨询</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 案例展示 -->
+        <div class="portfolio-section">
+            <h2>成功案例</h2>
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="icon">🚀</div>
+                    <h3>融资路演</h3>
+                    <p>帮助初创公司成功融资2000万</p>
+                </div>
+                <div class="portfolio-item">
+                    <div class="icon">🏢</div>
+                    <h3>企业年会</h3>
+                    <p>500人大型企业年会PPT方案</p>
+                </div>
+                <div class="portfolio-item">
+                    <div class="icon">🎓</div>
+                    <h3>学位答辩</h3>
+                    <p>帮助100+学生通过论文答辩</p>
+                </div>
+                <div class="portfolio-item">
+                    <div class="icon">📊</div>
+                    <h3>数据汇报</h3>
+                    <p>复杂数据可视化设计方案</p>
+                </div>
+                <div class="portfolio-item">
+                    <div class="icon">🎤</div>
+                    <h3>产品发布</h3>
+                    <p>科技公司产品发布会设计</p>
+                </div>
+                <div class="portfolio-item">
+                    <div class="icon">🏆</div>
+                    <h3>竞赛方案</h3>
+                    <p>创业大赛获奖项目PPT</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 流程说明 -->
+        <div class="process-section">
+            <h2>服务流程</h2>
+            <div class="process-timeline">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <h3>需求沟通</h3>
+                    <p>详细了解您的需求、目标受众、核心信息</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <h3>方案设计</h3>
+                    <p>设计师团队设计初稿方案和多套配色</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <h3>反馈修改</h3>
+                    <p>根据您的反馈进行调整，无限修改直到满意</p>
+                </div>
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <h3>最终交付</h3>
+                    <p>交付高质量文件、源文件、演讲稿等</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- FAQ -->
+        <div class="faq-section">
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <div class="faq-question">多久能完成？</div>
+                <div class="faq-answer">标准版48小时交付初稿，总工作周期5-15个工作日，具体根据项目复杂度而定。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">包含演讲稿吗？</div>
+                <div class="faq-answer">高级版和豪华版包含演讲稿和讲师稿。标准版可额外付费添加。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">有修改次数限制吗？</div>
+                <div class="faq-answer">没有！在服务周期内，我们提供无限次修改直到您完全满意为止。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">可以使用我们的品牌素材吗？</div>
+                <div class="faq-answer">完全可以。请在需求沟通阶段提供您的品牌指南、LOGO、色彩标准等。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">支持哪些PPT软件格式？</div>
+                <div class="faq-answer">支持PowerPoint、Keynote、Google Slides等所有主流格式，并可输出为PDF。</div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question">交付后还能修改吗？</div>
+                <div class="faq-answer">服务周期内无限修改。超期后收取小幅修改费，具体按修改内容而定。</div>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-section">
+            <h2>🎯 让您的PPT脱颖而出</h2>
+            <p>不要让平庸的设计毁了您精心准备的内容<br>让我们为您打造一份专业、高端、有说服力的PPT</p>
+            <a href="https://wa.me/+8613800138000" class="cta-btn">立即联系我们 →</a>
+        </div>
+    </div>
+</body>
+</html>
