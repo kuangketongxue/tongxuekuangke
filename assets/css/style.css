@@ -621,3 +621,159 @@ header h1 {
     transform: translateY(-8px);
     box-shadow: 0 15px 40px rgba(102, 126, 234, 0.3);
 }
+/* ========================================
+   定制服务区优化样式 (2025-01-xx 新增)
+   ======================================== */
+/* 定制服务区优化样式 */
+.nav-section.custom .section-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.nav-section.custom .custom-tip {
+    display: block;
+    color: #666;
+    font-size: 14px;
+    margin-top: 8px;
+    font-weight: normal;
+}
+
+.custom-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.custom-card {
+    position: relative;
+    padding: 30px 25px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.custom-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.custom-card:hover::before {
+    opacity: 1;
+}
+
+.custom-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+}
+
+.custom-card.featured {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    border: 2px solid #ff6b9d;
+}
+
+.custom-card.featured:hover {
+    box-shadow: 0 20px 40px rgba(245, 87, 108, 0.5);
+}
+
+.card-icon {
+    font-size: 48px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.custom-card h3 {
+    font-size: 22px;
+    margin: 15px 0 10px;
+    text-align: center;
+    font-weight: 600;
+}
+
+.card-desc {
+    text-align: center;
+    font-size: 14px;
+    margin-bottom: 20px;
+    opacity: 0.95;
+}
+
+.service-features {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+    font-size: 14px;
+}
+
+.service-features li {
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.service-features li:last-child {
+    border-bottom: none;
+}
+
+.custom-badge {
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    margin-top: 20px;
+    padding: 12px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+}
+
+.custom-badge.special {
+    font-size: 28px;
+    background: rgba(255,255,255,0.3);
+}
+
+.featured-label {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255,255,255,0.9);
+    color: #f5576c;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.save-tip {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 13px;
+    color: #fff;
+    background: rgba(255,255,255,0.15);
+    padding: 8px;
+    border-radius: 6px;
+    font-weight: 500;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .custom-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .custom-card {
+        padding: 25px 20px;
+    }
+    
+    .card-icon {
+        font-size: 40px;
+    }
+}
