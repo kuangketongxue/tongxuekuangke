@@ -1,20 +1,19 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <link rel="icon" type="image/x-icon" href="assets/images/favicon.ico">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>狂客·银河空间站</title>
     <!-- Font Awesome 库 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <!-- Chart.js 库 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, #0a0e27 0%, #1a1e3a 50%, #2a1e4a 100%);
@@ -23,7 +22,6 @@
             position: relative;
             overflow-x: hidden;
         }
-        
         /* 星空背景动画 */
         body::before {
             content: '';
@@ -32,7 +30,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: 
+            background-image:
                 radial-gradient(2px 2px at 20px 30px, white, transparent),
                 radial-gradient(2px 2px at 40px 70px, white, transparent),
                 radial-gradient(1px 1px at 50px 50px, white, transparent),
@@ -46,20 +44,78 @@
             pointer-events: none;
             z-index: 0;
         }
-        
         @keyframes stars {
             0% { transform: translateY(0); }
             100% { transform: translateY(-200px); }
         }
         
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        /* 左侧目录导航 */
+        .sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 260px;
+            height: 100vh;
+            background: rgba(10, 14, 39, 0.9);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 20px 0;
+            z-index: 100;
+            overflow-y: auto;
+            transition: transform 0.3s ease;
+        }
+        .sidebar-header {
+            text-align: center;
+            padding: 0 20px 20px;
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            margin-bottom: 20px;
+        }
+        .sidebar-header h2 {
+            font-size: 1.5rem;
+            background: linear-gradient(45deg, #00ffff, #ff00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-menu {
+            list-style: none;
+            padding: 0 15px;
+        }
+        .nav-item {
+            margin-bottom: 10px;
+        }
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            color: #ddd;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .nav-link:hover, .nav-link.active {
+            background: rgba(0, 255, 255, 0.1);
+            color: #00ffff;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+        .nav-icon {
+            margin-right: 10px;
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+        
+        /* 主内容区域 */
+        .main-content {
+            margin-left: 260px;
             padding: 20px;
             position: relative;
             z-index: 1;
         }
         
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
         header {
             text-align: center;
             padding: 40px 0;
@@ -70,7 +126,6 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
-        
         header h1 {
             font-size: 2.5rem;
             background: linear-gradient(45deg, #00ffff, #ff00ff, #ffff00);
@@ -79,18 +134,15 @@
             text-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
             animation: glow 2s ease-in-out infinite alternate;
         }
-        
         @keyframes glow {
             from { filter: brightness(1); }
             to { filter: brightness(1.2); }
         }
-        
         .main-nav {
             display: flex;
             flex-direction: column;
             gap: 30px;
         }
-        
         .nav-section {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 20px;
@@ -99,18 +151,16 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            scroll-margin-top: 20px;
         }
-        
         .nav-section:hover {
             transform: translateY(-5px);
             box-shadow: 0 12px 40px rgba(0, 255, 255, 0.2);
         }
-        
         .section-header {
             text-align: center;
             margin-bottom: 20px;
         }
-        
         .nav-section h2 {
             font-size: 1.8rem;
             margin-bottom: 10px;
@@ -118,7 +168,6 @@
             color: #00ffff;
             text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
         }
-        
         .member-tip, .custom-tip {
             display: block;
             text-align: center;
@@ -126,18 +175,15 @@
             color: #aaa;
             margin-top: 5px;
         }
-        
         .nav-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
             margin-top: 20px;
         }
-        
         .custom-grid {
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
         }
-        
         .nav-card {
             display: block;
             background: linear-gradient(135deg, rgba(0, 100, 200, 0.1), rgba(100, 0, 200, 0.1));
@@ -150,7 +196,6 @@
             position: relative;
             overflow: hidden;
         }
-        
         .nav-card::before {
             content: '';
             position: absolute;
@@ -163,49 +208,40 @@
             transition: all 0.5s;
             opacity: 0;
         }
-        
         .nav-card:hover::before {
             animation: shimmer 0.5s ease-in-out;
         }
-        
         @keyframes shimmer {
             0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); opacity: 0; }
             50% { opacity: 1; }
             100% { transform: translateX(100%) translateY(100%) rotate(45deg); opacity: 0; }
         }
-        
         .nav-card:hover {
             transform: translateY(-5px) scale(1.02);
             box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
             border-color: rgba(0, 255, 255, 0.6);
         }
-        
         .nav-card h3 {
             font-size: 1.2rem;
             margin-bottom: 10px;
             color: #00ffff;
         }
-        
         .nav-card p {
             color: #ddd;
             font-size: 0.9rem;
             line-height: 1.4;
         }
-        
         .premium-card {
             background: linear-gradient(135deg, rgba(255, 100, 0, 0.1), rgba(255, 0, 100, 0.1));
             border-color: rgba(255, 100, 0, 0.3);
         }
-        
         .premium-card:hover {
             border-color: rgba(255, 100, 0, 0.6);
             box-shadow: 0 10px 30px rgba(255, 100, 0, 0.3);
         }
-        
         .premium-card h3 {
             color: #ff9900;
         }
-        
         .premium-badge {
             display: inline-block;
             background: linear-gradient(45deg, #ff6600, #ff9900);
@@ -217,53 +253,44 @@
             font-weight: bold;
             box-shadow: 0 2px 10px rgba(255, 100, 0, 0.3);
         }
-        
         .custom-card {
             background: linear-gradient(135deg, rgba(0, 255, 100, 0.1), rgba(0, 100, 255, 0.1));
             border-color: rgba(0, 255, 100, 0.3);
             text-align: center;
         }
-        
         .custom-card:hover {
             border-color: rgba(0, 255, 100, 0.6);
             box-shadow: 0 10px 30px rgba(0, 255, 100, 0.3);
         }
-        
         .custom-card.featured {
             background: linear-gradient(135deg, rgba(255, 0, 100, 0.2), rgba(0, 100, 255, 0.2));
             border-color: rgba(255, 0, 100, 0.5);
             transform: scale(1.05);
         }
-        
         .custom-card.featured:hover {
             transform: scale(1.08) translateY(-5px);
             box-shadow: 0 15px 40px rgba(255, 0, 100, 0.4);
         }
-        
         .card-icon {
             font-size: 2.5rem;
             margin-bottom: 15px;
         }
-        
         .card-desc {
             font-size: 0.9rem;
             margin-bottom: 15px;
             color: #ddd;
         }
-        
         .service-features {
             list-style: none;
             text-align: left;
             margin-bottom: 15px;
             padding: 0 10px;
         }
-        
         .service-features li {
             margin-bottom: 5px;
             color: #aaa;
             font-size: 0.85rem;
         }
-        
         .custom-badge {
             display: inline-block;
             background: linear-gradient(45deg, #00ff66, #0099ff);
@@ -274,12 +301,10 @@
             font-weight: bold;
             box-shadow: 0 2px 10px rgba(0, 255, 100, 0.3);
         }
-        
         .custom-badge.special {
             background: linear-gradient(45deg, #ff0099, #9900ff);
             box-shadow: 0 2px 10px rgba(255, 0, 150, 0.4);
         }
-        
         .featured-label {
             position: absolute;
             top: 10px;
@@ -292,18 +317,71 @@
             font-weight: bold;
             animation: pulse 2s infinite;
         }
-        
         @keyframes pulse {
             0%, 100% { transform: scale(1); }
             50% { transform: scale(1.05); }
         }
-        
         .save-tip {
             color: #00ff66;
             font-size: 0.8rem;
             margin-top: 10px;
             font-weight: bold;
             text-shadow: 0 0 5px rgba(0, 255, 100, 0.5);
+        }
+        
+        /* 新增：图表区域 */
+        .chart-section {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 255, 0.2);
+        }
+        .chart-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+        }
+        .chart-wrapper {
+            flex: 1;
+            min-width: 300px;
+            max-width: 500px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+        }
+        .chart-title {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #00ffff;
+            font-size: 1.2rem;
+        }
+        
+        /* 新增：统计数据卡片 */
+        .stats-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .stat-card {
+            background: linear-gradient(135deg, rgba(0, 100, 200, 0.2), rgba(100, 0, 200, 0.2));
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #00ffff;
+            margin-bottom: 5px;
+        }
+        .stat-label {
+            font-size: 0.9rem;
+            color: #aaa;
         }
         
         /* 社交媒体 Footer */
@@ -314,21 +392,18 @@
             backdrop-filter: blur(10px);
             border-top: 1px solid rgba(0, 255, 255, 0.2);
         }
-        
         .footer-container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
             text-align: center;
         }
-        
         .social-links {
             display: flex;
             justify-content: center;
             gap: 20px;
             margin-bottom: 20px;
         }
-        
         .social-link {
             display: inline-flex;
             align-items: center;
@@ -343,184 +418,599 @@
             transition: all 0.3s ease;
             font-size: 1.2rem;
         }
-        
         .social-link:hover {
             background: rgba(0, 255, 255, 0.2);
             transform: translateY(-3px);
             box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
         }
-        
         .copyright {
             color: #aaa;
             font-size: 0.9rem;
         }
         
         /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .menu-toggle {
+                display: block;
+            }
+        }
         @media (max-width: 768px) {
             header h1 {
                 font-size: 1.8rem;
             }
-            
             .nav-grid, .custom-grid {
                 grid-template-columns: 1fr;
             }
-            
             .custom-card.featured {
                 transform: scale(1);
             }
-            
             .custom-card.featured:hover {
                 transform: scale(1.02) translateY(-5px);
             }
+            .chart-wrapper {
+                min-width: 100%;
+            }
+        }
+        
+        /* 菜单切换按钮 */
+        .menu-toggle {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            background: rgba(0, 255, 255, 0.2);
+            border: 1px solid rgba(0, 255, 255, 0.5);
+            color: #00ffff;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 101;
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🌌 欢迎来到狂客·银河空间站 🚀</h1>
-        </header>
-        <nav class="main-nav">
-            <!-- 星际探索区 -->
-            <div class="nav-section free">
-                <h2>✨ 星际探索区</h2>
-                <div class="nav-grid">
-                    <a href="https://kuangketongxue.github.io/kuangke.github.io/index.html" target="_blank" class="nav-card">
-                        <h3>🌠 个人星系</h3>
-                        <p>探索宇宙中的生活轨迹</p>
-                    </a>
-                    <a href="https://kuangketongxue.github.io/kuangke.github.io/success.html" target="_blank" class="nav-card">
-                        <h3>🌟 成长星座</h3>
-                        <p>记录闪耀的成长时刻</p>
-                    </a>
-                    <a href="https://kuangketongxue.github.io/kuangke.github.io/reading.html" target="_blank" class="nav-card">
-                        <h3>📚 星海图书馆</h3>
-                        <p>穿越时空的精选文章</p>
-                    </a>
-                    <a href="https://kuangketongxue.github.io/kuangke.github.io/books.html" target="_blank" class="nav-card">
-                        <h3>📖 智慧星云</h3>
-                        <p>宇宙级的书籍推荐</p>
-                    </a>
-                    <a href="https://kuangketongxue.github.io/free-courses/index.html" class="nav-card">
-                        <h3>🎨 创意星球工作坊</h3>
-                        <p>设计技能提升课程</p>
-                    </a>
-                    <a href="https://kuangketongxue.github.io/free-courses/index.html" class="nav-card">
-                        <h3>🎬 影视星系</h3>
-                        <p>视频剪辑技术分享</p>
-                    </a>
-                    <a href="https://kuangketongxue.github.io/free-courses/index.html" class="nav-card">
-                        <h3>✍️ 文字星河</h3>
-                        <p>宇宙级写作能力提升</p>
-                    </a>
-                    <!-- 新增：视频矩阵 -->
-                    <a href="https://kuangketongxue.github.io/kuangke.github.io/video.html" class="nav-card">
-                        <h3>🎥 多维视频矩阵</h3>
-                        <p>跨平台视频内容宇宙</p>
-                    </a>
-                </div>
-            </div>
-            <!-- 会员星际 -->
-            <div class="nav-section premium">
-                <div class="section-header">
-                    <h2>🔐 会员星际联盟</h2>
-                    <span class="member-tip">加入任意星际计划，获得一年会员身份，进入精英社群</span>
-                </div>
-                <div class="nav-grid">
-                    <a href="ai-rss.html" class="nav-card premium-card">
-                        <h3>🤖 AI星系情报站</h3>
-                        <p>最新AI科技资讯订阅</p>
-                        <span class="premium-badge">69星际币/年</span>
-                    </a>
-                    <a href="exam.html" class="nav-card premium-card">
-                        <h3>📊 超新星学霸计划</h3>
-                        <p>备考资料与技巧宝典</p>
-                        <span class="premium-badge">99星际币永久</span>
-                    </a>
-                    <a href="weekly-course.html" class="nav-card premium-card">
-                        <h3>🌊 宇宙弄潮周课</h3>
-                        <p>每周精选星际课程</p>
-                        <span class="premium-badge">299星际币/年</span>
-                    </a>
-                    <a href="english-tribe.html" class="nav-card premium-card">
-                        <h3>📖 银河英语联盟</h3>
-                        <p>系统化英语学习社群</p>
-                        <span class="premium-badge">599星际币/年</span>
-                    </a>
-                    <a href="Daily-Thought-Notes.html" class="nav-card premium-card">
-                        <h3>💭 思维星云日记</h3>
-                        <p>记录宇宙级思维火花</p>
-                        <span class="premium-badge">会员专属</span>
-                    </a>
-                </div>
-            </div>
-            <!-- 定制服务区 -->
-            <div class="nav-section custom">
-                <div class="section-header">
-                    <h2>⭐ 宇宙定制工坊</h2>
-                    <span class="custom-tip">星际专业团队 · 超光速交付 · 品质保证</span>
-                </div>
-                <div class="nav-grid custom-grid">
-                    <a href="ppt-custom.html" class="nav-card custom-card">
-                        <div class="card-icon">🌟</div>
-                        <h3>星际PPT定制</h3>
-                        <p class="card-desc">专业设计团队，48小时超光速交付</p>
-                        <ul class="service-features">
-                            <li>✓ 星际商务汇报</li>
-                            <li>✓ 宇宙教学课件</li>
-                            <li>✓ 星际产品发布</li>
-                        </ul>
-                        <span class="custom-badge">¥2,999起</span>
-                    </a>
-                    <a href="video-custom.html" class="nav-card custom-card">
-                        <div class="card-icon">🎬</div>
-                        <h3>银河视频定制</h3>
-                        <p class="card-desc">专业制作团队，5天精品交付</p>
-                        <ul class="service-features">
-                            <li>✓ 宇宙宣传片制作</li>
-                            <li>✓ 星际产品演示</li>
-                            <li>✓ 银河课程录制</li>
-                        </ul>
-                        <span class="custom-badge">¥4,999起</span>
-                    </a>
-                    <a href="package-custom.html" class="nav-card custom-card featured">
-                        <div class="featured-label">🔥 超级新星套餐</div>
-                        <div class="card-icon">🌌</div>
-                        <h3>宇宙全案服务</h3>
-                        <p class="card-desc">一站式星际品牌传播解决方案</p>
-                        <ul class="service-features">
-                            <li>✓ 完整PPT星际设计</li>
-                            <li>✓ 专业银河视频制作</li>
-                            <li>✓ 宇宙文案策划撰写</li>
-                        </ul>
-                        <span class="custom-badge special">¥8,999起</span>
-                        <div class="save-tip">超级优惠 · 省¥3,000+</div>
-                    </a>
-                </div>
-            </div>
-        </nav>
+    <!-- 菜单切换按钮（移动端） -->
+    <div class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
     </div>
-    <!-- 社交媒体 Footer -->
-    <footer class="social-footer">
-        <div class="footer-container">
-            <div class="social-links">
-                <a href="https://open.weixin.qq.com/qr/code?username=gh_ba5b6bb6bd89"
-                   target="_blank" class="social-link wechat" title="微信公众号" rel="noopener noreferrer">
-                    <i class="fab fa-weixin"></i>
-                </a>
-                <a href="https://github.com/kuangketongxue"
-                   target="_blank" class="social-link github" title="GitHub" rel="noopener noreferrer">
-                    <i class="fab fa-github"></i>
-                </a>
-                <a href="https://x.com/kuangketongxue"
-                   target="_blank" class="social-link x" title="X (前 Twitter)" rel="noopener noreferrer">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                    </svg>
-                </a>
-            </div>
-            <p class="copyright">© 2025 狂客·银河 版权所有</p>
+    
+    <!-- 左侧目录导航 -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h2>🌌 银河导航</h2>
         </div>
-    </footer>
+        <ul class="nav-menu">
+            <li class="nav-item">
+                <a href="#explore-section" class="nav-link active">
+                    <span class="nav-icon">✨</span>
+                    <span>星际探索区</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#premium-section" class="nav-link">
+                    <span class="nav-icon">🔐</span>
+                    <span>会员星际联盟</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#custom-section" class="nav-link">
+                    <span class="nav-icon">⭐</span>
+                    <span>宇宙定制工坊</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#stats-section" class="nav-link">
+                    <span class="nav-icon">📊</span>
+                    <span>星际数据统计</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#contact-section" class="nav-link">
+                    <span class="nav-icon">🌐</span>
+                    <span>星际联系</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- 主内容区域 -->
+    <div class="main-content">
+        <div class="container">
+            <header>
+                <h1>🌌 欢迎来到狂客·银河空间站 🚀</h1>
+            </header>
+            <nav class="main-nav">
+                <!-- 星际探索区 -->
+                <div class="nav-section free" id="explore-section">
+                    <h2>✨ 星际探索区</h2>
+                    <div class="nav-grid">
+                        <a href="https://kuangketongxue.github.io/kuangke.github.io/index.html" target="_blank" class="nav-card">
+                            <h3>🌠 个人星系</h3>
+                            <p>探索宇宙中的生活轨迹</p>
+                        </a>
+                        <a href="https://kuangketongxue.github.io/kuangke.github.io/success.html" target="_blank" class="nav-card">
+                            <h3>🌟 成长星座</h3>
+                            <p>记录闪耀的成长时刻</p>
+                        </a>
+                        <a href="https://kuangketongxue.github.io/kuangke.github.io/reading.html" target="_blank" class="nav-card">
+                            <h3>📚 星海图书馆</h3>
+                            <p>穿越时空的精选文章</p>
+                        </a>
+                        <a href="https://kuangketongxue.github.io/kuangke.github.io/books.html" target="_blank" class="nav-card">
+                            <h3>📖 智慧星云</h3>
+                            <p>宇宙级的书籍推荐</p>
+                        </a>
+                        <a href="https://kuangketongxue.github.io/free-courses/index.html" class="nav-card">
+                            <h3>🎨 创意星球工作坊</h3>
+                            <p>设计技能提升课程</p>
+                        </a>
+                        <a href="https://kuangketongxue.github.io/free-courses/index.html" class="nav-card">
+                            <h3>🎬 影视星系</h3>
+                            <p>视频剪辑技术分享</p>
+                        </a>
+                        <a href="https://kuangketongxue.github.io/free-courses/index.html" class="nav-card">
+                            <h3>✍️ 文字星河</h3>
+                            <p>宇宙级写作能力提升</p>
+                        </a>
+                        <!-- 新增：视频矩阵 -->
+                        <a href="https://kuangketongxue.github.io/kuangke.github.io/video.html" class="nav-card">
+                            <h3>🎥 多维视频矩阵</h3>
+                            <p>跨平台视频内容宇宙</p>
+                        </a>
+                    </div>
+                </div>
+                <!-- 会员星际 -->
+                <div class="nav-section premium" id="premium-section">
+                    <div class="section-header">
+                        <h2>🔐 会员星际联盟</h2>
+                        <span class="member-tip">加入任意星际计划，获得一年会员身份，进入精英社群</span>
+                    </div>
+                    
+                    <!-- 新增：统计数据卡片 -->
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <div class="stat-value">1,258</div>
+                            <div class="stat-label">活跃会员</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">98%</div>
+                            <div class="stat-label">满意度</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">4.9</div>
+                            <div class="stat-label">平均评分</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">24h</div>
+                            <div class="stat-label">平均响应时间</div>
+                        </div>
+                    </div>
+                    
+                    <div class="nav-grid">
+                        <a href="ai-rss.html" class="nav-card premium-card">
+                            <h3>🤖 AI星系情报站</h3>
+                            <p>最新AI科技资讯订阅</p>
+                            <span class="premium-badge">69星际币/年</span>
+                        </a>
+                        <a href="exam.html" class="nav-card premium-card">
+                            <h3>📊 超新星学霸计划</h3>
+                            <p>备考资料与技巧宝典</p>
+                            <span class="premium-badge">99星际币永久</span>
+                        </a>
+                        <a href="weekly-course.html" class="nav-card premium-card">
+                            <h3>🌊 宇宙弄潮周课</h3>
+                            <p>每周精选星际课程</p>
+                            <span class="premium-badge">299星际币/年</span>
+                        </a>
+                        <a href="english-tribe.html" class="nav-card premium-card">
+                            <h3>📖 银河英语联盟</h3>
+                            <p>系统化英语学习社群</p>
+                            <span class="premium-badge">599星际币/年</span>
+                        </a>
+                        <a href="Daily-Thought-Notes.html" class="nav-card premium-card">
+                            <h3>💭 思维星云日记</h3>
+                            <p>记录宇宙级思维火花</p>
+                            <span class="premium-badge">会员专属</span>
+                        </a>
+                    </div>
+                    
+                    <!-- 新增：图表区域 -->
+                    <div class="chart-section" id="stats-section">
+                        <h3 class="chart-title">会员星际联盟数据统计</h3>
+                        <div class="chart-container">
+                            <div class="chart-wrapper">
+                                <canvas id="membershipChart"></canvas>
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="satisfactionChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- 定制服务区 -->
+                <div class="nav-section custom" id="custom-section">
+                    <div class="section-header">
+                        <h2>⭐ 宇宙定制工坊</h2>
+                        <span class="custom-tip">星际专业团队 · 超光速交付 · 品质保证</span>
+                    </div>
+                    
+                    <!-- 新增：定制服务统计数据 -->
+                    <div class="stats-cards">
+                        <div class="stat-card">
+                            <div class="stat-value">356</div>
+                            <div class="stat-label">已完成项目</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">99.2%</div>
+                            <div class="stat-label">准时交付率</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">4.95</div>
+                            <div class="stat-label">客户评分</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-value">72h</div>
+                            <div class="stat-label">平均交付时间</div>
+                        </div>
+                    </div>
+                    
+                    <div class="nav-grid custom-grid">
+                        <a href="ppt-custom.html" class="nav-card custom-card">
+                            <div class="card-icon">🌟</div>
+                            <h3>星际PPT定制</h3>
+                            <p class="card-desc">专业设计团队，48小时超光速交付</p>
+                            <ul class="service-features">
+                                <li>✓ 星际商务汇报</li>
+                                <li>✓ 宇宙教学课件</li>
+                                <li>✓ 星际产品发布</li>
+                            </ul>
+                            <span class="custom-badge">¥2,999起</span>
+                        </a>
+                        <a href="video-custom.html" class="nav-card custom-card">
+                            <div class="card-icon">🎬</div>
+                            <h3>银河视频定制</h3>
+                            <p class="card-desc">专业制作团队，5天精品交付</p>
+                            <ul class="service-features">
+                                <li>✓ 宇宙宣传片制作</li>
+                                <li>✓ 星际产品演示</li>
+                                <li>✓ 银河课程录制</li>
+                            </ul>
+                            <span class="custom-badge">¥4,999起</span>
+                        </a>
+                        <a href="package-custom.html" class="nav-card custom-card featured">
+                            <div class="featured-label">🔥 超级新星套餐</div>
+                            <div class="card-icon">🌌</div>
+                            <h3>宇宙全案服务</h3>
+                            <p class="card-desc">一站式星际品牌传播解决方案</p>
+                            <ul class="service-features">
+                                <li>✓ 完整PPT星际设计</li>
+                                <li>✓ 专业银河视频制作</li>
+                                <li>✓ 宇宙文案策划撰写</li>
+                            </ul>
+                            <span class="custom-badge special">¥8,999起</span>
+                            <div class="save-tip">超级优惠 · 省¥3,000+</div>
+                        </a>
+                    </div>
+                    
+                    <!-- 新增：定制服务图表 -->
+                    <div class="chart-section">
+                        <h3 class="chart-title">定制服务项目统计</h3>
+                        <div class="chart-container">
+                            <div class="chart-wrapper">
+                                <canvas id="serviceChart"></canvas>
+                            </div>
+                            <div class="chart-wrapper">
+                                <canvas id="timelineChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <!-- 社交媒体 Footer -->
+        <footer class="social-footer" id="contact-section">
+            <div class="footer-container">
+                <div class="social-links">
+                    <a href="https://open.weixin.qq.com/qr/code?username=gh_ba5b6bb6bd89"
+                       target="_blank" class="social-link wechat" title="微信公众号" rel="noopener noreferrer">
+                        <i class="fab fa-weixin"></i>
+                    </a>
+                    <a href="https://github.com/kuangketongxue"
+                       target="_blank" class="social-link github" title="GitHub" rel="noopener noreferrer">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="https://x.com/kuangketongxue"
+                       target="_blank" class="social-link x" title="X (前 Twitter)" rel="noopener noreferrer">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                </div>
+                <p class="copyright">© 2025 狂客·银河 版权所有</p>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // 页面加载完成后初始化图表
+        document.addEventListener('DOMContentLoaded', function() {
+            // 会员星际联盟图表
+            const membershipCtx = document.getElementById('membershipChart').getContext('2d');
+            const membershipChart = new Chart(membershipCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['AI星系情报站', '超新星学霸计划', '宇宙弄潮周课', '银河英语联盟', '思维星云日记'],
+                    datasets: [{
+                        data: [25, 30, 20, 15, 10],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 206, 86, 0.7)',
+                            'rgba(75, 192, 192, 0.7)',
+                            'rgba(153, 102, 255, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#fff',
+                                font: {
+                                    size: 10
+                                }
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: '会员分布比例',
+                            color: '#00ffff',
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 满意度图表
+            const satisfactionCtx = document.getElementById('satisfactionChart').getContext('2d');
+            const satisfactionChart = new Chart(satisfactionCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['AI星系情报站', '超新星学霸计划', '宇宙弄潮周课', '银河英语联盟', '思维星云日记'],
+                    datasets: [{
+                        label: '满意度 (%)',
+                        data: [95, 98, 96, 99, 97],
+                        backgroundColor: 'rgba(0, 255, 255, 0.5)',
+                        borderColor: 'rgba(0, 255, 255, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: {
+                                color: '#fff'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#fff',
+                                maxRotation: 45
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#fff'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: '各服务满意度',
+                            color: '#00ffff',
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 定制服务图表
+            const serviceCtx = document.getElementById('serviceChart').getContext('2d');
+            const serviceChart = new Chart(serviceCtx, {
+                type: 'polarArea',
+                data: {
+                    labels: ['PPT定制', '视频定制', '全案服务'],
+                    datasets: [{
+                        data: [45, 35, 20],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.7)',
+                            'rgba(54, 162, 235, 0.7)',
+                            'rgba(255, 206, 86, 0.7)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#fff'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: '定制服务类型分布',
+                            color: '#00ffff',
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                }
+            });
+
+            // 时间线图表
+            const timelineCtx = document.getElementById('timelineChart').getContext('2d');
+            const timelineChart = new Chart(timelineCtx, {
+                type: 'line',
+                data: {
+                    labels: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月'],
+                    datasets: [{
+                        label: '项目数量',
+                        data: [12, 19, 15, 25, 22, 30, 28, 35, 32, 40, 38, 45],
+                        fill: false,
+                        backgroundColor: 'rgba(0, 255, 255, 0.2)',
+                        borderColor: 'rgba(0, 255, 255, 1)',
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#fff'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#fff'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#fff'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: '年度项目增长趋势',
+                            color: '#00ffff',
+                            font: {
+                                size: 14
+                            }
+                        }
+                    }
+                }
+            });
+            
+            // 导航菜单交互
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('.nav-section, .social-footer');
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            
+            // 移动端菜单切换
+            if (menuToggle) {
+                menuToggle.addEventListener('click', function() {
+                    sidebar.classList.toggle('active');
+                });
+            }
+            
+            // 导航链接点击事件
+            navLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 移除所有active类
+                    navLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // 添加当前active类
+                    this.classList.add('active');
+                    
+                    // 获取目标元素
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    // 平滑滚动到目标
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 20,
+                            behavior: 'smooth'
+                        });
+                    }
+                    
+                    // 移动端点击后关闭菜单
+                    if (window.innerWidth <= 1024) {
+                        sidebar.classList.remove('active');
+                    }
+                });
+            });
+            
+            // 滚动时更新活动导航项
+            window.addEventListener('scroll', function() {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    
+                    if (pageYOffset >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+                
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${current}`) {
+                        link.classList.add('active');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
