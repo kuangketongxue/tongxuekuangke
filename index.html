@@ -58,6 +58,115 @@
             0%, 100% { opacity: 0.3; }
             50% { opacity: 1; }
         }
+        /* 顶部免责声明 */
+        .top-disclaimer {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.15), rgba(255, 100, 0, 0.15));
+            border-bottom: 2px solid rgba(255, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+            z-index: 200;
+            padding: 12px 20px;
+            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.3);
+            animation: slideDown 0.5s ease-out;
+        }
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        .disclaimer-content-wrapper {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        .disclaimer-text {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+        .disclaimer-icon {
+            font-size: 1.3rem;
+            color: #ff6b6b;
+            animation: blink 2s infinite;
+            flex-shrink: 0;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.6; }
+        }
+        .disclaimer-message {
+            color: #ffb3b3;
+        }
+        .disclaimer-highlight {
+            color: #ff9900;
+            font-weight: bold;
+        }
+        .disclaimer-close {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 100, 100, 0.3);
+            color: #ff9999;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+        }
+        .disclaimer-close:hover {
+            background: rgba(255, 0, 0, 0.2);
+            transform: scale(1.1);
+            color: #ffffff;
+        }
+        .disclaimer-minimized {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.2), rgba(255, 100, 0, 0.2));
+            border: 2px solid rgba(255, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 12px 20px;
+            backdrop-filter: blur(15px);
+            z-index: 200;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: bounce 2s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+        .disclaimer-minimized:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
+        }
+        .disclaimer-minimized-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: #ff9999;
+        }
+        .disclaimer-hidden {
+            display: none;
+        }
         /* 侧边栏 */
         .sidebar {
             position: fixed;
@@ -114,6 +223,7 @@
         .main-content {
             margin-left: 260px;
             padding: 20px;
+            padding-top: 80px;
             position: relative;
             z-index: 1;
             min-height: 100vh;
@@ -384,52 +494,6 @@
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
-        /* 免责声明样式 */
-        .disclaimer-section {
-            background: rgba(255, 0, 0, 0.1);
-            border: 2px solid rgba(255, 0, 0, 0.3);
-            border-radius: 15px;
-            padding: 25px;
-            margin: 30px 0;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 8px 32px rgba(255, 0, 0, 0.2);
-        }
-        .disclaimer-header {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            color: #ff6b6b;
-            font-size: 1.3rem;
-            font-weight: bold;
-        }
-        .disclaimer-icon {
-            font-size: 1.5rem;
-            margin-right: 10px;
-            animation: blink 2s infinite;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        .disclaimer-content {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-        .disclaimer-content p {
-            margin-bottom: 10px;
-        }
-        .disclaimer-content ul {
-            margin-left: 20px;
-            margin-top: 10px;
-        }
-        .disclaimer-content li {
-            margin-bottom: 5px;
-            color: var(--text-muted);
-        }
-        .disclaimer-highlight {
-            color: #ff9900;
-            font-weight: bold;
-        }
         /* 底部 */
         .social-footer {
             background: rgba(0, 0, 0, 0.5);
@@ -476,7 +540,7 @@
         /* 菜单切换按钮 */
         .menu-toggle {
             position: fixed;
-            top: 20px;
+            top: 80px;
             left: 20px;
             background: rgba(0, 255, 255, 0.2);
             border: 1px solid var(--border-color);
@@ -508,6 +572,11 @@
             .menu-toggle {
                 display: flex;
             }
+            .disclaimer-content-wrapper {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
         }
         @media (max-width: 768px) {
             .nav-grid, .custom-grid {
@@ -519,10 +588,27 @@
             .stats-cards {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .disclaimer-text {
+                font-size: 0.8rem;
+            }
+            .disclaimer-minimized {
+                top: 10px;
+                right: 10px;
+                padding: 8px 12px;
+            }
+            .disclaimer-minimized-content {
+                font-size: 0.75rem;
+            }
         }
         @media (max-width: 480px) {
             .stats-cards {
                 grid-template-columns: 1fr;
+            }
+            .disclaimer-content-wrapper {
+                padding: 8px 15px;
+            }
+            .disclaimer-text {
+                font-size: 0.75rem;
             }
         }
         /* 滚动条样式 */
@@ -563,10 +649,35 @@
 <body>
     <!-- 动态星空背景 -->
     <div class="stars-bg" id="starsBg"></div>
+    
+    <!-- 顶部免责声明 -->
+    <div class="top-disclaimer" id="topDisclaimer">
+        <div class="disclaimer-content-wrapper">
+            <div class="disclaimer-text">
+                <span class="disclaimer-icon">⚠️</span>
+                <span class="disclaimer-message">
+                    <strong>重要声明：</strong>本网站所有内容均为<span class="disclaimer-highlight">AI生成演示</span>，服务产品<span class="disclaimer-highlight">尚未正式上架</span>，仅供展示参考，不构成任何承诺。
+                </span>
+            </div>
+            <div class="disclaimer-close" id="disclaimerClose" title="收起声明">
+                ×
+            </div>
+        </div>
+    </div>
+    
+    <!-- 收起后的免责声明按钮 -->
+    <div class="disclaimer-minimized disclaimer-hidden" id="disclaimerMinimized" title="查看免责声明">
+        <div class="disclaimer-minimized-content">
+            <span class="disclaimer-icon">⚠️</span>
+            <span>AI演示内容 · 非正式产品</span>
+        </div>
+    </div>
+
     <!-- 菜单切换按钮 -->
     <div class="menu-toggle" id="menuToggle" aria-label="切换菜单">
         <i class="fas fa-bars"></i>
     </div>
+    
     <!-- 左侧目录导航 -->
     <aside class="sidebar" id="sidebar" role="navigation" aria-label="主导航">
         <div class="sidebar-header">
@@ -598,12 +709,6 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="#disclaimer-section" class="nav-link" data-section="disclaimer">
-                    <span class="nav-icon">⚠️</span>
-                    <span>免责声明</span>
-                </a>
-            </li>
-            <li class="nav-item">
                 <a href="#contact-section" class="nav-link" data-section="contact">
                     <span class="nav-icon">🌐</span>
                     <span>星际联系</span>
@@ -611,6 +716,7 @@
             </li>
         </ul>
     </aside>
+    
     <!-- 主内容区域 -->
     <main class="main-content">
         <div class="container">
@@ -656,6 +762,7 @@
                         </a>
                     </div>
                 </section>
+                
                 <!-- 会员星际联盟 -->
                 <section class="nav-section premium fade-in" id="premium-section">
                     <div class="section-header">
@@ -722,6 +829,7 @@
                         </div>
                     </div>
                 </section>
+                
                 <!-- 定制服务区 -->
                 <section class="nav-section custom fade-in" id="custom-section">
                     <div class="section-header">
@@ -798,32 +906,9 @@
                         </div>
                     </div>
                 </section>
-                <!-- 免责声明 -->
-                <section class="disclaimer-section fade-in" id="disclaimer-section">
-                    <div class="disclaimer-header">
-                        <span class="disclaimer-icon">⚠️</span>
-                        <span>重要免责声明</span>
-                    </div>
-                    <div class="disclaimer-content">
-                        <p><strong>尊敬的星际访客：</strong></p>
-                        <p>欢迎使用狂客·银河空间站！为了保障您的权益，请仔细阅读以下免责声明：</p>
-                        <ul>
-                            <li><span class="disclaimer-highlight">AI生成内容：</span>本网站所有内容（包括但不限于文本、图片、图表、价格信息等）均由AI技术生成，仅供演示参考，不构成任何正式承诺。</li>
-                            <li><span class="disclaimer-highlight">非正式产品：</span>网站展示的所有服务、产品、价格等均为概念性内容，<strong>尚未正式上架销售</strong>，不代表实际可提供的服务或商品。</li>
-                            <li><span class="disclaimer-highlight">信息仅供参考：</span>网站中的数据统计、用户评价、项目数量等信息为虚构示例，仅供参考，不反映真实情况。</li>
-                            <li><span class="disclaimer-highlight">不承担法律责任：</span>对于因访问、使用或依赖本网站信息而产生的任何直接或间接损失，我们不承担任何法律责任。</li>
-                            <li><span class="disclaimer-highlight">版权声明：</span>网站设计、代码及内容的所有权归原作者所有，未经许可不得转载或商业使用。</li>
-                        </ul>
-                        <p style="margin-top: 15px; text-align: center;">
-                            <em>本免责声明最后更新时间：2025年10月21日</em>
-                        </p>
-                        <p style="text-align: center; color: var(--text-muted); font-size: 0.9rem;">
-                            继续使用本网站即表示您已阅读并同意上述免责声明。
-                        </p>
-                    </div>
-                </section>
             </nav>
         </div>
+        
         <!-- 社交媒体 Footer -->
         <footer class="social-footer" id="contact-section">
             <div class="footer-container">
@@ -847,6 +932,7 @@
             </div>
         </footer>
     </main>
+    
     <!-- 延迟加载 Chart.js -->
     <script>
         // 延迟加载 Chart.js
@@ -863,6 +949,65 @@
                 document.head.appendChild(script);
             });
         }
+        
+        // 免责声明管理器
+        class DisclaimerManager {
+            constructor() {
+                this.topDisclaimer = document.getElementById('topDisclaimer');
+                this.disclaimerClose = document.getElementById('disclaimerClose');
+                this.disclaimerMinimized = document.getElementById('disclaimerMinimized');
+                this.isMinimized = false;
+                this.init();
+            }
+            
+            init() {
+                // 关闭按钮点击事件
+                this.disclaimerClose.addEventListener('click', () => {
+                    this.minimizeDisclaimer();
+                });
+                
+                // 最小化按钮点击事件
+                this.disclaimerMinimized.addEventListener('click', () => {
+                    this.expandDisclaimer();
+                });
+                
+                // 5秒后自动最小化
+                setTimeout(() => {
+                    if (!this.isMinimized) {
+                        this.minimizeDisclaimer();
+                    }
+                }, 8000);
+                
+                // 检查本地存储状态
+                const savedState = localStorage.getItem('disclaimerMinimized');
+                if (savedState === 'true') {
+                    this.minimizeDisclaimer();
+                }
+            }
+            
+            minimizeDisclaimer() {
+                this.topDisclaimer.classList.add('disclaimer-hidden');
+                this.disclaimerMinimized.classList.remove('disclaimer-hidden');
+                this.isMinimized = true;
+                localStorage.setItem('disclaimerMinimized', 'true');
+                
+                // 调整主内容区域的padding
+                document.querySelector('.main-content').style.paddingTop = '20px';
+                document.querySelector('.menu-toggle').style.top = '20px';
+            }
+            
+            expandDisclaimer() {
+                this.topDisclaimer.classList.remove('disclaimer-hidden');
+                this.disclaimerMinimized.classList.add('disclaimer-hidden');
+                this.isMinimized = false;
+                localStorage.setItem('disclaimerMinimized', 'false');
+                
+                // 恢复主内容区域的padding
+                document.querySelector('.main-content').style.paddingTop = '80px';
+                document.querySelector('.menu-toggle').style.top = '80px';
+            }
+        }
+        
         // 创建动态星空背景
         function createStars() {
             const starsBg = document.getElementById('starsBg');
@@ -884,6 +1029,7 @@
                 starsBg.appendChild(star);
             }
         }
+        
         // 图表管理器 - 确保所有图表都能正确显示
         class ChartManager {
             constructor() {
@@ -911,6 +1057,7 @@
                     }
                 };
             }
+            
             async init() {
                 try {
                     await loadChartJS();
@@ -925,6 +1072,7 @@
                     this.showErrorMessage('图表加载失败，请刷新页面重试');
                 }
             }
+            
             showErrorMessage(message) {
                 const loadingElements = document.querySelectorAll('.chart-loading');
                 loadingElements.forEach(el => {
@@ -932,12 +1080,14 @@
                     el.style.display = 'block';
                 });
             }
+            
             createAllCharts() {
                 this.createMembershipChart();
                 this.createSatisfactionChart();
                 this.createServiceChart();
                 this.createTimelineChart();
             }
+            
             createMembershipChart() {
                 const ctx = document.getElementById('membershipChart');
                 if (!ctx) {
@@ -993,6 +1143,7 @@
                     console.error('创建会员分布图表失败:', error);
                 }
             }
+            
             createSatisfactionChart() {
                 const ctx = document.getElementById('satisfactionChart');
                 if (!ctx) {
@@ -1067,6 +1218,7 @@
                     console.error('创建满意度图表失败:', error);
                 }
             }
+            
             createServiceChart() {
                 const ctx = document.getElementById('serviceChart');
                 if (!ctx) {
@@ -1118,6 +1270,7 @@
                     console.error('创建服务类型图表失败:', error);
                 }
             }
+            
             createTimelineChart() {
                 const ctx = document.getElementById('timelineChart');
                 if (!ctx) {
@@ -1199,6 +1352,7 @@
                     console.error('创建时间线图表失败:', error);
                 }
             }
+            
             // 更新图表数据的方法
             updateCharts(newData) {
                 if (!this.isLoaded) return;
@@ -1209,6 +1363,7 @@
                     }
                 });
             }
+            
             // 销毁所有图表
             destroyCharts() {
                 Object.values(this.charts).forEach(chart => {
@@ -1217,21 +1372,24 @@
                 this.charts = {};
             }
         }
+        
         // 导航功能
         class NavigationManager {
             constructor() {
                 this.navLinks = document.querySelectorAll('.nav-link');
-                this.sections = document.querySelectorAll('.nav-section, .disclaimer-section, .social-footer');
+                this.sections = document.querySelectorAll('.nav-section, .social-footer');
                 this.menuToggle = document.getElementById('menuToggle');
                 this.sidebar = document.getElementById('sidebar');
                 this.init();
             }
+            
             init() {
                 this.setupMenuToggle();
                 this.setupNavigationLinks();
                 this.setupScrollSpy();
                 this.setupKeyboardNavigation();
             }
+            
             setupMenuToggle() {
                 if (this.menuToggle) {
                     this.menuToggle.addEventListener('click', () => {
@@ -1247,6 +1405,7 @@
                     }
                 });
             }
+            
             setupNavigationLinks() {
                 this.navLinks.forEach(link => {
                     link.addEventListener('click', (e) => {
@@ -1270,6 +1429,7 @@
                     });
                 });
             }
+            
             setupScrollSpy() {
                 let ticking = false;
                 const updateActiveNav = () => {
@@ -1297,6 +1457,7 @@
                 };
                 window.addEventListener('scroll', onScroll, { passive: true });
             }
+            
             setupKeyboardNavigation() {
                 document.addEventListener('keydown', (e) => {
                     if (e.key === 'Escape' && window.innerWidth <= 1024) {
@@ -1305,20 +1466,29 @@
                 });
             }
         }
+        
         // 主应用类
         class App {
             constructor() {
                 this.navigation = null;
                 this.chartManager = null;
+                this.disclaimerManager = null;
                 this.init();
             }
+            
             async init() {
+                // 初始化免责声明管理器
+                this.disclaimerManager = new DisclaimerManager();
+                
                 // 创建星空背景
                 createStars();
+                
                 // 初始化导航
                 this.navigation = new NavigationManager();
+                
                 // 延迟初始化图表
                 this.chartManager = new ChartManager();
+                
                 // 使用 Intersection Observer 优化图表加载时机
                 const chartObserver = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
@@ -1331,10 +1501,12 @@
                 }, {
                     threshold: 0.1
                 });
+                
                 const chartSection = document.getElementById('stats-section');
                 if (chartSection) {
-                    chartObserver.observe(chartSection);
+                    chartSection.observe(chartSection);
                 }
+                
                 // 监听页面可见性变化，优化性能
                 document.addEventListener('visibilitychange', () => {
                     if (document.hidden && this.chartManager) {
@@ -1346,6 +1518,7 @@
                         });
                     }
                 });
+                
                 // 监听窗口大小变化
                 window.addEventListener('resize', () => {
                     if (this.chartManager && this.chartManager.isLoaded) {
@@ -1356,15 +1529,18 @@
                 });
             }
         }
+        
         // 启动应用
         document.addEventListener('DOMContentLoaded', () => {
             new App();
             console.log('银河空间站应用启动完成');
         });
+        
         // 错误处理
         window.addEventListener('error', (e) => {
             console.error('页面错误:', e.error);
         });
+        
         // 性能监控
         if ('performance' in window) {
             window.addEventListener('load', () => {
