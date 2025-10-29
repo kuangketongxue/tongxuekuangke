@@ -6,92 +6,73 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <!-- SEO优化 -->
-    <title>狂客·银河空间站 | AI资讯·学习资源·定制服务综合平台</title>
-    <meta name="description" content="狂客·银河空间站是一个集AI资讯订阅、学习资源分享、专业定制服务于一体的综合平台。提供AI星系情报站、超新星学霸计划、宇宙定制工坊等特色服务。">
-    <meta name="keywords" content="AI资讯,在线学习,PPT定制,视频定制,会员服务,学习资源">
-    <meta name="author" content="狂客·银河">
+    <title>狂客空间 | AI资讯·学习资源·定制服务</title>
+    <meta name="description" content="狂客空间 - 专注AI资讯、学习资源分享、专业定制服务的精品平台">
+    <meta name="keywords" content="AI资讯,在线学习,PPT定制,视频定制,会员服务">
+    <meta name="author" content="狂客">
     <meta name="robots" content="index, follow">
     
-    <!-- Open Graph -->
-    <meta property="og:title" content="狂客·银河空间站">
-    <meta property="og:description" content="AI资讯·学习资源·定制服务综合平台">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kuangketongxue.github.io/">
-    
-    <!-- 性能优化 -->
-    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
-    <link rel="preconnect" href="https://cdn.jsdelivr.net">
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
-    
     <!-- 主题颜色 -->
-    <meta name="theme-color" content="#0a0e27">
+    <meta name="theme-color" content="#000000">
     
     <!-- Favicon -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌌</text></svg>">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
     
-    <!-- 关键CSS内联 -->
+    <!-- 字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
     <style>
         /* ==================== CSS变量系统 ==================== */
         :root {
-            /* 主题色 */
-            --primary-color: #00ffff;
-            --secondary-color: #ff00ff;
-            --accent-color: #ffff00;
+            /* 主题色 - 奢华黑金 */
+            --primary-gold: #d4af37;
+            --primary-black: #000000;
+            --primary-white: #ffffff;
+            --secondary-gold: #b8941e;
+            --light-gold: #f4e4b8;
             
             /* 背景色 */
-            --bg-dark: #0a0e27;
-            --bg-medium: #1a1e3a;
-            --bg-light: #2a1e4a;
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a0a;
+            --bg-card: rgba(255, 255, 255, 0.03);
             
             /* 文字颜色 */
             --text-primary: #ffffff;
-            --text-secondary: #dddddd;
-            --text-muted: #aaaaaa;
+            --text-secondary: #cccccc;
+            --text-muted: #888888;
+            --text-gold: #d4af37;
             
-            /* 边框和玻璃效果 */
-            --border-color: rgba(0, 255, 255, 0.2);
-            --glass-bg: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            /* 边框 */
+            --border-gold: rgba(212, 175, 55, 0.2);
+            --border-white: rgba(255, 255, 255, 0.1);
             
             /* 阴影 */
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.2);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.3);
-            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.4);
+            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.3);
+            --shadow-gold: 0 4px 24px rgba(212, 175, 55, 0.15);
             
-            /* 动画时长 */
-            --transition-fast: 0.2s;
-            --transition-normal: 0.3s;
-            --transition-slow: 0.5s;
+            /* 动画 */
+            --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             
             /* 间距 */
-            --spacing-xs: 4px;
-            --spacing-sm: 8px;
-            --spacing-md: 16px;
-            --spacing-lg: 24px;
-            --spacing-xl: 32px;
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 32px;
+            --spacing-lg: 48px;
+            --spacing-xl: 80px;
+            --spacing-2xl: 120px;
             
             /* 圆角 */
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 20px;
+            --radius: 4px;
             
-            /* 侧边栏宽度 */
-            --sidebar-width: 260px;
-            
-            /* 免责声明高度 */
-            --disclaimer-height: 60px;
+            /* 字体 */
+            --font-serif: 'Noto Serif SC', serif;
+            --font-sans: 'Noto Sans SC', sans-serif;
         }
 
-        /* 暗黑模式变量（预留） */
-        [data-theme="dark"] {
-            --bg-dark: #000000;
-            --bg-medium: #0a0a0a;
-            --bg-light: #1a1a1a;
-        }
-
-        /* ==================== 基础样式重置 ==================== */
-        *, *::before, *::after {
+        /* ==================== 基础重置 ==================== */
+        * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
@@ -101,1787 +82,622 @@
             font-size: 16px;
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 
-                         'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 
-                         'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-            background: linear-gradient(135deg, 
-                        var(--bg-dark) 0%, 
-                        var(--bg-medium) 50%, 
-                        var(--bg-light) 100%);
-            min-height: 100vh;
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
             color: var(--text-primary);
-            position: relative;
+            line-height: 1.8;
             overflow-x: hidden;
-            line-height: 1.6;
-            font-size: 1rem;
         }
 
-        /* ==================== Canvas星空背景 ==================== */
-        #starsCanvas {
+        /* ==================== 背景图片区域 ==================== */
+        .hero-background {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
-            height: 100%;
-            pointer-events: none;
+            height: 100vh;
             z-index: 0;
-            opacity: 0.6;
+            background: linear-gradient(180deg, 
+                rgba(0, 0, 0, 0.7) 0%, 
+                rgba(0, 0, 0, 0.85) 50%,
+                rgba(0, 0, 0, 0.95) 100%),
+                url('img/hero-bg.jpg') center/cover no-repeat;
+            opacity: 0.4;
         }
 
-        /* ==================== 骨架屏加载 ==================== */
-        .skeleton {
-            background: linear-gradient(
-                90deg,
-                rgba(255, 255, 255, 0.05) 25%,
-                rgba(255, 255, 255, 0.1) 50%,
-                rgba(255, 255, 255, 0.05) 75%
-            );
-            background-size: 200% 100%;
-            animation: skeleton-loading 1.5s infinite;
-            border-radius: var(--radius-md);
-        }
-
-        @keyframes skeleton-loading {
-            0% { background-position: 200% 0; }
-            100% { background-position: -200% 0; }
-        }
-
-        .skeleton-card {
-            height: 200px;
-            margin-bottom: var(--spacing-lg);
-        }
-
-        /* ==================== 顶部免责声明 ==================== */
-        .top-disclaimer {
+        /* ==================== 顶部声明条 ==================== */
+        .top-notice {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: linear-gradient(135deg, 
-                        rgba(255, 0, 0, 0.15), 
-                        rgba(255, 100, 0, 0.15));
-            border-bottom: 2px solid rgba(255, 0, 0, 0.4);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            z-index: 200;
-            padding: 12px 20px;
-            box-shadow: 0 4px 20px rgba(255, 0, 0, 0.3);
-            animation: slideDown var(--transition-slow) ease-out;
-            will-change: transform;
+            background: rgba(212, 175, 55, 0.08);
+            border-bottom: 1px solid var(--border-gold);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            padding: 12px 24px;
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
         }
 
-        @keyframes slideDown {
-            from {
-                transform: translateY(-100%);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .disclaimer-content-wrapper {
-            max-width: 1400px;
+        .notice-content {
+            max-width: 1200px;
             margin: 0 auto;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            gap: var(--spacing-lg);
-        }
-
-        .disclaimer-text {
-            flex: 1;
-            display: flex;
-            align-items: center;
+            justify-content: center;
             gap: 12px;
-            font-size: 0.9rem;
-            line-height: 1.4;
         }
 
-        .disclaimer-icon {
-            font-size: 1.3rem;
-            color: #ff6b6b;
-            animation: blink 2s infinite;
-            flex-shrink: 0;
+        .notice-text {
+            color: var(--text-gold);
+            font-weight: 500;
         }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.6; }
-        }
-
-        .disclaimer-message {
-            color: #ffb3b3;
-        }
-
-        .disclaimer-highlight {
-            color: #ff9900;
-            font-weight: 700;
-        }
-
-        .disclaimer-close {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 100, 100, 0.3);
-            color: #ff9999;
-            width: 32px;
-            height: 32px;
+        .notice-close {
+            background: transparent;
+            border: 1px solid var(--border-gold);
+            color: var(--text-gold);
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: all var(--transition-normal) ease;
-            flex-shrink: 0;
-            font-size: 1.2rem;
-            font-weight: 700;
         }
 
-        .disclaimer-close:hover {
-            background: rgba(255, 0, 0, 0.2);
-            transform: scale(1.1);
-            color: #ffffff;
+        .notice-close:hover {
+            background: rgba(212, 175, 55, 0.1);
+            transform: rotate(90deg);
         }
 
-        .disclaimer-close:focus {
-            outline: 2px solid #ff6666;
-            outline-offset: 2px;
+        .notice-hidden {
+            display: none;
         }
 
-        .disclaimer-minimized {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: linear-gradient(135deg, 
-                        rgba(255, 0, 0, 0.2), 
-                        rgba(255, 100, 0, 0.2));
-            border: 2px solid rgba(255, 0, 0, 0.4);
-            border-radius: var(--radius-md);
-            padding: 12px 20px;
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            z-index: 200;
-            cursor: pointer;
-            transition: all var(--transition-normal) ease;
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
-        }
-
-        .disclaimer-minimized:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(255, 0, 0, 0.4);
-        }
-
-        .disclaimer-minimized-content {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.85rem;
-            color: #ff9999;
-            font-weight: 600;
-        }
-
-        .disclaimer-hidden {
-            display: none !important;
-        }
-
-        /* ==================== 左侧导航栏 ==================== */
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: var(--sidebar-width);
-            height: 100vh;
-            background: rgba(10, 14, 39, 0.95);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-right: 1px solid var(--border-color);
-            padding: var(--spacing-lg) 0;
-            z-index: 100;
-            overflow-y: auto;
-            overflow-x: hidden;
-            transform: translateX(0);
-            transition: transform var(--transition-normal) ease;
-            will-change: transform;
-        }
-
-        .sidebar::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        .sidebar::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        .sidebar::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 3px;
-        }
-
-        .sidebar-header {
-            padding: 0 var(--spacing-lg) var(--spacing-lg);
-            border-bottom: 1px solid var(--border-color);
-            margin-bottom: var(--spacing-lg);
-        }
-
-        .sidebar-header h2 {
-            font-size: 1.5rem;
-            background: linear-gradient(45deg, 
-                        var(--primary-color), 
-                        var(--secondary-color));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            text-align: center;
-            font-weight: 700;
-        }
-
-        .nav-menu {
-            list-style: none;
-            padding: 0 15px;
-        }
-
-        .nav-item {
-            margin-bottom: 10px;
-        }
-
-        .nav-link {
-            display: flex;
-            align-items: center;
-            padding: 12px 15px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            border-radius: var(--radius-sm);
-            transition: all var(--transition-normal) ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-link::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 3px;
-            background: var(--primary-color);
-            transform: scaleY(0);
-            transition: transform var(--transition-normal) ease;
-        }
-
-        .nav-link:hover,
-        .nav-link:focus {
-            background: rgba(0, 255, 255, 0.1);
-            color: var(--primary-color);
-            transform: translateX(5px);
-            outline: none;
-        }
-
-        .nav-link:hover::before,
-        .nav-link.active::before {
-            transform: scaleY(1);
-        }
-
-        .nav-link.active {
-            background: rgba(0, 255, 255, 0.15);
-            color: var(--primary-color);
-            font-weight: 600;
-        }
-
-        .nav-icon {
-            margin-right: 10px;
-            font-size: 1.2rem;
-            width: 24px;
-            text-align: center;
-            flex-shrink: 0;
-        }
-
-        /* ==================== 主内容区域 ==================== */
-        .main-content {
-            margin-left: var(--sidebar-width);
-            padding: var(--spacing-lg);
-            padding-top: calc(var(--disclaimer-height) + var(--spacing-lg));
+        /* ==================== 主容器 ==================== */
+        .main-wrapper {
             position: relative;
             z-index: 1;
-            min-height: 100vh;
-            transition: margin-left var(--transition-normal) ease,
-                        padding-top var(--transition-normal) ease;
+            padding-top: 48px; /* 为顶部声明留出空间 */
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
+            padding: 0 24px;
         }
 
         /* ==================== 页头 ==================== */
-        header {
+        .site-header {
             text-align: center;
-            padding: var(--spacing-xl) var(--spacing-lg);
-            background: var(--glass-bg);
-            border-radius: var(--radius-lg);
+            padding: var(--spacing-2xl) 0;
             margin-bottom: var(--spacing-xl);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow-lg);
-            animation: fadeInUp 0.6s ease-out;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        header h1 {
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            background: linear-gradient(45deg, 
-                        var(--primary-color), 
-                        var(--secondary-color), 
-                        var(--accent-color));
+        .site-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: var(--primary-gold);
+            letter-spacing: 0.05em;
+            margin-bottom: var(--spacing-sm);
+            background: linear-gradient(135deg, 
+                var(--primary-gold) 0%, 
+                var(--light-gold) 50%, 
+                var(--primary-gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            animation: glow 3s ease-in-out infinite alternate;
-            font-weight: 700;
-            letter-spacing: 1px;
         }
 
-        @keyframes glow {
-            from { filter: brightness(1) drop-shadow(0 0 5px currentColor); }
-            to { filter: brightness(1.2) drop-shadow(0 0 10px currentColor); }
+        .site-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            letter-spacing: 0.2em;
         }
 
-        /* ==================== 区块样式 ==================== */
-        .nav-section {
-            background: var(--glass-bg);
-            border-radius: var(--radius-lg);
-            padding: var(--spacing-xl);
-            margin-bottom: var(--spacing-xl);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--shadow-lg);
-            scroll-margin-top: calc(var(--disclaimer-height) + var(--spacing-lg));
-            animation: fadeInUp 0.6s ease-out backwards;
+        /* ==================== 分隔线 ==================== */
+        .divider {
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--primary-gold) 50%, 
+                transparent 100%);
+            margin: var(--spacing-xl) auto;
         }
 
-        .nav-section:nth-child(1) { animation-delay: 0.1s; }
-        .nav-section:nth-child(2) { animation-delay: 0.2s; }
-        .nav-section:nth-child(3) { animation-delay: 0.3s; }
-
-        .section-header {
+        /* ==================== 区块标题 ==================== */
+        .section-title {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 600;
             text-align: center;
-            margin-bottom: var(--spacing-lg);
+            color: var(--primary-gold);
+            margin-bottom: var(--spacing-md);
+            letter-spacing: 0.05em;
         }
 
-        .nav-section h2 {
-            font-size: 1.8rem;
-            color: var(--primary-color);
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-            margin-bottom: 10px;
-            font-weight: 700;
-        }
-
-        .member-tip,
-        .custom-tip {
-            display: block;
+        .section-desc {
             text-align: center;
-            font-size: 0.9rem;
             color: var(--text-muted);
-            margin-top: var(--spacing-sm);
-            font-style: italic;
+            font-size: 0.9375rem;
+            margin-bottom: var(--spacing-lg);
+            font-weight: 300;
         }
 
-        /* ==================== 网格布局 ==================== */
-        .nav-grid {
+        /* ==================== 卡片网格 ==================== */
+        .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--spacing-lg);
-            margin-top: var(--spacing-lg);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-2xl);
         }
 
-        .custom-grid {
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        }
-
-        /* ==================== 卡片样式 ==================== */
-        .nav-card {
-            display: block;
-            background: linear-gradient(135deg, 
-                        rgba(0, 100, 200, 0.1), 
-                        rgba(100, 0, 200, 0.1));
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 15px;
+        /* ==================== 通用卡片 ==================== */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-white);
+            border-radius: var(--radius);
             padding: var(--spacing-lg);
             text-decoration: none;
             color: var(--text-primary);
-            transition: all var(--transition-normal) ease;
+            transition: var(--transition);
             position: relative;
             overflow: hidden;
-            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            min-height: 280px;
         }
 
-        .nav-card::before {
+        .card::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(
-                circle,
-                rgba(0, 255, 255, 0.1) 0%,
-                transparent 70%
-            );
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                var(--primary-gold) 50%, 
+                transparent 100%);
             opacity: 0;
-            transition: opacity var(--transition-normal) ease;
+            transition: var(--transition);
         }
 
-        .nav-card:hover::before {
+        .card:hover {
+            border-color: var(--border-gold);
+            background: rgba(212, 175, 55, 0.03);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .card:hover::before {
             opacity: 1;
-        }
-
-        .nav-card:hover,
-        .nav-card:focus {
-            transform: translateY(-5px) scale(1.02);
-            box-shadow: 0 10px 30px rgba(0, 255, 255, 0.3);
-            border-color: rgba(0, 255, 255, 0.6);
-            outline: none;
-        }
-
-        .nav-card:focus {
-            outline: 2px solid var(--primary-color);
-            outline-offset: 2px;
-        }
-
-        .nav-card h3 {
-            font-size: 1.2rem;
-            margin-bottom: 10px;
-            color: var(--primary-color);
-            font-weight: 600;
-            position: relative;
-            z-index: 1;
-        }
-
-        .nav-card p {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            line-height: 1.5;
-            position: relative;
-            z-index: 1;
-        }
-
-        /* 高级会员卡片 */
-        .premium-card {
-            background: linear-gradient(135deg, 
-                        rgba(255, 100, 0, 0.1), 
-                        rgba(255, 0, 100, 0.1));
-            border-color: rgba(255, 100, 0, 0.3);
-        }
-
-        .premium-card:hover,
-        .premium-card:focus {
-            border-color: rgba(255, 100, 0, 0.6);
-            box-shadow: 0 10px 30px rgba(255, 100, 0, 0.3);
-        }
-
-        .premium-card h3 {
-            color: #ff9900;
-        }
-
-        .premium-badge {
-            display: inline-block;
-            background: linear-gradient(45deg, #ff6600, #ff9900);
-            color: white;
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            margin-top: 10px;
-            font-weight: 700;
-            box-shadow: 0 2px 8px rgba(255, 100, 0, 0.3);
-        }
-
-        /* 定制服务卡片 */
-        .custom-card {
-            background: linear-gradient(135deg, 
-                        rgba(0, 255, 100, 0.1), 
-                        rgba(0, 100, 255, 0.1));
-            border-color: rgba(0, 255, 100, 0.3);
-            text-align: center;
-        }
-
-        .custom-card:hover,
-        .custom-card:focus {
-            border-color: rgba(0, 255, 100, 0.6);
-            box-shadow: 0 10px 30px rgba(0, 255, 100, 0.3);
-        }
-
-        .custom-card.featured {
-            background: linear-gradient(135deg, 
-                        rgba(255, 0, 100, 0.2), 
-                        rgba(0, 100, 255, 0.2));
-            border-color: rgba(255, 0, 100, 0.5);
-            transform: scale(1.02);
-        }
-
-        .custom-card.featured:hover,
-        .custom-card.featured:focus {
-            transform: scale(1.05) translateY(-5px);
         }
 
         .card-icon {
             font-size: 2.5rem;
-            margin-bottom: 15px;
+            margin-bottom: var(--spacing-sm);
             display: block;
         }
 
+        .card-title {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-xs);
+            color: var(--text-primary);
+        }
+
         .card-desc {
-            font-size: 0.9rem;
-            margin-bottom: 15px;
+            font-size: 0.9375rem;
             color: var(--text-secondary);
-            line-height: 1.5;
+            line-height: 1.7;
+            margin-bottom: auto;
+            font-weight: 300;
         }
 
-        .service-features {
-            list-style: none;
-            text-align: left;
-            margin-bottom: 15px;
-            padding: 0 10px;
-        }
-
-        .service-features li {
-            margin-bottom: var(--spacing-sm);
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .service-features li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--primary-color);
-            font-weight: 700;
-        }
-
-        .custom-badge {
+        .card-badge {
             display: inline-block;
-            background: linear-gradient(45deg, #00ff66, #0099ff);
-            color: white;
-            padding: 8px 18px;
-            border-radius: 20px;
-            font-size: 0.95rem;
-            font-weight: 700;
-            box-shadow: 0 2px 8px rgba(0, 255, 100, 0.3);
+            margin-top: var(--spacing-sm);
+            padding: 8px 20px;
+            border: 1px solid var(--border-gold);
+            border-radius: var(--radius);
+            font-size: 0.875rem;
+            color: var(--text-gold);
+            font-weight: 500;
+            align-self: flex-start;
         }
 
-        .custom-badge.special {
-            background: linear-gradient(45deg, #ff0099, #9900ff);
-            box-shadow: 0 2px 8px rgba(255, 0, 150, 0.3);
+        /* ==================== 特色卡片 ==================== */
+        .card-featured {
+            border: 1px solid var(--border-gold);
+            background: rgba(212, 175, 55, 0.05);
+        }
+
+        .card-featured .card-title {
+            color: var(--primary-gold);
         }
 
         .featured-label {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background: linear-gradient(45deg, #ff3366, #ff6633);
-            color: white;
+            top: var(--spacing-sm);
+            right: var(--spacing-sm);
+            background: var(--primary-gold);
+            color: var(--primary-black);
             padding: 4px 12px;
-            border-radius: 10px;
+            border-radius: var(--radius);
             font-size: 0.75rem;
-            font-weight: 700;
-            animation: pulse 2s infinite;
-            z-index: 2;
-            box-shadow: 0 2px 8px rgba(255, 50, 50, 0.4);
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-
-        .save-tip {
-            color: #00ff66;
-            font-size: 0.85rem;
-            margin-top: 10px;
-            font-weight: 700;
-        }
-
-        /* ==================== 统计卡片 ==================== */
-        .stats-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
-            margin-top: var(--spacing-lg);
-            margin-bottom: var(--spacing-xl);
-        }
-
-        .stat-card {
-            background: linear-gradient(135deg, 
-                        rgba(0, 100, 200, 0.2), 
-                        rgba(100, 0, 200, 0.2));
-            border: 1px solid rgba(0, 255, 255, 0.3);
-            border-radius: 10px;
-            padding: 15px;
-            text-align: center;
-            transition: transform var(--transition-normal) ease;
-        }
-
-        .stat-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: var(--spacing-sm);
-            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
-        }
-
-        .stat-label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        /* ==================== 图表区域 ==================== */
-        .chart-section {
-            margin-top: var(--spacing-xl);
-            background: var(--glass-bg);
-            border-radius: 15px;
-            padding: 25px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid var(--border-color);
-        }
-
-        .chart-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            margin-top: var(--spacing-lg);
-        }
-
-        .chart-wrapper {
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: var(--radius-md);
-            padding: var(--spacing-lg);
-            position: relative;
-            height: 350px;
-        }
-
-        .chart-title {
-            text-align: center;
-            margin-bottom: 15px;
-            color: var(--primary-color);
-            font-size: 1.2rem;
             font-weight: 600;
+            letter-spacing: 0.05em;
         }
 
-        .chart-loading {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--primary-color);
-            font-size: 1.1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .chart-loading::after {
-            content: '';
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--primary-color);
-            border-top: 2px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        /* ==================== 区块间距 ==================== */
+        .section {
+            margin-bottom: var(--spacing-2xl);
         }
 
         /* ==================== 页脚 ==================== */
-        .social-footer {
-            background: rgba(0, 0, 0, 0.5);
+        .site-footer {
+            border-top: 1px solid var(--border-white);
             padding: var(--spacing-xl) 0;
-            margin-top: 50px;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border-top: 1px solid var(--border-color);
+            text-align: center;
+            margin-top: var(--spacing-2xl);
         }
 
-        .footer-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 var(--spacing-lg);
-            text-align: center;
+        .footer-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--primary-gold);
+            margin-bottom: var(--spacing-md);
+            font-weight: 600;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            gap: var(--spacing-lg);
-            margin-bottom: var(--spacing-lg);
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
         }
 
         .social-link {
-            display: inline-flex;
+            width: 48px;
+            height: 48px;
+            border: 1px solid var(--border-white);
+            border-radius: 50%;
+            display: flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--border-color);
-            border-radius: 50%;
-            color: var(--primary-color);
+            color: var(--text-secondary);
             text-decoration: none;
-            transition: all var(--transition-normal) ease;
-            font-size: 1.2rem;
+            font-size: 1.25rem;
+            transition: var(--transition);
         }
 
-        .social-link:hover,
-        .social-link:focus {
-            background: rgba(0, 255, 255, 0.2);
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0, 255, 255, 0.4);
-            outline: none;
-        }
-
-        .social-link:focus {
-            outline: 2px solid var(--primary-color);
-            outline-offset: 2px;
+        .social-link:hover {
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+            transform: translateY(-4px);
         }
 
         .copyright {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.875rem;
+            font-weight: 300;
         }
 
-        /* ==================== 菜单切换按钮 ==================== */
-        .menu-toggle {
-            position: fixed;
-            top: calc(var(--disclaimer-height) + 20px);
-            left: 20px;
-            background: rgba(0, 255, 255, 0.2);
-            border: 1px solid var(--border-color);
-            color: var(--primary-color);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            z-index: 101;
-            transition: all var(--transition-normal) ease;
-            box-shadow: var(--shadow-md);
-        }
-
-        .menu-toggle:hover,
-        .menu-toggle:focus {
-            background: rgba(0, 255, 255, 0.3);
-            transform: scale(1.1);
-            outline: none;
-        }
-
-        .menu-toggle:focus {
-            outline: 2px solid var(--primary-color);
-            outline-offset: 2px;
-        }
-
-        /* ==================== 响应式设计 ==================== */
-        @media (max-width: 1024px) {
-            :root {
-                --sidebar-width: 0px;
-            }
-
-            .sidebar {
-                transform: translateX(-100%);
-                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
-            }
-
-            .sidebar.active {
-                transform: translateX(0);
-            }
-
-            .main-content {
-                margin-left: 0;
-            }
-
-            .menu-toggle {
-                display: flex;
-            }
-
-            .disclaimer-content-wrapper {
-                flex-direction: column;
-                gap: 10px;
-                text-align: center;
-            }
-        }
-
+        /* ==================== 响应式 ==================== */
         @media (max-width: 768px) {
-            html {
-                font-size: 14px;
+            :root {
+                --spacing-xl: 48px;
+                --spacing-2xl: 64px;
             }
 
-            .nav-grid,
-            .custom-grid {
+            .site-header {
+                padding: var(--spacing-xl) 0;
+            }
+
+            .card-grid {
                 grid-template-columns: 1fr;
             }
 
-            .chart-container {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-cards {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .disclaimer-text {
-                font-size: 0.8rem;
-            }
-
-            .disclaimer-minimized {
-                top: 10px;
-                right: 10px;
-                padding: 8px 12px;
-            }
-
-            .disclaimer-minimized-content {
-                font-size: 0.75rem;
-            }
-
-            .nav-section {
-                padding: var(--spacing-lg);
-            }
-
-            header {
-                padding: var(--spacing-lg);
+            .notice-content {
+                font-size: 0.8125rem;
             }
         }
 
-        @media (max-width: 480px) {
-            .stats-cards {
-                grid-template-columns: 1fr;
-            }
+        /* ==================== 滚动条 ==================== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
 
-            .disclaimer-content-wrapper {
-                padding: 8px 15px;
-            }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
 
-            .disclaimer-text {
-                font-size: 0.75rem;
-            }
-
-            .social-links {
-                gap: var(--spacing-md);
-            }
-
-            .chart-wrapper {
-                height: 280px;
-            }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-gold);
+            border-radius: 4px;
         }
 
         /* ==================== 打印样式 ==================== */
         @media print {
-            .sidebar,
-            .menu-toggle,
-            .top-disclaimer,
-            .disclaimer-minimized,
-            .social-footer {
+            .top-notice,
+            .hero-background {
                 display: none;
             }
-
-            .main-content {
-                margin-left: 0;
-                padding-top: var(--spacing-lg);
-            }
-
+            
             body {
                 background: white;
                 color: black;
             }
         }
-
-        /* ==================== 滚动条样式 ==================== */
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary-color);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--secondary-color);
-        }
-
-        /* ==================== 可访问性辅助 ==================== */
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0, 0, 0, 0);
-            white-space: nowrap;
-            border-width: 0;
-        }
-
-        /* 焦点可见性 */
-        .focus-visible {
-            outline: 2px solid var(--primary-color);
-            outline-offset: 2px;
-        }
-
-        /* 减少动画（用户偏好） */
-        @media (prefers-reduced-motion: reduce) {
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-            }
-        }
     </style>
-
-    <!-- Font Awesome 延迟加载 -->
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
-          as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    </noscript>
-
-    <!-- 结构化数据 -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Organization",
-        "name": "狂客·银河空间站",
-        "description": "AI资讯·学习资源·定制服务综合平台",
-        "url": "https://kuangketongxue.github.io/",
-        "logo": "https://kuangketongxue.github.io/logo.png",
-        "sameAs": [
-            "https://github.com/kuangketongxue",
-            "https://x.com/kuangketongxue"
-        ]
-    }
-    </script>
 </head>
-
 <body>
-    <!-- Canvas星空背景 -->
-    <canvas id="starsCanvas" aria-hidden="true"></canvas>
+    <!-- 背景图片 -->
+    <div class="hero-background"></div>
 
-    <!-- 顶部免责声明 -->
-    <div class="top-disclaimer" id="topDisclaimer" role="alert" aria-live="polite">
-        <div class="disclaimer-content-wrapper">
-            <div class="disclaimer-text">
-                <span class="disclaimer-icon" aria-hidden="true">⚠️</span>
-                <span class="disclaimer-message">
-                    <strong>重要声明：</strong>本网站所有内容均为<span class="disclaimer-highlight">AI生成演示</span>，服务产品<span class="disclaimer-highlight">尚未正式上架</span>，仅供展示参考，不构成任何承诺。
-                </span>
-            </div>
-            <button class="disclaimer-close" 
-                    id="disclaimerClose" 
-                    title="收起声明" 
-                    aria-label="关闭免责声明">
-                ×
-            </button>
+    <!-- 顶部声明 -->
+    <div class="top-notice" id="topNotice">
+        <div class="notice-content">
+            <span class="notice-text">⚠️ 内容为AI生成演示，服务尚未正式上架</span>
+            <button class="notice-close" id="noticeClose" aria-label="关闭">×</button>
         </div>
     </div>
 
-    <!-- 收起后的免责声明按钮 -->
-    <div class="disclaimer-minimized disclaimer-hidden" 
-         id="disclaimerMinimized" 
-         role="button"
-         tabindex="0"
-         aria-label="展开免责声明">
-        <div class="disclaimer-minimized-content">
-            <span class="disclaimer-icon" aria-hidden="true">⚠️</span>
-            <span>AI演示内容 · 非正式产品</span>
-        </div>
-    </div>
-
-    <!-- 菜单切换按钮 -->
-    <button class="menu-toggle" 
-            id="menuToggle" 
-            aria-label="切换导航菜单"
-            aria-expanded="false"
-            aria-controls="sidebar">
-        <i class="fas fa-bars" aria-hidden="true"></i>
-    </button>
-
-    <!-- 左侧导航栏 -->
-    <aside class="sidebar" 
-           id="sidebar" 
-           role="navigation" 
-           aria-label="主导航">
-        <div class="sidebar-header">
-            <h2>🌌 银河导航</h2>
-        </div>
-        <nav>
-            <ul class="nav-menu" role="menubar">
-                <li class="nav-item" role="none">
-                    <a href="#explore-section" 
-                       class="nav-link active" 
-                       data-section="explore"
-                       role="menuitem"
-                       tabindex="0">
-                        <span class="nav-icon" aria-hidden="true">✨</span>
-                        <span>星际探索区</span>
-                    </a>
-                </li>
-                <li class="nav-item" role="none">
-                    <a href="#premium-section" 
-                       class="nav-link" 
-                       data-section="premium"
-                       role="menuitem"
-                       tabindex="-1">
-                        <span class="nav-icon" aria-hidden="true">🔐</span>
-                        <span>会员星际联盟</span>
-                    </a>
-                </li>
-                <li class="nav-item" role="none">
-                    <a href="#custom-section" 
-                       class="nav-link" 
-                       data-section="custom"
-                       role="menuitem"
-                       tabindex="-1">
-                        <span class="nav-icon" aria-hidden="true">⭐</span>
-                        <span>宇宙定制工坊</span>
-                    </a>
-                </li>
-                <li class="nav-item" role="none">
-                    <a href="#stats-section" 
-                       class="nav-link" 
-                       data-section="stats"
-                       role="menuitem"
-                       tabindex="-1">
-                        <span class="nav-icon" aria-hidden="true">📊</span>
-                        <span>星际数据统计</span>
-                    </a>
-                </li>
-                <li class="nav-item" role="none">
-                    <a href="#contact-section" 
-                       class="nav-link" 
-                       data-section="contact"
-                       role="menuitem"
-                       tabindex="-1">
-                        <span class="nav-icon" aria-hidden="true">🌐</span>
-                        <span>星际联系</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
-    </aside>
-
-    <!-- 主内容区域 -->
-    <main class="main-content" id="mainContent">
+    <!-- 主内容 -->
+    <div class="main-wrapper">
         <div class="container">
             <!-- 页头 -->
-            <header>
-                <h1>🌌 欢迎来到狂客·银河空间站 🚀</h1>
+            <header class="site-header">
+                <h1 class="site-title">狂客空间</h1>
+                <p class="site-subtitle">AI · 学习 · 定制</p>
             </header>
 
-            <!-- 导航区块 -->
-            <nav class="main-nav" aria-label="服务导航">
-                <!-- 星际探索区 -->
-                <section class="nav-section free" id="explore-section" aria-labelledby="explore-title">
-                    <div class="section-header">
-                        <h2 id="explore-title">✨ 星际探索区</h2>
-                    </div>
-                    <div class="nav-grid">
-                        <a href="https://kuangketongxue.github.io/kuangke.github.io/index.html" 
-                           target="_blank" 
-                           class="nav-card" 
-                           rel="noopener noreferrer"
-                           aria-label="个人星系 - 探索宇宙中的生活轨迹">
-                            <h3>🌠 个人星系</h3>
-                            <p>探索宇宙中的生活轨迹</p>
-                        </a>
-                        <a href="https://kuangketongxue.github.io/kuangke.github.io/success.html" 
-                           target="_blank" 
-                           class="nav-card" 
-                           rel="noopener noreferrer"
-                           aria-label="成长星座 - 记录闪耀的成长时刻">
-                            <h3>🌟 成长星座</h3>
-                            <p>记录闪耀的成长时刻</p>
-                        </a>
-                        <a href="https://kuangketongxue.github.io/kuangke.github.io/reading.html" 
-                           target="_blank" 
-                           class="nav-card" 
-                           rel="noopener noreferrer"
-                           aria-label="星海图书馆 - 穿越时空的精选文章">
-                            <h3>📚 星海图书馆</h3>
-                            <p>穿越时空的精选文章</p>
-                        </a>
-                        <a href="https://kuangketongxue.github.io/kuangke.github.io/books.html" 
-                           target="_blank" 
-                           class="nav-card" 
-                           rel="noopener noreferrer"
-                           aria-label="智慧星云 - 宇宙级的书籍推荐">
-                            <h3>📖 智慧星云</h3>
-                            <p>宇宙级的书籍推荐</p>
-                        </a>
-                        <a href="https://kuangketongxue.github.io/free-courses/index.html" 
-                           class="nav-card"
-                           aria-label="创意星球工作坊 - 设计技能提升课程">
-                            <h3>🎨 创意星球工作坊</h3>
-                            <p>设计技能提升课程</p>
-                        </a>
-                        <a href="https://kuangketongxue.github.io/free-courses/index.html" 
-                           class="nav-card"
-                           aria-label="影视星系 - 视频剪辑技术分享">
-                            <h3>🎬 影视星系</h3>
-                            <p>视频剪辑技术分享</p>
-                        </a>
-                        <a href="https://kuangketongxue.github.io/free-courses/index.html" 
-                           class="nav-card"
-                           aria-label="文字星河 - 宇宙级写作能力提升">
-                            <h3>✍️ 文字星河</h3>
-                            <p>宇宙级写作能力提升</p>
-                        </a>
-                        <a href="https://kuangketongxue.github.io/kuangke.github.io/video.html" 
-                           class="nav-card"
-                           aria-label="多维视频矩阵 - 跨平台视频内容宇宙">
-                            <h3>🎥 多维视频矩阵</h3>
-                            <p>跨平台视频内容宇宙</p>
-                        </a>
-                    </div>
-                </section>
-
-                <!-- 会员星际联盟 -->
-                <section class="nav-section premium" id="premium-section" aria-labelledby="premium-title">
-                    <div class="section-header">
-                        <h2 id="premium-title">🔐 会员星际联盟</h2>
-                        <span class="member-tip">加入任意星际计划，获得一年会员身份，进入精英社群</span>
-                    </div>
-
-                    <!-- 统计卡片 -->
-                    <div class="stats-cards" role="list">
-                        <div class="stat-card" role="listitem">
-                            <div class="stat-value" aria-label="1258名活跃会员">1,258</div>
-                            <div class="stat-label">活跃会员</div>
-                        </div>
-                        <div class="stat-card" role="listitem">
-                            <div class="stat-value" aria-label="98%满意度">98%</div>
-                            <div class="stat-label">满意度</div>
-                        </div>
-                        <div class="stat-card" role="listitem">
-                            <div class="stat-value" aria-label="4.9分平均评分">4.9</div>
-                            <div class="stat-label">平均评分</div>
-                        </div>
-                        <div class="stat-card" role="listitem">
-                            <div class="stat-value" aria-label="24小时平均响应时间">24h</div>
-                            <div class="stat-label">平均响应时间</div>
-                        </div>
-                    </div>
-
-                    <div class="nav-grid">
-                        <a href="ai-rss.html" 
-                           class="nav-card premium-card"
-                           aria-label="AI星系情报站 - 69星际币每年">
-                            <h3>🤖 AI星系情报站</h3>
-                            <p>最新AI科技资讯订阅</p>
-                            <span class="premium-badge">69星际币/年</span>
-                        </a>
-                        <a href="exam.html" 
-                           class="nav-card premium-card"
-                           aria-label="超新星学霸计划 - 99星际币永久">
-                            <h3>📊 超新星学霸计划</h3>
-                            <p>备考资料与技巧宝典</p>
-                            <span class="premium-badge">99星际币永久</span>
-                        </a>
-                        <a href="weekly-course.html" 
-                           class="nav-card premium-card"
-                           aria-label="宇宙弄潮周课 - 299星际币每年">
-                            <h3>🌊 宇宙弄潮周课</h3>
-                            <p>每周精选星际课程</p>
-                            <span class="premium-badge">299星际币/年</span>
-                        </a>
-                        <a href="english-tribe.html" 
-                           class="nav-card premium-card"
-                           aria-label="银河英语联盟 - 599星际币每年">
-                            <h3>📖 银河英语联盟</h3>
-                            <p>系统化英语学习社群</p>
-                            <span class="premium-badge">599星际币/年</span>
-                        </a>
-                        <a href="Daily-Thought-Notes.html" 
-                           class="nav-card premium-card"
-                           aria-label="思维星云日记 - 会员专属">
-                            <h3>💭 思维星云日记</h3>
-                            <p>记录宇宙级思维火花</p>
-                            <span class="premium-badge">会员专属</span>
-                        </a>
-                    </div>
-
-                    <!-- 会员数据统计图表 -->
-                    <div class="chart-section" id="stats-section" aria-labelledby="stats-chart-title">
-                        <h3 class="chart-title" id="stats-chart-title">📊 会员星际联盟数据统计</h3>
-                        <div class="chart-container">
-                            <div class="chart-wrapper">
-                                <canvas id="membershipChart" 
-                                        role="img" 
-                                        aria-label="会员分布比例饼图"></canvas>
-                                <div class="chart-loading" style="display: none;">加载中...</div>
-                            </div>
-                            <div class="chart-wrapper">
-                                <canvas id="satisfactionChart" 
-                                        role="img" 
-                                        aria-label="各服务满意度柱状图"></canvas>
-                                <div class="chart-loading" style="display: none;">加载中...</div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- 宇宙定制工坊 -->
-                <section class="nav-section custom" id="custom-section" aria-labelledby="custom-title">
-                    <div class="section-header">
-                        <h2 id="custom-title">⭐ 宇宙定制工坊</h2>
-                        <span class="custom-tip">星际专业团队 · 超光速交付 · 品质保证</span>
-                    </div>
-
-                    <!-- 统计卡片 -->
-                    <div class="stats-cards" role="list">
-                        <div class="stat-card" role="listitem">
-                            <div class="stat-value" aria-label="356个已完成项目">356</div>
-                            <div class="stat-label">已完成项目</div>
-                        </div>
-                        <div class="stat-card" role="listitem">
-                            <div class="stat-value" aria-label="99.2%准时交付率">99.2%</div>
-                            <div class="stat-label">准时交付率</div>
-                        </div>
-                        <div class="stat-card" role="listitem">
-                            <div class="stat-value" aria-label="4.95分客户评分">4.95</div>
-                            <div class="stat-label">客户评分</div>
-                        </div>
-                        <div class="stat-card" role="listitem">
-                            <div class="stat-value" aria-label="72小时平均交付时间">72h</div>
-                            <div class="stat-label">平均交付时间</div>
-                        </div>
-                    </div>
-
-                    <div class="nav-grid custom-grid">
-                        <a href="ppt-custom.html" 
-                           class="nav-card custom-card"
-                           aria-label="星际PPT定制 - 2999元起">
-                            <div class="card-icon" aria-hidden="true">🌟</div>
-                            <h3>星际PPT定制</h3>
-                            <p class="card-desc">专业设计团队，48小时超光速交付</p>
-                            <ul class="service-features">
-                                <li>星际商务汇报</li>
-                                <li>宇宙教学课件</li>
-                                <li>星际产品发布</li>
-                            </ul>
-                            <span class="custom-badge">¥2,999起</span>
-                        </a>
-                        <a href="video-custom.html" 
-                           class="nav-card custom-card"
-                           aria-label="银河视频定制 - 4999元起">
-                            <div class="card-icon" aria-hidden="true">🎬</div>
-                            <h3>银河视频定制</h3>
-                            <p class="card-desc">专业制作团队，5天精品交付</p>
-                            <ul class="service-features">
-                                <li>宇宙宣传片制作</li>
-                                <li>星际产品演示</li>
-                                <li>银河课程录制</li>
-                            </ul>
-                            <span class="custom-badge">¥4,999起</span>
-                        </a>
-                        <a href="package-custom.html" 
-                           class="nav-card custom-card featured"
-                           aria-label="宇宙全案服务 - 8999元起 - 超级新星套餐">
-                            <div class="featured-label" aria-hidden="true">🔥 超级新星套餐</div>
-                            <div class="card-icon" aria-hidden="true">🌌</div>
-                            <h3>宇宙全案服务</h3>
-                            <p class="card-desc">一站式星际品牌传播解决方案</p>
-                            <ul class="service-features">
-                                <li>完整PPT星际设计</li>
-                                <li>专业银河视频制作</li>
-                                <li>宇宙文案策划撰写</li>
-                            </ul>
-                            <span class="custom-badge special">¥8,999起</span>
-                            <div class="save-tip">超级优惠 · 省¥3,000+</div>
-                        </a>
-                    </div>
-
-                    <!-- 定制服务图表 -->
-                    <div class="chart-section" aria-labelledby="custom-chart-title">
-                        <h3 class="chart-title" id="custom-chart-title">📈 定制服务项目统计</h3>
-                        <div class="chart-container">
-                            <div class="chart-wrapper">
-                                <canvas id="serviceChart" 
-                                        role="img" 
-                                        aria-label="定制服务类型分布极坐标图"></canvas>
-                                <div class="chart-loading" style="display: none;">加载中...</div>
-                            </div>
-                            <div class="chart-wrapper">
-                                <canvas id="timelineChart" 
-                                        role="img" 
-                                        aria-label="年度项目增长趋势折线图"></canvas>
-                                <div class="chart-loading" style="display: none;">加载中...</div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </nav>
-        </div>
-
-        <!-- 社交媒体 Footer -->
-        <footer class="social-footer" id="contact-section" aria-labelledby="footer-title">
-            <div class="footer-container">
-                <h2 id="footer-title" class="sr-only">联系方式</h2>
-                <div class="social-links" role="list">
-                    <a href="https://open.weixin.qq.com/qr/code?username=gh_ba5b6bb6bd89"
-                       target="_blank" 
-                       class="social-link wechat" 
-                       title="微信公众号" 
-                       rel="noopener noreferrer"
-                       role="listitem"
-                       aria-label="访问微信公众号">
-                        <i class="fab fa-weixin" aria-hidden="true"></i>
+            <!-- 探索区 -->
+            <section class="section">
+                <h2 class="section-title">发现</h2>
+                <p class="section-desc">探索优质内容与资源</p>
+                
+                <div class="card-grid">
+                    <a href="https://kuangketongxue.github.io/kuangke.github.io/index.html" class="card">
+                        <span class="card-icon">✦</span>
+                        <h3 class="card-title">个人空间</h3>
+                        <p class="card-desc">探索生活的每一刻</p>
                     </a>
-                    <a href="https://github.com/kuangketongxue"
-                       target="_blank" 
-                       class="social-link github" 
-                       title="GitHub" 
-                       rel="noopener noreferrer"
-                       role="listitem"
-                       aria-label="访问GitHub">
-                        <i class="fab fa-github" aria-hidden="true"></i>
+
+                    <a href="https://kuangketongxue.github.io/kuangke.github.io/success.html" class="card">
+                        <span class="card-icon">◆</span>
+                        <h3 class="card-title">成长档案</h3>
+                        <p class="card-desc">记录闪耀的成长时刻</p>
                     </a>
-                    <a href="https://x.com/kuangketongxue"
+
+                    <a href="https://kuangketongxue.github.io/kuangke.github.io/reading.html" class="card">
+                        <span class="card-icon">◇</span>
+                        <h3 class="card-title">阅读空间</h3>
+                        <p class="card-desc">精选文章与思考</p>
+                    </a>
+
+                    <a href="https://kuangketongxue.github.io/kuangke.github.io/books.html" class="card">
+                        <span class="card-icon">◈</span>
+                        <h3 class="card-title">书籍推荐</h3>
+                        <p class="card-desc">精品书籍分享</p>
+                    </a>
+
+                    <a href="https://kuangketongxue.github.io/free-courses/index.html" class="card">
+                        <span class="card-icon">✧</span>
+                        <h3 class="card-title">设计工坊</h3>
+                        <p class="card-desc">提升设计技能</p>
+                    </a>
+
+                    <a href="https://kuangketongxue.github.io/kuangke.github.io/video.html" class="card">
+                        <span class="card-icon">◉</span>
+                        <h3 class="card-title">视频集</h3>
+                        <p class="card-desc">跨平台视频内容</p>
+                    </a>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <!-- 会员区 -->
+            <section class="section">
+                <h2 class="section-title">精英会</h2>
+                <p class="section-desc">专属会员服务与社群</p>
+                
+                <div class="card-grid">
+                    <a href="ai-rss.html" class="card">
+                        <span class="card-icon">◐</span>
+                        <h3 class="card-title">AI周侃</h3>
+                        <p class="card-desc">每周精选AI资讯（双关"周刊"）</p>
+                        <span class="card-badge">¥69/年</span>
+                    </a>
+
+                    <a href="exam.html" class="card">
+                        <span class="card-icon">◑</span>
+                        <h3 class="card-title">学霸计划</h3>
+                        <p class="card-desc">备考资料与学习技巧</p>
+                        <span class="card-badge">¥99 永久</span>
+                    </a>
+
+                    <a href="weekly-course.html" class="card">
+                        <span class="card-icon">◒</span>
+                        <h3 class="card-title">周课精选</h3>
+                        <p class="card-desc">每周优质课程推荐</p>
+                        <span class="card-badge">¥299/年</span>
+                    </a>
+
+                    <a href="english-tribe.html" class="card">
+                        <span class="card-icon">◓</span>
+                        <h3 class="card-title">英语会</h3>
+                        <p class="card-desc">系统化英语学习社群</p>
+                        <span class="card-badge">¥599/年</span>
+                    </a>
+
+                    <a href="Daily-Thought-Notes.html" class="card">
+                        <span class="card-icon">◔</span>
+                        <h3 class="card-title">思享笔记</h3>
+                        <p class="card-desc">会员专属思维记录（双关"思想"）</p>
+                        <span class="card-badge">会员专属</span>
+                    </a>
+                </div>
+            </section>
+
+            <div class="divider"></div>
+
+            <!-- 定制区 -->
+            <section class="section">
+                <h2 class="section-title">私享定制</h2>
+                <p class="section-desc">专业团队 · 品质保证</p>
+                
+                <div class="card-grid">
+                    <a href="ppt-custom.html" class="card">
+                        <span class="card-icon">◈</span>
+                        <h3 class="card-title">PPT定制</h3>
+                        <p class="card-desc">专业设计，48小时交付<br>商务汇报 / 教学课件 / 产品发布</p>
+                        <span class="card-badge">¥2,999起</span>
+                    </a>
+
+                    <a href="video-custom.html" class="card">
+                        <span class="card-icon">◆</span>
+                        <h3 class="card-title">视频定制</h3>
+                        <p class="card-desc">专业制作，5天交付<br>宣传片 / 产品演示 / 课程录制</p>
+                        <span class="card-badge">¥4,999起</span>
+                    </a>
+
+                    <a href="package-custom.html" class="card card-featured">
+                        <span class="featured-label">推荐</span>
+                        <span class="card-icon">◇</span>
+                        <h3 class="card-title">全案服务</h3>
+                        <p class="card-desc">一站式解决方案<br>PPT设计 + 视频制作 + 文案策划</p>
+                        <span class="card-badge">¥8,999起 省¥3,000+</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- 页脚 -->
+            <footer class="site-footer">
+                <h3 class="footer-title">联系我们</h3>
+                <div class="social-links">
+                    <a href="https://open.weixin.qq.com/qr/code?username=gh_ba5b6bb6bd89" 
+                       class="social-link" 
                        target="_blank" 
-                       class="social-link x" 
-                       title="X (前 Twitter)" 
-                       rel="noopener noreferrer"
-                       role="listitem"
-                       aria-label="访问X平台">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                       rel="noopener"
+                       aria-label="微信公众号">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.27-.027-.407-.03zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/kuangketongxue" 
+                       class="social-link" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                        </svg>
+                    </a>
+                    <a href="https://x.com/kuangketongxue" 
+                       class="social-link" 
+                       target="_blank" 
+                       rel="noopener"
+                       aria-label="X (Twitter)">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                         </svg>
                     </a>
                 </div>
-                <p class="copyright">© 2025 狂客·银河 版权所有</p>
-            </div>
-        </footer>
-    </main>
+                <p class="copyright">© 2025 狂客 版权所有</p>
+            </footer>
+        </div>
+    </div>
 
-    <!-- JavaScript代码 -->
     <script>
         'use strict';
 
-        // ==================== 工具函数 ====================
-        const Utils = {
-            // 节流函数
-            throttle(func, wait) {
-                let timeout = null;
-                let previous = 0;
-                return function(...args) {
-                    const now = Date.now();
-                    const remaining = wait - (now - previous);
-                    if (remaining <= 0 || remaining > wait) {
-                        if (timeout) {
-                            clearTimeout(timeout);
-                            timeout = null;
-                        }
-                        previous = now;
-                        func.apply(this, args);
-                    } else if (!timeout) {
-                        timeout = setTimeout(() => {
-                            previous = Date.now();
-                            timeout = null;
-                            func.apply(this, args);
-                        }, remaining);
-                    }
-                };
-            },
-
-            // 防抖函数
-            debounce(func, wait) {
-                let timeout = null;
-                return function(...args) {
-                    clearTimeout(timeout);
-                    timeout = setTimeout(() => func.apply(this, args), wait);
-                };
-            },
-
-            // 获取随机数
-            random(min, max) {
-                return Math.random() * (max - min) + min;
-            },
-
-            // 检查元素是否在视口中
-            isInViewport(element) {
-                const rect = element.getBoundingClientRect();
-                return (
-                    rect.top >= 0 &&
-                    rect.left >= 0 &&
-                    rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                    rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-                );
-            }
-        };
-
-        // ==================== Canvas星空背景类 ====================
-        class StarField {
-            constructor(canvasId) {
-                this.canvas = document.getElementById(canvasId);
-                if (!this.canvas) {
-                    console.error(`Canvas元素 #${canvasId} 未找到`);
-                    return;
-                }
-                
-                this.ctx = this.canvas.getContext('2d');
-                this.stars = [];
-                this.starCount = 150;
-                this.animationId = null;
-                
-                this.init();
-                this.setupEventListeners();
-            }
-
-            init() {
-                this.resize();
-                this.createStars();
-                this.animate();
-            }
-
-            resize() {
-                this.canvas.width = window.innerWidth;
-                this.canvas.height = window.innerHeight;
-            }
-
-            createStars() {
-                this.stars = [];
-                for (let i = 0; i < this.starCount; i++) {
-                    this.stars.push({
-                        x: Utils.random(0, this.canvas.width),
-                        y: Utils.random(0, this.canvas.height),
-                        radius: Utils.random(0.5, 2),
-                        opacity: Utils.random(0.3, 1),
-                        speed: Utils.random(0.0005, 0.002),
-                        direction: Utils.random(0, Math.PI * 2)
-                    });
-                }
-            }
-
-            drawStar(star) {
-                this.ctx.beginPath();
-                this.ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
-                this.ctx.fillStyle = `rgba(255, 255, 255, ${star.opacity})`;
-                this.ctx.fill();
-            }
-
-            updateStar(star) {
-                // 更新透明度（闪烁效果）
-                star.opacity += star.speed;
-                if (star.opacity > 1 || star.opacity < 0.3) {
-                    star.speed = -star.speed;
-                }
-
-                // 微小的位置变化（漂移效果）
-                star.x += Math.cos(star.direction) * 0.1;
-                star.y += Math.sin(star.direction) * 0.1;
-
-                // 边界检测
-                if (star.x < 0) star.x = this.canvas.width;
-                if (star.x > this.canvas.width) star.x = 0;
-                if (star.y < 0) star.y = this.canvas.height;
-                if (star.y > this.canvas.height) star.y = 0;
-            }
-
-            animate() {
-                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-                
-                this.stars.forEach(star => {
-                    this.updateStar(star);
-                    this.drawStar(star);
-                });
-
-                this.animationId = requestAnimationFrame(() => this.animate());
-            }
-
-            setupEventListeners() {
-                window.addEventListener('resize', Utils.debounce(() => {
-                    this.resize();
-                    this.createStars();
-                }, 250));
-
-                // 页面可见性变化时暂停/恢复动画
-                document.addEventListener('visibilitychange', () => {
-                    if (document.hidden) {
-                        if (this.animationId) {
-                            cancelAnimationFrame(this.animationId);
-                            this.animationId = null;
-                        }
-                    } else {
-                        if (!this.animationId) {
-                            this.animate();
-                        }
-                    }
-                });
-            }
-
-            destroy() {
-                if (this.animationId) {
-                    cancelAnimationFrame(this.animationId);
-                }
-                this.stars = [];
-            }
-        }
-
-        // ==================== 免责声明管理类 ====================
-        class DisclaimerManager {
+        // 顶部声明管理
+        class NoticeManager {
             constructor() {
-                this.topDisclaimer = document.getElementById('topDisclaimer');
-                this.disclaimerClose = document.getElementById('disclaimerClose');
-                this.disclaimerMinimized = document.getElementById('disclaimerMinimized');
-                this.mainContent = document.querySelector('.main-content');
-                this.menuToggle = document.getElementById('menuToggle');
-                this.isMinimized = false;
-                this.autoMinimizeDelay = 8000; // 8秒后自动最小化
-                
-                if (!this.topDisclaimer || !this.disclaimerClose || !this.disclaimerMinimized) {
-                    console.error('免责声明元素未找到');
-                    return;
-                }
-                
+                this.notice = document.getElementById('topNotice');
+                this.closeBtn = document.getElementById('noticeClose');
                 this.init();
             }
 
             init() {
-                this.setupEventListeners();
-                this.checkSavedState();
-                this.scheduleAutoMinimize();
-            }
-
-            setupEventListeners() {
-                // 关闭按钮点击
-                this.disclaimerClose.addEventListener('click', () => this.minimize());
+                if (!this.notice || !this.closeBtn) return;
                 
-                // 最小化按钮点击
-                this.disclaimerMinimized.addEventListener('click', () => this.expand());
-                
-                // 键盘支持
-                this.disclaimerMinimized.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        this.expand();
-                    }
-                });
-
-                // 鼠标悬停取消自动最小化
-                this.topDisclaimer.addEventListener('mouseenter', () => {
-                    this.cancelAutoMinimize();
-                });
-            }
-
-            checkSavedState() {
-                const savedState = localStorage.getItem('disclaimerMinimized');
-                if (savedState === 'true') {
-                    this.minimize(false); // 不保存状态，因为已经是从保存的状态恢复的
+                // 检查是否已关闭
+                if (localStorage.getItem('noticeClose') === 'true') {
+                    this.hide();
+                    return;
                 }
+
+                // 绑定关闭事件
+                this.closeBtn.addEventListener('click', () => this.close());
+
+                // 10秒后自动隐藏
+                setTimeout(() => this.close(), 10000);
             }
 
-            scheduleAutoMinimize() {
-                this.autoMinimizeTimer = setTimeout(() => {
-                    if (!this.isMinimized) {
-                        this.minimize();
-                    }
-                }, this.autoMinimizeDelay);
+            close() {
+                localStorage.setItem('noticeClose', 'true');
+                this.hide();
             }
 
-            cancelAutoMinimize() {
-                if (this.autoMinimizeTimer) {
-                    clearTimeout(this.autoMinimizeTimer);
-                    this.autoMinimizeTimer = null;
-                }
-            }
-
-            minimize(saveState = true) {
-                this.topDisclaimer.classList.add('disclaimer-hidden');
-                this.disclaimerMinimized.classList.remove('disclaimer-hidden');
-                this.isMinimized = true;
-                
-                if (saveState) {
-                    localStorage.setItem('disclaimerMinimized', 'true');
-                }
-                
-                this.adjustLayout(true);
-                this.cancelAutoMinimize();
-            }
-
-            expand() {
-                this.topDisclaimer.classList.remove('disclaimer-hidden');
-                this.disclaimerMinimized.classList.add('disclaimer-hidden');
-                this.isMinimized = false;
-                
-                localStorage.setItem('disclaimerMinimized', 'false');
-                this.adjustLayout(false);
-                
-                // 展开后重新计时自动最小化
-                this.scheduleAutoMinimize();
-            }
-
-            adjustLayout(isMinimized) {
-                if (this.mainContent) {
-                    this.mainContent.style.paddingTop = isMinimized ? 
-                        'var(--spacing-lg)' : 
-                        'calc(var(--disclaimer-height) + var(--spacing-lg))';
-                }
-                
-                if (this.menuToggle) {
-                    this.menuToggle.style.top = isMinimized ? 
-                        'var(--spacing-lg)' : 
-                        'calc(var(--disclaimer-height) + 20px)';
+            hide() {
+                if (this.notice) {
+                    this.notice.classList.add('notice-hidden');
+                    document.querySelector('.main-wrapper').style.paddingTop = '0';
                 }
             }
         }
 
-        // ==================== 图表管理类 ====================
-        class ChartManager {
-            constructor() {
-                this.charts = {};
-                this.isLoaded = false;
-                this.loadPromise = null;
-                
-                this.defaultOptions = {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            labels: {
-                                color: '#ffffff',
-                                font: {
-                                    size: 12,
-                                    family: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif'
-                                },
-                                padding: 15,
-                                usePointStyle: true
-                            }
-                        },
-                        tooltip: {
-                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
-                            titleColor: '#00ffff',
-                            bodyColor: '#ffffff',
-                            borderColor: '#00ffff',
-                            borderWidth: 1,
-                            padding: 12,
-                            displayColors: true,
-                            callbacks: {}
-                        }
-                    },
-                    animation: {
-                        duration: 1000,
-                        easing: 'easeInOutQuart'
+        // 初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            new NoticeManager();
+
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
                     }
-                };
-            }
-
-            async loadChartJS() {
-                if (this.loadPromise) return this.loadPromise;
-                
-                this.loadPromise = new Promise((resolve, reject) => {
-                    if (window.Chart) {
-                        resolve(window.Chart);
-                        return;
-                    }
-                    
-                    const script = document.createElement('script');
-                    script.src = 'https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js';
-                    script.integrity = 'sha384-6X+0Ql+D5Yl6bzvtlqAYGgd/SEVKJbXLqGgC0nPkR0D5vQWy8VeVpZ3jQVwXGbEJ';
-                    script.crossOrigin = 'anonymous';
-                    script.onload = () => {
-                        console.log('Chart.js 加载成功');
-                        resolve(window.Chart);
-                    };
-                    script.onerror = () => {
-                        console.error('Chart.js 加载失败');
-                        reject(new Error('Chart.js 加载失败'));
-                    };
-                    document.head.appendChild(script);
                 });
-                
-                return this.loadPromise;
-            }
+            });
 
-            async init() {
-                try {
-                    await this.loadChartJS();
-                    this.isLoaded = true;
-                    
-                    // 延迟创建图表，确保 DOM 已渲染
-                    requestAnimationFrame(() => {
-                        this.createAllCharts();
-                    });
-                } catch (error) {
-                    console.error('图表初始化失败:', error);
-                    this.showErrorMessage('图表加载失败，请刷新页面重试');
+            // 外部链接新窗口打开
+            document.querySelectorAll('a[href^="http"]').forEach(link => {
+                if (!link.hasAttribute('target')) {
+                    link.setAttribute('target', '_blank');
+                    link.setAttribute('rel', 'noopener noreferrer');
                 }
+            });
+        });
+
+        // 性能监控
+        window.addEventListener('load', () => {
+            if ('performance' in window) {
+                const perfData = window.performance.timing;
+                const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
+                console.log(`页面加载时间: ${pageLoadTime}ms`);
             }
-
-            showErrorMessage(message) {
-                const loadingElements = document.querySelectorAll('.chart-loading');
-                loadingElements.forEach(el => {
-                    el.textContent = message;
-                    el.style.display = 'block';
-                    el.style.color = '#ff6b6b';
-                });
-            }
-
-            createAllCharts() {
-                try {
-                    this.createMembershipChart();
-                    this.createSatisfactionChart();
-                    this.createServiceChart();
-                    this.createTimelineChart();
-                    
-                    // 隐藏加载提示
-                    document.querySelectorAll('.chart-loading').forEach(el => {
-                        el.style.display = 'none';
-                    });
-                } catch (error) {
-                    console.error('创建图表时出错:', error);
-                    this.showErrorMessage('图表创建失败');
-                }
-            }
-
-            createMembershipChart() {
-                const ctx = document.getElementById('membershipChart');
-                if (!ctx) return;
-
-                try {
-                    this.charts.membership = new Chart(ctx, {
+        });
+    </script>
+</body>
+</html>
