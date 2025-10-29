@@ -53,6 +53,33 @@
             background-position: center;
         }
 
+        /* 左上角返回按钮 */
+        .back-btn {
+            position: fixed;
+            top: 18px;
+            left: 18px;
+            z-index: 1000;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 14px;
+            border-radius: 999px;
+            border: 1px solid rgba(107, 163, 212, 0.4);
+            background: rgba(26, 31, 58, 0.55);
+            color: #a8d5ff;
+            text-decoration: none;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+            transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .back-btn:hover {
+            transform: translateY(-2px);
+            border-color: rgba(107, 163, 212, 0.8);
+            background: rgba(26, 31, 58, 0.75);
+            box-shadow: 0 8px 24px rgba(107, 163, 212, 0.15);
+            color: #ffffff;
+        }
+
         /* 顶部导航 */
         header {
             position: relative;
@@ -349,6 +376,9 @@
     </style>
 </head>
 <body>
+    <!-- 左上角返回按钮（将 YOUR_BACK_LINK 替换为返回地址） -->
+    <a class="back-btn" href="YOUR_BACK_LINK" aria-label="返回上一页">← 返回</a>
+
     <!-- 顶部导航 -->
     <header>
         <h1>英语阅读社群</h1>
@@ -366,7 +396,7 @@
             <p style="line-height: 1.8; margin-bottom: 20px; color: #b8c8d8;">
                 每天为您精心推荐来自英语世界的高质量文章，开阔视野，提升英语阅读水平。
             </p>
-            <a href="YOUR_ARTICLE_LINK_HERE" class="article-link" target="_blank">
+            <a href="YOUR_ARTICLE_LINK_HERE" class="article-link" target="_blank" rel="noopener">
                 点击阅读全文 →
             </a>
         </section>
@@ -376,7 +406,7 @@
             <div class="section-card">
                 <h3>🌟 关于社群</h3>
                 <p>
-                    这是一个致力于英语阅读与学习的高端社群。我们精心遴选来自The New York Times、The Guardian、TED等世界顶级媒体的优质文章，帮助英语学习者开阔视野，深化理解。
+                    这是一个致力于英语阅读与学习的高端社群。我们精心遴选来自 The New York Times、The Guardian、TED 等世界顶级媒体的优质文章，帮助英语学习者开阔视野，深化理解。
                 </p>
                 <p>
                     在这里，您将体验到纯正英文的魅力，与志同道合的朋友探讨国际热点话题，共同进步。
@@ -405,21 +435,21 @@
                     <div class="drama-icon">🔥</div>
                     <h3>Breaking Bad</h3>
                     <p>绝命毒师 - 一部关于道德与救赎的史诗级杰作，堪称电视剧顶峰之作。</p>
-                    <a href="YOUR_BREAKING_BAD_LINK" class="drama-link" target="_blank">开始观看 →</a>
+                    <a href="YOUR_BREAKING_BAD_LINK" class="drama-link" target="_blank" rel="noopener">开始观看 →</a>
                 </div>
 
                 <div class="drama-card">
                     <div class="drama-icon">⚖️</div>
                     <h3>Better Call Saul</h3>
                     <p>风骚律师 - 精妙的人物塑造与剧情设计，深刻揭示人性复杂面。</p>
-                    <a href="YOUR_BETTER_CALL_SAUL_LINK" class="drama-link" target="_blank">开始观看 →</a>
+                    <a href="YOUR_BETTER_CALL_SAUL_LINK" class="drama-link" target="_blank" rel="noopener">开始观看 →</a>
                 </div>
 
                 <div class="drama-card">
                     <div class="drama-icon">💰</div>
                     <h3>Billions</h3>
                     <p>亿万 - 聚焦金融世界的权力游戏，精彩绝伦的剧情碰撞与对话。</p>
-                    <a href="YOUR_BILLIONS_LINK" class="drama-link" target="_blank">开始观看 →</a>
+                    <a href="YOUR_BILLIONS_LINK" class="drama-link" target="_blank" rel="noopener">开始观看 →</a>
                 </div>
             </div>
         </section>
