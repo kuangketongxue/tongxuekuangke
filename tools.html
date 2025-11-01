@@ -57,20 +57,17 @@
             --font-serif: 'Noto Serif SC', serif;
             --font-sans: 'Noto Sans SC', sans-serif;
         }
-
         /* ==================== 基础重置 ==================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         html {
             font-size: 16px;
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
         }
-
         body {
             font-family: var(--font-sans);
             background: var(--bg-primary);
@@ -78,7 +75,6 @@
             line-height: 1.8;
             overflow-x: hidden;
         }
-
         /* ==================== 背景 ==================== */
         .page-background {
             position: fixed;
@@ -91,7 +87,6 @@
                         radial-gradient(circle at 80% 80%, rgba(212, 175, 55, 0.03) 0%, transparent 50%),
                         var(--bg-primary);
         }
-
         /* ==================== 主容器 ==================== */
         .main-wrapper {
             position: relative;
@@ -100,14 +95,12 @@
             display: flex;
             flex-direction: column;
         }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
             flex: 1;
         }
-
         /* ==================== 返回按钮 ==================== */
         .back-button {
             display: inline-flex;
@@ -120,23 +113,19 @@
             margin: var(--spacing-md) 0;
             transition: var(--transition);
         }
-
         .back-button:hover {
             color: var(--light-gold);
             transform: translateX(-4px);
         }
-
         .back-button::before {
             content: '←';
             font-size: 1.25rem;
         }
-
         /* ==================== 页头 ==================== */
         .page-header {
             text-align: center;
             padding: var(--spacing-xl) 0 var(--spacing-lg);
         }
-
         .page-title {
             font-family: var(--font-serif);
             font-size: clamp(2rem, 5vw, 3rem);
@@ -152,14 +141,12 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
         .page-subtitle {
             font-size: 1rem;
             color: var(--text-secondary);
             font-weight: 300;
             letter-spacing: 0.1em;
         }
-
         /* ==================== 分类导航 ==================== */
         .category-nav {
             display: flex;
@@ -168,7 +155,6 @@
             margin-bottom: var(--spacing-lg);
             flex-wrap: wrap;
         }
-
         .category-btn {
             padding: 12px 24px;
             background: var(--bg-card);
@@ -180,19 +166,16 @@
             transition: var(--transition);
             font-weight: 400;
         }
-
         .category-btn:hover {
             border-color: var(--border-gold);
             color: var(--text-gold);
         }
-
         .category-btn.active {
             background: rgba(212, 175, 55, 0.1);
             border-color: var(--primary-gold);
             color: var(--primary-gold);
             font-weight: 500;
         }
-
         /* ==================== 工具卡片 ==================== */
         .tools-grid {
             display: grid;
@@ -200,7 +183,6 @@
             gap: var(--spacing-md);
             margin-bottom: var(--spacing-xl);
         }
-
         .tool-card {
             background: var(--bg-card);
             border: 1px solid var(--border-white);
@@ -215,7 +197,6 @@
             flex-direction: column;
             min-height: 220px;
         }
-
         .tool-card::before {
             content: '';
             position: absolute;
@@ -230,36 +211,30 @@
             opacity: 0;
             transition: var(--transition);
         }
-
         .tool-card:hover {
             border-color: var(--border-gold);
             background: rgba(212, 175, 55, 0.03);
             transform: translateY(-4px);
             box-shadow: var(--shadow-gold);
         }
-
         .tool-card:hover::before {
             opacity: 1;
         }
-
         .tool-header {
             display: flex;
             align-items: flex-start;
             justify-content: space-between;
             margin-bottom: var(--spacing-sm);
         }
-
         .tool-icon {
             font-size: 2rem;
             flex-shrink: 0;
         }
-
         .tool-tags {
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
         }
-
         .tool-tag {
             font-size: 0.75rem;
             padding: 4px 8px;
@@ -268,19 +243,26 @@
             border-radius: var(--radius);
             color: var(--text-gold);
         }
-
         .tool-tag.free {
             background: rgba(76, 175, 80, 0.1);
             border-color: rgba(76, 175, 80, 0.3);
             color: #66bb6a;
         }
-
         .tool-tag.hot {
             background: rgba(255, 87, 34, 0.1);
             border-color: rgba(255, 87, 34, 0.3);
             color: #ff7043;
         }
-
+        .tool-tag.new {
+            background: rgba(33, 150, 243, 0.1);
+            border-color: rgba(33, 150, 243, 0.3);
+            color: #42a5f5;
+        }
+        .tool-tag.recommend {
+            background: rgba(156, 39, 176, 0.1);
+            border-color: rgba(156, 39, 176, 0.3);
+            color: #ab47bc;
+        }
         .tool-title {
             font-family: var(--font-serif);
             font-size: 1.125rem;
@@ -288,7 +270,6 @@
             margin-bottom: var(--spacing-xs);
             color: var(--text-primary);
         }
-
         .tool-desc {
             font-size: 0.9375rem;
             color: var(--text-secondary);
@@ -296,7 +277,6 @@
             margin-bottom: auto;
             font-weight: 300;
         }
-
         .tool-link {
             display: inline-flex;
             align-items: center;
@@ -306,16 +286,13 @@
             font-size: 0.875rem;
             font-weight: 500;
         }
-
         .tool-link::after {
             content: '→';
             transition: var(--transition);
         }
-
         .tool-card:hover .tool-link::after {
             transform: translateX(4px);
         }
-
         /* ==================== 页脚 ==================== */
         .site-footer {
             border-top: 1px solid var(--border-white);
@@ -323,7 +300,6 @@
             text-align: center;
             margin-top: auto;
         }
-
         .footer-title {
             font-family: var(--font-serif);
             font-size: 1.5rem;
@@ -331,14 +307,12 @@
             margin-bottom: var(--spacing-md);
             font-weight: 600;
         }
-
         .social-links {
             display: flex;
             justify-content: center;
             gap: var(--spacing-md);
             margin-bottom: var(--spacing-md);
         }
-
         .social-link {
             width: 48px;
             height: 48px;
@@ -352,70 +326,61 @@
             font-size: 1.25rem;
             transition: var(--transition);
         }
-
         .social-link:hover {
             border-color: var(--primary-gold);
             color: var(--primary-gold);
             transform: translateY(-4px);
         }
-
         .copyright {
             color: var(--text-muted);
             font-size: 0.875rem;
             font-weight: 300;
         }
-
         /* ==================== 响应式 ==================== */
         @media (max-width: 768px) {
             :root {
                 --spacing-xl: 48px;
                 --spacing-2xl: 64px;
             }
-
             .page-header {
                 padding: var(--spacing-lg) 0 var(--spacing-md);
             }
-
             .tools-grid {
                 grid-template-columns: 1fr;
             }
-
             .category-nav {
                 gap: 8px;
             }
-
             .category-btn {
                 padding: 10px 16px;
                 font-size: 0.875rem;
             }
         }
-
         /* ==================== 滚动条 ==================== */
         ::-webkit-scrollbar {
             width: 8px;
         }
-
         ::-webkit-scrollbar-track {
             background: var(--bg-secondary);
         }
-
         ::-webkit-scrollbar-thumb {
             background: var(--primary-gold);
             border-radius: 4px;
         }
-
         /* ==================== 加载动画 ==================== */
         .tool-card {
             animation: fadeInUp 0.6s ease-out backwards;
         }
-
         .tool-card:nth-child(1) { animation-delay: 0.1s; }
         .tool-card:nth-child(2) { animation-delay: 0.2s; }
         .tool-card:nth-child(3) { animation-delay: 0.3s; }
         .tool-card:nth-child(4) { animation-delay: 0.4s; }
         .tool-card:nth-child(5) { animation-delay: 0.5s; }
         .tool-card:nth-child(6) { animation-delay: 0.6s; }
-
+        .tool-card:nth-child(7) { animation-delay: 0.7s; }
+        .tool-card:nth-child(8) { animation-delay: 0.8s; }
+        .tool-card:nth-child(9) { animation-delay: 0.9s; }
+        .tool-card:nth-child(10) { animation-delay: 1s; }
         @keyframes fadeInUp {
             from {
                 opacity: 0;
@@ -426,7 +391,6 @@
                 transform: translateY(0);
             }
         }
-
         /* ==================== 打印样式 ==================== */
         @media print {
             .page-background,
@@ -444,19 +408,16 @@
 <body>
     <!-- 背景 -->
     <div class="page-background"></div>
-
     <!-- 主内容 -->
     <div class="main-wrapper">
         <div class="container">
             <!-- 返回按钮 -->
             <a href="index.html" class="back-button">返回首页</a>
-
             <!-- 页头 -->
             <header class="page-header">
                 <h1 class="page-title">效率工具集</h1>
                 <p class="page-subtitle">精选生产力工具 · 显著提升工作效率</p>
             </header>
-
             <!-- 分类导航 -->
             <nav class="category-nav">
                 <button class="category-btn active" data-category="all">全部</button>
@@ -465,10 +426,62 @@
                 <button class="category-btn" data-category="dev">开发工具</button>
                 <button class="category-btn" data-category="office">办公工具</button>
                 <button class="category-btn" data-category="writing">写作工具</button>
+                <button class="category-btn" data-category="special">特色工具</button>
             </nav>
-
             <!-- 工具网格 -->
             <div class="tools-grid" id="toolsGrid">
+                <!-- 特色工具（新增） -->
+                <a href="https://editor.mdnice.com" class="tool-card" data-category="writing special office" target="_blank" rel="noopener">
+                    <div class="tool-header">
+                        <span class="tool-icon">📱</span>
+                        <div class="tool-tags">
+                            <span class="tool-tag free">免费</span>
+                            <span class="tool-tag recommend">推荐</span>
+                        </div>
+                    </div>
+                    <h3 class="tool-title">公众号排版助手</h3>
+                    <p class="tool-desc">专业的微信公众号Markdown编辑器，支持多种主题样式，一键复制粘贴，让排版更优雅</p>
+                    <span class="tool-link">访问工具</span>
+                </a>
+
+                <a href="#" class="tool-card" data-category="ai special office" target="_blank" rel="noopener">
+                    <div class="tool-header">
+                        <span class="tool-icon">👔</span>
+                        <div class="tool-tags">
+                            <span class="tool-tag new">新品</span>
+                            <span class="tool-tag hot">热门</span>
+                        </div>
+                    </div>
+                    <h3 class="tool-title">HR+企业大佬智能体演练</h3>
+                    <p class="tool-desc">AI模拟HR面试和企业高管对话场景，助你提升职场沟通技巧，为面试和晋升做好充分准备</p>
+                    <span class="tool-link">访问工具</span>
+                </a>
+
+                <a href="#" class="tool-card" data-category="ai special" target="_blank" rel="noopener">
+                    <div class="tool-header">
+                        <span class="tool-icon">💝</span>
+                        <div class="tool-tags">
+                            <span class="tool-tag new">新品</span>
+                            <span class="tool-tag recommend">推荐</span>
+                        </div>
+                    </div>
+                    <h3 class="tool-title">狂客恋爱个性指导智能体</h3>
+                    <p class="tool-desc">基于AI的恋爱情感分析与建议工具，提供个性化恋爱指导，帮助你更好地理解和经营亲密关系</p>
+                    <span class="tool-link">访问工具</span>
+                </a>
+
+                <a href="#" class="tool-card" data-category="dev special" target="_blank" rel="noopener">
+                    <div class="tool-header">
+                        <span class="tool-icon">🪜</span>
+                        <div class="tool-tags">
+                            <span class="tool-tag recommend">推荐</span>
+                        </div>
+                    </div>
+                    <h3 class="tool-title">梯子魔方汇总</h3>
+                    <p class="tool-desc">精选优质科学上网工具汇总，包含详细配置教程和使用指南，助你畅游全球互联网</p>
+                    <span class="tool-link">访问工具</span>
+                </a>
+
                 <!-- AI工具 -->
                 <a href="https://chat.openai.com" class="tool-card" data-category="ai" target="_blank" rel="noopener">
                     <div class="tool-header">
@@ -481,7 +494,6 @@
                     <p class="tool-desc">OpenAI推出的强大AI对话助手，支持代码编写、文案创作、问题解答等多种场景</p>
                     <span class="tool-link">访问工具</span>
                 </a>
-
                 <a href="https://www.midjourney.com" class="tool-card" data-category="ai design" target="_blank" rel="noopener">
                     <div class="tool-header">
                         <span class="tool-icon">🎨</span>
@@ -493,7 +505,6 @@
                     <p class="tool-desc">顶级AI绘画工具，通过文字描述生成高质量艺术作品，适合设计师和创意工作者</p>
                     <span class="tool-link">访问工具</span>
                 </a>
-
                 <a href="https://claude.ai" class="tool-card" data-category="ai writing" target="_blank" rel="noopener">
                     <div class="tool-header">
                         <span class="tool-icon">💬</span>
@@ -502,22 +513,20 @@
                         </div>
                     </div>
                     <h3 class="tool-title">Claude</h3>
-                    <p class="tool-desc">Anthropic开发的AI助手，擅长长文本处理和深度分析，适合复杂任务处理</p>
+                    <p class="tool-desc">Anthropic开发的AI助手,擅长长文本处理和深度分析，适合复杂任务处理</p>
                     <span class="tool-link">访问工具</span>
                 </a>
-
                 <a href="https://gemini.google.com" class="tool-card" data-category="ai" target="_blank" rel="noopener">
                     <div class="tool-header">
                         <span class="tool-icon">✨</span>
                         <div class="tool-tags">
-                            <span class="tool-tag">新品</span>
+                            <span class="tool-tag new">新品</span>
                         </div>
                     </div>
                     <h3 class="tool-title">Google Gemini</h3>
                     <p class="tool-desc">Google推出的多模态AI助手，支持文本、图像、视频等多种输入方式</p>
                     <span class="tool-link">访问工具</span>
                 </a>
-
                 <!-- 设计工具 -->
                 <a href="https://www.figma.com" class="tool-card" data-category="design" target="_blank" rel="noopener">
                     <div class="tool-header">
@@ -531,7 +540,6 @@
                     <p class="tool-desc">协作式界面设计工具，支持实时多人编辑，是UI/UX设计师的首选</p>
                     <span class="tool-link">访问工具</span>
                 </a>
-
                 <a href="https://www.canva.com" class="tool-card" data-category="design" target="_blank" rel="noopener">
                     <div class="tool-header">
                         <span class="tool-icon">🖼️</span>
@@ -543,7 +551,6 @@
                     <p class="tool-desc">简单易用的在线设计平台，提供海量模板，适合快速制作海报、PPT等</p>
                     <span class="tool-link">访问工具</span>
                 </a>
-
                 <a href="https://www.remove.bg" class="tool-card" data-category="design" target="_blank" rel="noopener">
                     <div class="tool-header">
                         <span class="tool-icon">✂️</span>
@@ -555,7 +562,6 @@
                     <p class="tool-desc">AI一键抠图工具，5秒钟自动去除图片背景，支持批量处理</p>
                     <span class="tool-link">访问工具</span>
                 </a>
-
                 <!-- 开发工具 -->
                 <a href="https://github.com" class="tool-card" data-category="dev" target="_blank" rel="noopener">
                     <div class="tool-header">
@@ -569,7 +575,6 @@
                     <p class="tool-desc">全球最大的代码托管平台，支持版本控制、协作开发和开源项目</p>
                     <span class="tool-link">访问工具</span>
                 </a>
-
                 <a href="https://code.visualstudio.com" class="tool-card" data-category="dev" target="_blank" rel="noopener">
                     <div class="tool-header">
                         <span class="tool-icon">📝</span>
@@ -581,7 +586,6 @@
                     <p class="tool-desc">微软开发的轻量级代码编辑器，功能强大，支持海量扩展插件</p>
                     <span class="tool-link">访问工具</span>
                 </a>
-
                 <a href="https://vercel.com" class="tool-card" data-category="dev" target="_blank" rel="noopener">
                     <div class="tool-header">
                         <span class="tool-icon">🚀</span>
@@ -593,7 +597,6 @@
                     <p class="tool-desc">前端项目部署平台，支持一键部署，自动CI/CD，零配置上线</p>
                     <span class="tool-link">访问工具</span>
                 </a>
-
                 <!-- 办公工具 -->
                 <a href="https://www.notion.so" class="tool-card" data-category="office" target="_blank" rel="noopener">
                     <div class="tool-header">
@@ -607,7 +610,6 @@
                     <p class="tool-desc">全能型笔记和协作工具，支持文档、数据库、看板等多种形式</p>
                     <span class="tool-link">访问工具</span>
                 </a>
-
                 <a href="https://www.office.com" class="tool-card" data-category="office" target="_blank" rel="noopener">
                     <div class="tool-header">
                         <span class="tool-icon">📊</span>
@@ -619,7 +621,6 @@
                     <p class="tool-desc">微软办公套件在线版，包括Word、Excel、PowerPoint等经典工具</p>
                     <span class="tool-link">访问工具</span>
                 </a>
-
                 <a href="https://www.wps.cn" class="tool-card" data-category="office" target="_blank" rel="noopener">
                     <div class="tool-header">
                         <span class="tool-icon">📄</span>
@@ -631,7 +632,6 @@
                     <p class="tool-desc">国产办公软件，完美兼容Office格式，云端同步，AI辅助功能</p>
                     <span class="tool-link">访问工具</span>
                 </a>
-
                 <a href="https://www.feishu.cn" class="tool-card" data-category="office" target="_blank" rel="noopener">
                     <div class="tool-header">
                         <span class="tool-icon">💼</span>
@@ -643,7 +643,6 @@
                     <p class="tool-desc">字节跳动出品的企业协作平台，集成文档、会议、日历、聊天等功能</p>
                     <span class="tool-link">访问工具</span>
                 </a>
-
                 <!-- 写作工具 -->
                 <a href="https://www.grammarly.com" class="tool-card" data-category="writing" target="_blank" rel="noopener">
                     <div class="tool-header">
@@ -656,7 +655,6 @@
                     <p class="tool-desc">智能英文写作助手，提供语法检查、拼写纠正和风格建议</p>
                     <span class="tool-link">访问工具</span>
                 </a>
-
                 <a href="https://www.deepl.com" class="tool-card" data-category="writing" target="_blank" rel="noopener">
                     <div class="tool-header">
                         <span class="tool-icon">🌐</span>
@@ -669,7 +667,6 @@
                     <p class="tool-desc">目前最好的AI翻译工具，翻译质量超越Google，支持多种语言</p>
                     <span class="tool-link">访问工具</span>
                 </a>
-
                 <a href="https://www.hemingwayapp.com" class="tool-card" data-category="writing" target="_blank" rel="noopener">
                     <div class="tool-header">
                         <span class="tool-icon">📖</span>
@@ -681,7 +678,6 @@
                     <p class="tool-desc">简化写作风格的编辑器，帮助你写出更清晰、更有力的文字</p>
                     <span class="tool-link">访问工具</span>
                 </a>
-
                 <a href="https://www.yuque.com" class="tool-card" data-category="writing office" target="_blank" rel="noopener">
                     <div class="tool-header">
                         <span class="tool-icon">📚</span>
@@ -693,11 +689,8 @@
                     <p class="tool-desc">阿里巴巴出品的云端知识库，支持文档、表格、画板等多种创作形式</p>
                     <span class="tool-link">访问工具</span>
                 </a>
-
             </div>
-
         </div>
-
         <!-- 页脚 -->
         <footer class="site-footer">
             <div class="container">
@@ -735,10 +728,8 @@
             </div>
         </footer>
     </div>
-
     <script>
         'use strict';
-
         // 分类过滤功能
         class ToolsFilter {
             constructor() {
@@ -746,24 +737,19 @@
                 this.cards = document.querySelectorAll('.tool-card');
                 this.init();
             }
-
             init() {
                 this.buttons.forEach(btn => {
                     btn.addEventListener('click', () => this.handleFilter(btn));
                 });
             }
-
             handleFilter(activeBtn) {
                 const category = activeBtn.dataset.category;
-
                 // 更新按钮状态
                 this.buttons.forEach(btn => btn.classList.remove('active'));
                 activeBtn.classList.add('active');
-
                 // 过滤卡片
                 this.cards.forEach(card => {
                     const cardCategories = card.dataset.category.split(' ');
-                    
                     if (category === 'all' || cardCategories.includes(category)) {
                         card.style.display = 'flex';
                         // 重新触发动画
@@ -777,11 +763,9 @@
                 });
             }
         }
-
         // 页面加载完成后初始化
         document.addEventListener('DOMContentLoaded', () => {
             new ToolsFilter();
-
             // 外部链接新窗口打开
             document.querySelectorAll('a[href^="http"]').forEach(link => {
                 if (!link.hasAttribute('target')) {
@@ -789,7 +773,6 @@
                     link.setAttribute('rel', 'noopener noreferrer');
                 }
             });
-
             // 性能监控
             if ('performance' in window) {
                 window.addEventListener('load', () => {
