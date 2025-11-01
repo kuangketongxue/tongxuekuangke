@@ -4,25 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
     <!-- SEO优化 -->
     <title>狂客空间 | AI资讯·学习资源·定制服务</title>
     <meta name="description" content="狂客空间 - 专注AI资讯、学习资源分享、专业定制服务的精品平台">
     <meta name="keywords" content="AI资讯,在线学习,PPT定制,视频定制,会员服务">
     <meta name="author" content="狂客">
     <meta name="robots" content="index, follow">
-    
     <!-- 主题颜色 -->
     <meta name="theme-color" content="#000000">
-    
     <!-- Favicon -->
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
-    
     <!-- 字体 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    
     <style>
         /* ==================== CSS变量系统 ==================== */
         :root {
@@ -32,29 +27,23 @@
             --primary-white: #ffffff;
             --secondary-gold: #b8941e;
             --light-gold: #f4e4b8;
-            
             /* 背景色 */
             --bg-primary: #000000;
             --bg-secondary: #0a0a0a;
             --bg-card: rgba(255, 255, 255, 0.03);
-            
             /* 文字颜色 */
             --text-primary: #ffffff;
             --text-secondary: #cccccc;
             --text-muted: #888888;
             --text-gold: #d4af37;
-            
             /* 边框 */
             --border-gold: rgba(212, 175, 55, 0.2);
             --border-white: rgba(255, 255, 255, 0.1);
-            
             /* 阴影 */
             --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.3);
             --shadow-gold: 0 4px 24px rgba(212, 175, 55, 0.15);
-            
             /* 动画 */
             --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            
             /* 间距 */
             --spacing-xs: 8px;
             --spacing-sm: 16px;
@@ -62,28 +51,23 @@
             --spacing-lg: 48px;
             --spacing-xl: 80px;
             --spacing-2xl: 120px;
-            
             /* 圆角 */
             --radius: 4px;
-            
             /* 字体 */
             --font-serif: 'Noto Serif SC', serif;
             --font-sans: 'Noto Sans SC', sans-serif;
         }
-
         /* ==================== 基础重置 ==================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         html {
             font-size: 16px;
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
         }
-
         body {
             font-family: var(--font-sans);
             background: var(--bg-primary);
@@ -91,7 +75,6 @@
             line-height: 1.8;
             overflow-x: hidden;
         }
-
         /* ==================== 背景图片区域 ==================== */
         .hero-background {
             position: fixed;
@@ -100,14 +83,13 @@
             width: 100%;
             height: 100vh;
             z-index: 0;
-            background: linear-gradient(180deg, 
-                rgba(0, 0, 0, 0.7) 0%, 
+            background: linear-gradient(180deg,
+                rgba(0, 0, 0, 0.7) 0%,
                 rgba(0, 0, 0, 0.85) 50%,
                 rgba(0, 0, 0, 0.95) 100%),
                 url('img/hero-bg.jpg') center/cover no-repeat;
             opacity: 0.4;
         }
-
         /* ==================== 顶部声明条 ==================== */
         .top-notice {
             position: fixed;
@@ -123,7 +105,6 @@
             font-size: 0.875rem;
             color: var(--text-secondary);
         }
-
         .notice-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -132,12 +113,10 @@
             justify-content: center;
             gap: 12px;
         }
-
         .notice-text {
             color: var(--text-gold);
             font-weight: 500;
         }
-
         .notice-close {
             background: transparent;
             border: 1px solid var(--border-gold);
@@ -152,36 +131,30 @@
             align-items: center;
             justify-content: center;
         }
-
         .notice-close:hover {
             background: rgba(212, 175, 55, 0.1);
             transform: rotate(90deg);
         }
-
         .notice-hidden {
             display: none;
         }
-
         /* ==================== 主容器 ==================== */
         .main-wrapper {
             position: relative;
             z-index: 1;
             padding-top: 48px; /* 为顶部声明留出空间 */
         }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
         }
-
         /* ==================== 页头 ==================== */
         .site-header {
             text-align: center;
             padding: var(--spacing-2xl) 0;
             margin-bottom: var(--spacing-xl);
         }
-
         .site-title {
             font-family: var(--font-serif);
             font-size: clamp(2.5rem, 6vw, 4rem);
@@ -189,33 +162,30 @@
             color: var(--primary-gold);
             letter-spacing: 0.05em;
             margin-bottom: var(--spacing-sm);
-            background: linear-gradient(135deg, 
-                var(--primary-gold) 0%, 
-                var(--light-gold) 50%, 
+            background: linear-gradient(135deg,
+                var(--primary-gold) 0%,
+                var(--light-gold) 50%,
                 var(--primary-gold) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
         .site-subtitle {
             font-size: 1.125rem;
             color: var(--text-secondary);
             font-weight: 300;
             letter-spacing: 0.2em;
         }
-
         /* ==================== 分隔线 ==================== */
         .divider {
             width: 80px;
             height: 1px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                var(--primary-gold) 50%, 
+            background: linear-gradient(90deg,
+                transparent 0%,
+                var(--primary-gold) 50%,
                 transparent 100%);
             margin: var(--spacing-xl) auto;
         }
-
         /* ==================== 区块标题 ==================== */
         .section-title {
             font-family: var(--font-serif);
@@ -226,7 +196,6 @@
             margin-bottom: var(--spacing-md);
             letter-spacing: 0.05em;
         }
-
         .section-desc {
             text-align: center;
             color: var(--text-muted);
@@ -234,7 +203,6 @@
             margin-bottom: var(--spacing-lg);
             font-weight: 300;
         }
-
         /* ==================== 卡片网格 ==================== */
         .card-grid {
             display: grid;
@@ -242,7 +210,6 @@
             gap: var(--spacing-md);
             margin-bottom: var(--spacing-2xl);
         }
-
         /* ==================== 通用卡片 ==================== */
         .card {
             background: var(--bg-card);
@@ -258,7 +225,6 @@
             flex-direction: column;
             min-height: 280px;
         }
-
         .card::before {
             content: '';
             position: absolute;
@@ -266,31 +232,27 @@
             left: 0;
             right: 0;
             height: 1px;
-            background: linear-gradient(90deg, 
-                transparent 0%, 
-                var(--primary-gold) 50%, 
+            background: linear-gradient(90deg,
+                transparent 0%,
+                var(--primary-gold) 50%,
                 transparent 100%);
             opacity: 0;
             transition: var(--transition);
         }
-
         .card:hover {
             border-color: var(--border-gold);
             background: rgba(212, 175, 55, 0.03);
             transform: translateY(-4px);
             box-shadow: var(--shadow-gold);
         }
-
         .card:hover::before {
             opacity: 1;
         }
-
         .card-icon {
             font-size: 2.5rem;
             margin-bottom: var(--spacing-sm);
             display: block;
         }
-
         .card-title {
             font-family: var(--font-serif);
             font-size: 1.25rem;
@@ -298,7 +260,6 @@
             margin-bottom: var(--spacing-xs);
             color: var(--text-primary);
         }
-
         .card-desc {
             font-size: 0.9375rem;
             color: var(--text-secondary);
@@ -306,7 +267,6 @@
             margin-bottom: auto;
             font-weight: 300;
         }
-
         .card-badge {
             display: inline-block;
             margin-top: var(--spacing-sm);
@@ -318,17 +278,14 @@
             font-weight: 500;
             align-self: flex-start;
         }
-
         /* ==================== 特色卡片 ==================== */
         .card-featured {
             border: 1px solid var(--border-gold);
             background: rgba(212, 175, 55, 0.05);
         }
-
         .card-featured .card-title {
             color: var(--primary-gold);
         }
-
         .featured-label {
             position: absolute;
             top: var(--spacing-sm);
@@ -341,12 +298,10 @@
             font-weight: 600;
             letter-spacing: 0.05em;
         }
-
         /* ==================== 区块间距 ==================== */
         .section {
             margin-bottom: var(--spacing-2xl);
         }
-
         /* ==================== 页脚 ==================== */
         .site-footer {
             border-top: 1px solid var(--border-white);
@@ -354,7 +309,6 @@
             text-align: center;
             margin-top: var(--spacing-2xl);
         }
-
         .footer-title {
             font-family: var(--font-serif);
             font-size: 1.5rem;
@@ -362,14 +316,12 @@
             margin-bottom: var(--spacing-md);
             font-weight: 600;
         }
-
         .social-links {
             display: flex;
             justify-content: center;
             gap: var(--spacing-md);
             margin-bottom: var(--spacing-md);
         }
-
         .social-link {
             width: 48px;
             height: 48px;
@@ -383,60 +335,49 @@
             font-size: 1.25rem;
             transition: var(--transition);
         }
-
         .social-link:hover {
             border-color: var(--primary-gold);
             color: var(--primary-gold);
             transform: translateY(-4px);
         }
-
         .copyright {
             color: var(--text-muted);
             font-size: 0.875rem;
             font-weight: 300;
         }
-
         /* ==================== 响应式 ==================== */
         @media (max-width: 768px) {
             :root {
                 --spacing-xl: 48px;
                 --spacing-2xl: 64px;
             }
-
             .site-header {
                 padding: var(--spacing-xl) 0;
             }
-
             .card-grid {
                 grid-template-columns: 1fr;
             }
-
             .notice-content {
                 font-size: 0.8125rem;
             }
         }
-
         /* ==================== 滚动条 ==================== */
         ::-webkit-scrollbar {
             width: 8px;
         }
-
         ::-webkit-scrollbar-track {
             background: var(--bg-secondary);
         }
-
         ::-webkit-scrollbar-thumb {
             background: var(--primary-gold);
             border-radius: 4px;
         }
-
         /* ==================== 打印样式 ==================== */
         @media print {
             .top-notice,
             .hero-background {
                 display: none;
             }
-            
             body {
                 background: white;
                 color: black;
@@ -447,7 +388,6 @@
 <body>
     <!-- 背景图片 -->
     <div class="hero-background"></div>
-
     <!-- 顶部声明 -->
     <div class="top-notice" id="topNotice">
         <div class="notice-content">
@@ -455,7 +395,6 @@
             <button class="notice-close" id="noticeClose" aria-label="关闭">×</button>
         </div>
     </div>
-
     <!-- 主内容 -->
     <div class="main-wrapper">
         <div class="container">
@@ -464,58 +403,53 @@
                 <h1 class="site-title">狂客空间</h1>
                 <p class="site-subtitle">AI · 学习 · 定制</p>
             </header>
-
             <!-- 探索区 -->
             <section class="section">
                 <h2 class="section-title">发现</h2>
                 <p class="section-desc">探索优质内容与资源</p>
-                
                 <div class="card-grid">
                     <a href="https://kuangketongxue.github.io/kuangke.github.io/index.html" class="card">
                         <span class="card-icon">✦</span>
                         <h3 class="card-title">个人空间</h3>
                         <p class="card-desc">探索生活的每一刻</p>
                     </a>
-
                     <a href="https://kuangketongxue.github.io/kuangke.github.io/success.html" class="card">
                         <span class="card-icon">◆</span>
                         <h3 class="card-title">成长档案</h3>
                         <p class="card-desc">记录闪耀的成长时刻</p>
                     </a>
-
                     <a href="https://kuangketongxue.github.io/kuangke.github.io/reading.html" class="card">
                         <span class="card-icon">◇</span>
                         <h3 class="card-title">阅读空间</h3>
                         <p class="card-desc">精选文章与思考</p>
                     </a>
-
                     <a href="https://kuangketongxue.github.io/kuangke.github.io/books.html" class="card">
                         <span class="card-icon">◈</span>
                         <h3 class="card-title">书籍推荐</h3>
                         <p class="card-desc">精品书籍分享</p>
                     </a>
-
                     <a href="https://kuangketongxue.github.io/free-courses/index.html" class="card">
                         <span class="card-icon">✧</span>
                         <h3 class="card-title">设计工坊</h3>
                         <p class="card-desc">提升设计技能</p>
                     </a>
-
                     <a href="https://kuangketongxue.github.io/kuangke.github.io/video.html" class="card">
                         <span class="card-icon">◉</span>
                         <h3 class="card-title">视频集</h3>
                         <p class="card-desc">跨平台视频内容</p>
                     </a>
+                    <a href="tools.html" class="card">
+                        <span class="card-icon">⚙</span>
+                        <h3 class="card-title">效率工具</h3>
+                        <p class="card-desc">精选生产力工具集</p>
+                    </a>
                 </div>
             </section>
-
             <div class="divider"></div>
-
             <!-- 会员区 -->
             <section class="section">
                 <h2 class="section-title">精英会</h2>
                 <p class="section-desc">专属会员服务与社群</p>
-                
                 <div class="card-grid">
                     <a href="ai-rss.html" class="card">
                         <span class="card-icon">◐</span>
@@ -523,28 +457,24 @@
                         <p class="card-desc">每周精选AI资讯</p>
                         <span class="card-badge">¥69/年</span>
                     </a>
-
                     <a href="exam.html" class="card">
                         <span class="card-icon">◑</span>
                         <h3 class="card-title">学霸计划</h3>
                         <p class="card-desc">备考资料与学习技巧</p>
                         <span class="card-badge">¥99 永久</span>
                     </a>
-
                     <a href="weekly-course.html" class="card">
                         <span class="card-icon">◒</span>
                         <h3 class="card-title">周课精选</h3>
                         <p class="card-desc">每周优质课程推荐</p>
                         <span class="card-badge">¥299/年</span>
                     </a>
-
                     <a href="english-tribe.html" class="card">
                         <span class="card-icon">◓</span>
                         <h3 class="card-title">英语会</h3>
                         <p class="card-desc">系统化英语学习社群</p>
                         <span class="card-badge">¥599/年</span>
                     </a>
-
                     <a href="Daily-Thought-Notes.html" class="card">
                         <span class="card-icon">◔</span>
                         <h3 class="card-title">思享笔记</h3>
@@ -553,14 +483,11 @@
                     </a>
                 </div>
             </section>
-
             <div class="divider"></div>
-
             <!-- 定制区 -->
             <section class="section">
                 <h2 class="section-title">私享定制</h2>
                 <p class="section-desc">专业团队 · 品质保证</p>
-                
                 <div class="card-grid">
                     <a href="ppt-custom.html" class="card">
                         <span class="card-icon">◈</span>
@@ -568,14 +495,12 @@
                         <p class="card-desc">专业设计，48小时交付<br>商务汇报 / 教学课件 / 产品发布</p>
                         <span class="card-badge">¥2,999起</span>
                     </a>
-
                     <a href="video-custom.html" class="card">
                         <span class="card-icon">◆</span>
                         <h3 class="card-title">视频定制</h3>
                         <p class="card-desc">专业制作，5天交付<br>宣传片 / 产品演示 / 课程录制</p>
                         <span class="card-badge">¥4,999起</span>
                     </a>
-
                     <a href="package-custom.html" class="card card-featured">
                         <span class="featured-label">推荐</span>
                         <span class="card-icon">◇</span>
@@ -585,32 +510,31 @@
                     </a>
                 </div>
             </section>
-
             <!-- 页脚 -->
             <footer class="site-footer">
                 <h3 class="footer-title">联系我们</h3>
                 <div class="social-links">
-                    <a href="https://open.weixin.qq.com/qr/code?username=gh_ba5b6bb6bd89" 
-                       class="social-link" 
-                       target="_blank" 
+                    <a href="https://open.weixin.qq.com/qr/code?username=gh_ba5b6bb6bd89"
+                       class="social-link"
+                       target="_blank"
                        rel="noopener"
                        aria-label="微信公众号">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.27-.027-.407-.03zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z"/>
                         </svg>
                     </a>
-                    <a href="https://github.com/kuangketongxue" 
-                       class="social-link" 
-                       target="_blank" 
+                    <a href="https://github.com/kuangketongxue"
+                       class="social-link"
+                       target="_blank"
                        rel="noopener"
                        aria-label="GitHub">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                             <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
                         </svg>
                     </a>
-                    <a href="https://x.com/kuangketongxue" 
-                       class="social-link" 
-                       target="_blank" 
+                    <a href="https://x.com/kuangketongxue"
+                       class="social-link"
+                       target="_blank"
                        rel="noopener"
                        aria-label="X (Twitter)">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -622,10 +546,8 @@
             </footer>
         </div>
     </div>
-
     <script>
         'use strict';
-
         // 顶部声明管理
         class NoticeManager {
             constructor() {
@@ -633,28 +555,22 @@
                 this.closeBtn = document.getElementById('noticeClose');
                 this.init();
             }
-
             init() {
                 if (!this.notice || !this.closeBtn) return;
-                
                 // 检查是否已关闭
                 if (localStorage.getItem('noticeClose') === 'true') {
                     this.hide();
                     return;
                 }
-
                 // 绑定关闭事件
                 this.closeBtn.addEventListener('click', () => this.close());
-
                 // 10秒后自动隐藏
                 setTimeout(() => this.close(), 10000);
             }
-
             close() {
                 localStorage.setItem('noticeClose', 'true');
                 this.hide();
             }
-
             hide() {
                 if (this.notice) {
                     this.notice.classList.add('notice-hidden');
@@ -662,11 +578,9 @@
                 }
             }
         }
-
         // 初始化
         document.addEventListener('DOMContentLoaded', () => {
             new NoticeManager();
-
             // 平滑滚动
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
@@ -680,7 +594,6 @@
                     }
                 });
             });
-
             // 外部链接新窗口打开
             document.querySelectorAll('a[href^="http"]').forEach(link => {
                 if (!link.hasAttribute('target')) {
@@ -689,7 +602,6 @@
                 }
             });
         });
-
         // 性能监控
         window.addEventListener('load', () => {
             if ('performance' in window) {
