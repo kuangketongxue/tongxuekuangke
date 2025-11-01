@@ -15,14 +15,13 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #e8e8e8;
-            background: linear-gradient(135deg, #1a1f3a 0%, #0f1628 50%, #1a1f3a 100%);
-            background-attachment: fixed;
             min-height: 100vh;
             overflow-x: hidden;
             position: relative;
+            background: #0a0e27;
         }
         
-        /* 背景图片层 */
+        /* 背景图片层 - 保留原图 */
         body::after {
             content: '';
             position: fixed;
@@ -30,15 +29,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('image/1bc53c073dba06b9d5da505d6e0faa46.png');
+            background-image: url('image/1bc53c073dba06b9d5da705d6e0faa46.png');
             background-size: cover;
             background-position: center;
-            opacity: 0.25;
+            background-attachment: fixed;
             z-index: -2;
             pointer-events: none;
         }
         
-        /* 星空背景效果 */
+        /* 渐变遮罩层 - 使内容更易读 */
         body::before {
             content: '';
             position: fixed;
@@ -46,22 +45,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image:
-                radial-gradient(1.5px 1.5px at 20px 30px, rgba(255,255,255,0.6), rgba(0,0,0,0)),
-                radial-gradient(1.5px 1.5px at 60px 70px, rgba(255,255,255,0.8), rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 50px 50px, rgba(255,255,255,0.5), rgba(0,0,0,0)),
-                radial-gradient(1px 1px at 130px 80px, rgba(255,255,255,0.7), rgba(0,0,0,0)),
-                radial-gradient(2px 2px at 90px 10px, rgba(255,255,255,0.6), rgba(0,0,0,0));
-            background-repeat: repeat;
-            background-size: 200px 200px;
-            animation: twinkle 6s infinite ease-in-out;
+            background: linear-gradient(
+                180deg,
+                rgba(10, 14, 39, 0.75) 0%,
+                rgba(10, 14, 39, 0.5) 30%,
+                rgba(10, 14, 39, 0.6) 70%,
+                rgba(10, 14, 39, 0.8) 100%
+            );
             z-index: -1;
             pointer-events: none;
-        }
-        
-        @keyframes twinkle {
-            0%, 100% { opacity: 0.3; }
-            50% { opacity: 0.7; }
         }
         
         /* 左上角返回按钮 */
@@ -75,12 +67,12 @@
             gap: 8px;
             padding: 10px 16px;
             border-radius: 999px;
-            border: 1px solid rgba(168, 213, 255, 0.3);
-            background: rgba(26, 31, 58, 0.7);
+            border: 1px solid rgba(168, 213, 255, 0.35);
+            background: rgba(26, 31, 58, 0.75);
             color: #a8d5ff;
             text-decoration: none;
             backdrop-filter: blur(12px);
-            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.4);
             transition: all 0.3s ease;
             font-size: 0.95em;
         }
@@ -88,8 +80,8 @@
         .back-btn:hover {
             transform: translateY(-2px);
             border-color: rgba(168, 213, 255, 0.6);
-            background: rgba(26, 31, 58, 0.85);
-            box-shadow: 0 8px 28px rgba(107, 163, 212, 0.2);
+            background: rgba(26, 31, 58, 0.9);
+            box-shadow: 0 8px 28px rgba(107, 163, 212, 0.3);
             color: #ffffff;
         }
         
@@ -98,9 +90,9 @@
             position: relative;
             padding: 50px 0;
             text-align: center;
-            border-bottom: 1px solid rgba(168, 213, 255, 0.15);
-            background: rgba(10, 14, 39, 0.75);
-            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(168, 213, 255, 0.2);
+            background: rgba(10, 14, 39, 0.8);
+            backdrop-filter: blur(20px);
         }
         
         header h1 {
@@ -133,16 +125,17 @@
         .daily-article {
             margin-bottom: 70px;
             padding: 45px 50px;
-            background: rgba(26, 31, 58, 0.65);
-            border: 1px solid rgba(168, 213, 255, 0.25);
+            background: rgba(26, 31, 58, 0.75);
+            border: 1px solid rgba(168, 213, 255, 0.3);
             border-radius: 12px;
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
             transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
         
         .daily-article:hover {
-            border-color: rgba(168, 213, 255, 0.5);
-            box-shadow: 0 12px 40px rgba(107, 163, 212, 0.15);
+            border-color: rgba(168, 213, 255, 0.55);
+            box-shadow: 0 12px 40px rgba(107, 163, 212, 0.2);
             transform: translateY(-2px);
         }
         
@@ -164,14 +157,14 @@
         .daily-article p {
             line-height: 1.9;
             margin-bottom: 20px;
-            color: #c8d8e8;
+            color: #d0e0f0;
             letter-spacing: 0.3px;
         }
         
         .article-link {
             display: inline-block;
             padding: 14px 38px;
-            background: linear-gradient(135deg, rgba(107, 163, 212, 0.8), rgba(90, 146, 195, 0.8));
+            background: linear-gradient(135deg, rgba(107, 163, 212, 0.85), rgba(90, 146, 195, 0.85));
             color: white;
             text-decoration: none;
             border-radius: 50px;
@@ -179,14 +172,15 @@
             font-weight: 500;
             letter-spacing: 1px;
             margin-top: 15px;
-            border: 1px solid rgba(168, 213, 255, 0.3);
+            border: 1px solid rgba(168, 213, 255, 0.4);
+            box-shadow: 0 4px 15px rgba(107, 163, 212, 0.3);
         }
         
         .article-link:hover {
-            background: linear-gradient(135deg, rgba(90, 146, 195, 0.9), rgba(74, 130, 179, 0.9));
+            background: linear-gradient(135deg, rgba(90, 146, 195, 0.95), rgba(74, 130, 179, 0.95));
             transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(107, 163, 212, 0.35);
-            border-color: rgba(168, 213, 255, 0.5);
+            box-shadow: 0 10px 30px rgba(107, 163, 212, 0.4);
+            border-color: rgba(168, 213, 255, 0.6);
         }
         
         /* 社群介绍和QQ群 */
@@ -199,16 +193,17 @@
         
         .section-card {
             padding: 45px;
-            background: rgba(26, 31, 58, 0.65);
-            border: 1px solid rgba(168, 213, 255, 0.25);
+            background: rgba(26, 31, 58, 0.75);
+            border: 1px solid rgba(168, 213, 255, 0.3);
             border-radius: 12px;
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
             transition: all 0.4s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
         
         .section-card:hover {
-            border-color: rgba(168, 213, 255, 0.5);
-            box-shadow: 0 12px 40px rgba(107, 163, 212, 0.15);
+            border-color: rgba(168, 213, 255, 0.55);
+            box-shadow: 0 12px 40px rgba(107, 163, 212, 0.2);
             transform: translateY(-2px);
         }
         
@@ -222,7 +217,7 @@
         
         .section-card p {
             line-height: 1.9;
-            color: #c8d8e8;
+            color: #d0e0f0;
             margin-bottom: 18px;
             letter-spacing: 0.3px;
         }
@@ -233,15 +228,15 @@
             gap: 18px;
             margin-top: 28px;
             padding: 15px;
-            background: rgba(107, 163, 212, 0.1);
+            background: rgba(107, 163, 212, 0.15);
             border-radius: 8px;
-            border: 1px solid rgba(168, 213, 255, 0.2);
+            border: 1px solid rgba(168, 213, 255, 0.25);
         }
         
         .qq-icon {
             width: 48px;
             height: 48px;
-            background: linear-gradient(135deg, rgba(107, 163, 212, 0.8), rgba(90, 146, 195, 0.8));
+            background: linear-gradient(135deg, rgba(107, 163, 212, 0.85), rgba(90, 146, 195, 0.85));
             border-radius: 10px;
             display: flex;
             align-items: center;
@@ -250,6 +245,7 @@
             color: white;
             font-weight: 600;
             flex-shrink: 0;
+            box-shadow: 0 2px 10px rgba(107, 163, 212, 0.3);
         }
         
         .qq-link {
@@ -288,18 +284,19 @@
         
         .drama-card {
             padding: 40px 35px;
-            background: rgba(26, 31, 58, 0.65);
-            border: 1px solid rgba(168, 213, 255, 0.25);
+            background: rgba(26, 31, 58, 0.75);
+            border: 1px solid rgba(168, 213, 255, 0.3);
             border-radius: 12px;
-            backdrop-filter: blur(15px);
+            backdrop-filter: blur(20px);
             text-align: center;
             transition: all 0.4s ease;
             cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
         }
         
         .drama-card:hover {
-            border-color: rgba(168, 213, 255, 0.5);
-            box-shadow: 0 15px 45px rgba(107, 163, 212, 0.2);
+            border-color: rgba(168, 213, 255, 0.55);
+            box-shadow: 0 15px 45px rgba(107, 163, 212, 0.25);
             transform: translateY(-8px);
         }
         
@@ -307,12 +304,13 @@
             width: 75px;
             height: 75px;
             margin: 0 auto 22px;
-            background: linear-gradient(135deg, rgba(107, 163, 212, 0.8), rgba(90, 146, 195, 0.8));
+            background: linear-gradient(135deg, rgba(107, 163, 212, 0.85), rgba(90, 146, 195, 0.85));
             border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2.3em;
+            box-shadow: 0 4px 15px rgba(107, 163, 212, 0.3);
         }
         
         .drama-card h3 {
@@ -324,7 +322,7 @@
         }
         
         .drama-card p {
-            color: #a8b8c8;
+            color: #b0c0d0;
             margin-bottom: 26px;
             font-size: 0.93em;
             line-height: 1.7;
@@ -333,32 +331,32 @@
         .drama-link {
             display: inline-block;
             padding: 11px 32px;
-            background: rgba(107, 163, 212, 0.2);
+            background: rgba(107, 163, 212, 0.25);
             color: #a8d5ff;
             text-decoration: none;
             border-radius: 50px;
             transition: all 0.3s ease;
-            border: 1px solid rgba(168, 213, 255, 0.4);
+            border: 1px solid rgba(168, 213, 255, 0.45);
             font-weight: 500;
             font-size: 0.95em;
         }
         
         .drama-link:hover {
-            background: rgba(107, 163, 212, 0.4);
+            background: rgba(107, 163, 212, 0.45);
             border-color: rgba(168, 213, 255, 0.7);
             transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(107, 163, 212, 0.25);
+            box-shadow: 0 5px 20px rgba(107, 163, 212, 0.3);
         }
         
         /* 页脚 */
         footer {
             text-align: center;
-            padding: 35px 30px 30px;
-            border-top: 1px solid rgba(168, 213, 255, 0.15);
+            padding: 35px 30px 28px;
+            border-top: 1px solid rgba(168, 213, 255, 0.2);
             color: #7a8a9e;
             margin-top: 60px;
-            background: rgba(10, 14, 39, 0.75);
-            backdrop-filter: blur(15px);
+            background: rgba(10, 14, 39, 0.85);
+            backdrop-filter: blur(20px);
         }
         
         /* 社交链接容器 */
@@ -377,8 +375,8 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
-            background: rgba(107, 163, 212, 0.15);
-            border: 1px solid rgba(168, 213, 255, 0.25);
+            background: rgba(107, 163, 212, 0.2);
+            border: 1px solid rgba(168, 213, 255, 0.3);
             color: #a8d5ff;
             text-decoration: none;
             transition: all 0.3s ease;
@@ -386,11 +384,11 @@
         }
         
         .social-link:hover {
-            background: rgba(107, 163, 212, 0.3);
-            border-color: rgba(168, 213, 255, 0.5);
+            background: rgba(107, 163, 212, 0.4);
+            border-color: rgba(168, 213, 255, 0.6);
             color: #ffffff;
             transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(107, 163, 212, 0.3);
+            box-shadow: 0 5px 20px rgba(107, 163, 212, 0.35);
         }
         
         .social-link svg {
@@ -398,16 +396,13 @@
             height: 18px;
         }
         
-        /* 版权信息 - 缩小字体 */
+        /* 版权信息 - 显著缩小 */
         .copyright {
-            margin-top: 15px;
-            font-size: 0.78em;
-            color: #6a7a8e;
+            margin-top: 12px;
+            font-size: 0.72em;
+            color: #5a6a7e;
             letter-spacing: 0.3px;
-        }
-        
-        .copyright small {
-            opacity: 0.85;
+            opacity: 0.8;
         }
         
         /* 响应式设计 */
@@ -451,6 +446,10 @@
             .social-link {
                 width: 38px;
                 height: 38px;
+            }
+            
+            .copyright {
+                font-size: 0.7em;
             }
         }
         
@@ -599,9 +598,7 @@
             </nav>
             
             <!-- 版权信息 -->
-            <p class="copyright">
-                <small>© 2025 狂客·银河 版权所有</small>
-            </p>
+            <p class="copyright">© 2025 狂客·银河 版权所有</p>
         </div>
     </footer>
     
