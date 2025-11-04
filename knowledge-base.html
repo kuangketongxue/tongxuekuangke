@@ -19,17 +19,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- WebP支持检测 -->
-    <script>
-        (function() {
-            var webP = new Image();
-            webP.src = 'data:image/webp;base64,UklGRjoAAABXRUJQVlA4IC4AAACyAgCdASoCAAIALmk0mk0iIiIiIgBoSygABc6WWgAA/veff/0PP8bA//LwYAAA';
-            webP.onload = webP.onerror = function() {
-                if (webP.height !== 2) {
-                    document.documentElement.classList.add('no-webp');
-                }
-            };
-        })();
-    </script>
+   
     <style>
         /* ==================== CSS变量系统 ==================== */
         :root {
@@ -114,7 +104,7 @@
             rgba(0, 0, 0, 0.25) 50%,
             rgba(0, 0, 0, 0.35) 100%),
         /* 背景图片 */
-        url('image/home.jpg');
+        url('https://raw.githubusercontent.com/kuangketongxue/tongxuekuangke/main/image/home.jpg');
     /* 背景定位优化 */
     background-position: center center;
     background-size: cover;
