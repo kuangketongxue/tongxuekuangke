@@ -57,25 +57,30 @@
             --font-serif: 'Noto Serif SC', serif;
             --font-sans: 'Noto Sans SC', sans-serif;
         }
+
         /* ==================== 基础重置 ==================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         html {
             font-size: 16px;
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
         }
+
         body {
             font-family: var(--font-sans);
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.8;
             overflow-x: hidden;
+            position: relative;
         }
-        /* ==================== 背景图片区域 ==================== */
+
+        /* ==================== 背景图片区域（强化版）==================== */
         .hero-background {
             position: fixed;
             top: 0;
@@ -83,28 +88,87 @@
             width: 100%;
             height: 100vh;
             z-index: 0;
-            background: linear-gradient(180deg,
-                rgba(0, 0, 0, 0.7) 0%,
-                rgba(0, 0, 0, 0.85) 50%,
-                rgba(0, 0, 0, 0.95) 100%),
-                url('img/hero-bg.jpg') center/cover no-repeat;
-            opacity: 0.4;
+            overflow: hidden;
         }
+
+        /* 背景图片主体 */
+        .hero-background::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* ⭐ 在这里修改你的背景图片URL ⭐ */
+            background: url('img/1.jpg') center/cover no-repeat;
+            /* 备用图片示例（可选） */
+            /* background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80') center/cover no-repeat; */
+            filter: brightness(0.4) contrast(1.1);
+            animation: slowZoom 20s ease-in-out infinite alternate;
+        }
+
+        /* 渐变遮罩层 */
+        .hero-background::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                180deg,
+                rgba(0, 0, 0, 0.5) 0%,
+                rgba(0, 0, 0, 0.7) 30%,
+                rgba(0, 0, 0, 0.85) 60%,
+                rgba(0, 0, 0, 0.95) 100%
+            );
+            backdrop-filter: blur(2px);
+        }
+
+        /* 背景动画 */
+        @keyframes slowZoom {
+            0% {
+                transform: scale(1);
+            }
+            100% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* 网格纹理叠加 */
+        .hero-background-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
+            background-image: 
+                linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.3;
+            pointer-events: none;
+        }
+
         /* ==================== 顶部声明条 ==================== */
         .top-notice {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(212, 175, 55, 0.08);
+            background: rgba(212, 175, 55, 0.1);
             border-bottom: 1px solid var(--border-gold);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
             z-index: 100;
             padding: 12px 24px;
             text-align: center;
             font-size: 0.875rem;
             color: var(--text-secondary);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
+
         .notice-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -113,10 +177,12 @@
             justify-content: center;
             gap: 12px;
         }
+
         .notice-text {
             color: var(--text-gold);
             font-weight: 500;
         }
+
         .notice-close {
             background: transparent;
             border: 1px solid var(--border-gold);
@@ -131,30 +197,38 @@
             align-items: center;
             justify-content: center;
         }
+
         .notice-close:hover {
-            background: rgba(212, 175, 55, 0.1);
+            background: rgba(212, 175, 55, 0.2);
             transform: rotate(90deg);
         }
+
         .notice-hidden {
             display: none;
         }
+
         /* ==================== 主容器 ==================== */
         .main-wrapper {
             position: relative;
             z-index: 1;
-            padding-top: 48px; /* 为顶部声明留出空间 */
+            padding-top: 48px;
+            min-height: 100vh;
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
         }
+
         /* ==================== 页头 ==================== */
         .site-header {
             text-align: center;
             padding: var(--spacing-2xl) 0;
             margin-bottom: var(--spacing-xl);
+            position: relative;
         }
+
         .site-title {
             font-family: var(--font-serif);
             font-size: clamp(2.5rem, 6vw, 4rem);
@@ -169,13 +243,27 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            animation: titleGlow 3s ease-in-out infinite alternate;
         }
+
+        @keyframes titleGlow {
+            0% {
+                filter: brightness(1);
+            }
+            100% {
+                filter: brightness(1.2);
+            }
+        }
+
         .site-subtitle {
             font-size: 1.125rem;
             color: var(--text-secondary);
             font-weight: 300;
             letter-spacing: 0.2em;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
         }
+
         /* ==================== 分隔线 ==================== */
         .divider {
             width: 80px;
@@ -185,7 +273,9 @@
                 var(--primary-gold) 50%,
                 transparent 100%);
             margin: var(--spacing-xl) auto;
+            box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
+
         /* ==================== 区块标题 ==================== */
         .section-title {
             font-family: var(--font-serif);
@@ -195,14 +285,18 @@
             color: var(--primary-gold);
             margin-bottom: var(--spacing-md);
             letter-spacing: 0.05em;
+            text-shadow: 0 2px 12px rgba(212, 175, 55, 0.3);
         }
+
         .section-desc {
             text-align: center;
             color: var(--text-muted);
             font-size: 0.9375rem;
             margin-bottom: var(--spacing-lg);
             font-weight: 300;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
         }
+
         /* ==================== 卡片网格 ==================== */
         .card-grid {
             display: grid;
@@ -210,9 +304,10 @@
             gap: var(--spacing-md);
             margin-bottom: var(--spacing-2xl);
         }
-        /* ==================== 通用卡片 ==================== */
+
+        /* ==================== 通用卡片（增强版）==================== */
         .card {
-            background: var(--bg-card);
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid var(--border-white);
             border-radius: var(--radius);
             padding: var(--spacing-lg);
@@ -224,7 +319,11 @@
             display: flex;
             flex-direction: column;
             min-height: 280px;
+            backdrop-filter: blur(10px) saturate(150%);
+            -webkit-backdrop-filter: blur(10px) saturate(150%);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
         }
+
         .card::before {
             content: '';
             position: absolute;
@@ -239,34 +338,65 @@
             opacity: 0;
             transition: var(--transition);
         }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top left, rgba(212, 175, 55, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
         .card:hover {
             border-color: var(--border-gold);
-            background: rgba(212, 175, 55, 0.03);
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-gold);
+            background: rgba(212, 175, 55, 0.08);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 32px rgba(212, 175, 55, 0.2), 0 0 20px rgba(212, 175, 55, 0.1);
         }
+
         .card:hover::before {
             opacity: 1;
         }
+
+        .card:hover::after {
+            opacity: 1;
+        }
+
         .card-icon {
             font-size: 2.5rem;
             margin-bottom: var(--spacing-sm);
             display: block;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+            z-index: 1;
+            position: relative;
         }
+
         .card-title {
             font-family: var(--font-serif);
             font-size: 1.25rem;
             font-weight: 600;
             margin-bottom: var(--spacing-xs);
             color: var(--text-primary);
+            z-index: 1;
+            position: relative;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
+
         .card-desc {
             font-size: 0.9375rem;
             color: var(--text-secondary);
             line-height: 1.7;
             margin-bottom: auto;
             font-weight: 300;
+            z-index: 1;
+            position: relative;
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
         }
+
         .card-badge {
             display: inline-block;
             margin-top: var(--spacing-sm);
@@ -277,15 +407,22 @@
             color: var(--text-gold);
             font-weight: 500;
             align-self: flex-start;
+            z-index: 1;
+            position: relative;
+            backdrop-filter: blur(5px);
+            background: rgba(212, 175, 55, 0.05);
         }
+
         /* ==================== 特色卡片 ==================== */
         .card-featured {
             border: 1px solid var(--border-gold);
-            background: rgba(212, 175, 55, 0.05);
+            background: rgba(212, 175, 55, 0.08);
         }
+
         .card-featured .card-title {
             color: var(--primary-gold);
         }
+
         .featured-label {
             position: absolute;
             top: var(--spacing-sm);
@@ -297,31 +434,41 @@
             font-size: 0.75rem;
             font-weight: 600;
             letter-spacing: 0.05em;
+            z-index: 2;
+            box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
         }
+
         /* ==================== 区块间距 ==================== */
         .section {
             margin-bottom: var(--spacing-2xl);
         }
+
         /* ==================== 页脚 ==================== */
         .site-footer {
             border-top: 1px solid var(--border-white);
             padding: var(--spacing-xl) 0;
             text-align: center;
             margin-top: var(--spacing-2xl);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
         }
+
         .footer-title {
             font-family: var(--font-serif);
             font-size: 1.5rem;
             color: var(--primary-gold);
             margin-bottom: var(--spacing-md);
             font-weight: 600;
+            text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
         }
+
         .social-links {
             display: flex;
             justify-content: center;
             gap: var(--spacing-md);
             margin-bottom: var(--spacing-md);
         }
+
         .social-link {
             width: 48px;
             height: 48px;
@@ -334,48 +481,72 @@
             text-decoration: none;
             font-size: 1.25rem;
             transition: var(--transition);
+            backdrop-filter: blur(5px);
+            background: rgba(255, 255, 255, 0.03);
         }
+
         .social-link:hover {
             border-color: var(--primary-gold);
             color: var(--primary-gold);
             transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
         }
+
         .copyright {
             color: var(--text-muted);
             font-size: 0.875rem;
             font-weight: 300;
         }
+
         /* ==================== 响应式 ==================== */
         @media (max-width: 768px) {
             :root {
                 --spacing-xl: 48px;
                 --spacing-2xl: 64px;
             }
+
             .site-header {
                 padding: var(--spacing-xl) 0;
             }
+
             .card-grid {
                 grid-template-columns: 1fr;
             }
+
             .notice-content {
                 font-size: 0.8125rem;
             }
+
+            .card:hover {
+                transform: translateY(-4px) scale(1.01);
+            }
         }
-        /* ==================== 滚动条 ==================== */
+
+        /* ==================== 滚动条（美化版）==================== */
         ::-webkit-scrollbar {
-            width: 8px;
+            width: 10px;
         }
+
         ::-webkit-scrollbar-track {
             background: var(--bg-secondary);
+            border-left: 1px solid rgba(212, 175, 55, 0.1);
         }
+
         ::-webkit-scrollbar-thumb {
-            background: var(--primary-gold);
-            border-radius: 4px;
+            background: linear-gradient(180deg, var(--primary-gold), var(--secondary-gold));
+            border-radius: 5px;
+            border: 2px solid var(--bg-secondary);
         }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-gold);
+        }
+
         /* ==================== 打印样式 ==================== */
         @media print {
             .top-notice,
-            .hero-background {
+            .hero-background,
+            .hero-background-grid {
                 display: none;
             }
             body {
@@ -383,18 +554,39 @@
                 color: black;
             }
         }
+
+        /* ==================== 加载动画 ==================== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section {
+            animation: fadeInUp 0.8s ease-out;
+        }
     </style>
 </head>
 <body>
     <!-- 背景图片 -->
     <div class="hero-background"></div>
+    
+    <!-- 网格纹理 -->
+    <div class="hero-background-grid"></div>
+
     <!-- 顶部声明 -->
     <div class="top-notice" id="topNotice">
         <div class="notice-content">
-            <span class="notice-text">⚠️ 内容为AI生成演示，服务尚未正式上架</span>
+            <span class="notice-text">⚠️ 内容为AI生成演示,服务尚未正式上架</span>
             <button class="notice-close" id="noticeClose" aria-label="关闭">×</button>
         </div>
     </div>
+
     <!-- 主内容 -->
     <div class="main-wrapper">
         <div class="container">
@@ -403,6 +595,7 @@
                 <h1 class="site-title">狂客空间</h1>
                 <p class="site-subtitle">AI · 学习 · 定制</p>
             </header>
+
             <!-- 探索区 -->
             <section class="section">
                 <h2 class="section-title">发现</h2>
@@ -443,14 +636,16 @@
                         <h3 class="card-title">效率工具</h3>
                         <p class="card-desc">精选生产力工具集</p>
                     </a>
-                     <a href="knowledge-base.html" class="card">
+                    <a href="knowledge-base.html" class="card">
                         <span class="card-icon">⚡</span>
                         <h3 class="card-title">弄潮先锋营</h3>
-                       <p class="card-desc">前沿知识库与智能检索</p>
+                        <p class="card-desc">前沿知识库与智能检索</p>
                     </a>
                 </div>
             </section>
+
             <div class="divider"></div>
+
             <!-- 会员区 -->
             <section class="section">
                 <h2 class="section-title">精英会</h2>
@@ -488,7 +683,9 @@
                     </a>
                 </div>
             </section>
+
             <div class="divider"></div>
+
             <!-- 定制区 -->
             <section class="section">
                 <h2 class="section-title">私享定制</h2>
@@ -497,13 +694,13 @@
                     <a href="ppt-custom.html" class="card">
                         <span class="card-icon">◈</span>
                         <h3 class="card-title">PPT定制</h3>
-                        <p class="card-desc">专业设计，48小时交付<br>商务汇报 / 教学课件 / 产品发布</p>
+                        <p class="card-desc">专业设计,48小时交付<br>商务汇报 / 教学课件 / 产品发布</p>
                         <span class="card-badge">¥2,999起</span>
                     </a>
                     <a href="video-custom.html" class="card">
                         <span class="card-icon">◆</span>
                         <h3 class="card-title">视频定制</h3>
-                        <p class="card-desc">专业制作，5天交付<br>宣传片 / 产品演示 / 课程录制</p>
+                        <p class="card-desc">专业制作,5天交付<br>宣传片 / 产品演示 / 课程录制</p>
                         <span class="card-badge">¥4,999起</span>
                     </a>
                     <a href="package-custom.html" class="card card-featured">
@@ -515,6 +712,7 @@
                     </a>
                 </div>
             </section>
+
             <!-- 页脚 -->
             <footer class="site-footer">
                 <h3 class="footer-title">联系我们</h3>
@@ -551,8 +749,10 @@
             </footer>
         </div>
     </div>
+
     <script>
         'use strict';
+
         // 顶部声明管理
         class NoticeManager {
             constructor() {
@@ -560,22 +760,28 @@
                 this.closeBtn = document.getElementById('noticeClose');
                 this.init();
             }
+
             init() {
                 if (!this.notice || !this.closeBtn) return;
+
                 // 检查是否已关闭
                 if (localStorage.getItem('noticeClose') === 'true') {
                     this.hide();
                     return;
                 }
+
                 // 绑定关闭事件
                 this.closeBtn.addEventListener('click', () => this.close());
+
                 // 10秒后自动隐藏
                 setTimeout(() => this.close(), 10000);
             }
+
             close() {
                 localStorage.setItem('noticeClose', 'true');
                 this.hide();
             }
+
             hide() {
                 if (this.notice) {
                     this.notice.classList.add('notice-hidden');
@@ -583,9 +789,11 @@
                 }
             }
         }
+
         // 初始化
         document.addEventListener('DOMContentLoaded', () => {
             new NoticeManager();
+
             // 平滑滚动
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
@@ -599,6 +807,7 @@
                     }
                 });
             });
+
             // 外部链接新窗口打开
             document.querySelectorAll('a[href^="http"]').forEach(link => {
                 if (!link.hasAttribute('target')) {
@@ -606,13 +815,50 @@
                     link.setAttribute('rel', 'noopener noreferrer');
                 }
             });
+
+            // 卡片入场动画
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.6s ease-out forwards';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            document.querySelectorAll('.card').forEach(card => {
+                card.style.opacity = '0';
+                observer.observe(card);
+            });
         });
+
         // 性能监控
         window.addEventListener('load', () => {
             if ('performance' in window) {
                 const perfData = window.performance.timing;
                 const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
                 console.log(`页面加载时间: ${pageLoadTime}ms`);
+            }
+        });
+
+        // 背景视差效果
+        let ticking = false;
+        window.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const scrolled = window.pageYOffset;
+                    const background = document.querySelector('.hero-background');
+                    if (background) {
+                        background.style.transform = `translateY(${scrolled * 0.5}px)`;
+                    }
+                    ticking = false;
+                });
+                ticking = true;
             }
         });
     </script>
