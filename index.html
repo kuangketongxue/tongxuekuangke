@@ -95,7 +95,7 @@
             backface-visibility: hidden;
         }
 
-        /* 背景图片主体 - 增强亮度 */
+        /* 背景图片主体 - 固定路径并增强亮度 */
         .hero-background::before {
             content: '';
             position: absolute;
@@ -103,12 +103,10 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* ⭐ 在这里修改你的背景图片URL ⭐ */
+            /* 固定背景图片路径 */
             background: url('image/00294682dfcd997e226623d058d51aab.png') center/cover no-repeat;
-            /* 备用图片示例 */
-            /* background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&q=80') center/cover no-repeat; */
             
-            /* 强化亮度：调整brightness从0.4提升到0.7 */
+            /* 强化亮度：从0.4提升到0.7，增加对比度和饱和度 */
             filter: brightness(0.7) contrast(1.15) saturate(1.1);
             
             /* 性能优化 */
@@ -800,7 +798,7 @@
             init() {
                 if (!this.notice || !this.closeBtn) return;
 
-                // 检查是否已关闭
+                // 检查是否已关闭（使用sessionStorage）
                 if (sessionStorage.getItem('noticeClose') === 'true') {
                     this.hide();
                     return;
@@ -938,40 +936,20 @@
                 
                 // 输出核心Web指标
                 if ('PerformanceObserver' in window) {
-                    const observer = new PerformanceObserver((list) => {
-                        for (const entry of list.getEntries()) {
-                            console.log(`📊 ${entry.name}: ${entry.value.toFixed(2)}ms`);
-                        }
-                    });
-                    observer.observe({ entryTypes: ['paint', 'largest-contentful-paint'] });
+                    try {
+                        const observer = new PerformanceObserver((list) => {
+                            for (const entry of list.getEntries()) {
+                                console.log(`📊 ${entry.name}: ${entry.value.toFixed(2)}ms`);
+                            }
+                        });
+                        observer.observe({ entryTypes: ['paint', 'largest-contentful-paint'] });
+                    } catch (e) {
+                        // 部分浏览器可能不支持某些指标
+                        console.log('性能监控部分不可用');
+                    }
                 }
             }
         });
-
-        // 预加载关键资源
-        if ('IntersectionObserver' in window) {
-            const lazyLoadConfig = {
-                rootMargin: '50px 0px',
-                threshold: 0.01
-            };
-
-            const lazyLoad = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const img = entry.target;
-                        if (img.dataset.src) {
-                            img.src = img.dataset.src;
-                            img.removeAttribute('data-src');
-                            lazyLoad.unobserve(img);
-                        }
-                    }
-                });
-            }, lazyLoadConfig);
-
-            document.querySelectorAll('img[data-src]').forEach(img => {
-                lazyLoad.observe(img);
-            });
-        }
     </script>
 </body>
 </html>
