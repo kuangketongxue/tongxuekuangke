@@ -572,6 +572,49 @@
             font-size: 0.875rem;
             font-weight: 300;
         }
+        /* ==================== 高亮显示 ==================== */
+        .highlight {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--primary-gold);
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+        /* ==================== 返回顶部按钮 ==================== */
+        .back-to-top {
+            position: fixed;
+            right: 32px;
+            bottom: 32px;
+            width: 56px;
+            height: 56px;
+            background: var(--primary-gold);
+            border: none;
+            border-radius: 50%;
+            color: var(--primary-black);
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all var(--transition);
+            box-shadow: var(--shadow-gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .back-to-top:hover {
+            background: var(--light-gold);
+            transform: translateY(-4px);
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3);
+        }
+        .back-to-top:active {
+            transform: translateY(-2px);
+        }
         /* ==================== 响应式 ==================== */
         @media (max-width: 768px) {
             :root {
@@ -612,6 +655,13 @@
             .knowledge-date {
                 margin-left: 0;
             }
+            .back-to-top {
+                right: 16px;
+                bottom: 16px;
+                width: 48px;
+                height: 48px;
+                font-size: 1.25rem;
+            }
         }
         /* ==================== 滚动条 ==================== */
         ::-webkit-scrollbar {
@@ -624,25 +674,20 @@
             background: var(--primary-gold);
             border-radius: 4px;
         }
-        /* ==================== 高亮显示 ==================== */
-        .highlight {
-            background: rgba(212, 175, 55, 0.2);
-            color: var(--primary-gold);
-            padding: 2px 4px;
-            border-radius: 2px;
-        }
     </style>
 </head>
 <body>
     <!-- 背景图片 -->
     <div class="hero-background"></div>
+    
     <!-- 顶部声明 -->
     <div class="top-notice" id="topNotice">
         <div class="notice-content">
-            <span class="notice-text">⚡ 知识库持续更新中，欢迎探索前沿知识</span>
+            <span class="notice-text">⚡ 知识库持续更新中,欢迎探索前沿知识</span>
             <button class="notice-close" id="noticeClose" aria-label="关闭">×</button>
         </div>
     </div>
+    
     <!-- 主内容 -->
     <div class="main-wrapper">
         <div class="container">
@@ -655,6 +700,7 @@
                 <h1 class="site-title">弄潮先锋营</h1>
                 <p class="site-subtitle">前沿知识 · 智能检索</p>
             </header>
+            
             <!-- 统计面板 -->
             <section class="stats-panel">
                 <div class="stat-card">
@@ -674,6 +720,7 @@
                     <div class="stat-date" id="lastUpdateFull"></div>
                 </div>
             </section>
+            
             <!-- 搜索区域 -->
             <section class="search-section">
                 <div class="search-container">
@@ -692,31 +739,35 @@
                     </div>
                 </div>
             </section>
+            
             <!-- 工具栏 -->
             <div class="toolbar">
                 <div class="sort-controls">
-                    <span class="sort-label">排序：</span>
+                    <span class="sort-label">排序:</span>
                     <button class="sort-btn active" data-sort="date">最新</button>
                     <button class="sort-btn" data-sort="inspiration">启发值</button>
                 </div>
                 <div class="inspiration-filter">
-                    <span class="inspiration-label">启发值筛选：</span>
+                    <span class="inspiration-label">启发值筛选:</span>
                     <button class="inspiration-btn active" data-stars="all">全部</button>
                     <button class="inspiration-btn" data-stars="5">⭐5星</button>
                     <button class="inspiration-btn" data-stars="4">⭐4星+</button>
                     <button class="inspiration-btn" data-stars="3">⭐3星+</button>
                 </div>
             </div>
+            
             <!-- 分类过滤 -->
             <section class="filter-section" id="filterSection">
                 <!-- 动态生成分类按钮 -->
             </section>
+            
             <!-- 知识点列表 -->
             <section class="knowledge-list" id="knowledgeList">
                 <div class="loading">
                     <div class="loading-spinner"></div>
                 </div>
             </section>
+            
             <!-- 页脚 -->
             <footer class="site-footer">
                 <h3 class="footer-title">联系我们</h3>
@@ -753,6 +804,12 @@
             </footer>
         </div>
     </div>
+
+    <!-- 返回顶部按钮 -->
+    <button class="back-to-top" id="backToTop" aria-label="返回顶部">
+        ↑
+    </button>
+
     <script>
         'use strict';
         // ==================== 知识库管理类 ====================
@@ -804,7 +861,6 @@
             updateStats() {
                 // 知识点总数
                 this.totalKnowledge.textContent = this.data.length;
-                
                 // 计算平均启发值
                 if (this.data.length > 0) {
                     const totalInspiration = this.data.reduce((sum, item) => {
@@ -815,13 +871,11 @@
                 } else {
                     this.avgInspiration.textContent = '0';
                 }
-                
                 // 最新更新时间
                 const dates = this.data
                     .map(item => item.date)
                     .filter(Boolean)
                     .sort((a, b) => new Date(b) - new Date(a));
-                
                 if (dates.length > 0) {
                     const latestDate = new Date(dates[0]);
                     this.lastUpdate.textContent = this.formatShortDate(latestDate);
@@ -1095,6 +1149,31 @@
         document.addEventListener('DOMContentLoaded', () => {
             new NoticeManager();
             new KnowledgeBase();
+            
+            // 返回顶部按钮
+            const backToTopBtn = document.getElementById('backToTop');
+            
+            // 监听滚动事件
+            let scrollTimeout;
+            window.addEventListener('scroll', () => {
+                clearTimeout(scrollTimeout);
+                scrollTimeout = setTimeout(() => {
+                    if (window.pageYOffset > 300) {
+                        backToTopBtn.classList.add('visible');
+                    } else {
+                        backToTopBtn.classList.remove('visible');
+                    }
+                }, 100);
+            });
+            
+            // 点击返回顶部
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+            
             // 平滑滚动
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
