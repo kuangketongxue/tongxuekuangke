@@ -76,7 +76,7 @@
             overflow-x: hidden;
             position: relative;
         }
-        /* ==================== 背景图片区域（固定版本）==================== */
+        /* ==================== 背景图片区域（最大亮度版本）==================== */
         .hero-background {
             position: fixed;
             top: 0;
@@ -86,7 +86,7 @@
             z-index: 0;
             overflow: hidden;
         }
-        /* 背景图片主体 - 完全固定，不再跟随滚动 */
+        /* 背景图片主体 - 最大亮度设置 */
         .hero-background::before {
             content: '';
             position: absolute;
@@ -96,12 +96,12 @@
             height: 100%;
             /* 固定背景图片路径 */
             background: url('image/00294682dfcd997e226623d058d51aab.png') center/cover no-repeat fixed;
-            /* 强化亮度 */
-            filter: brightness(0.7) contrast(1.15) saturate(1.1);
-            /* 仅保留缩放动画，移除transform */
+            /* 最大化亮度：brightness(1.8) 提升至180%亮度 */
+            filter: brightness(1.8) contrast(1.2) saturate(1.15);
+            /* 仅保留缩放动画 */
             animation: subtleZoom 20s ease-in-out infinite alternate;
         }
-        /* 渐变遮罩层 */
+        /* 轻量级渐变遮罩层 - 减少遮罩透明度以显示更多背景 */
         .hero-background::after {
             content: '';
             position: absolute;
@@ -111,12 +111,12 @@
             height: 100%;
             background: linear-gradient(
                 180deg,
-                rgba(0, 0, 0, 0.35) 0%,
-                rgba(0, 0, 0, 0.5) 30%,
-                rgba(0, 0, 0, 0.65) 60%,
-                rgba(0, 0, 0, 0.8) 100%
+                rgba(0, 0, 0, 0.15) 0%,
+                rgba(0, 0, 0, 0.25) 30%,
+                rgba(0, 0, 0, 0.35) 60%,
+                rgba(0, 0, 0, 0.5) 100%
             );
-            backdrop-filter: blur(1px);
+            backdrop-filter: blur(0.5px);
         }
         /* 背景动画 - 仅使用scale缩放 */
         @keyframes subtleZoom {
@@ -127,7 +127,7 @@
                 transform: scale(1.05);
             }
         }
-        /* 网格纹理叠加 */
+        /* 网格纹理叠加 - 降低不透明度 */
         .hero-background-grid {
             position: fixed;
             top: 0;
@@ -136,10 +136,10 @@
             height: 100vh;
             z-index: 0;
             background-image:
-                linear-gradient(rgba(212, 175, 55, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(212, 175, 55, 0.05) 1px, transparent 1px);
+                linear-gradient(rgba(212, 175, 55, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(212, 175, 55, 0.03) 1px, transparent 1px);
             background-size: 50px 50px;
-            opacity: 0.4;
+            opacity: 0.3;
             pointer-events: none;
         }
         /* ==================== 顶部声明条 ==================== */
