@@ -18,8 +18,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <!-- WebP支持检测 -->
-   
+    
     <style>
         /* ==================== CSS变量系统 ==================== */
         :root {
@@ -82,84 +81,77 @@
             overflow-x: hidden;
         }
 
-        /* ==================== 背景图片区域 - 极致清晰优化 ==================== */
-/* ==================== 背景图片区域 - 极致清晰优化 ==================== */
-.hero-background {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    z-index: 0;
-    /* 核心优化: 图片渲染质量 */
-    image-rendering: -webkit-optimize-contrast;
-    image-rendering: crisp-edges;
-    image-rendering: high-quality;
-    -ms-interpolation-mode: bicubic;
-    /* 背景图片配置 */
-    background:
-        /* 极轻渐变叠加层 - 最大化图片可见度 */
-        linear-gradient(180deg,
-            rgba(0, 0, 0, 0.15) 0%,
-            rgba(0, 0, 0, 0.25) 50%,
-            rgba(0, 0, 0, 0.35) 100%),
-        /* 背景图片 */
-        url('https://raw.githubusercontent.com/kuangketongxue/tongxuekuangke/main/image/home.jpg');
-    /* 背景定位优化 */
-    background-position: center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    /* 整体透明度最大化 */
-    opacity: 1;
-    /* 硬件加速 */
-    transform: translateZ(0);
-    will-change: transform;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-    /* 增强亮度和对比度滤镜 */
-    filter: contrast(1.15) brightness(1.25) saturate(1.1);
-    -webkit-filter: contrast(1.15) brightness(1.25) saturate(1.1);
-}
+        /* ==================== 背景图片区域 - 最亮优化 ==================== */
+        .hero-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
+            /* 核心优化: 图片渲染质量 */
+            image-rendering: -webkit-optimize-contrast;
+            image-rendering: crisp-edges;
+            image-rendering: high-quality;
+            -ms-interpolation-mode: bicubic;
+            /* 背景图片配置 - 极轻叠加层 */
+            background:
+                /* 极轻渐变叠加 - 只保留5%暗角效果 */
+                linear-gradient(180deg,
+                    rgba(0, 0, 0, 0.02) 0%,
+                    rgba(0, 0, 0, 0.05) 50%,
+                    rgba(0, 0, 0, 0.08) 100%),
+                /* 背景图片 */
+                url('https://raw.githubusercontent.com/kuangketongxue/tongxuekuangke/main/image/home.jpg');
+            /* 背景定位优化 */
+            background-position: center center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            /* 完全不透明 */
+            opacity: 1;
+            /* 硬件加速 */
+            transform: translateZ(0);
+            will-change: transform;
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+            /* 最大亮度优化滤镜 */
+            filter: contrast(1.2) brightness(1.5) saturate(1.15);
+            -webkit-filter: contrast(1.2) brightness(1.5) saturate(1.15);
+        }
 
-/* WebP格式支持 */
-.hero-background {
-    background-image:
-        linear-gradient(180deg,
-            rgba(0, 0, 0, 0.15) 0%,
-            rgba(0, 0, 0, 0.25) 50%,
-            rgba(0, 0, 0, 0.35) 100%),
-        url('image/home.webp');
-}
+        /* WebP格式支持 */
+        .hero-background {
+            background-image:
+                linear-gradient(180deg,
+                    rgba(0, 0, 0, 0.02) 0%,
+                    rgba(0, 0, 0, 0.05) 50%,
+                    rgba(0, 0, 0, 0.08) 100%),
+                url('image/home.webp');
+        }
 
-.no-webp .hero-background {
-    background-image:
-        linear-gradient(180deg,
-            rgba(0, 0, 0, 0.15) 0%,
-            rgba(0, 0, 0, 0.25) 50%,
-            rgba(0, 0, 0, 0.35) 100%),
-        url('image/home.jpg');
-}
+        .no-webp .hero-background {
+            background-image:
+                linear-gradient(180deg,
+                    rgba(0, 0, 0, 0.02) 0%,
+                    rgba(0, 0, 0, 0.05) 50%,
+                    rgba(0, 0, 0, 0.08) 100%),
+                url('image/home.jpg');
+        }
 
-/* 移除锐化层以避免过度处理 */
-.hero-background::before {
-    display: none;
-}
-
-/* 高DPI屏幕优化 */
-@media
-    (-webkit-min-device-pixel-ratio: 2),
-    (min-resolution: 192dpi) {
-    .hero-background {
-        background-image:
-            linear-gradient(180deg,
-                rgba(0, 0, 0, 0.15) 0%,
-                rgba(0, 0, 0, 0.25) 50%,
-                rgba(0, 0, 0, 0.35) 100%),
-            url('image/home@2x.jpg');
-    }
-}
-         
+        /* 高DPI屏幕优化 */
+        @media
+            (-webkit-min-device-pixel-ratio: 2),
+            (min-resolution: 192dpi) {
+            .hero-background {
+                background-image:
+                    linear-gradient(180deg,
+                        rgba(0, 0, 0, 0.02) 0%,
+                        rgba(0, 0, 0, 0.05) 50%,
+                        rgba(0, 0, 0, 0.08) 100%),
+                    url('image/646319e1a90b5935aee2d99bf472021f.png');
+            }
+        }
 
         /* ==================== 顶部声明条 ==================== */
         .top-notice {
@@ -775,10 +767,6 @@
                 background-attachment: scroll;
                 background-size: cover;
                 background-position: center center;
-            }
-
-            .hero-background::before {
-                background-attachment: scroll;
             }
 
             .site-header {
