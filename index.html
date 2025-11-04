@@ -57,20 +57,17 @@
             --font-serif: 'Noto Serif SC', serif;
             --font-sans: 'Noto Sans SC', sans-serif;
         }
-
         /* ==================== 基础重置 ==================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         html {
             font-size: 16px;
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
         }
-
         body {
             font-family: var(--font-sans);
             background: var(--bg-primary);
@@ -79,8 +76,7 @@
             overflow-x: hidden;
             position: relative;
         }
-
-        /* ==================== 背景图片区域（强化亮度+性能优化）==================== */
+        /* ==================== 背景图片区域（固定版本）==================== */
         .hero-background {
             position: fixed;
             top: 0;
@@ -89,13 +85,8 @@
             height: 100vh;
             z-index: 0;
             overflow: hidden;
-            /* 性能优化 */
-            will-change: transform;
-            transform: translateZ(0);
-            backface-visibility: hidden;
         }
-
-        /* 背景图片主体 - 固定路径并增强亮度 */
+        /* 背景图片主体 - 完全固定，不再跟随滚动 */
         .hero-background::before {
             content: '';
             position: absolute;
@@ -104,18 +95,13 @@
             width: 100%;
             height: 100%;
             /* 固定背景图片路径 */
-            background: url('image/00294682dfcd997e226623d058d51aab.png') center/cover no-repeat;
-            
-            /* 强化亮度：从0.4提升到0.7，增加对比度和饱和度 */
+            background: url('image/00294682dfcd997e226623d058d51aab.png') center/cover no-repeat fixed;
+            /* 强化亮度 */
             filter: brightness(0.7) contrast(1.15) saturate(1.1);
-            
-            /* 性能优化 */
-            will-change: transform;
-            transform: translateZ(0);
-            animation: slowZoom 20s ease-in-out infinite alternate;
+            /* 仅保留缩放动画，移除transform */
+            animation: subtleZoom 20s ease-in-out infinite alternate;
         }
-
-        /* 渐变遮罩层 - 调整透明度以保留更多亮度 */
+        /* 渐变遮罩层 */
         .hero-background::after {
             content: '';
             position: absolute;
@@ -123,7 +109,6 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* 减少遮罩不透明度，让背景更明亮 */
             background: linear-gradient(
                 180deg,
                 rgba(0, 0, 0, 0.35) 0%,
@@ -132,21 +117,17 @@
                 rgba(0, 0, 0, 0.8) 100%
             );
             backdrop-filter: blur(1px);
-            /* 性能优化 */
-            will-change: opacity;
         }
-
-        /* 背景动画 - 性能优化版本 */
-        @keyframes slowZoom {
+        /* 背景动画 - 仅使用scale缩放 */
+        @keyframes subtleZoom {
             0% {
-                transform: scale(1) translateZ(0);
+                transform: scale(1);
             }
             100% {
-                transform: scale(1.05) translateZ(0);
+                transform: scale(1.05);
             }
         }
-
-        /* 网格纹理叠加 - 增强可见度 */
+        /* 网格纹理叠加 */
         .hero-background-grid {
             position: fixed;
             top: 0;
@@ -160,10 +141,7 @@
             background-size: 50px 50px;
             opacity: 0.4;
             pointer-events: none;
-            /* 性能优化 */
-            will-change: opacity;
         }
-
         /* ==================== 顶部声明条 ==================== */
         .top-notice {
             position: fixed;
@@ -181,7 +159,6 @@
             color: var(--text-secondary);
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
         }
-
         .notice-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -190,12 +167,10 @@
             justify-content: center;
             gap: 12px;
         }
-
         .notice-text {
             color: var(--text-gold);
             font-weight: 500;
         }
-
         .notice-close {
             background: transparent;
             border: 1px solid var(--border-gold);
@@ -210,16 +185,13 @@
             align-items: center;
             justify-content: center;
         }
-
         .notice-close:hover {
             background: rgba(212, 175, 55, 0.2);
             transform: rotate(90deg);
         }
-
         .notice-hidden {
             display: none;
         }
-
         /* ==================== 主容器 ==================== */
         .main-wrapper {
             position: relative;
@@ -227,13 +199,11 @@
             padding-top: 48px;
             min-height: 100vh;
         }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
         }
-
         /* ==================== 页头 ==================== */
         .site-header {
             text-align: center;
@@ -241,7 +211,6 @@
             margin-bottom: var(--spacing-xl);
             position: relative;
         }
-
         .site-title {
             font-family: var(--font-serif);
             font-size: clamp(2.5rem, 6vw, 4rem);
@@ -258,10 +227,7 @@
             background-clip: text;
             text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
             animation: titleGlow 3s ease-in-out infinite alternate;
-            /* 性能优化 */
-            will-change: filter;
         }
-
         @keyframes titleGlow {
             0% {
                 filter: brightness(1) drop-shadow(0 0 20px rgba(212, 175, 55, 0.3));
@@ -270,7 +236,6 @@
                 filter: brightness(1.2) drop-shadow(0 0 30px rgba(212, 175, 55, 0.5));
             }
         }
-
         .site-subtitle {
             font-size: 1.125rem;
             color: var(--text-secondary);
@@ -278,7 +243,6 @@
             letter-spacing: 0.2em;
             text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
         }
-
         /* ==================== 分隔线 ==================== */
         .divider {
             width: 80px;
@@ -290,7 +254,6 @@
             margin: var(--spacing-xl) auto;
             box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
         }
-
         /* ==================== 区块标题 ==================== */
         .section-title {
             font-family: var(--font-serif);
@@ -302,7 +265,6 @@
             letter-spacing: 0.05em;
             text-shadow: 0 2px 12px rgba(212, 175, 55, 0.3);
         }
-
         .section-desc {
             text-align: center;
             color: var(--text-muted);
@@ -311,7 +273,6 @@
             font-weight: 300;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
         }
-
         /* ==================== 卡片网格 ==================== */
         .card-grid {
             display: grid;
@@ -319,8 +280,7 @@
             gap: var(--spacing-md);
             margin-bottom: var(--spacing-2xl);
         }
-
-        /* ==================== 通用卡片（性能优化版）==================== */
+        /* ==================== 通用卡片 ==================== */
         .card {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid var(--border-white);
@@ -337,11 +297,7 @@
             backdrop-filter: blur(10px) saturate(150%);
             -webkit-backdrop-filter: blur(10px) saturate(150%);
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-            /* 性能优化 */
-            will-change: transform, box-shadow;
-            transform: translateZ(0);
         }
-
         .card::before {
             content: '';
             position: absolute;
@@ -356,7 +312,6 @@
             opacity: 0;
             transition: var(--transition);
         }
-
         .card::after {
             content: '';
             position: absolute;
@@ -368,22 +323,18 @@
             opacity: 0;
             transition: var(--transition);
         }
-
         .card:hover {
             border-color: var(--border-gold);
             background: rgba(212, 175, 55, 0.1);
-            transform: translateY(-8px) scale(1.02) translateZ(0);
+            transform: translateY(-8px) scale(1.02);
             box-shadow: 0 12px 32px rgba(212, 175, 55, 0.25), 0 0 20px rgba(212, 175, 55, 0.15);
         }
-
         .card:hover::before {
             opacity: 1;
         }
-
         .card:hover::after {
             opacity: 1;
         }
-
         .card-icon {
             font-size: 2.5rem;
             margin-bottom: var(--spacing-sm);
@@ -392,7 +343,6 @@
             z-index: 1;
             position: relative;
         }
-
         .card-title {
             font-family: var(--font-serif);
             font-size: 1.25rem;
@@ -403,7 +353,6 @@
             position: relative;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
         }
-
         .card-desc {
             font-size: 0.9375rem;
             color: var(--text-secondary);
@@ -414,7 +363,6 @@
             position: relative;
             text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
         }
-
         .card-badge {
             display: inline-block;
             margin-top: var(--spacing-sm);
@@ -430,17 +378,14 @@
             backdrop-filter: blur(5px);
             background: rgba(212, 175, 55, 0.08);
         }
-
         /* ==================== 特色卡片 ==================== */
         .card-featured {
             border: 1px solid var(--border-gold);
             background: rgba(212, 175, 55, 0.1);
         }
-
         .card-featured .card-title {
             color: var(--primary-gold);
         }
-
         .featured-label {
             position: absolute;
             top: var(--spacing-sm);
@@ -455,12 +400,10 @@
             z-index: 2;
             box-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
         }
-
         /* ==================== 区块间距 ==================== */
         .section {
             margin-bottom: var(--spacing-2xl);
         }
-
         /* ==================== 页脚 ==================== */
         .site-footer {
             border-top: 1px solid var(--border-white);
@@ -470,7 +413,6 @@
             background: rgba(0, 0, 0, 0.4);
             backdrop-filter: blur(10px);
         }
-
         .footer-title {
             font-family: var(--font-serif);
             font-size: 1.5rem;
@@ -479,14 +421,12 @@
             font-weight: 600;
             text-shadow: 0 2px 8px rgba(212, 175, 55, 0.3);
         }
-
         .social-links {
             display: flex;
             justify-content: center;
             gap: var(--spacing-md);
             margin-bottom: var(--spacing-md);
         }
-
         .social-link {
             width: 48px;
             height: 48px;
@@ -502,69 +442,56 @@
             backdrop-filter: blur(5px);
             background: rgba(255, 255, 255, 0.05);
         }
-
         .social-link:hover {
             border-color: var(--primary-gold);
             color: var(--primary-gold);
             transform: translateY(-4px);
             box-shadow: 0 4px 16px rgba(212, 175, 55, 0.3);
         }
-
         .copyright {
             color: var(--text-muted);
             font-size: 0.875rem;
             font-weight: 300;
         }
-
         /* ==================== 响应式 ==================== */
         @media (max-width: 768px) {
             :root {
                 --spacing-xl: 48px;
                 --spacing-2xl: 64px;
             }
-
             .site-header {
                 padding: var(--spacing-xl) 0;
             }
-
             .card-grid {
                 grid-template-columns: 1fr;
             }
-
             .notice-content {
                 font-size: 0.8125rem;
             }
-
             .card:hover {
-                transform: translateY(-4px) scale(1.01) translateZ(0);
+                transform: translateY(-4px) scale(1.01);
             }
-
-            /* 移动端禁用背景动画以提升性能 */
+            /* 移动端禁用背景动画 */
             .hero-background::before {
                 animation: none;
             }
         }
-
-        /* ==================== 滚动条（美化版）==================== */
+        /* ==================== 滚动条 ==================== */
         ::-webkit-scrollbar {
             width: 10px;
         }
-
         ::-webkit-scrollbar-track {
             background: var(--bg-secondary);
             border-left: 1px solid rgba(212, 175, 55, 0.1);
         }
-
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(180deg, var(--primary-gold), var(--secondary-gold));
             border-radius: 5px;
             border: 2px solid var(--bg-secondary);
         }
-
         ::-webkit-scrollbar-thumb:hover {
             background: var(--primary-gold);
         }
-
         /* ==================== 打印样式 ==================== */
         @media print {
             .top-notice,
@@ -572,13 +499,11 @@
             .hero-background-grid {
                 display: none;
             }
-
             body {
                 background: white;
                 color: black;
             }
         }
-
         /* ==================== 加载动画 ==================== */
         @keyframes fadeInUp {
             from {
@@ -590,11 +515,9 @@
                 transform: translateY(0);
             }
         }
-
         .section {
             animation: fadeInUp 0.8s ease-out;
         }
-
         /* ==================== 性能优化：减少重绘 ==================== */
         @media (prefers-reduced-motion: reduce) {
             *,
@@ -612,7 +535,6 @@
     <div class="hero-background"></div>
     <!-- 网格纹理 -->
     <div class="hero-background-grid"></div>
-
     <!-- 顶部声明 -->
     <div class="top-notice" id="topNotice">
         <div class="notice-content">
@@ -620,7 +542,6 @@
             <button class="notice-close" id="noticeClose" aria-label="关闭">×</button>
         </div>
     </div>
-
     <!-- 主内容 -->
     <div class="main-wrapper">
         <div class="container">
@@ -629,7 +550,6 @@
                 <h1 class="site-title">狂客空间</h1>
                 <p class="site-subtitle">AI · 学习 · 定制</p>
             </header>
-
             <!-- 探索区 -->
             <section class="section">
                 <h2 class="section-title">发现</h2>
@@ -677,9 +597,7 @@
                     </a>
                 </div>
             </section>
-
             <div class="divider"></div>
-
             <!-- 会员区 -->
             <section class="section">
                 <h2 class="section-title">精英会</h2>
@@ -717,9 +635,7 @@
                     </a>
                 </div>
             </section>
-
             <div class="divider"></div>
-
             <!-- 定制区 -->
             <section class="section">
                 <h2 class="section-title">私享定制</h2>
@@ -746,7 +662,6 @@
                     </a>
                 </div>
             </section>
-
             <!-- 页脚 -->
             <footer class="site-footer">
                 <h3 class="footer-title">联系我们</h3>
@@ -783,10 +698,8 @@
             </footer>
         </div>
     </div>
-
     <script>
         'use strict';
-
         // 顶部声明管理
         class NoticeManager {
             constructor() {
@@ -794,28 +707,22 @@
                 this.closeBtn = document.getElementById('noticeClose');
                 this.init();
             }
-
             init() {
                 if (!this.notice || !this.closeBtn) return;
-
-                // 检查是否已关闭（使用sessionStorage）
+                // 检查是否已关闭
                 if (sessionStorage.getItem('noticeClose') === 'true') {
                     this.hide();
                     return;
                 }
-
                 // 绑定关闭事件
                 this.closeBtn.addEventListener('click', () => this.close());
-
                 // 10秒后自动隐藏
                 setTimeout(() => this.close(), 10000);
             }
-
             close() {
                 sessionStorage.setItem('noticeClose', 'true');
                 this.hide();
             }
-
             hide() {
                 if (this.notice) {
                     this.notice.classList.add('notice-hidden');
@@ -823,72 +730,30 @@
                 }
             }
         }
-
-        // 性能优化：视差滚动（使用节流）
-        class ParallaxManager {
-            constructor() {
-                this.background = document.querySelector('.hero-background');
-                this.ticking = false;
-                this.lastScrollY = 0;
-                this.init();
-            }
-
-            init() {
-                if (!this.background) return;
-                
-                // 检测是否为移动设备
-                if (window.matchMedia('(max-width: 768px)').matches) {
-                    return; // 移动设备禁用视差
-                }
-
-                window.addEventListener('scroll', () => this.requestTick(), { passive: true });
-            }
-
-            requestTick() {
-                if (!this.ticking) {
-                    window.requestAnimationFrame(() => this.update());
-                    this.ticking = true;
-                }
-            }
-
-            update() {
-                this.lastScrollY = window.pageYOffset;
-                const translateY = this.lastScrollY * 0.5;
-                this.background.style.transform = `translateY(${translateY}px) translateZ(0)`;
-                this.ticking = false;
-            }
-        }
-
-        // 卡片入场动画优化
+        // 卡片入场动画
         class CardAnimationManager {
             constructor() {
                 this.cards = document.querySelectorAll('.card');
                 this.observer = null;
                 this.init();
             }
-
             init() {
                 if (!this.cards.length) return;
-
                 const options = {
                     threshold: 0.1,
                     rootMargin: '0px 0px -50px 0px'
                 };
-
                 this.observer = new IntersectionObserver((entries) => {
                     entries.forEach((entry, index) => {
                         if (entry.isIntersecting) {
-                            // 添加延迟以创建瀑布效果
                             setTimeout(() => {
                                 entry.target.style.opacity = '1';
                                 entry.target.style.transform = 'translateY(0)';
-                            }, index * 50); // 每个卡片延迟50ms
-                            
+                            }, index * 50);
                             this.observer.unobserve(entry.target);
                         }
                     });
                 }, options);
-
                 this.cards.forEach(card => {
                     card.style.opacity = '0';
                     card.style.transform = 'translateY(30px)';
@@ -897,13 +762,10 @@
                 });
             }
         }
-
         // 初始化
         document.addEventListener('DOMContentLoaded', () => {
             new NoticeManager();
-            new ParallaxManager();
             new CardAnimationManager();
-
             // 平滑滚动
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
@@ -917,7 +779,6 @@
                     }
                 });
             });
-
             // 外部链接新窗口打开
             document.querySelectorAll('a[href^="http"]').forEach(link => {
                 if (!link.hasAttribute('target')) {
@@ -926,28 +787,12 @@
                 }
             });
         });
-
         // 性能监控
         window.addEventListener('load', () => {
             if ('performance' in window && 'timing' in window.performance) {
                 const perfData = window.performance.timing;
                 const pageLoadTime = perfData.loadEventEnd - perfData.navigationStart;
                 console.log(`⚡ 页面加载时间: ${pageLoadTime}ms`);
-                
-                // 输出核心Web指标
-                if ('PerformanceObserver' in window) {
-                    try {
-                        const observer = new PerformanceObserver((list) => {
-                            for (const entry of list.getEntries()) {
-                                console.log(`📊 ${entry.name}: ${entry.value.toFixed(2)}ms`);
-                            }
-                        });
-                        observer.observe({ entryTypes: ['paint', 'largest-contentful-paint'] });
-                    } catch (e) {
-                        // 部分浏览器可能不支持某些指标
-                        console.log('性能监控部分不可用');
-                    }
-                }
             }
         });
     </script>
