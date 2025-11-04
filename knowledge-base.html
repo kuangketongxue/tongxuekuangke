@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- SEO优化 -->
+    <title>弄潮先锋营 - 前沿知识库 | 狂客空间</title>
+    <meta name="description" content="弄潮先锋营 - 前沿知识点检索与学习平台">
+    <meta name="keywords" content="知识库,检索,学习,前沿技术">
+    <meta name="author" content="狂客">
+    <meta name="robots" content="index, follow">
+    <!-- 主题颜色 -->
+    <meta name="theme-color" content="#000000">
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚡</text></svg>">
+    <!-- 字体 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* ==================== CSS变量系统 ==================== */
+        :root {
+            /* 主题色 - 奢华黑金 */
+            --primary-gold: #d4af37;
+            --primary-black: #000000;
+            --primary-white: #ffffff;
+            --secondary-gold: #b8941e;
+            --light-gold: #f4e4b8;
+            /* 背景色 */
+            --bg-primary: #000000;
+            --bg-secondary: #0a0a0a;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            /* 文字颜色 */
+            --text-primary: #ffffff;
+            --text-secondary: #cccccc;
+            --text-muted: #888888;
+            --text-gold: #d4af37;
+            /* 边框 */
+            --border-gold: rgba(212, 175, 55, 0.2);
+            --border-white: rgba(255, 255, 255, 0.1);
+            /* 阴影 */
+            --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.3);
+            --shadow-gold: 0 4px 24px rgba(212, 175, 55, 0.15);
+            /* 动画 */
+            --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            /* 间距 */
+            --spacing-xs: 8px;
+            --spacing-sm: 16px;
+            --spacing-md: 32px;
+            --spacing-lg: 48px;
+            --spacing-xl: 80px;
+            --spacing-2xl: 120px;
+            /* 圆角 */
+            --radius: 4px;
+            /* 字体 */
+            --font-serif: 'Noto Serif SC', serif;
+            --font-sans: 'Noto Sans SC', sans-serif;
+        }
+
+        /* ==================== 基础重置 ==================== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-sans);
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.8;
+            overflow-x: hidden;
+        }
+
+        /* ==================== 背景图片区域 ==================== */
+        .hero-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            z-index: 0;
+            background: linear-gradient(180deg,
+                rgba(0, 0, 0, 0.7) 0%,
+                rgba(0, 0, 0, 0.85) 50%,
+                rgba(0, 0, 0, 0.95) 100%),
+                url('img/hero-bg.jpg') center/cover no-repeat;
+            opacity: 0.4;
+        }
+
+        /* ==================== 顶部声明条 ==================== */
+        .top-notice {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(212, 175, 55, 0.08);
+            border-bottom: 1px solid var(--border-gold);
+            backdrop-filter: blur(20px);
+            z-index: 100;
+            padding: 12px 24px;
+            text-align: center;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+
+        .notice-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .notice-text {
+            color: var(--text-gold);
+            font-weight: 500;
+        }
+
+        .notice-close {
+            background: transparent;
+            border: 1px solid var(--border-gold);
+            color: var(--text-gold);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: var(--transition);
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .notice-close:hover {
+            background: rgba(212, 175, 55, 0.1);
+            transform: rotate(90deg);
+        }
+
+        .notice-hidden {
+            display: none;
+        }
+
+        /* ==================== 主容器 ==================== */
+        .main-wrapper {
+            position: relative;
+            z-index: 1;
+            padding-top: 48px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ==================== 页头 ==================== */
+        .site-header {
+            text-align: center;
+            padding: var(--spacing-xl) 0;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .site-title {
+            font-family: var(--font-serif);
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            color: var(--primary-gold);
+            letter-spacing: 0.05em;
+            margin-bottom: var(--spacing-sm);
+            background: linear-gradient(135deg,
+                var(--primary-gold) 0%,
+                var(--light-gold) 50%,
+                var(--primary-gold) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .site-subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            letter-spacing: 0.2em;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-gold);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            margin-bottom: var(--spacing-md);
+            transition: var(--transition);
+        }
+
+        .back-link:hover {
+            color: var(--light-gold);
+            transform: translateX(-4px);
+        }
+
+        /* ==================== 搜索区域 ==================== */
+        .search-section {
+            margin-bottom: var(--spacing-xl);
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .search-box {
+            position: relative;
+            display: flex;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .search-input {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid var(--border-white);
+            border-radius: var(--radius);
+            padding: 16px 24px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-family: var(--font-sans);
+            transition: var(--transition);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--border-gold);
+            background: rgba(212, 175, 55, 0.03);
+        }
+
+        .search-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .search-btn {
+            background: var(--primary-gold);
+            color: var(--primary-black);
+            border: none;
+            border-radius: var(--radius);
+            padding: 16px 32px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-sans);
+        }
+
+        .search-btn:hover {
+            background: var(--light-gold);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .search-stats {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .search-stats span {
+            color: var(--text-gold);
+            font-weight: 500;
+        }
+
+        /* ==================== 分类过滤 ==================== */
+        .filter-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            justify-content: center;
+            margin-bottom: var(--spacing-lg);
+        }
+
+        .filter-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-white);
+            border-radius: var(--radius);
+            padding: 8px 20px;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-sans);
+        }
+
+        .filter-btn:hover {
+            border-color: var(--border-gold);
+            color: var(--text-gold);
+        }
+
+        .filter-btn.active {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+            font-weight: 500;
+        }
+
+        /* ==================== 知识点列表 ==================== */
+        .knowledge-list {
+            display: grid;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-2xl);
+        }
+
+        .knowledge-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-white);
+            border-radius: var(--radius);
+            padding: var(--spacing-md);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .knowledge-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg,
+                transparent 0%,
+                var(--primary-gold) 50%,
+                transparent 100%);
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .knowledge-item:hover {
+            border-color: var(--border-gold);
+            background: rgba(212, 175, 55, 0.03);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        .knowledge-item:hover::before {
+            opacity: 1;
+        }
+
+        .knowledge-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--spacing-sm);
+            gap: var(--spacing-sm);
+        }
+
+        .knowledge-title {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .knowledge-category {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--border-gold);
+            border-radius: var(--radius);
+            padding: 4px 12px;
+            font-size: 0.75rem;
+            color: var(--text-gold);
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .knowledge-content {
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            line-height: 1.7;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .knowledge-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            align-items: center;
+        }
+
+        .knowledge-tag {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-white);
+            border-radius: var(--radius);
+            padding: 4px 12px;
+            font-size: 0.8125rem;
+            color: var(--text-muted);
+        }
+
+        .knowledge-date {
+            color: var(--text-muted);
+            font-size: 0.8125rem;
+            margin-left: auto;
+        }
+
+        /* ==================== 空状态 ==================== */
+        .empty-state {
+            text-align: center;
+            padding: var(--spacing-xl) 0;
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: var(--spacing-md);
+            opacity: 0.3;
+        }
+
+        .empty-text {
+            color: var(--text-muted);
+            font-size: 1.125rem;
+        }
+
+        /* ==================== 加载状态 ==================== */
+        .loading {
+            text-align: center;
+            padding: var(--spacing-xl) 0;
+        }
+
+        .loading-spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid var(--border-white);
+            border-top-color: var(--primary-gold);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* ==================== 页脚 ==================== */
+        .site-footer {
+            border-top: 1px solid var(--border-white);
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+            margin-top: var(--spacing-2xl);
+        }
+
+        .footer-title {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            color: var(--primary-gold);
+            margin-bottom: var(--spacing-md);
+            font-weight: 600;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .social-link {
+            width: 48px;
+            height: 48px;
+            border: 1px solid var(--border-white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1.25rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+            transform: translateY(-4px);
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            font-weight: 300;
+        }
+
+        /* ==================== 响应式 ==================== */
+        @media (max-width: 768px) {
+            :root {
+                --spacing-xl: 48px;
+                --spacing-2xl: 64px;
+            }
+
+            .site-header {
+                padding: var(--spacing-lg) 0;
+            }
+
+            .search-box {
+                flex-direction: column;
+            }
+
+            .search-btn {
+                width: 100%;
+            }
+
+            .filter-section {
+                gap: var(--spacing-xs);
+            }
+
+            .filter-btn {
+                padding: 6px 16px;
+                font-size: 0.8125rem;
+            }
+
+            .knowledge-header {
+                flex-direction: column;
+            }
+
+            .knowledge-date {
+                margin-left: 0;
+            }
+        }
+
+        /* ==================== 滚动条 ==================== */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-gold);
+            border-radius: 4px;
+        }
+
+        /* ==================== 高亮显示 ==================== */
+        .highlight {
+            background: rgba(212, 175, 55, 0.2);
+            color: var(--primary-gold);
+            padding: 2px 4px;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景图片 -->
+    <div class="hero-background"></div>
+
+    <!-- 顶部声明 -->
+    <div class="top-notice" id="topNotice">
+        <div class="notice-content">
+            <span class="notice-text">⚡ 知识库持续更新中，欢迎探索前沿知识</span>
+            <button class="notice-close" id="noticeClose" aria-label="关闭">×</button>
+        </div>
+    </div>
+
+    <!-- 主内容 -->
+    <div class="main-wrapper">
+        <div class="container">
+            <!-- 页头 -->
+            <header class="site-header">
+                <a href="index.html" class="back-link">
+                    <span>←</span>
+                    <span>返回首页</span>
+                </a>
+                <h1 class="site-title">弄潮先锋营</h1>
+                <p class="site-subtitle">前沿知识 · 智能检索</p>
+            </header>
+
+            <!-- 搜索区域 -->
+            <section class="search-section">
+                <div class="search-container">
+                    <div class="search-box">
+                        <input 
+                            type="text" 
+                            class="search-input" 
+                            id="searchInput"
+                            placeholder="搜索知识点关键词..."
+                            autocomplete="off"
+                        >
+                        <button class="search-btn" id="searchBtn">搜索</button>
+                    </div>
+                    <div class="search-stats" id="searchStats">
+                        共收录 <span id="totalCount">0</span> 个知识点
+                    </div>
+                </div>
+            </section>
+
+            <!-- 分类过滤 -->
+            <section class="filter-section" id="filterSection">
+                <!-- 动态生成分类按钮 -->
+            </section>
+
+            <!-- 知识点列表 -->
+            <section class="knowledge-list" id="knowledgeList">
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                </div>
+            </section>
+
+            <!-- 页脚 -->
+            <footer class="site-footer">
+                <h3 class="footer-title">联系我们</h3>
+                <div class="social-links">
+                    <a href="https://open.weixin.qq.com/qr/code?username=gh_ba5b6bb6bd89"
+                       class="social-link"
+                       target="_blank"
+                       rel="noopener"
+                       aria-label="微信公众号">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 0 1 .213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 0 0 .167-.054l1.903-1.114a.864.864 0 0 1 .717-.098 10.16 10.16 0 0 0 2.837.403c.276 0 .543-.027.811-.05-.857-2.578.157-4.972 1.932-6.446 1.703-1.415 3.882-1.98 5.853-1.838-.576-3.583-4.196-6.348-8.596-6.348zM5.785 5.991c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178A1.17 1.17 0 0 1 4.623 7.17c0-.651.52-1.18 1.162-1.18zm5.813 0c.642 0 1.162.529 1.162 1.18a1.17 1.17 0 0 1-1.162 1.178 1.17 1.17 0 0 1-1.162-1.178c0-.651.52-1.18 1.162-1.18zm5.34 2.867c-1.797-.052-3.746.512-5.28 1.786-1.72 1.428-2.687 3.72-1.78 6.22.942 2.453 3.666 4.229 6.884 4.229.826 0 1.622-.12 2.361-.336a.722.722 0 0 1 .598.082l1.584.926a.272.272 0 0 0 .14.047c.134 0 .24-.111.24-.247 0-.06-.023-.12-.038-.177l-.327-1.233a.582.582 0 0 1-.023-.156.49.49 0 0 1 .201-.398C23.024 18.48 24 16.82 24 14.98c0-3.21-2.931-5.837-6.656-6.088V8.89c-.135-.01-.27-.027-.407-.03zm-2.53 3.274c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982zm4.844 0c.535 0 .969.44.969.982a.976.976 0 0 1-.969.983.976.976 0 0 1-.969-.983c0-.542.434-.982.969-.982z"/>
+                        </svg>
+                    </a>
+                    <a href="https://github.com/kuangketongxue"
+                       class="social-link"
+                       target="_blank"
+                       rel="noopener"
+                       aria-label="GitHub">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                        </svg>
+                    </a>
+                    <a href="https://x.com/kuangketongxue"
+                       class="social-link"
+                       target="_blank"
+                       rel="noopener"
+                       aria-label="X (Twitter)">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                        </svg>
+                    </a>
+                </div>
+                <p class="copyright">© 2025 狂客 版权所有</p>
+            </footer>
+        </div>
+    </div>
+
+    <script>
+        'use strict';
+
+        // ==================== 知识库管理类 ====================
+        class KnowledgeBase {
+            constructor() {
+                this.data = [];
+                this.filteredData = [];
+                this.currentCategory = 'all';
+                this.searchQuery = '';
+                
+                // DOM 元素
+                this.searchInput = document.getElementById('searchInput');
+                this.searchBtn = document.getElementById('searchBtn');
+                this.filterSection = document.getElementById('filterSection');
+                this.knowledgeList = document.getElementById('knowledgeList');
+                this.searchStats = document.getElementById('searchStats');
+                this.totalCount = document.getElementById('totalCount');
+                
+                this.init();
+            }
+
+            async init() {
+                await this.loadData();
+                this.setupEventListeners();
+                this.renderFilters();
+                this.renderList();
+            }
+
+            // 加载数据
+            async loadData() {
+                try {
+                    const response = await fetch('knowledge-data.json');
+                    if (!response.ok) {
+                        throw new Error('数据加载失败');
+                    }
+                    this.data = await response.json();
+                    this.filteredData = [...this.data];
+                    this.totalCount.textContent = this.data.length;
+                } catch (error) {
+                    console.error('加载数据失败:', error);
+                    this.showError('数据加载失败，请刷新页面重试');
+                }
+            }
+
+            // 设置事件监听
+            setupEventListeners() {
+                // 搜索按钮
+                this.searchBtn.addEventListener('click', () => this.handleSearch());
+                
+                // 回车搜索
+                this.searchInput.addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.handleSearch();
+                    }
+                });
+
+                // 实时搜索（输入延迟）
+                let searchTimeout;
+                this.searchInput.addEventListener('input', (e) => {
+                    clearTimeout(searchTimeout);
+                    searchTimeout = setTimeout(() => {
+                        this.searchQuery = e.target.value.trim();
+                        this.filterAndRender();
+                    }, 300);
+                });
+            }
+
+            // 处理搜索
+            handleSearch() {
+                this.searchQuery = this.searchInput.value.trim();
+                this.filterAndRender();
+            }
+
+            // 渲染分类过滤按钮
+            renderFilters() {
+                const categories = new Set(['all']);
+                this.data.forEach(item => {
+                    if (item.category) {
+                        categories.add(item.category);
+                    }
+                });
+
+                const categoryNames = {
+                    'all': '全部',
+                    'ai': 'AI技术',
+                    'programming': '编程开发',
+                    'design': '设计创意',
+                    'business': '商业思维',
+                    'learning': '学习方法',
+                    'tool': '工具应用',
+                    'other': '其他'
+                };
+
+                this.filterSection.innerHTML = Array.from(categories).map(cat => `
+                    <button 
+                        class="filter-btn ${cat === this.currentCategory ? 'active' : ''}" 
+                        data-category="${cat}"
+                    >
+                        ${categoryNames[cat] || cat}
+                    </button>
+                `).join('');
+
+                // 绑定分类点击事件
+                this.filterSection.querySelectorAll('.filter-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        this.currentCategory = e.target.dataset.category;
+                        this.filterAndRender();
+                        
+                        // 更新按钮状态
+                        this.filterSection.querySelectorAll('.filter-btn').forEach(b => {
+                            b.classList.remove('active');
+                        });
+                        e.target.classList.add('active');
+                    });
+                });
+            }
+
+            // 过滤并渲染
+            filterAndRender() {
+                this.filteredData = this.data.filter(item => {
+                    // 分类过滤
+                    const categoryMatch = this.currentCategory === 'all' || 
+                                        item.category === this.currentCategory;
+                    
+                    // 搜索过滤
+                    if (!this.searchQuery) {
+                        return categoryMatch;
+                    }
+
+                    const query = this.searchQuery.toLowerCase();
+                    const titleMatch = item.title.toLowerCase().includes(query);
+                    const contentMatch = item.content.toLowerCase().includes(query);
+                    const tagsMatch = item.tags && item.tags.some(tag => 
+                        tag.toLowerCase().includes(query)
+                    );
+
+                    return categoryMatch && (titleMatch || contentMatch || tagsMatch);
+                });
+
+                this.renderList();
+            }
+
+            // 渲染知识点列表
+            renderList() {
+                if (this.filteredData.length === 0) {
+                    this.showEmpty();
+                    return;
+                }
+
+                this.knowledgeList.innerHTML = this.filteredData.map(item => {
+                    const highlightedTitle = this.highlightText(item.title);
+                    const highlightedContent = this.highlightText(item.content);
+                    
+                    return `
+                        <article class="knowledge-item">
+                            <div class="knowledge-header">
+                                <div>
+                                    <h3 class="knowledge-title">${highlightedTitle}</h3>
+                                </div>
+                                <span class="knowledge-category">${this.getCategoryName(item.category)}</span>
+                            </div>
+                            <div class="knowledge-content">${highlightedContent}</div>
+                            <div class="knowledge-meta">
+                                ${item.tags ? item.tags.map(tag => 
+                                    `<span class="knowledge-tag">${tag}</span>`
+                                ).join('') : ''}
+                                ${item.date ? `<span class="knowledge-date">${item.date}</span>` : ''}
+                            </div>
+                        </article>
+                    `;
+                }).join('');
+
+                // 更新统计信息
+                const resultText = this.searchQuery ? 
+                    `找到 <span>${this.filteredData.length}</span> 个相关结果` :
+                    `共收录 <span>${this.data.length}</span> 个知识点`;
+                this.searchStats.innerHTML = resultText;
+            }
+
+            // 高亮文本
+            highlightText(text) {
+                if (!this.searchQuery) return text;
+                
+                const regex = new RegExp(`(${this.searchQuery})`, 'gi');
+                return text.replace(regex, '<span class="highlight">$1</span>');
+            }
+
+            // 获取分类名称
+            getCategoryName(category) {
+                const names = {
+                    'ai': 'AI技术',
+                    'programming': '编程开发',
+                    'design': '设计创意',
+                    'business': '商业思维',
+                    'learning': '学习方法',
+                    'tool': '工具应用',
+                    'other': '其他'
+                };
+                return names[category] || category;
+            }
+
+            // 显示空状态
+            showEmpty() {
+                this.knowledgeList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">🔍</div>
+                        <p class="empty-text">
+                            ${this.searchQuery ? '未找到相关知识点' : '暂无知识点'}
+                        </p>
+                    </div>
+                `;
+            }
+
+            // 显示错误
+            showError(message) {
+                this.knowledgeList.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">⚠️</div>
+                        <p class="empty-text">${message}</p>
+                    </div>
+                `;
+            }
+        }
+
+        // ==================== 顶部声明管理 ====================
+        class NoticeManager {
+            constructor() {
+                this.notice = document.getElementById('topNotice');
+                this.closeBtn = document.getElementById('noticeClose');
+                this.init();
+            }
+
+            init() {
+                if (!this.notice || !this.closeBtn) return;
+
+                if (localStorage.getItem('knowledgeNoticeClose') === 'true') {
+                    this.hide();
+                    return;
+                }
+
+                this.closeBtn.addEventListener('click', () => this.close());
+                setTimeout(() => this.close(), 10000);
+            }
+
+            close() {
+                localStorage.setItem('knowledgeNoticeClose', 'true');
+                this.hide();
+            }
+
+            hide() {
+                if (this.notice) {
+                    this.notice.classList.add('notice-hidden');
+                    document.querySelector('.main-wrapper').style.paddingTop = '0';
+                }
+            }
+        }
+
+        // ==================== 初始化 ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            new NoticeManager();
+            new KnowledgeBase();
+
+            // 平滑滚动
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
