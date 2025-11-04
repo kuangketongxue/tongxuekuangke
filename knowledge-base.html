@@ -636,7 +636,6 @@
 <body>
     <!-- 背景图片 -->
     <div class="hero-background"></div>
-    
     <!-- 顶部声明 -->
     <div class="top-notice" id="topNotice">
         <div class="notice-content">
@@ -644,7 +643,6 @@
             <button class="notice-close" id="noticeClose" aria-label="关闭">×</button>
         </div>
     </div>
-    
     <!-- 主内容 -->
     <div class="main-wrapper">
         <div class="container">
@@ -657,7 +655,6 @@
                 <h1 class="site-title">弄潮先锋营</h1>
                 <p class="site-subtitle">前沿知识 · 智能检索</p>
             </header>
-            
             <!-- 统计面板 -->
             <section class="stats-panel">
                 <div class="stat-card">
@@ -666,9 +663,9 @@
                     <div class="stat-label">知识点总数</div>
                 </div>
                 <div class="stat-card">
-                    <div class="stat-icon">🏷️</div>
-                    <div class="stat-value" id="totalCategories">0</div>
-                    <div class="stat-label">分类数量</div>
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-value" id="avgInspiration">0</div>
+                    <div class="stat-label">平均启发值</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-icon">🕒</div>
@@ -677,7 +674,6 @@
                     <div class="stat-date" id="lastUpdateFull"></div>
                 </div>
             </section>
-            
             <!-- 搜索区域 -->
             <section class="search-section">
                 <div class="search-container">
@@ -696,7 +692,6 @@
                     </div>
                 </div>
             </section>
-            
             <!-- 工具栏 -->
             <div class="toolbar">
                 <div class="sort-controls">
@@ -712,19 +707,16 @@
                     <button class="inspiration-btn" data-stars="3">⭐3星+</button>
                 </div>
             </div>
-            
             <!-- 分类过滤 -->
             <section class="filter-section" id="filterSection">
                 <!-- 动态生成分类按钮 -->
             </section>
-            
             <!-- 知识点列表 -->
             <section class="knowledge-list" id="knowledgeList">
                 <div class="loading">
                     <div class="loading-spinner"></div>
                 </div>
             </section>
-            
             <!-- 页脚 -->
             <footer class="site-footer">
                 <h3 class="footer-title">联系我们</h3>
@@ -761,10 +753,8 @@
             </footer>
         </div>
     </div>
-    
     <script>
         'use strict';
-        
         // ==================== 知识库管理类 ====================
         class KnowledgeBase {
             constructor() {
@@ -774,7 +764,6 @@
                 this.currentSort = 'date';
                 this.currentStarFilter = 'all';
                 this.searchQuery = '';
-                
                 // DOM 元素
                 this.searchInput = document.getElementById('searchInput');
                 this.searchBtn = document.getElementById('searchBtn');
@@ -782,16 +771,13 @@
                 this.knowledgeList = document.getElementById('knowledgeList');
                 this.searchStats = document.getElementById('searchStats');
                 this.totalCount = document.getElementById('totalCount');
-                
                 // 统计面板元素
                 this.totalKnowledge = document.getElementById('totalKnowledge');
-                this.totalCategories = document.getElementById('totalCategories');
+                this.avgInspiration = document.getElementById('avgInspiration');
                 this.lastUpdate = document.getElementById('lastUpdate');
                 this.lastUpdateFull = document.getElementById('lastUpdateFull');
-                
                 this.init();
             }
-            
             async init() {
                 await this.loadData();
                 this.setupEventListeners();
@@ -799,7 +785,6 @@
                 this.updateStats();
                 this.renderList();
             }
-            
             // 加载数据
             async loadData() {
                 try {
@@ -815,15 +800,21 @@
                     this.showError('数据加载失败,请刷新页面重试');
                 }
             }
-            
             // 更新统计信息
             updateStats() {
                 // 知识点总数
                 this.totalKnowledge.textContent = this.data.length;
                 
-                // 分类数量
-                const categories = new Set(this.data.map(item => item.category).filter(Boolean));
-                this.totalCategories.textContent = categories.size;
+                // 计算平均启发值
+                if (this.data.length > 0) {
+                    const totalInspiration = this.data.reduce((sum, item) => {
+                        return sum + (item.inspiration || 0);
+                    }, 0);
+                    const average = (totalInspiration / this.data.length).toFixed(1);
+                    this.avgInspiration.textContent = average;
+                } else {
+                    this.avgInspiration.textContent = '0';
+                }
                 
                 // 最新更新时间
                 const dates = this.data
@@ -840,13 +831,11 @@
                     this.lastUpdateFull.textContent = '暂无更新记录';
                 }
             }
-            
             // 格式化短日期
             formatShortDate(date) {
                 const now = new Date();
                 const diff = now - date;
                 const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-                
                 if (days === 0) return '今天';
                 if (days === 1) return '昨天';
                 if (days < 7) return `${days}天前`;
@@ -854,7 +843,6 @@
                 if (days < 365) return `${Math.floor(days / 30)}月前`;
                 return `${Math.floor(days / 365)}年前`;
             }
-            
             // 格式化完整日期
             formatFullDate(date) {
                 return date.toLocaleDateString('zh-CN', {
@@ -863,20 +851,17 @@
                     day: 'numeric'
                 });
             }
-            
             // 设置事件监听
             setupEventListeners() {
                 // 搜索按钮
                 this.searchBtn.addEventListener('click', () => this.handleSearch());
-                
                 // 回车搜索
                 this.searchInput.addEventListener('keypress', (e) => {
                     if (e.key === 'Enter') {
                         this.handleSearch();
                     }
                 });
-                
-                // 实时搜索（输入延迟）
+                // 实时搜索(输入延迟)
                 let searchTimeout;
                 this.searchInput.addEventListener('input', (e) => {
                     clearTimeout(searchTimeout);
@@ -885,7 +870,6 @@
                         this.filterAndRender();
                     }, 300);
                 });
-                
                 // 排序按钮
                 document.querySelectorAll('.sort-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
@@ -895,7 +879,6 @@
                         this.filterAndRender();
                     });
                 });
-                
                 // 启发值筛选按钮
                 document.querySelectorAll('.inspiration-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
@@ -906,13 +889,11 @@
                     });
                 });
             }
-            
             // 处理搜索
             handleSearch() {
                 this.searchQuery = this.searchInput.value.trim();
                 this.filterAndRender();
             }
-            
             // 渲染分类过滤按钮
             renderFilters() {
                 const categories = new Set(['all']);
@@ -921,7 +902,6 @@
                         categories.add(item.category);
                     }
                 });
-                
                 const categoryNames = {
                     'all': '全部',
                     'ai': 'AI技术',
@@ -932,7 +912,6 @@
                     'tool': '工具应用',
                     'other': '其他'
                 };
-                
                 this.filterSection.innerHTML = Array.from(categories).map(cat => `
                     <button
                         class="filter-btn ${cat === this.currentCategory ? 'active' : ''}"
@@ -941,7 +920,6 @@
                         ${categoryNames[cat] || cat}
                     </button>
                 `).join('');
-                
                 // 绑定分类点击事件
                 this.filterSection.querySelectorAll('.filter-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
@@ -955,14 +933,12 @@
                     });
                 });
             }
-            
             // 过滤并渲染
             filterAndRender() {
                 this.filteredData = this.data.filter(item => {
                     // 分类过滤
                     const categoryMatch = this.currentCategory === 'all' ||
                                         item.category === this.currentCategory;
-                    
                     // 启发值过滤
                     let starMatch = true;
                     if (this.currentStarFilter !== 'all') {
@@ -970,28 +946,22 @@
                         const itemStars = item.inspiration || 0;
                         starMatch = itemStars >= minStars;
                     }
-                    
                     // 搜索过滤
                     if (!this.searchQuery) {
                         return categoryMatch && starMatch;
                     }
-                    
                     const query = this.searchQuery.toLowerCase();
                     const titleMatch = item.title.toLowerCase().includes(query);
                     const contentMatch = item.content.toLowerCase().includes(query);
                     const tagsMatch = item.tags && item.tags.some(tag =>
                         tag.toLowerCase().includes(query)
                     );
-                    
                     return categoryMatch && starMatch && (titleMatch || contentMatch || tagsMatch);
                 });
-                
                 // 排序
                 this.sortData();
-                
                 this.renderList();
             }
-            
             // 排序数据
             sortData() {
                 if (this.currentSort === 'date') {
@@ -1008,19 +978,16 @@
                     });
                 }
             }
-            
             // 渲染知识点列表
             renderList() {
                 if (this.filteredData.length === 0) {
                     this.showEmpty();
                     return;
                 }
-                
                 this.knowledgeList.innerHTML = this.filteredData.map(item => {
                     const highlightedTitle = this.highlightText(item.title);
                     const highlightedContent = this.highlightText(item.content);
                     const stars = this.renderStars(item.inspiration || 0);
-                    
                     return `
                         <article class="knowledge-item">
                             <div class="knowledge-header">
@@ -1040,36 +1007,29 @@
                         </article>
                     `;
                 }).join('');
-                
                 // 更新统计信息
                 const resultText = this.searchQuery || this.currentStarFilter !== 'all' || this.currentCategory !== 'all' ?
                     `找到 <span>${this.filteredData.length}</span> 个相关结果` :
                     `共收录 <span>${this.data.length}</span> 个知识点`;
                 this.searchStats.innerHTML = resultText;
             }
-            
             // 渲染星级
             renderStars(count) {
                 if (count === 0) return '';
-                
                 const maxStars = 5;
                 let starsHtml = '<div class="inspiration-rating">';
-                
                 for (let i = 1; i <= maxStars; i++) {
                     starsHtml += `<span class="star ${i <= count ? '' : 'empty'}">★</span>`;
                 }
-                
                 starsHtml += '</div>';
                 return starsHtml;
             }
-            
             // 高亮文本
             highlightText(text) {
                 if (!this.searchQuery) return text;
                 const regex = new RegExp(`(${this.searchQuery})`, 'gi');
                 return text.replace(regex, '<span class="highlight">$1</span>');
             }
-            
             // 获取分类名称
             getCategoryName(category) {
                 const names = {
@@ -1083,7 +1043,6 @@
                 };
                 return names[category] || category;
             }
-            
             // 显示空状态
             showEmpty() {
                 this.knowledgeList.innerHTML = `
@@ -1095,7 +1054,6 @@
                     </div>
                 `;
             }
-            
             // 显示错误
             showError(message) {
                 this.knowledgeList.innerHTML = `
@@ -1106,7 +1064,6 @@
                 `;
             }
         }
-        
         // ==================== 顶部声明管理 ====================
         class NoticeManager {
             constructor() {
@@ -1114,24 +1071,19 @@
                 this.closeBtn = document.getElementById('noticeClose');
                 this.init();
             }
-            
             init() {
                 if (!this.notice || !this.closeBtn) return;
-                
                 if (localStorage.getItem('knowledgeNoticeClose') === 'true') {
                     this.hide();
                     return;
                 }
-                
                 this.closeBtn.addEventListener('click', () => this.close());
                 setTimeout(() => this.close(), 10000);
             }
-            
             close() {
                 localStorage.setItem('knowledgeNoticeClose', 'true');
                 this.hide();
             }
-            
             hide() {
                 if (this.notice) {
                     this.notice.classList.add('notice-hidden');
@@ -1139,12 +1091,10 @@
                 }
             }
         }
-        
         // ==================== 初始化 ====================
         document.addEventListener('DOMContentLoaded', () => {
             new NoticeManager();
             new KnowledgeBase();
-            
             // 平滑滚动
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
