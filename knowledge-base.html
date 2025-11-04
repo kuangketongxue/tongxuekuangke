@@ -57,20 +57,17 @@
             --font-serif: 'Noto Serif SC', serif;
             --font-sans: 'Noto Sans SC', sans-serif;
         }
-
         /* ==================== 基础重置 ==================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
         html {
             font-size: 16px;
             scroll-behavior: smooth;
             -webkit-font-smoothing: antialiased;
         }
-
         body {
             font-family: var(--font-sans);
             background: var(--bg-primary);
@@ -78,7 +75,6 @@
             line-height: 1.8;
             overflow-x: hidden;
         }
-
         /* ==================== 背景图片区域 ==================== */
         .hero-background {
             position: fixed;
@@ -94,7 +90,6 @@
                 url('img/hero-bg.jpg') center/cover no-repeat;
             opacity: 0.4;
         }
-
         /* ==================== 顶部声明条 ==================== */
         .top-notice {
             position: fixed;
@@ -110,7 +105,6 @@
             font-size: 0.875rem;
             color: var(--text-secondary);
         }
-
         .notice-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -119,12 +113,10 @@
             justify-content: center;
             gap: 12px;
         }
-
         .notice-text {
             color: var(--text-gold);
             font-weight: 500;
         }
-
         .notice-close {
             background: transparent;
             border: 1px solid var(--border-gold);
@@ -139,36 +131,30 @@
             align-items: center;
             justify-content: center;
         }
-
         .notice-close:hover {
             background: rgba(212, 175, 55, 0.1);
             transform: rotate(90deg);
         }
-
         .notice-hidden {
             display: none;
         }
-
         /* ==================== 主容器 ==================== */
         .main-wrapper {
             position: relative;
             z-index: 1;
             padding-top: 48px;
         }
-
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 24px;
         }
-
         /* ==================== 页头 ==================== */
         .site-header {
             text-align: center;
             padding: var(--spacing-xl) 0;
             margin-bottom: var(--spacing-lg);
         }
-
         .site-title {
             font-family: var(--font-serif);
             font-size: clamp(2.5rem, 6vw, 4rem);
@@ -184,14 +170,12 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-
         .site-subtitle {
             font-size: 1.125rem;
             color: var(--text-secondary);
             font-weight: 300;
             letter-spacing: 0.2em;
         }
-
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -202,29 +186,64 @@
             margin-bottom: var(--spacing-md);
             transition: var(--transition);
         }
-
         .back-link:hover {
             color: var(--light-gold);
             transform: translateX(-4px);
         }
-
+        /* ==================== 统计面板 ==================== */
+        .stats-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-md);
+            margin-bottom: var(--spacing-xl);
+        }
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-white);
+            border-radius: var(--radius);
+            padding: var(--spacing-md);
+            text-align: center;
+            transition: var(--transition);
+        }
+        .stat-card:hover {
+            border-color: var(--border-gold);
+            background: rgba(212, 175, 55, 0.03);
+            transform: translateY(-2px);
+        }
+        .stat-icon {
+            font-size: 2rem;
+            margin-bottom: var(--spacing-xs);
+        }
+        .stat-value {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            margin-bottom: var(--spacing-xs);
+        }
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        .stat-date {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-top: var(--spacing-xs);
+        }
         /* ==================== 搜索区域 ==================== */
         .search-section {
             margin-bottom: var(--spacing-xl);
         }
-
         .search-container {
             max-width: 800px;
             margin: 0 auto;
         }
-
         .search-box {
             position: relative;
             display: flex;
             gap: var(--spacing-sm);
             margin-bottom: var(--spacing-md);
         }
-
         .search-input {
             flex: 1;
             background: var(--bg-card);
@@ -236,17 +255,14 @@
             font-family: var(--font-sans);
             transition: var(--transition);
         }
-
         .search-input:focus {
             outline: none;
             border-color: var(--border-gold);
             background: rgba(212, 175, 55, 0.03);
         }
-
         .search-input::placeholder {
             color: var(--text-muted);
         }
-
         .search-btn {
             background: var(--primary-gold);
             color: var(--primary-black);
@@ -259,25 +275,59 @@
             transition: var(--transition);
             font-family: var(--font-sans);
         }
-
         .search-btn:hover {
             background: var(--light-gold);
             transform: translateY(-2px);
             box-shadow: var(--shadow-gold);
         }
-
         .search-stats {
             text-align: center;
             color: var(--text-muted);
             font-size: 0.875rem;
             margin-bottom: var(--spacing-sm);
         }
-
         .search-stats span {
             color: var(--text-gold);
             font-weight: 500;
         }
-
+        /* ==================== 工具栏 ==================== */
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+        .sort-controls {
+            display: flex;
+            gap: var(--spacing-xs);
+            align-items: center;
+        }
+        .sort-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        .sort-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-white);
+            border-radius: var(--radius);
+            padding: 8px 16px;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-sans);
+        }
+        .sort-btn:hover {
+            border-color: var(--border-gold);
+            color: var(--text-gold);
+        }
+        .sort-btn.active {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+        }
         /* ==================== 分类过滤 ==================== */
         .filter-section {
             display: flex;
@@ -286,7 +336,6 @@
             justify-content: center;
             margin-bottom: var(--spacing-lg);
         }
-
         .filter-btn {
             background: var(--bg-card);
             border: 1px solid var(--border-white);
@@ -298,26 +347,55 @@
             transition: var(--transition);
             font-family: var(--font-sans);
         }
-
         .filter-btn:hover {
             border-color: var(--border-gold);
             color: var(--text-gold);
         }
-
         .filter-btn.active {
             background: rgba(212, 175, 55, 0.1);
             border-color: var(--primary-gold);
             color: var(--primary-gold);
             font-weight: 500;
         }
-
+        /* ==================== 启发值筛选 ==================== */
+        .inspiration-filter {
+            display: flex;
+            gap: var(--spacing-xs);
+            align-items: center;
+        }
+        .inspiration-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+        }
+        .inspiration-btn {
+            background: var(--bg-card);
+            border: 1px solid var(--border-white);
+            border-radius: var(--radius);
+            padding: 6px 12px;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            cursor: pointer;
+            transition: var(--transition);
+            font-family: var(--font-sans);
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .inspiration-btn:hover {
+            border-color: var(--border-gold);
+            color: var(--text-gold);
+        }
+        .inspiration-btn.active {
+            background: rgba(212, 175, 55, 0.1);
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+        }
         /* ==================== 知识点列表 ==================== */
         .knowledge-list {
             display: grid;
             gap: var(--spacing-md);
             margin-bottom: var(--spacing-2xl);
         }
-
         .knowledge-item {
             background: var(--bg-card);
             border: 1px solid var(--border-white);
@@ -327,7 +405,6 @@
             position: relative;
             overflow: hidden;
         }
-
         .knowledge-item::before {
             content: '';
             position: absolute;
@@ -342,18 +419,15 @@
             opacity: 0;
             transition: var(--transition);
         }
-
         .knowledge-item:hover {
             border-color: var(--border-gold);
             background: rgba(212, 175, 55, 0.03);
             transform: translateY(-2px);
             box-shadow: var(--shadow-gold);
         }
-
         .knowledge-item:hover::before {
             opacity: 1;
         }
-
         .knowledge-header {
             display: flex;
             justify-content: space-between;
@@ -361,15 +435,19 @@
             margin-bottom: var(--spacing-sm);
             gap: var(--spacing-sm);
         }
-
         .knowledge-title {
             font-family: var(--font-serif);
             font-size: 1.25rem;
             font-weight: 600;
             color: var(--text-primary);
             margin-bottom: var(--spacing-xs);
+            flex: 1;
         }
-
+        .knowledge-badges {
+            display: flex;
+            gap: var(--spacing-xs);
+            align-items: center;
+        }
         .knowledge-category {
             display: inline-block;
             background: rgba(212, 175, 55, 0.1);
@@ -381,21 +459,32 @@
             font-weight: 500;
             white-space: nowrap;
         }
-
+        /* ==================== 启发值星级 ==================== */
+        .inspiration-rating {
+            display: flex;
+            gap: 2px;
+            align-items: center;
+        }
+        .star {
+            color: var(--primary-gold);
+            font-size: 0.875rem;
+        }
+        .star.empty {
+            color: var(--text-muted);
+            opacity: 0.3;
+        }
         .knowledge-content {
             color: var(--text-secondary);
             font-size: 0.9375rem;
             line-height: 1.7;
             margin-bottom: var(--spacing-sm);
         }
-
         .knowledge-meta {
             display: flex;
             flex-wrap: wrap;
             gap: var(--spacing-sm);
             align-items: center;
         }
-
         .knowledge-tag {
             background: var(--bg-secondary);
             border: 1px solid var(--border-white);
@@ -404,36 +493,30 @@
             font-size: 0.8125rem;
             color: var(--text-muted);
         }
-
         .knowledge-date {
             color: var(--text-muted);
             font-size: 0.8125rem;
             margin-left: auto;
         }
-
         /* ==================== 空状态 ==================== */
         .empty-state {
             text-align: center;
             padding: var(--spacing-xl) 0;
         }
-
         .empty-icon {
             font-size: 4rem;
             margin-bottom: var(--spacing-md);
             opacity: 0.3;
         }
-
         .empty-text {
             color: var(--text-muted);
             font-size: 1.125rem;
         }
-
         /* ==================== 加载状态 ==================== */
         .loading {
             text-align: center;
             padding: var(--spacing-xl) 0;
         }
-
         .loading-spinner {
             display: inline-block;
             width: 40px;
@@ -443,11 +526,9 @@
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
-
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
-
         /* ==================== 页脚 ==================== */
         .site-footer {
             border-top: 1px solid var(--border-white);
@@ -455,7 +536,6 @@
             text-align: center;
             margin-top: var(--spacing-2xl);
         }
-
         .footer-title {
             font-family: var(--font-serif);
             font-size: 1.5rem;
@@ -463,14 +543,12 @@
             margin-bottom: var(--spacing-md);
             font-weight: 600;
         }
-
         .social-links {
             display: flex;
             justify-content: center;
             gap: var(--spacing-md);
             margin-bottom: var(--spacing-md);
         }
-
         .social-link {
             width: 48px;
             height: 48px;
@@ -484,70 +562,68 @@
             font-size: 1.25rem;
             transition: var(--transition);
         }
-
         .social-link:hover {
             border-color: var(--primary-gold);
             color: var(--primary-gold);
             transform: translateY(-4px);
         }
-
         .copyright {
             color: var(--text-muted);
             font-size: 0.875rem;
             font-weight: 300;
         }
-
         /* ==================== 响应式 ==================== */
         @media (max-width: 768px) {
             :root {
                 --spacing-xl: 48px;
                 --spacing-2xl: 64px;
             }
-
             .site-header {
                 padding: var(--spacing-lg) 0;
             }
-
             .search-box {
                 flex-direction: column;
             }
-
             .search-btn {
                 width: 100%;
             }
-
+            .toolbar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .sort-controls,
+            .inspiration-filter {
+                justify-content: center;
+            }
             .filter-section {
                 gap: var(--spacing-xs);
             }
-
             .filter-btn {
                 padding: 6px 16px;
                 font-size: 0.8125rem;
             }
-
             .knowledge-header {
                 flex-direction: column;
             }
-
+            .knowledge-badges {
+                width: 100%;
+                justify-content: space-between;
+            }
             .knowledge-date {
                 margin-left: 0;
             }
         }
-
         /* ==================== 滚动条 ==================== */
         ::-webkit-scrollbar {
             width: 8px;
         }
-
         ::-webkit-scrollbar-track {
             background: var(--bg-secondary);
         }
-
         ::-webkit-scrollbar-thumb {
             background: var(--primary-gold);
             border-radius: 4px;
         }
-
         /* ==================== 高亮显示 ==================== */
         .highlight {
             background: rgba(212, 175, 55, 0.2);
@@ -560,7 +636,7 @@
 <body>
     <!-- 背景图片 -->
     <div class="hero-background"></div>
-
+    
     <!-- 顶部声明 -->
     <div class="top-notice" id="topNotice">
         <div class="notice-content">
@@ -568,7 +644,7 @@
             <button class="notice-close" id="noticeClose" aria-label="关闭">×</button>
         </div>
     </div>
-
+    
     <!-- 主内容 -->
     <div class="main-wrapper">
         <div class="container">
@@ -581,14 +657,34 @@
                 <h1 class="site-title">弄潮先锋营</h1>
                 <p class="site-subtitle">前沿知识 · 智能检索</p>
             </header>
-
+            
+            <!-- 统计面板 -->
+            <section class="stats-panel">
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-value" id="totalKnowledge">0</div>
+                    <div class="stat-label">知识点总数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏷️</div>
+                    <div class="stat-value" id="totalCategories">0</div>
+                    <div class="stat-label">分类数量</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🕒</div>
+                    <div class="stat-value" id="lastUpdate">-</div>
+                    <div class="stat-label">最新更新</div>
+                    <div class="stat-date" id="lastUpdateFull"></div>
+                </div>
+            </section>
+            
             <!-- 搜索区域 -->
             <section class="search-section">
                 <div class="search-container">
                     <div class="search-box">
-                        <input 
-                            type="text" 
-                            class="search-input" 
+                        <input
+                            type="text"
+                            class="search-input"
                             id="searchInput"
                             placeholder="搜索知识点关键词..."
                             autocomplete="off"
@@ -600,19 +696,35 @@
                     </div>
                 </div>
             </section>
-
+            
+            <!-- 工具栏 -->
+            <div class="toolbar">
+                <div class="sort-controls">
+                    <span class="sort-label">排序：</span>
+                    <button class="sort-btn active" data-sort="date">最新</button>
+                    <button class="sort-btn" data-sort="inspiration">启发值</button>
+                </div>
+                <div class="inspiration-filter">
+                    <span class="inspiration-label">启发值筛选：</span>
+                    <button class="inspiration-btn active" data-stars="all">全部</button>
+                    <button class="inspiration-btn" data-stars="5">⭐5星</button>
+                    <button class="inspiration-btn" data-stars="4">⭐4星+</button>
+                    <button class="inspiration-btn" data-stars="3">⭐3星+</button>
+                </div>
+            </div>
+            
             <!-- 分类过滤 -->
             <section class="filter-section" id="filterSection">
                 <!-- 动态生成分类按钮 -->
             </section>
-
+            
             <!-- 知识点列表 -->
             <section class="knowledge-list" id="knowledgeList">
                 <div class="loading">
                     <div class="loading-spinner"></div>
                 </div>
             </section>
-
+            
             <!-- 页脚 -->
             <footer class="site-footer">
                 <h3 class="footer-title">联系我们</h3>
@@ -649,16 +761,18 @@
             </footer>
         </div>
     </div>
-
+    
     <script>
         'use strict';
-
+        
         // ==================== 知识库管理类 ====================
         class KnowledgeBase {
             constructor() {
                 this.data = [];
                 this.filteredData = [];
                 this.currentCategory = 'all';
+                this.currentSort = 'date';
+                this.currentStarFilter = 'all';
                 this.searchQuery = '';
                 
                 // DOM 元素
@@ -669,16 +783,23 @@
                 this.searchStats = document.getElementById('searchStats');
                 this.totalCount = document.getElementById('totalCount');
                 
+                // 统计面板元素
+                this.totalKnowledge = document.getElementById('totalKnowledge');
+                this.totalCategories = document.getElementById('totalCategories');
+                this.lastUpdate = document.getElementById('lastUpdate');
+                this.lastUpdateFull = document.getElementById('lastUpdateFull');
+                
                 this.init();
             }
-
+            
             async init() {
                 await this.loadData();
                 this.setupEventListeners();
                 this.renderFilters();
+                this.updateStats();
                 this.renderList();
             }
-
+            
             // 加载数据
             async loadData() {
                 try {
@@ -691,10 +812,58 @@
                     this.totalCount.textContent = this.data.length;
                 } catch (error) {
                     console.error('加载数据失败:', error);
-                    this.showError('数据加载失败，请刷新页面重试');
+                    this.showError('数据加载失败,请刷新页面重试');
                 }
             }
-
+            
+            // 更新统计信息
+            updateStats() {
+                // 知识点总数
+                this.totalKnowledge.textContent = this.data.length;
+                
+                // 分类数量
+                const categories = new Set(this.data.map(item => item.category).filter(Boolean));
+                this.totalCategories.textContent = categories.size;
+                
+                // 最新更新时间
+                const dates = this.data
+                    .map(item => item.date)
+                    .filter(Boolean)
+                    .sort((a, b) => new Date(b) - new Date(a));
+                
+                if (dates.length > 0) {
+                    const latestDate = new Date(dates[0]);
+                    this.lastUpdate.textContent = this.formatShortDate(latestDate);
+                    this.lastUpdateFull.textContent = this.formatFullDate(latestDate);
+                } else {
+                    this.lastUpdate.textContent = '-';
+                    this.lastUpdateFull.textContent = '暂无更新记录';
+                }
+            }
+            
+            // 格式化短日期
+            formatShortDate(date) {
+                const now = new Date();
+                const diff = now - date;
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+                
+                if (days === 0) return '今天';
+                if (days === 1) return '昨天';
+                if (days < 7) return `${days}天前`;
+                if (days < 30) return `${Math.floor(days / 7)}周前`;
+                if (days < 365) return `${Math.floor(days / 30)}月前`;
+                return `${Math.floor(days / 365)}年前`;
+            }
+            
+            // 格式化完整日期
+            formatFullDate(date) {
+                return date.toLocaleDateString('zh-CN', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            }
+            
             // 设置事件监听
             setupEventListeners() {
                 // 搜索按钮
@@ -706,7 +875,7 @@
                         this.handleSearch();
                     }
                 });
-
+                
                 // 实时搜索（输入延迟）
                 let searchTimeout;
                 this.searchInput.addEventListener('input', (e) => {
@@ -716,14 +885,34 @@
                         this.filterAndRender();
                     }, 300);
                 });
+                
+                // 排序按钮
+                document.querySelectorAll('.sort-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        this.currentSort = e.target.dataset.sort;
+                        document.querySelectorAll('.sort-btn').forEach(b => b.classList.remove('active'));
+                        e.target.classList.add('active');
+                        this.filterAndRender();
+                    });
+                });
+                
+                // 启发值筛选按钮
+                document.querySelectorAll('.inspiration-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        this.currentStarFilter = e.target.dataset.stars;
+                        document.querySelectorAll('.inspiration-btn').forEach(b => b.classList.remove('active'));
+                        e.target.classList.add('active');
+                        this.filterAndRender();
+                    });
+                });
             }
-
+            
             // 处理搜索
             handleSearch() {
                 this.searchQuery = this.searchInput.value.trim();
                 this.filterAndRender();
             }
-
+            
             // 渲染分类过滤按钮
             renderFilters() {
                 const categories = new Set(['all']);
@@ -732,7 +921,7 @@
                         categories.add(item.category);
                     }
                 });
-
+                
                 const categoryNames = {
                     'all': '全部',
                     'ai': 'AI技术',
@@ -743,22 +932,21 @@
                     'tool': '工具应用',
                     'other': '其他'
                 };
-
+                
                 this.filterSection.innerHTML = Array.from(categories).map(cat => `
-                    <button 
-                        class="filter-btn ${cat === this.currentCategory ? 'active' : ''}" 
+                    <button
+                        class="filter-btn ${cat === this.currentCategory ? 'active' : ''}"
                         data-category="${cat}"
                     >
                         ${categoryNames[cat] || cat}
                     </button>
                 `).join('');
-
+                
                 // 绑定分类点击事件
                 this.filterSection.querySelectorAll('.filter-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
                         this.currentCategory = e.target.dataset.category;
                         this.filterAndRender();
-                        
                         // 更新按钮状态
                         this.filterSection.querySelectorAll('.filter-btn').forEach(b => {
                             b.classList.remove('active');
@@ -767,77 +955,121 @@
                     });
                 });
             }
-
+            
             // 过滤并渲染
             filterAndRender() {
                 this.filteredData = this.data.filter(item => {
                     // 分类过滤
-                    const categoryMatch = this.currentCategory === 'all' || 
+                    const categoryMatch = this.currentCategory === 'all' ||
                                         item.category === this.currentCategory;
+                    
+                    // 启发值过滤
+                    let starMatch = true;
+                    if (this.currentStarFilter !== 'all') {
+                        const minStars = parseInt(this.currentStarFilter);
+                        const itemStars = item.inspiration || 0;
+                        starMatch = itemStars >= minStars;
+                    }
                     
                     // 搜索过滤
                     if (!this.searchQuery) {
-                        return categoryMatch;
+                        return categoryMatch && starMatch;
                     }
-
+                    
                     const query = this.searchQuery.toLowerCase();
                     const titleMatch = item.title.toLowerCase().includes(query);
                     const contentMatch = item.content.toLowerCase().includes(query);
-                    const tagsMatch = item.tags && item.tags.some(tag => 
+                    const tagsMatch = item.tags && item.tags.some(tag =>
                         tag.toLowerCase().includes(query)
                     );
-
-                    return categoryMatch && (titleMatch || contentMatch || tagsMatch);
+                    
+                    return categoryMatch && starMatch && (titleMatch || contentMatch || tagsMatch);
                 });
-
+                
+                // 排序
+                this.sortData();
+                
                 this.renderList();
             }
-
+            
+            // 排序数据
+            sortData() {
+                if (this.currentSort === 'date') {
+                    this.filteredData.sort((a, b) => {
+                        const dateA = new Date(a.date || '1970-01-01');
+                        const dateB = new Date(b.date || '1970-01-01');
+                        return dateB - dateA;
+                    });
+                } else if (this.currentSort === 'inspiration') {
+                    this.filteredData.sort((a, b) => {
+                        const insA = a.inspiration || 0;
+                        const insB = b.inspiration || 0;
+                        return insB - insA;
+                    });
+                }
+            }
+            
             // 渲染知识点列表
             renderList() {
                 if (this.filteredData.length === 0) {
                     this.showEmpty();
                     return;
                 }
-
+                
                 this.knowledgeList.innerHTML = this.filteredData.map(item => {
                     const highlightedTitle = this.highlightText(item.title);
                     const highlightedContent = this.highlightText(item.content);
+                    const stars = this.renderStars(item.inspiration || 0);
                     
                     return `
                         <article class="knowledge-item">
                             <div class="knowledge-header">
-                                <div>
-                                    <h3 class="knowledge-title">${highlightedTitle}</h3>
+                                <h3 class="knowledge-title">${highlightedTitle}</h3>
+                                <div class="knowledge-badges">
+                                    <span class="knowledge-category">${this.getCategoryName(item.category)}</span>
+                                    ${stars}
                                 </div>
-                                <span class="knowledge-category">${this.getCategoryName(item.category)}</span>
                             </div>
                             <div class="knowledge-content">${highlightedContent}</div>
                             <div class="knowledge-meta">
-                                ${item.tags ? item.tags.map(tag => 
+                                ${item.tags ? item.tags.map(tag =>
                                     `<span class="knowledge-tag">${tag}</span>`
                                 ).join('') : ''}
-                                ${item.date ? `<span class="knowledge-date">${item.date}</span>` : ''}
+                                ${item.date ? `<span class="knowledge-date">${this.formatFullDate(new Date(item.date))}</span>` : ''}
                             </div>
                         </article>
                     `;
                 }).join('');
-
+                
                 // 更新统计信息
-                const resultText = this.searchQuery ? 
+                const resultText = this.searchQuery || this.currentStarFilter !== 'all' || this.currentCategory !== 'all' ?
                     `找到 <span>${this.filteredData.length}</span> 个相关结果` :
                     `共收录 <span>${this.data.length}</span> 个知识点`;
                 this.searchStats.innerHTML = resultText;
             }
-
+            
+            // 渲染星级
+            renderStars(count) {
+                if (count === 0) return '';
+                
+                const maxStars = 5;
+                let starsHtml = '<div class="inspiration-rating">';
+                
+                for (let i = 1; i <= maxStars; i++) {
+                    starsHtml += `<span class="star ${i <= count ? '' : 'empty'}">★</span>`;
+                }
+                
+                starsHtml += '</div>';
+                return starsHtml;
+            }
+            
             // 高亮文本
             highlightText(text) {
                 if (!this.searchQuery) return text;
-                
                 const regex = new RegExp(`(${this.searchQuery})`, 'gi');
                 return text.replace(regex, '<span class="highlight">$1</span>');
             }
-
+            
             // 获取分类名称
             getCategoryName(category) {
                 const names = {
@@ -851,7 +1083,7 @@
                 };
                 return names[category] || category;
             }
-
+            
             // 显示空状态
             showEmpty() {
                 this.knowledgeList.innerHTML = `
@@ -863,7 +1095,7 @@
                     </div>
                 `;
             }
-
+            
             // 显示错误
             showError(message) {
                 this.knowledgeList.innerHTML = `
@@ -874,7 +1106,7 @@
                 `;
             }
         }
-
+        
         // ==================== 顶部声明管理 ====================
         class NoticeManager {
             constructor() {
@@ -882,24 +1114,24 @@
                 this.closeBtn = document.getElementById('noticeClose');
                 this.init();
             }
-
+            
             init() {
                 if (!this.notice || !this.closeBtn) return;
-
+                
                 if (localStorage.getItem('knowledgeNoticeClose') === 'true') {
                     this.hide();
                     return;
                 }
-
+                
                 this.closeBtn.addEventListener('click', () => this.close());
                 setTimeout(() => this.close(), 10000);
             }
-
+            
             close() {
                 localStorage.setItem('knowledgeNoticeClose', 'true');
                 this.hide();
             }
-
+            
             hide() {
                 if (this.notice) {
                     this.notice.classList.add('notice-hidden');
@@ -907,12 +1139,12 @@
                 }
             }
         }
-
+        
         // ==================== 初始化 ====================
         document.addEventListener('DOMContentLoaded', () => {
             new NoticeManager();
             new KnowledgeBase();
-
+            
             // 平滑滚动
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
