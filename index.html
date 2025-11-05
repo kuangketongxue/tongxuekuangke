@@ -11,21 +11,78 @@
     <meta name="robots" content="index,follow">
     <meta name="theme-color" content="#000000">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
-    
     <!-- DNS预解析 -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    
     <!-- 预连接 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    
     <!-- 字体优化加载 -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
-    
     <!-- 关键CSS内联 -->
-    <style>:root{--primary-gold:#d4af37;--primary-black:#000;--primary-white:#fff;--bg-primary:#000;--text-primary:#fff;--text-secondary:#ccc;--text-gold:#d4af37;--border-gold:rgba(212,175,55,.2);--transition:.4s cubic-bezier(.4,0,.2,1);--font-serif:'Noto Serif SC',serif;--font-sans:'Noto Sans SC',sans-serif}*{margin:0;padding:0;box-sizing:border-box}html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}body{font-family:var(--font-sans);background:var(--bg-primary);color:var(--text-primary);line-height:1.8;overflow-x:hidden}.hero-background{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:0;overflow:hidden;will-change:transform}.hero-background::before{content:'';position:absolute;inset:0;background:url('image/00294682dfcd997e226623d058d51aab.png') center/cover no-repeat fixed;filter:brightness(1.8) contrast(1.2);will-change:transform;animation:zoom 20s ease-in-out infinite alternate}@keyframes zoom{to{transform:scale(1.05)}}.hero-background::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.5) 100%);backdrop-filter:blur(.5px)}.main-wrapper{position:relative;z-index:1;padding-top:48px;min-height:100vh}.container{max-width:1200px;margin:0 auto;padding:0 24px}.site-header{text-align:center;padding:120px 0 80px;margin-bottom:80px}.site-title{font-family:var(--font-serif);font-size:clamp(2.5rem,6vw,4rem);font-weight:700;color:var(--primary-gold);letter-spacing:.05em;margin-bottom:16px;background:linear-gradient(135deg,var(--primary-gold),#f4e4b8,var(--primary-gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:glow 3s ease-in-out infinite alternate}@keyframes glow{to{filter:brightness(1.2) drop-shadow(0 0 30px rgba(212,175,55,.5))}}.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;margin-bottom:120px}.card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:48px;text-decoration:none;color:var(--text-primary);transition:var(--transition);position:relative;overflow:hidden;min-height:280px;backdrop-filter:blur(10px);will-change:transform}.card:hover{border-color:var(--border-gold);background:rgba(212,175,55,.1);transform:translateY(-8px) scale(1.02);box-shadow:0 12px 32px rgba(212,175,55,.25)}</style>
+    <style>
+        :root{--primary-gold:#d4af37;--primary-black:#000;--primary-white:#fff;--bg-primary:#000;--text-primary:#fff;--text-secondary:#ccc;--text-gold:#d4af37;--border-gold:rgba(212,175,55,.2);--transition:.4s cubic-bezier(.4,0,.2,1);--font-serif:'Noto Serif SC',serif;--font-sans:'Noto Sans SC',sans-serif}
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+        body{font-family:var(--font-sans);background:var(--bg-primary);color:var(--text-primary);line-height:1.8;overflow-x:hidden}
+        .hero-background{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:0;overflow:hidden;will-change:transform}
+        .hero-background::before{content:'';position:absolute;inset:0;background:url('image/00294682dfcd997e226623d058d51aab.png') center/cover no-repeat fixed;filter:brightness(1.8) contrast(1.2);will-change:transform;animation:zoom 20s ease-in-out infinite alternate}
+        @keyframes zoom{to{transform:scale(1.05)}}
+        .hero-background::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.5) 100%);backdrop-filter:blur(.5px)}
+        .main-wrapper{position:relative;z-index:1;padding-top:48px;min-height:100vh}
+        .container{max-width:1200px;margin:0 auto;padding:0 24px}
+        .site-header{text-align:center;padding:120px 0 80px;margin-bottom:80px}
+        .site-title{font-family:var(--font-serif);font-size:clamp(2.5rem,6vw,4rem);font-weight:700;color:var(--primary-gold);letter-spacing:.05em;margin-bottom:16px;background:linear-gradient(135deg,var(--primary-gold),#f4e4b8,var(--primary-gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:glow 3s ease-in-out infinite alternate}
+        @keyframes glow{to{filter:brightness(1.2) drop-shadow(0 0 30px rgba(212,175,55,.5))}}
+        .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;margin-bottom:120px}
+        .card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:48px;text-decoration:none;color:var(--text-primary);transition:var(--transition);position:relative;overflow:hidden;min-height:280px;backdrop-filter:blur(10px);will-change:transform}
+        .card:hover{border-color:var(--border-gold);background:rgba(212,175,55,.1);transform:translateY(-8px) scale(1.02);box-shadow:0 12px 32px rgba(212,175,55,.25)}
+        
+        /* 返回按钮样式 */
+        .back-button{
+            position:fixed;
+            top:70px;
+            left:24px;
+            z-index:101;
+            display:flex;
+            align-items:center;
+            gap:8px;
+            padding:12px 20px;
+            background:rgba(0,0,0,.6);
+            border:1px solid var(--border-gold);
+            border-radius:4px;
+            color:var(--text-gold);
+            text-decoration:none;
+            font-size:.875rem;
+            font-weight:500;
+            backdrop-filter:blur(20px);
+            transition:var(--transition);
+        }
+        .back-button:hover{
+            background:rgba(212,175,55,.2);
+            border-color:var(--primary-gold);
+            transform:translateX(-4px);
+            box-shadow:0 4px 16px rgba(212,175,55,.3);
+        }
+        .back-button svg{
+            width:16px;
+            height:16px;
+            transition:transform .3s ease;
+        }
+        .back-button:hover svg{
+            transform:translateX(-2px);
+        }
+        
+        @media(max-width:768px){
+            .back-button{
+                top:60px;
+                left:16px;
+                padding:10px 16px;
+                font-size:.8125rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- 背景图片 -->
@@ -38,6 +95,14 @@
             <button id="noticeClose" style="background:transparent;border:1px solid var(--border-gold);color:var(--text-gold);width:24px;height:24px;border-radius:50%;cursor:pointer;transition:var(--transition)" aria-label="关闭">×</button>
         </div>
     </div>
+    
+    <!-- 返回按钮 -->
+    <a href="https://kuangketongxue.github.io/tongxuekuangke/Homepage.html" class="back-button" title="返回上一页">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        <span>返回</span>
+    </a>
     
     <!-- 主内容 -->
     <div class="main-wrapper">
@@ -238,6 +303,17 @@
     <link rel="stylesheet" href="data:text/css;base64,LnRvcC1ub3RpY2V7dHJhbnNpdGlvbjpvcGFjaXR5IC40cyxoZWlnaHQgLjRzfS5ub3RpY2UtaGlkZGVue2Rpc3BsYXk6bm9uZX0ubm90aWNlLWNsb3NlOmhvdmVye2JhY2tncm91bmQ6cmdiYSgyMTIsMTc1LDU1LC4yKTt0cmFuc2Zvcm06cm90YXRlKDkwZGVnKX0uY2FyZC1pY29ue3otaW5kZXg6MTtwb3NpdGlvbjpyZWxhdGl2ZX0uY2FyZC10aXRsZSwuY2FyZC1kZXNje3otaW5kZXg6MTtwb3NpdGlvbjpyZWxhdGl2ZX0uc29jaWFsLWxpbms6aG92ZXJ7Ym9yZGVyLWNvbG9yOnZhcigtLXByaW1hcnktZ29sZCk7Y29sb3I6dmFyKC0tcHJpbWFyeS1nb2xkKTt0cmFuc2Zvcm06dHJhbnNsYXRlWSgtNHB4KX1AbWVkaWEobWF4LXdpZHRoOjc2OHB4KXsuY2FyZC1ncmlke2dyaWQtdGVtcGxhdGUtY29sdW1uczoxZnJ9LmNhcmQ6aG92ZXJ7dHJhbnNmb3JtOnRyYW5zbGF0ZVkoLTRweCkgc2NhbGUoMS4wMSl9fTo6LXdlYmtpdC1zY3JvbGxiYXJ7d2lkdGg6MTBweH06Oi13ZWJraXQtc2Nyb2xsYmFyLXRyYWNre2JhY2tncm91bmQ6IzBhMGEwYTtib3JkZXItbGVmdDoxcHggc29saWQgcmdiYSgyMTIsMTc1LDU1LC4xKX06Oi13ZWJraXQtc2Nyb2xsYmFyLXRodW1ie2JhY2tncm91bmQ6bGluZWFyLWdyYWRpZW50KDE4MGRlZywjZDRhZjM3LCNiODk0MWUpO2JvcmRlci1yYWRpdXM6NXB4O2JvcmRlcjoycHggc29saWQgIzBhMGEwYX06Oi13ZWJraXQtc2Nyb2xsYmFyLXRodW1iOmhvdmVye2JhY2tncm91bmQ6I2Q0YWYzN30=" media="print" onload="this.media='all'">
     
     <!-- JavaScript异步加载 -->
-    <script>!function(){"use strict";const e=document.getElementById("topNotice"),t=document.getElementById("noticeClose");if(e&&t){"true"===sessionStorage.getItem("noticeClose")&&(e.style.display="none",document.querySelector(".main-wrapper").style.paddingTop="0");const n=()=>{sessionStorage.setItem("noticeClose","true"),e.style.display="none",document.querySelector(".main-wrapper").style.paddingTop="0"};t.addEventListener("click",n),setTimeout(n,1e4)}const n=new IntersectionObserver((e=>{e.forEach(((e,t)=>{e.isIntersecting&&(setTimeout((()=>{e.target.style.opacity="1",e.target.style.transform="translateY(0)"}),50*t),n.unobserve(e.target))}))}),{threshold:.1,rootMargin:"0px 0px -50px 0px"});document.querySelectorAll(".card").forEach((e=>{e.style.opacity="0",e.style.transform="translateY(30px)",e.style.transition="opacity .6s ease-out,transform .6s ease-out",n.observe(e)})),document.querySelectorAll('a[href^="http"]').forEach((e=>{e.hasAttribute("target")||(e.setAttribute("target","_blank"),e.setAttribute("rel","noopener noreferrer"))})),"performance"in window&&"timing"in performance&&window.addEventListener("load",(()=>{const e=performance.timing.loadEventEnd-performance.timing.navigationStart;console.log(`⚡ 页面加载时间: ${e}ms`)}))}();</script>
+    <script>
+        !function(){"use strict";
+        const e=document.getElementById("topNotice"),t=document.getElementById("noticeClose");
+        if(e&&t){"true"===sessionStorage.getItem("noticeClose")&&(e.style.display="none",document.querySelector(".main-wrapper").style.paddingTop="0");
+        const n=()=>{sessionStorage.setItem("noticeClose","true"),e.style.display="none",document.querySelector(".main-wrapper").style.paddingTop="0"};
+        t.addEventListener("click",n),setTimeout(n,1e4)}
+        const n=new IntersectionObserver((e=>{e.forEach(((e,t)=>{e.isIntersecting&&(setTimeout((()=>{e.target.style.opacity="1",e.target.style.transform="translateY(0)"}),50*t),n.unobserve(e.target))}))}),{threshold:.1,rootMargin:"0px 0px -50px 0px"});
+        document.querySelectorAll(".card").forEach((e=>{e.style.opacity="0",e.style.transform="translateY(30px)",e.style.transition="opacity .6s ease-out,transform .6s ease-out",n.observe(e)})),
+        document.querySelectorAll('a[href^="http"]').forEach((e=>{e.hasAttribute("target")||(e.setAttribute("target","_blank"),e.setAttribute("rel","noopener noreferrer"))})),
+        "performance"in window&&"timing"in performance&&window.addEventListener("load",(()=>{const e=performance.timing.loadEventEnd-performance.timing.navigationStart;console.log`⚡ 页面加载时间: ${e}ms`}))
+        }();
+    </script>
 </body>
 </html>
