@@ -13,7 +13,6 @@
             padding: 0;
             box-sizing: border-box;
         }
-        
         :root {
             --primary-color: #d4af37;
             --secondary-color: #1a1a2e;
@@ -27,7 +26,6 @@
             --spacing-xl: 60px;
             --spacing-2xl: 80px;
         }
-        
         body {
             font-family: 'Noto Serif SC', 'Microsoft YaHei', serif;
             min-height: 100vh;
@@ -37,7 +35,6 @@
             color: var(--text-primary);
             letter-spacing: 0.5px;
         }
-        
         /* 高级星空背景 */
         body::before {
             content: '';
@@ -59,12 +56,10 @@
             opacity: 0.6;
             z-index: 0;
         }
-        
         @keyframes stars {
             from { transform: translateY(0); }
             to { transform: translateY(-300px); }
         }
-        
         /* 光晕效果 */
         body::after {
             content: '';
@@ -77,12 +72,10 @@
             animation: rotate 40s linear infinite;
             z-index: 0;
         }
-        
         @keyframes rotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
-        
         .container {
             position: relative;
             z-index: 1;
@@ -91,7 +84,6 @@
             display: flex;
             flex-direction: column;
         }
-        
         /* 顶部通知栏 */
         .notification {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
@@ -110,12 +102,10 @@
             letter-spacing: 2px;
             transition: all 0.3s ease;
         }
-        
         .notification:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(212, 175, 55, 0.2);
         }
-        
         /* 主要内容区 */
         .main-content {
             display: grid;
@@ -127,7 +117,6 @@
             width: 100%;
             padding-bottom: 100px;
         }
-        
         /* 卡片通用样式 */
         .card {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
@@ -137,25 +126,21 @@
             backdrop-filter: blur(20px);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        
         .card:hover {
             transform: translateY(-4px);
             box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
             border-color: rgba(212, 175, 55, 0.3);
         }
-        
         /* 左侧区域 */
         .left-section {
             display: flex;
             flex-direction: column;
             gap: var(--spacing-xl);
         }
-        
         .avatar-section {
             text-align: center;
             padding: var(--spacing-xl) var(--spacing-lg);
         }
-        
         .avatar-container {
             width: 180px;
             height: 180px;
@@ -171,13 +156,11 @@
             box-shadow: 0 8px 32px rgba(212, 175, 55, 0.2);
             transition: all 0.4s ease;
         }
-        
         .avatar-container:hover {
             transform: scale(1.05);
             border-color: var(--primary-color);
             box-shadow: 0 12px 48px rgba(212, 175, 55, 0.4);
         }
-        
         .avatar-container::before {
             content: '';
             position: absolute;
@@ -188,11 +171,9 @@
             transition: opacity 0.4s ease;
             animation: rotate 3s linear infinite;
         }
-        
         .avatar-container:hover::before {
             opacity: 0.5;
         }
-        
         .avatar-container img {
             width: 100%;
             height: 100%;
@@ -200,12 +181,10 @@
             position: relative;
             z-index: 1;
         }
-        
         .avatar-placeholder {
             font-size: 80px;
             color: var(--primary-color);
         }
-        
         .site-name {
             color: var(--primary-color);
             font-size: 22px;
@@ -214,7 +193,6 @@
             margin-top: var(--spacing-md);
             font-family: 'Poppins', sans-serif;
         }
-        
         .site-domain {
             color: var(--text-secondary);
             font-size: 18px;
@@ -224,7 +202,6 @@
             letter-spacing: 0.5px;
             line-height: 1.5;
         }
-        
         .quote-section h2 {
             color: var(--primary-color);
             font-size: 24px;
@@ -233,7 +210,6 @@
             font-style: italic;
             letter-spacing: 2px;
         }
-        
         .quote-section p {
             color: var(--text-secondary);
             font-size: 16px;
@@ -241,7 +217,6 @@
             font-weight: 300;
             letter-spacing: 1px;
         }
-        
         .social-links {
             display: flex;
             gap: var(--spacing-md);
@@ -249,7 +224,6 @@
             justify-content: center;
             flex-wrap: wrap;
         }
-        
         .social-icon {
             width: 56px;
             height: 56px;
@@ -265,14 +239,12 @@
             transition: all 0.3s ease;
             text-decoration: none;
         }
-        
         .social-icon:hover {
             background: rgba(212, 175, 55, 0.2);
             border-color: var(--primary-color);
             transform: translateY(-4px) rotate(5deg);
             box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
         }
-        
         /* 中间区域 */
         .center-section {
             display: flex;
@@ -280,7 +252,6 @@
             justify-content: center;
             gap: var(--spacing-xl);
         }
-        
         .welcome-text {
             color: var(--primary-color);
             font-size: 48px;
@@ -291,7 +262,6 @@
             font-family: 'Noto Serif SC', serif;
             text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
         }
-        
         .quote-box {
             padding: var(--spacing-2xl) var(--spacing-xl);
             text-align: center;
@@ -300,7 +270,6 @@
             flex-direction: column;
             justify-content: center;
         }
-        
         .quote-box p {
             color: var(--text-primary);
             font-size: 20px;
@@ -309,7 +278,6 @@
             font-weight: 300;
             letter-spacing: 1px;
         }
-        
         .quote-author {
             color: var(--primary-color);
             font-size: 15px;
@@ -317,11 +285,9 @@
             letter-spacing: 2px;
             font-weight: 300;
         }
-        
         .link-section {
             padding: var(--spacing-xl);
         }
-        
         .link-title {
             color: var(--text-primary);
             font-size: 18px;
@@ -333,7 +299,6 @@
             letter-spacing: 2px;
             font-weight: 300;
         }
-        
         .link-button {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
             border: 1px solid rgba(212, 175, 55, 0.3);
@@ -351,25 +316,21 @@
             letter-spacing: 2px;
             font-weight: 300;
         }
-        
         .link-button:hover {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.15) 100%);
             transform: translateY(-4px);
             box-shadow: 0 12px 36px rgba(212, 175, 55, 0.3);
         }
-        
         /* 右侧区域 */
         .right-section {
             display: flex;
             flex-direction: column;
             gap: var(--spacing-xl);
         }
-        
         .date-time {
             text-align: center;
             padding: var(--spacing-2xl) var(--spacing-xl);
         }
-        
         .date {
             color: var(--text-secondary);
             font-size: 15px;
@@ -377,7 +338,6 @@
             letter-spacing: 2px;
             font-weight: 300;
         }
-        
         .time {
             color: var(--primary-color);
             font-size: 56px;
@@ -386,7 +346,6 @@
             letter-spacing: 4px;
             text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
         }
-        
         .weather {
             color: var(--text-secondary);
             font-size: 14px;
@@ -395,28 +354,23 @@
             font-weight: 300;
             line-height: 1.8;
         }
-        
         .weather-icon {
             font-size: 40px;
             margin-bottom: var(--spacing-sm);
             animation: float 3s ease-in-out infinite;
         }
-        
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-10px); }
         }
-        
         .weather-loading {
             color: var(--primary-color);
             animation: pulse 1.5s ease-in-out infinite;
         }
-        
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
-        
         .weather-detail {
             display: flex;
             justify-content: center;
@@ -425,13 +379,11 @@
             margin-top: var(--spacing-sm);
             opacity: 0.7;
         }
-        
         .weather-item {
             display: flex;
             align-items: center;
             gap: 4px;
         }
-        
         /* 底部备案信息 */
         .footer {
             position: fixed;
@@ -449,7 +401,6 @@
             letter-spacing: 1px;
             font-weight: 300;
         }
-        
         /* 右下角图标 */
         .chat-icon {
             position: fixed;
@@ -470,19 +421,16 @@
             z-index: 10;
             backdrop-filter: blur(20px);
         }
-        
         .chat-icon:hover {
             transform: scale(1.1) rotate(360deg);
             border-color: var(--primary-color);
             box-shadow: 0 12px 48px rgba(212, 175, 55, 0.4);
         }
-        
         .chat-icon img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        
         /* 响应式设计 */
         @media (max-width: 1400px) {
             .main-content {
@@ -490,76 +438,61 @@
                 gap: var(--spacing-lg);
             }
         }
-        
         @media (max-width: 1024px) {
             .container {
                 padding: var(--spacing-lg) var(--spacing-md);
             }
-            
             .main-content {
                 grid-template-columns: 1fr;
                 gap: var(--spacing-lg);
             }
-            
             .welcome-text {
                 font-size: 36px;
                 letter-spacing: 4px;
             }
-            
             .time {
                 font-size: 48px;
             }
-            
             .footer {
                 width: calc(100% - 32px);
                 max-width: 500px;
                 text-align: center;
             }
         }
-        
         @media (max-width: 768px) {
             .container {
                 padding: var(--spacing-md) var(--spacing-sm);
             }
-            
             .card {
                 padding: var(--spacing-lg);
             }
-            
             .welcome-text {
                 font-size: 28px;
                 letter-spacing: 2px;
             }
-            
             .time {
                 font-size: 40px;
             }
-            
             .avatar-container {
                 width: 150px;
                 height: 150px;
             }
-            
             .notification {
                 font-size: 14px;
                 padding: var(--spacing-sm) var(--spacing-md);
             }
-            
             .quote-box p {
                 font-size: 18px;
             }
-            
             .chat-icon {
                 width: 56px;
                 height: 56px;
             }
-            
             .weather-detail {
                 flex-direction: column;
                 gap: 4px;
             }
         }
-        
         /* 加载动画 */
         @keyframes fadeIn {
             from {
@@ -571,11 +504,9 @@
                 transform: translateY(0);
             }
         }
-        
         .card {
             animation: fadeIn 0.6s ease-out;
         }
-        
         .left-section .card:nth-child(1) { animation-delay: 0.1s; }
         .left-section .card:nth-child(2) { animation-delay: 0.2s; }
         .center-section .card:nth-child(1) { animation-delay: 0.15s; }
@@ -589,7 +520,6 @@
         <div class="notification" id="greeting">
             嘿上好 · 欢迎来到我的主页
         </div>
-        
         <!-- 主要内容 -->
         <div class="main-content">
             <!-- 左侧 -->
@@ -601,7 +531,6 @@
                     <div class="site-name">狂客同学</div>
                     <div class="site-domain">Classmate Kuangke.top</div>
                 </div>
-                
                 <div class="card quote-section">
                     <h2>❝ Hello World!</h2>
                     <p>世界不死，理想不灭</p>
@@ -618,18 +547,15 @@
                     </div>
                 </div>
             </div>
-            
             <!-- 中间 -->
             <div class="center-section">
                 <div class="welcome-text">
                     欢迎访问
                 </div>
-                
                 <div class="card quote-box">
                     <p id="quote-text">加载中...</p>
                     <p class="quote-author" id="quote-author">—</p>
                 </div>
-                
                 <div class="card link-section">
                     <div class="link-title">
                         🔗 网站列表
@@ -640,7 +566,6 @@
                     </a>
                 </div>
             </div>
-            
             <!-- 右侧 -->
             <div class="right-section">
                 <div class="card date-time">
@@ -652,22 +577,18 @@
                 </div>
             </div>
         </div>
-        
         <!-- 底部备案 -->
         <div class="footer">
             ©️ 2025 狂客版权所有
         </div>
-        
         <!-- 右下角头像 -->
         <div class="chat-icon" title="联系我">
             <span style="font-size: 32px;">💬</span>
         </div>
     </div>
-    
     <script>
         // ========== 配置区域 ==========
         const QWEATHER_KEY = 'YOUR_QWEATHER_API_KEY'; // 请替换为您的和风天气 API Key
-        
         // 金句库
         const quotes = [
             { text: "有死之限是因为惧怕死亡<br>很怕死亡是因为有挂念的事与人吧", author: "原神" },
@@ -681,7 +602,6 @@
             { text: "愿你历尽千帆<br>归来仍是少年", author: "祝福语" },
             { text: "山高路远<br>我们慢慢来", author: "治愈系" }
         ];
-        
         // 和风天气图标映射
         const qweatherIcons = {
             '100': '☀️', // 晴
@@ -743,12 +663,10 @@
             '901': '❄️', // 冷
             '999': '🌈'  // 未知
         };
-        
         // 获取和风天气图标
         function getQweatherIcon(code) {
             return qweatherIcons[code] || '🌈';
         }
-        
         // 随机选择金句
         function loadRandomQuote() {
             const randomIndex = Math.floor(Math.random() * quotes.length);
@@ -756,7 +674,6 @@
             document.getElementById('quote-text').innerHTML = quote.text;
             document.getElementById('quote-author').textContent = `— ${quote.author}`;
         }
-        
         // 获取时间问候语
         function getGreeting() {
             const hour = new Date().getHours();
@@ -767,12 +684,10 @@
             if (hour >= 18 && hour < 22) return '嘿晚上好';
             return '嘿深夜好';
         }
-        
         // 更新问候语
         function updateGreeting() {
             document.getElementById('greeting').textContent = getGreeting() + ' · 欢迎来到我的主页';
         }
-        
         // 实时时钟
         function updateClock() {
             const now = new Date();
@@ -781,7 +696,6 @@
             const seconds = String(now.getSeconds()).padStart(2, '0');
             document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
         }
-        
         // 更新日期
         function updateDate() {
             const now = new Date();
@@ -792,14 +706,12 @@
             const weekday = weekdays[now.getDay()];
             document.getElementById('date').textContent = `${year}年${month}月${day}日 ${weekday}`;
         }
-        
         // 获取城市ID（通过经纬度）
         async function getCityId(lon, lat) {
             try {
                 const url = `https://geoapi.qweather.com/v2/city/lookup?location=${lon},${lat}&key=${QWEATHER_KEY}`;
                 const response = await fetch(url);
                 const data = await response.json();
-                
                 if (data.code === '200' && data.location && data.location.length > 0) {
                     return data.location[0].id;
                 }
@@ -809,42 +721,34 @@
                 return null;
             }
         }
-        
         // 获取和风天气实时数据
         async function fetchQWeather() {
             const weatherElement = document.getElementById('weather');
-            
             // 检查API Key
             if (QWEATHER_KEY === '2a7e3fb132e443ac965e50b001317f5f') {
                 console.warn('请先设置和风天气API Key');
                 showDefaultWeather();
                 return;
             }
-            
             try {
                 // 获取用户位置
                 if ('geolocation' in navigator) {
                     navigator.geolocation.getCurrentPosition(
                         async (position) => {
                             const { latitude, longitude } = position.coords;
-                            
                             try {
                                 // 获取城市ID
                                 const cityId = await getCityId(longitude, latitude);
-                                
                                 if (!cityId) {
                                     throw new Error('无法获取城市信息');
                                 }
-                                
                                 // 获取实时天气
                                 const weatherUrl = `https://devapi.qweather.com/v7/weather/now?location=${cityId}&key=${QWEATHER_KEY}`;
                                 const response = await fetch(weatherUrl);
                                 const data = await response.json();
-                                
                                 if (data.code === '200' && data.now) {
                                     const weather = data.now;
                                     const icon = getQweatherIcon(weather.icon);
-                                    
                                     weatherElement.innerHTML = `
                                         <div class="weather-icon">${icon}</div>
                                         <div style="font-size: 16px; margin-bottom: 8px;">
@@ -890,13 +794,11 @@
                 showDefaultWeather();
             }
         }
-        
         // 显示默认天气
         function showDefaultWeather() {
             const weatherElement = document.getElementById('weather');
             const hour = new Date().getHours();
             let weather, icon, temp;
-            
             // 根据时间显示合适的天气
             if (hour >= 6 && hour < 18) {
                 weather = '天气晴朗';
@@ -907,7 +809,6 @@
                 icon = '🌙';
                 temp = '18';
             }
-            
             weatherElement.innerHTML = `
                 <div class="weather-icon">${icon}</div>
                 <div style="font-size: 16px; margin-bottom: 8px;">
@@ -918,7 +819,6 @@
                 </div>
             `;
         }
-        
         // 初始化
         window.addEventListener('load', function() {
             loadRandomQuote();
@@ -926,15 +826,12 @@
             updateDate();
             updateClock();
             fetchQWeather();
-            
             // 定时更新
             setInterval(updateClock, 1000);
             setInterval(updateGreeting, 60000);
             setInterval(updateDate, 60000);
-            
             // 每15分钟更新一次天气
             setInterval(fetchQWeather, 900000);
-            
             // 欢迎提示（延迟显示）
             const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
             setTimeout(() => {
@@ -942,7 +839,6 @@
                 alert(message);
             }, 800);
         });
-        
         // 添加页面可见性API，当页面重新可见时更新天气
         document.addEventListener('visibilitychange', function() {
             if (!document.hidden) {
