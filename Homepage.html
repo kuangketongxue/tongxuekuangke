@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5plus1.top - 我的主页</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            height: 100vh;
+            overflow: hidden;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            position: relative;
+        }
+        /* 背景图片层 */
+        body::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('YOUR_BACKGROUND_IMAGE_URL_HERE');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        /* 背景动画星空效果 */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(2px 2px at 20px 30px, white, transparent),
+                radial-gradient(2px 2px at 60px 70px, white, transparent),
+                radial-gradient(1px 1px at 50px 50px, white, transparent),
+                radial-gradient(1px 1px at 130px 80px, white, transparent),
+                radial-gradient(2px 2px at 90px 10px, white, transparent);
+            background-size: 200px 200px;
+            animation: stars 20s linear infinite;
+            opacity: 0.5;
+            z-index: 0;
+        }
+        @keyframes stars {
+            from { transform: translateY(0); }
+            to { transform: translateY(-200px); }
+        }
+        .container {
+            position: relative;
+            z-index: 1;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+        }
+        /* 顶部通知栏 */
+        .notification {
+            background: rgba(255, 50, 50, 0.2);
+            border: 2px solid #ff3333;
+            border-radius: 10px;
+            padding: 15px 30px;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            margin-bottom: 20px;
+            align-self: center;
+        }
+        .notification::before {
+            content: 'ℹ️ ';
+        }
+        /* 主要内容区 */
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 30px;
+            height: calc(100vh - 200px);
+        }
+        /* 左侧区域 */
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .avatar-section {
+            text-align: center;
+        }
+        .avatar-title {
+            color: #ff6b6b;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+        .avatar-container {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            border: 4px solid #ff6b6b;
+            overflow: hidden;
+            background: linear-gradient(135deg, #ff9a56, #ff6b6b);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .site-name {
+            color: #ff6b6b;
+            font-size: 24px;
+            margin-top: 10px;
+        }
+        .quote-section {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        .quote-section h2 {
+            color: white;
+            font-size: 28px;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+        .quote-section p {
+            color: #ddd;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+        .social-links {
+            display: flex;
+            gap: 20px;
+            margin-top: 20px;
+            justify-content: center;
+        }
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+        .social-icon:hover {
+            background: rgba(255, 255, 255, 0.4);
+            transform: scale(1.1);
+        }
+        /* 中间区域 */
+        .center-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .welcome-text {
+            color: #ff6b6b;
+            font-size: 32px;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .quote-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
+            text-align: center;
+            width: 100%;
+        }
+        .quote-box p {
+            color: white;
+            font-size: 18px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        .quote-author {
+            color: #ff6b6b;
+            font-size: 16px;
+            font-style: italic;
+        }
+        .link-section {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        .link-title {
+            color: white;
+            font-size: 20px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            justify-content: center;
+        }
+        .link-button {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            padding: 20px;
+            border-radius: 10px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            text-decoration: none;
+        }
+        .link-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-5px);
+        }
+        /* 右侧区域 */
+        .right-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+        .date-time {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .date {
+            color: #ddd;
+            font-size: 16px;
+            margin-bottom: 15px;
+        }
+        .time {
+            color: white;
+            font-size: 48px;
+            font-weight: bold;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 3px;
+        }
+        .weather {
+            color: #ff6b6b;
+            font-size: 14px;
+            margin-top: 15px;
+        }
+        /* 底部备案信息 */
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 50, 50, 0.3);
+            border: 2px solid #ff3333;
+            padding: 10px 30px;
+            border-radius: 10px;
+            color: white;
+            font-size: 14px;
+            z-index: 10;
+        }
+        /* 右下角图标 */
+        .chat-icon {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s;
+            overflow: hidden;
+            z-index: 10;
+        }
+        .chat-icon:hover {
+            transform: scale(1.1);
+        }
+        .chat-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部通知 -->
+        <div class="notification" id="greeting">
+            嘿上好 欢迎来到我的主页
+        </div>
+        <!-- 主要内容 -->
+        <div class="main-content">
+            <!-- 左侧 -->
+            <div class="left-section">
+                <div class="avatar-section">
+                    <div class="avatar-container">
+                        <img src="YOUR_AVATAR_IMAGE_URL_HERE" alt="头像">
+                    </div>
+                    <div class="site-name">狂客同学</div>
+                    <div class="site-name" style="font-size: 32px; margin-top: 10px;">5plus1.top</div>
+                </div>
+                <div class="quote-section">
+                    <h2>❝ Hello World!</h2>
+                    <p>世界不死，理想不灭</p>
+                    <div class="social-links">
+                        <a href="YOUR_GITHUB_URL_HERE" class="social-icon" title="GitHub" target="_blank">
+                            🐙
+                        </a>
+                        <a href="YOUR_WECHAT_URL_HERE" class="social-icon" title="微信" target="_blank">
+                            💬
+                        </a>
+                        <a href="YOUR_X_URL_HERE" class="social-icon" title="X" target="_blank">
+                            ❌
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- 中间 -->
+            <div class="center-section">
+                <div class="welcome-text">
+                    欢迎访问
+                </div>
+                <div class="quote-box">
+                    <p id="quote-text">加载中...</p>
+                    <p class="quote-author" id="quote-author">—</p>
+                </div>
+                <div class="link-section">
+                    <div class="link-title">
+                        🔗 网站列表
+                    </div>
+                    <a href="https://kuangketongxue.github.io/tongxuekuangke/index.html" class="link-button" target="_blank">
+                        <span>📡</span>
+                        <span>狂客空间</span>
+                    </a>
+                </div>
+            </div>
+            <!-- 右侧 -->
+            <div class="right-section">
+                <div class="date-time">
+                    <div class="date" id="date">2025年11月05日 星期三</div>
+                    <div class="time" id="clock">20:56:19</div>
+                    <div class="weather">天气晴朗</div>
+                </div>
+            </div>
+        </div>
+        <!-- 底部备案 -->
+        <div class="footer">
+            ©️2025狂客版权所有
+        </div>
+        <!-- 右下角头像 -->
+        <div class="chat-icon">
+            <img src="YOUR_AVATAR_IMAGE_URL_HERE" alt="avatar">
+        </div>
+    </div>
+    <script>
+        // 金句库
+        const quotes = [
+            { text: "有死之限是因为惧怕死亡，很<br>怕死亡是因为有挂念的事与人<br>吧。", author: "『原神』" },
+            { text: "生命的意义在于追求，而非<br>到达终点。", author: "『哲学名言』" },
+            { text: "今天的努力，是为了明天的<br>辉煌。", author: "『励志语录』" },
+            { text: "世界那么大，我想去看看。", author: "『旅行者』" },
+            { text: "代码改变世界，创新引领未来。", author: "『程序员』" },
+            { text: "星光不问赶路人，时光不负<br>有心人。", author: "『古诗词』" },
+            { text: "保持热爱，奔赴山海。", author: "『现代诗』" },
+            { text: "人生没有白走的路，每一步<br>都算数。", author: "『人生哲理』" },
+            { text: "愿你历尽千帆，归来仍是少年。", author: "『祝福语』" },
+            { text: "山高路远，我们慢慢来。", author: "『治愈系』" }
+        ];
+
+        // 随机选择金句
+        function loadRandomQuote() {
+            const randomIndex = Math.floor(Math.random() * quotes.length);
+            const quote = quotes[randomIndex];
+            document.getElementById('quote-text').innerHTML = quote.text;
+            document.getElementById('quote-author').textContent = `—${quote.author}`;
+        }
+
+        // 获取时间问候语
+        function getGreeting() {
+            const hour = new Date().getHours();
+            let greeting = '';
+            
+            if (hour >= 5 && hour < 9) {
+                greeting = '嘿早上好';
+            } else if (hour >= 9 && hour < 11) {
+                greeting = '嘿上午好';
+            } else if (hour >= 11 && hour < 14) {
+                greeting = '嘿中午好';
+            } else if (hour >= 14 && hour < 18) {
+                greeting = '嘿下午好';
+            } else if (hour >= 18 && hour < 22) {
+                greeting = '嘿晚上好';
+            } else {
+                greeting = '嘿深夜好';
+            }
+            
+            return greeting;
+        }
+
+        // 更新问候语
+        function updateGreeting() {
+            document.getElementById('greeting').textContent = getGreeting() + ' 欢迎来到我的主页';
+        }
+
+        // 实时时钟
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+        }
+
+        // 更新日期
+        function updateDate() {
+            const now = new Date();
+            const year = now.getFullYear();
+            const month = String(now.getMonth() + 1).padStart(2, '0');
+            const day = String(now.getDate()).padStart(2, '0');
+            const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+            const weekday = weekdays[now.getDay()];
+            
+            document.getElementById('date').textContent = `${year}年${month}月${day}日 ${weekday}`;
+        }
+
+        // 初始化
+        window.addEventListener('load', function() {
+            loadRandomQuote();
+            updateGreeting();
+            updateDate();
+            updateClock();
+            setInterval(updateClock, 1000);
+            setInterval(updateGreeting, 60000); // 每分钟更新一次问候语
+            
+            // 欢迎弹窗
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            alert(`欢迎来到我的主页！\n\n${randomQuote.text.replace(/<br>/g, '\n')}\n\n${randomQuote.author}`);
+        });
+    </script>
+</body>
+</html>
