@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* ... 保持原有样式不变 ... */
         * {
             margin: 0;
             padding: 0;
@@ -31,11 +30,46 @@
             font-family: 'Noto Serif SC', 'Microsoft YaHei', serif;
             min-height: 100vh;
             overflow-x: hidden;
-            background: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #16213e 100%);
             position: relative;
             color: var(--text-primary);
             letter-spacing: 0.5px;
         }
+        /* 背景图片容器 */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        .background-image.active {
+            opacity: 1;
+        }
+        /* 背景遮罩层 */
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 10, 15, 0.7) 0%, rgba(26, 26, 46, 0.6) 50%, rgba(22, 33, 62, 0.7) 100%);
+            z-index: 0;
+        }
+        /* 星星动画层 */
         body::before {
             content: '';
             position: fixed;
@@ -53,8 +87,9 @@
                 radial-gradient(2px 2px at 79% 53%, white, transparent);
             background-size: 300px 300px;
             animation: stars 30s linear infinite;
-            opacity: 0.6;
-            z-index: 0;
+            opacity: 0.3;
+            z-index: 1;
+            pointer-events: none;
         }
         @keyframes stars {
             from { transform: translateY(0); }
@@ -67,9 +102,10 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
             animation: rotate 40s linear infinite;
-            z-index: 0;
+            z-index: 1;
+            pointer-events: none;
         }
         @keyframes rotate {
             from { transform: rotate(0deg); }
@@ -77,23 +113,23 @@
         }
         .container {
             position: relative;
-            z-index: 1;
+            z-index: 2;
             min-height: 100vh;
-            padding: var(--spacing-xl) var(--spacing-lg);
+            padding: var(--spacing-2xl) var(--spacing-xl);
             display: flex;
             flex-direction: column;
         }
         .notification {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
             border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 16px;
-            padding: var(--spacing-md) var(--spacing-xl);
+            border-radius: 12px;
+            padding: var(--spacing-sm) var(--spacing-lg);
             text-align: center;
             color: var(--primary-color);
-            font-size: 16px;
+            font-size: 13px;
             font-weight: 300;
-            margin-bottom: var(--spacing-xl);
-            max-width: 600px;
+            margin-bottom: var(--spacing-2xl);
+            max-width: 500px;
             margin-left: auto;
             margin-right: auto;
             backdrop-filter: blur(20px);
@@ -107,18 +143,18 @@
         .main-content {
             display: grid;
             grid-template-columns: 380px 1fr 380px;
-            gap: var(--spacing-xl);
+            gap: 120px;
             flex: 1;
-            max-width: 1600px;
+            max-width: 1800px;
             margin: 0 auto;
             width: 100%;
-            padding-bottom: 100px;
+            padding-bottom: 120px;
         }
         .card {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: var(--spacing-xl);
+            border-radius: 20px;
+            padding: var(--spacing-lg);
             backdrop-filter: blur(20px);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
@@ -130,18 +166,18 @@
         .left-section {
             display: flex;
             flex-direction: column;
-            gap: var(--spacing-xl);
+            gap: var(--spacing-2xl);
         }
         .avatar-section {
             text-align: center;
-            padding: var(--spacing-xl) var(--spacing-lg);
+            padding: var(--spacing-lg);
         }
         .avatar-container {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto var(--spacing-lg);
+            width: 140px;
+            height: 140px;
+            margin: 0 auto var(--spacing-md);
             border-radius: 50%;
-            border: 3px solid rgba(212, 175, 55, 0.3);
+            border: 2px solid rgba(212, 175, 55, 0.3);
             overflow: hidden;
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.1));
             display: flex;
@@ -177,51 +213,51 @@
             z-index: 1;
         }
         .avatar-placeholder {
-            font-size: 80px;
+            font-size: 60px;
             color: var(--primary-color);
         }
         .site-name {
             color: var(--primary-color);
-            font-size: 22px;
+            font-size: 16px;
             font-weight: 300;
-            letter-spacing: 3px;
+            letter-spacing: 2px;
             margin-top: var(--spacing-md);
             font-family: 'Poppins', sans-serif;
         }
         .site-domain {
             color: var(--text-secondary);
-            font-size: 18px;
-            font-weight: 400;
+            font-size: 12px;
+            font-weight: 300;
             margin-top: var(--spacing-sm);
             font-family: 'Poppins', sans-serif;
             letter-spacing: 0.5px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
         .quote-section h2 {
             color: var(--primary-color);
-            font-size: 24px;
+            font-size: 16px;
             font-weight: 300;
-            margin-bottom: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
             font-style: italic;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
         .quote-section p {
             color: var(--text-secondary);
-            font-size: 16px;
-            line-height: 2;
+            font-size: 12px;
+            line-height: 1.8;
             font-weight: 300;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
         .social-links {
             display: flex;
             gap: var(--spacing-md);
-            margin-top: var(--spacing-xl);
+            margin-top: var(--spacing-lg);
             justify-content: center;
             flex-wrap: wrap;
         }
         .social-icon {
-            width: 56px;
-            height: 56px;
+            width: 48px;
+            height: 48px;
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
@@ -229,7 +265,7 @@
             align-items: center;
             justify-content: center;
             color: var(--text-primary);
-            font-size: 24px;
+            font-size: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
@@ -244,70 +280,74 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            gap: var(--spacing-xl);
+            align-items: center;
+            gap: var(--spacing-2xl);
+            padding: 0 var(--spacing-2xl);
         }
         .welcome-text {
             color: var(--primary-color);
-            font-size: 48px;
+            font-size: 32px;
             text-align: center;
             font-weight: 300;
-            letter-spacing: 8px;
-            margin-bottom: var(--spacing-md);
+            letter-spacing: 6px;
+            margin-bottom: var(--spacing-sm);
             font-family: 'Noto Serif SC', serif;
             text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
         }
         .quote-box {
-            padding: var(--spacing-2xl) var(--spacing-xl);
+            padding: var(--spacing-xl) var(--spacing-lg);
             text-align: center;
-            min-height: 200px;
+            min-height: 180px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            max-width: 700px;
         }
         .quote-box p {
             color: var(--text-primary);
-            font-size: 20px;
-            line-height: 2.2;
-            margin-bottom: var(--spacing-lg);
+            font-size: 15px;
+            line-height: 2;
+            margin-bottom: var(--spacing-md);
             font-weight: 300;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
         .quote-author {
             color: var(--primary-color);
-            font-size: 15px;
+            font-size: 12px;
             font-style: italic;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             font-weight: 300;
         }
         .link-section {
-            padding: var(--spacing-xl);
+            padding: var(--spacing-lg);
+            max-width: 500px;
         }
         .link-title {
             color: var(--text-primary);
-            font-size: 18px;
-            margin-bottom: var(--spacing-lg);
+            font-size: 14px;
+            margin-bottom: var(--spacing-md);
             display: flex;
             align-items: center;
             gap: var(--spacing-sm);
             justify-content: center;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             font-weight: 300;
         }
         .link-button {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
             border: 1px solid rgba(212, 175, 55, 0.3);
-            padding: var(--spacing-lg) var(--spacing-xl);
-            border-radius: 16px;
+            padding: var(--spacing-md) var(--spacing-lg);
+            border-radius: 12px;
             color: var(--text-primary);
-            font-size: 18px;
+            font-size: 14px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: var(--spacing-md);
+            gap: var(--spacing-sm);
             text-decoration: none;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
             font-weight: 300;
         }
         .link-button:hover {
@@ -318,37 +358,37 @@
         .right-section {
             display: flex;
             flex-direction: column;
-            gap: var(--spacing-xl);
+            gap: var(--spacing-2xl);
         }
         .date-time {
             text-align: center;
-            padding: var(--spacing-2xl) var(--spacing-xl);
+            padding: var(--spacing-xl) var(--spacing-lg);
         }
         .date {
             color: var(--text-secondary);
-            font-size: 15px;
-            margin-bottom: var(--spacing-lg);
-            letter-spacing: 2px;
+            font-size: 12px;
+            margin-bottom: var(--spacing-md);
+            letter-spacing: 1px;
             font-weight: 300;
         }
         .time {
             color: var(--primary-color);
-            font-size: 56px;
+            font-size: 40px;
             font-weight: 300;
             font-family: 'Poppins', monospace;
-            letter-spacing: 4px;
+            letter-spacing: 3px;
             text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
         }
         .weather {
             color: var(--text-secondary);
-            font-size: 14px;
-            margin-top: var(--spacing-lg);
-            letter-spacing: 1px;
+            font-size: 11px;
+            margin-top: var(--spacing-md);
+            letter-spacing: 0.5px;
             font-weight: 300;
-            line-height: 1.8;
+            line-height: 1.6;
         }
         .weather-icon {
-            font-size: 40px;
+            font-size: 32px;
             margin-bottom: var(--spacing-sm);
             animation: float 3s ease-in-out infinite;
         }
@@ -367,8 +407,8 @@
         .weather-detail {
             display: flex;
             justify-content: center;
-            gap: var(--spacing-md);
-            font-size: 12px;
+            gap: var(--spacing-sm);
+            font-size: 10px;
             margin-top: var(--spacing-sm);
             opacity: 0.7;
         }
@@ -384,21 +424,21 @@
             transform: translateX(-50%);
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
             border: 1px solid rgba(212, 175, 55, 0.3);
-            padding: var(--spacing-sm) var(--spacing-xl);
-            border-radius: 12px;
+            padding: 10px var(--spacing-lg);
+            border-radius: 10px;
             color: var(--text-secondary);
-            font-size: 13px;
+            font-size: 11px;
             z-index: 10;
             backdrop-filter: blur(20px);
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             font-weight: 300;
         }
         .chat-icon {
             position: fixed;
             bottom: var(--spacing-lg);
             right: var(--spacing-lg);
-            width: 64px;
-            height: 64px;
+            width: 56px;
+            height: 56px;
             border-radius: 50%;
             background: rgba(255, 255, 255, 0.08);
             border: 1px solid rgba(212, 175, 55, 0.3);
@@ -424,8 +464,8 @@
         }
         @media (max-width: 1400px) {
             .main-content {
-                grid-template-columns: 300px 1fr 300px;
-                gap: var(--spacing-lg);
+                grid-template-columns: 320px 1fr 320px;
+                gap: 80px;
             }
         }
         @media (max-width: 1024px) {
@@ -434,14 +474,17 @@
             }
             .main-content {
                 grid-template-columns: 1fr;
-                gap: var(--spacing-lg);
+                gap: var(--spacing-xl);
+            }
+            .center-section {
+                padding: 0;
             }
             .welcome-text {
-                font-size: 36px;
+                font-size: 28px;
                 letter-spacing: 4px;
             }
             .time {
-                font-size: 48px;
+                font-size: 36px;
             }
             .footer {
                 width: calc(100% - 32px);
@@ -454,33 +497,36 @@
                 padding: var(--spacing-md) var(--spacing-sm);
             }
             .card {
-                padding: var(--spacing-lg);
+                padding: var(--spacing-md);
             }
             .welcome-text {
-                font-size: 28px;
+                font-size: 24px;
                 letter-spacing: 2px;
             }
             .time {
-                font-size: 40px;
+                font-size: 32px;
             }
             .avatar-container {
-                width: 150px;
-                height: 150px;
+                width: 120px;
+                height: 120px;
             }
             .notification {
-                font-size: 14px;
+                font-size: 12px;
                 padding: var(--spacing-sm) var(--spacing-md);
             }
             .quote-box p {
-                font-size: 18px;
+                font-size: 14px;
             }
             .chat-icon {
-                width: 56px;
-                height: 56px;
+                width: 48px;
+                height: 48px;
             }
             .weather-detail {
                 flex-direction: column;
                 gap: 4px;
+            }
+            .main-content {
+                gap: var(--spacing-lg);
             }
         }
         @keyframes fadeIn {
@@ -504,6 +550,10 @@
     </style>
 </head>
 <body>
+    <!-- 动态背景容器 -->
+    <div class="background-container" id="background-container"></div>
+    <div class="background-overlay"></div>
+
     <div class="container">
         <div class="notification" id="greeting">
             嘿上好 · 欢迎来到我的主页
@@ -520,7 +570,7 @@
                 </div>
                 <div class="card quote-section">
                     <h2>❝ Hello World!</h2>
-                    <p>世界不死，理想不灭</p>
+                    <p>世界不死,理想不灭</p>
                     <div class="social-links">
                         <a href="https://github.com/kuangketongxue" class="social-icon" title="GitHub" target="_blank" rel="noopener">
                             🐙
@@ -566,27 +616,169 @@
             ©️ 2025 狂客版权所有
         </div>
         <div class="chat-icon" title="联系我">
-            <span style="font-size: 32px;">💬</span>
+            <span style="font-size: 28px;">💬</span>
         </div>
     </div>
     <script>
         // ========== 配置区域 ==========
         const QWEATHER_KEY = '2a7e3fb132e443ac965e50b001317f5f';
         
-        // 金句库
-        const quotes = [
-            { text: "有死之限是因为惧怕死亡<br>很怕死亡是因为有挂念的事与人吧", author: "原神" },
-            { text: "生命的意义在于追求<br>而非到达终点", author: "哲学名言" },
-            { text: "今天的努力<br>是为了明天的辉煌", author: "励志语录" },
-            { text: "世界那么大<br>我想去看看", author: "旅行者" },
-            { text: "代码改变世界<br>创新引领未来", author: "程序员" },
-            { text: "星光不问赶路人<br>时光不负有心人", author: "古诗词" },
-            { text: "保持热爱<br>奔赴山海", author: "现代诗" },
-            { text: "人生没有白走的路<br>每一步都算数", author: "人生哲理" },
-            { text: "愿你历尽千帆<br>归来仍是少年", author: "祝福语" },
-            { text: "山高路远<br>我们慢慢来", author: "治愈系" }
+        // 动漫风格星空背景图片库 (使用高质量的动漫星空图片URL)
+        const animeStarryBackgrounds = [
+            'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1920&q=80', // 星空1
+            'https://images.unsplash.com/photo-1464802686167-b939a6910659?w=1920&q=80', // 星空2
+            'https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=1920&q=80', // 星空3
+            'https://images.unsplash.com/photo-1444080748397-f442aa95c3e5?w=1920&q=80', // 星空4
+            'https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=1920&q=80', // 星空5
+            'https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?w=1920&q=80', // 星空6
+            'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80', // 星空7
+            'https://images.unsplash.com/photo-1520034475321-cbe63696469a?w=1920&q=80', // 星空8
+            'https://images.unsplash.com/photo-1509773896068-7fd415d91e2e?w=1920&q=80', // 星空9
+            'https://images.unsplash.com/photo-1447433589675-4aaa569f3e05?w=1920&q=80', // 星空10
+            'https://images.unsplash.com/photo-1446941611757-91d2c3bd3d45?w=1920&q=80', // 星空11
+            'https://images.unsplash.com/photo-1465101162946-4377e57745c3?w=1920&q=80', // 星空12
+            'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=1920&q=80', // 星空13
+            'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1920&q=80', // 星空14
+            'https://images.unsplash.com/photo-1504333638930-c8787321eee0?w=1920&q=80'  // 星空15
         ];
-        
+
+        // 埃隆·马斯克、史蒂夫·乔布斯和坎耶·韦斯特的金句库
+        const quotes = [
+            // 埃隆·马斯克 (Elon Musk) - 45句
+            { text: "当某件事足够重要时<br>即使胜算不大,你也应该去做", author: "埃隆·马斯克" },
+            { text: "失败是一个选项<br>如果你没有失败,说明你创新不够", author: "埃隆·马斯克" },
+            { text: "我宁愿乐观而错误<br>也不愿悲观而正确", author: "埃隆·马斯克" },
+            { text: "坚持是非常重要的<br>除非你被迫放弃,否则不要放弃", author: "埃隆·马斯克" },
+            { text: "如果你早上醒来并认为未来会更好<br>那就是美好的一天", author: "埃隆·马斯克" },
+            { text: "我认为普通人可以选择不平凡", author: "埃隆·马斯克" },
+            { text: "人生太短暂<br>不能怀恨在心", author: "埃隆·马斯克" },
+            { text: "付出超常的努力是值得的<br>因为你的收获会超乎想象", author: "埃隆·马斯克" },
+            { text: "如果你需要鼓舞人心的话语<br>不要创业", author: "埃隆·马斯克" },
+            { text: "我不会放弃<br>我必须做出这些事情成真", author: "埃隆·马斯克" },
+            { text: "第一步是确定某件事是可能的<br>然后概率就会发生", author: "埃隆·马斯克" },
+            { text: "我可以有一个失败后的派对<br>或者我可以继续工作", author: "埃隆·马斯克" },
+            { text: "如果事情不失败<br>你就创新不够", author: "埃隆·马斯克" },
+            { text: "品牌只是人们对你公司的看法", author: "埃隆·马斯克" },
+            { text: "伟大的公司建立在伟大的产品之上", author: "埃隆·马斯克" },
+            { text: "我认为创业最重要的是<br>超级努力工作", author: "埃隆·马斯克" },
+            { text: "不要只是追随潮流<br>你也可以创造潮流", author: "埃隆·马斯克" },
+            { text: "如果你是一位联合创始人<br>你的工作时长应该翻倍", author: "埃隆·马斯克" },
+            { text: "我觉得一周工作80-100小时<br>会提高成功概率", author: "埃隆·马斯克" },
+            { text: "物理学教你推理<br>从第一性原理推理", author: "埃隆·马斯克" },
+            { text: "我们需要弄清楚如何让意识延续下去", author: "埃隆·马斯克" },
+            { text: "生命不能只是解决一个又一个悲惨的问题", author: "埃隆·马斯克" },
+            { text: "我们需要能让我们早上愿意醒来的东西", author: "埃隆·马斯克" },
+            { text: "创造比毁灭难得多", author: "埃隆·马斯克" },
+            { text: "如果你正在创造公司<br>你实际上是在创造一个产品", author: "埃隆·马斯克" },
+            { text: "重要的是对未来充满热情", author: "埃隆·马斯克" },
+            { text: "某些东西必须激励你", author: "埃隆·马斯克" },
+            { text: "我对未来感到非常兴奋", author: "埃隆·马斯克" },
+            { text: "最好的思考方式是<br>把知识看作一棵语义树", author: "埃隆·马斯克" },
+            { text: "确保你理解基本原理<br>然后才是细节", author: "埃隆·马斯克" },
+            { text: "我倾向于从物理学框架来处理事情", author: "埃隆·马斯克" },
+            { text: "不要害怕新事物", author: "埃隆·马斯克" },
+            { text: "我们应该思考未来<br>并让未来变得美好", author: "埃隆·马斯克" },
+            { text: "如果你想改变世界<br>就必须非常努力", author: "埃隆·马斯克" },
+            { text: "采取行动比完美重要", author: "埃隆·马斯克" },
+            { text: "我对火星充满热情", author: "埃隆·马斯克" },
+            { text: "人类需要成为多行星物种", author: "埃隆·马斯克" },
+            { text: "我认为人工智能是我们存在的最大风险", author: "埃隆·马斯克" },
+            { text: "批评是很重要的<br>寻求批评", author: "埃隆·马斯克" },
+            { text: "不要盲目跟随趋势", author: "埃隆·马斯克" },
+            { text: "质疑你的假设", author: "埃隆·马斯克" },
+            { text: "工程是最接近魔法的东西", author: "埃隆·马斯克" },
+            { text: "我们正在建设通向未来的道路", author: "埃隆·马斯克" },
+            { text: "你必须相信不可能", author: "埃隆·马斯克" },
+            { text: "每一天都是新的开始", author: "埃隆·马斯克" },
+            // 史蒂夫·乔布斯 (Steve Jobs) - 45句
+            { text: "求知若饥,虚心若愚", author: "史蒂夫·乔布斯" },
+            { text: "活着就是为了改变世界", author: "史蒂夫·乔布斯" },
+            { text: "你的时间有限<br>不要浪费在重复他人的生活上", author: "史蒂夫·乔布斯" },
+            { text: "创新区分领导者和跟随者", author: "史蒂夫·乔布斯" },
+            { text: "成为卓越的代名词<br>很多人并不适合需要卓越素质的环境", author: "史蒂夫·乔布斯" },
+            { text: "唯一做伟大工作的方法<br>是热爱你所做的", author: "史蒂夫·乔布斯" },
+            { text: "设计不只是外表和感觉<br>设计是它如何工作", author: "史蒂夫·乔布斯" },
+            { text: "简单比复杂更难", author: "史蒂夫·乔布斯" },
+            { text: "专注和简单一直是我的秘诀之一", author: "史蒂夫·乔布斯" },
+            { text: "记住你即将死去<br>是我所知道的避免患得患失的最好方法", author: "史蒂夫·乔布斯" },
+            { text: "你不能连接前瞻性的点<br>只能回顾性地连接它们", author: "史蒂夫·乔布斯" },
+            { text: "质量比数量更重要", author: "史蒂夫·乔布斯" },
+            { text: "创新与你有多少研发资金无关", author: "史蒂夫·乔布斯" },
+            { text: "我想在宇宙中留下印记", author: "史蒂夫·乔布斯" },
+            { text: "我们来这里是为了在宇宙中留下痕迹", author: "史蒂夫·乔布斯" },
+            { text: "不要让他人的意见淹没你内心的声音", author: "史蒂夫·乔布斯" },
+            { text: "你的工作将占据你生活的很大一部分", author: "史蒂夫·乔布斯" },
+            { text: "真正满足的唯一方式<br>是做你认为伟大的工作", author: "史蒂夫·乔布斯" },
+            { text: "有时生活会用砖头打你的头<br>不要失去信心", author: "史蒂夫·乔布斯" },
+            { text: "我确信让我继续前进的唯一东西<br>是我热爱我所做的", author: "史蒂夫·乔布斯" },
+            { text: "对于我来说,营销是关于价值观的", author: "史蒂夫·乔布斯" },
+            { text: "我们的目标很简单<br>设计和制造世界上最好的产品", author: "史蒂夫·乔布斯" },
+            { text: "创新与说是无关<br>创新与说否有关", author: "史蒂夫·乔布斯" },
+            { text: "对一千件事情说不", author: "史蒂夫·乔布斯" },
+            { text: "细节很重要<br>值得等待把它做好", author: "史蒂夫·乔布斯" },
+            { text: "伟大的艺术家偷窃", author: "史蒂夫·乔布斯" },
+            { text: "真正的艺术家交付作品", author: "史蒂夫·乔布斯" },
+            { text: "我们正在制造工具<br>以增强人类能力", author: "史蒂夫·乔布斯" },
+            { text: "技术本身是不够的", author: "史蒂夫·乔布斯" },
+            { text: "技术必须与人文艺术结合", author: "史蒂夫·乔布斯" },
+            { text: "我们相信思考不同的人", author: "史蒂夫·乔布斯" },
+            { text: "疯狂到认为他们能改变世界的人<br>就是那些真正改变世界的人", author: "史蒂夫·乔布斯" },
+            { text: "客户体验从技术开始", author: "史蒂夫·乔布斯" },
+            { text: "你必须从客户体验开始<br>然后回到技术", author: "史蒂夫·乔布斯" },
+            { text: "我认为如果你做了一些好事<br>它应该留在你的心中一段时间", author: "史蒂夫·乔布斯" },
+            { text: "然后继续做下一个精彩的东西", author: "史蒂夫·乔布斯" },
+            { text: "不要沉湎于过去", author: "史蒂夫·乔布斯" },
+            { text: "勇于追随你的心和直觉", author: "史蒂夫·乔布斯" },
+            { text: "它们以某种方式知道你真正想成为什么", author: "史蒂夫·乔布斯" },
+            { text: "我们只是想制造伟大的产品", author: "史蒂夫·乔布斯" },
+            { text: "当你成长时你倾向于被告知<br>世界就是这样", author: "史蒂夫·乔布斯" },
+            { text: "生活可以更广阔", author: "史蒂夫·乔布斯" },
+            { text: "一旦你发现这一点<br>你的生活将永远不同", author: "史蒂夫·乔布斯" },
+            { text: "我们在这里短暂停留<br>你可能不能做很多事情", author: "史蒂夫·乔布斯" },
+            { text: "所以你最好把它们做好", author: "史蒂夫·乔布斯" },
+            // 坎耶·韦斯特 (Kanye West) - 40句
+            { text: "我拒绝接受他人对我能力的限制", author: "坎耶·韦斯特" },
+            { text: "相信你的幻想", author: "坎耶·韦斯特" },
+            { text: "我还没有开始到达我的巅峰", author: "坎耶·韦斯特" },
+            { text: "我是一个产品的产品", author: "坎耶·韦斯特" },
+            { text: "我会继续成为一个声音<br>一个梦想家", author: "坎耶·韦斯特" },
+            { text: "你不能看着Instagram<br>然后认为这就是真实生活", author: "坎耶·韦斯特" },
+            { text: "有时你必须摆脱一切<br>以便重新发现一切", author: "坎耶·韦斯特" },
+            { text: "我是全世界最伟大的", author: "坎耶·韦斯特" },
+            { text: "我的最大痛苦就是<br>我永远不会是我自己的粉丝", author: "坎耶·韦斯特" },
+            { text: "创造力是人类最伟大的反叛", author: "坎耶·韦斯特" },
+            { text: "我必须表达我想要表达的一切", author: "坎耶·韦斯特" },
+            { text: "我总是想着未来", author: "坎耶·韦斯特" },
+            { text: "我来这里是为了战斗<br>为了未来", author: "坎耶·韦斯特" },
+            { text: "我不是一个商人<br>我是一门生意,伙计", author: "坎耶·韦斯特" },
+            { text: "你要么是天才<br>要么什么都不是", author: "坎耶·韦斯特" },
+            { text: "我喜欢听到有人说不", author: "坎耶·韦斯特" },
+            { text: "那就是我开始真正工作的时候", author: "坎耶·韦斯特" },
+            { text: "成功的关键是相信自己", author: "坎耶·韦斯特" },
+            { text: "我的信心来自我的愿景", author: "坎耶·韦斯特" },
+            { text: "我不想活在过去<br>我想活在现在", author: "坎耶·韦斯特" },
+            { text: "艺术就是一切", author: "坎耶·韦斯特" },
+            { text: "我想让每个人都快乐", author: "坎耶·韦斯特" },
+            { text: "但这不可能<br>所以我只是继续做我的事", author: "坎耶·韦斯特" },
+            { text: "我在为人类而设计", author: "坎耶·韦斯特" },
+            { text: "我的目标不是当总统", author: "坎耶·韦斯特" },
+            { text: "我的目标是改变世界", author: "坎耶·韦斯特" },
+            { text: "我知道我不是完美的", author: "坎耶·韦斯特" },
+            { text: "但我正在努力做到最好", author: "坎耶·韦斯特" },
+            { text: "文化就是一切", author: "坎耶·韦斯特" },
+            { text: "我是个自由思想家", author: "坎耶·韦斯特" },
+            { text: "永远不要让别人告诉你<br>你不能做什么", author: "坎耶·韦斯特" },
+            { text: "我想创造只有我能创造的东西", author: "坎耶·韦斯特" },
+            { text: "我正在做一些<br>以前从未做过的事情", author: "坎耶·韦斯特" },
+            { text: "我的音乐就是我的真理", author: "坎耶·韦斯特" },
+            { text: "我不需要你的认可", author: "坎耶·韦斯特" },
+            { text: "我相信完美", author: "坎耶·韦斯特" },
+            { text: "我相信愿景<br>我相信梦想", author: "坎耶·韦斯特" },
+            { text: "天才和疯狂之间只有一线之隔", author: "坎耶·韦斯特" },
+            { text: "我代表自由表达", author: "坎耶·韦斯特" },
+            { text: "未来就是现在", author: "坎耶·韦斯特" }
+        ];
+
         // 和风天气图标映射
         const qweatherIcons = {
             '100': '☀️', '101': '☁️', '102': '⛅', '103': '⛅', '104': '☁️',
@@ -599,12 +791,71 @@
             '507': '🌪️', '508': '🌪️', '509': '🌫️', '510': '🌫️',
             '900': '🔥', '901': '❄️', '999': '🌈'
         };
-        
+
+        // ========== 背景图片管理 ==========
+        let currentBackgroundIndex = -1;
+        let usedBackgrounds = [];
+
+        // 初始化背景
+        function initBackground() {
+            const container = document.getElementById('background-container');
+            const randomBg = getRandomBackground();
+            const bgDiv = document.createElement('div');
+            bgDiv.className = 'background-image active';
+            bgDiv.style.backgroundImage = `url(${randomBg})`;
+            container.appendChild(bgDiv);
+            
+            // 预加载其他图片
+            preloadBackgrounds();
+        }
+
+        // 获取随机背景(不重复)
+        function getRandomBackground() {
+            if (usedBackgrounds.length === animeStarryBackgrounds.length) {
+                usedBackgrounds = []; // 全部用完后重置
+            }
+            
+            let randomIndex;
+            do {
+                randomIndex = Math.floor(Math.random() * animeStarryBackgrounds.length);
+            } while (usedBackgrounds.includes(randomIndex));
+            
+            usedBackgrounds.push(randomIndex);
+            currentBackgroundIndex = randomIndex;
+            
+            // 保存到localStorage
+            localStorage.setItem('lastBackgroundIndex', randomIndex);
+            localStorage.setItem('usedBackgrounds', JSON.stringify(usedBackgrounds));
+            
+            return animeStarryBackgrounds[randomIndex];
+        }
+
+        // 预加载背景图片
+        function preloadBackgrounds() {
+            animeStarryBackgrounds.forEach(url => {
+                const img = new Image();
+                img.src = url;
+            });
+        }
+
+        // 从localStorage恢复状态
+        function restoreBackgroundState() {
+            const lastIndex = localStorage.getItem('lastBackgroundIndex');
+            const savedUsed = localStorage.getItem('usedBackgrounds');
+            
+            if (lastIndex !== null) {
+                currentBackgroundIndex = parseInt(lastIndex);
+            }
+            if (savedUsed) {
+                usedBackgrounds = JSON.parse(savedUsed);
+            }
+        }
+
         // 获取和风天气图标
         function getQweatherIcon(code) {
             return qweatherIcons[code] || '🌈';
         }
-        
+
         // 随机选择金句
         function loadRandomQuote() {
             const randomIndex = Math.floor(Math.random() * quotes.length);
@@ -612,7 +863,7 @@
             document.getElementById('quote-text').innerHTML = quote.text;
             document.getElementById('quote-author').textContent = `— ${quote.author}`;
         }
-        
+
         // 获取时间问候语
         function getGreeting() {
             const hour = new Date().getHours();
@@ -623,12 +874,12 @@
             if (hour >= 18 && hour < 22) return '嘿晚上好';
             return '嘿深夜好';
         }
-        
+
         // 更新问候语
         function updateGreeting() {
             document.getElementById('greeting').textContent = getGreeting() + ' · 欢迎来到我的主页';
         }
-        
+
         // 实时时钟
         function updateClock() {
             const now = new Date();
@@ -637,7 +888,7 @@
             const seconds = String(now.getSeconds()).padStart(2, '0');
             document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
         }
-        
+
         // 更新日期
         function updateDate() {
             const now = new Date();
@@ -648,48 +899,36 @@
             const weekday = weekdays[now.getDay()];
             document.getElementById('date').textContent = `${year}年${month}月${day}日 ${weekday}`;
         }
-        
-        // 获取和风天气实时数据（修复版本）
+
+        // 获取和风天气实时数据
         async function fetchQWeather() {
             const weatherElement = document.getElementById('weather');
-            
             try {
                 if (!('geolocation' in navigator)) {
                     console.warn('浏览器不支持地理定位');
                     showDefaultWeather();
                     return;
                 }
-                
                 navigator.geolocation.getCurrentPosition(
                     async (position) => {
                         const { latitude, longitude } = position.coords;
                         console.log('获取到位置:', latitude, longitude);
-                        
                         try {
-                            // 使用正确的和风天气 API 格式
                             const locationStr = `${longitude.toFixed(2)},${latitude.toFixed(2)}`;
-                            
-                            // 修改为正确的 API 端点（使用免费版 API）
                             const weatherUrl = `https://devapi.qweather.com/v7/weather/now?location=${locationStr}&key=${QWEATHER_KEY}`;
-                            
                             console.log('请求天气 URL:', weatherUrl);
-                            
                             const response = await fetch(weatherUrl);
-                            
                             if (!response.ok) {
                                 throw new Error(`HTTP error! status: ${response.status}`);
                             }
-                            
                             const data = await response.json();
                             console.log('天气数据:', data);
-                            
                             if (data.code === '200' && data.now) {
                                 const weather = data.now;
                                 const icon = getQweatherIcon(weather.icon);
-                                
                                 weatherElement.innerHTML = `
                                     <div class="weather-icon">${icon}</div>
-                                    <div style="font-size: 16px; margin-bottom: 8px;">
+                                    <div style="font-size: 13px; margin-bottom: 6px;">
                                         ${weather.text} · ${weather.temp}°C
                                     </div>
                                     <div class="weather-detail">
@@ -702,7 +941,7 @@
                                             <span>湿度 ${weather.humidity}%</span>
                                         </div>
                                     </div>
-                                    <div style="font-size: 11px; margin-top: 8px; opacity: 0.6;">
+                                    <div style="font-size: 10px; margin-top: 6px; opacity: 0.6;">
                                         体感温度 ${weather.feelsLike}°C
                                     </div>
                                 `;
@@ -730,13 +969,12 @@
                 showDefaultWeather();
             }
         }
-        
+
         // 显示默认天气
         function showDefaultWeather() {
             const weatherElement = document.getElementById('weather');
             const hour = new Date().getHours();
             let weather, icon, temp;
-            
             if (hour >= 6 && hour < 18) {
                 weather = '天气晴朗';
                 icon = '☀️';
@@ -746,20 +984,21 @@
                 icon = '🌙';
                 temp = '18';
             }
-            
             weatherElement.innerHTML = `
                 <div class="weather-icon">${icon}</div>
-                <div style="font-size: 16px; margin-bottom: 8px;">
+                <div style="font-size: 13px; margin-bottom: 6px;">
                     ${weather} · ${temp}°C
                 </div>
-                <div style="font-size: 12px; opacity: 0.7;">
+                <div style="font-size: 11px; opacity: 0.7;">
                     祝您有美好的一天
                 </div>
             `;
         }
-        
+
         // 初始化
         window.addEventListener('load', function() {
+            restoreBackgroundState();
+            initBackground();
             loadRandomQuote();
             updateGreeting();
             updateDate();
@@ -772,7 +1011,7 @@
             setInterval(updateDate, 60000);
             setInterval(fetchQWeather, 900000); // 每15分钟更新一次天气
         });
-        
+
         // 页面可见性变化时更新
         document.addEventListener('visibilitychange', function() {
             if (!document.hidden) {
