@@ -38,7 +38,6 @@
         .card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:32px;margin-bottom:120px}
         .card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:4px;padding:48px;text-decoration:none;color:var(--text-primary);transition:var(--transition);position:relative;overflow:hidden;min-height:280px;backdrop-filter:blur(10px);will-change:transform}
         .card:hover{border-color:var(--border-gold);background:rgba(212,175,55,.1);transform:translateY(-8px) scale(1.02);box-shadow:0 12px 32px rgba(212,175,55,.25)}
-        
         /* 返回按钮样式 */
         .back-button{
             position:fixed;
@@ -73,7 +72,6 @@
         .back-button:hover svg{
             transform:translateX(-2px);
         }
-        
         @media(max-width:768px){
             .back-button{
                 top:60px;
@@ -87,7 +85,6 @@
 <body>
     <!-- 背景图片 -->
     <div class="hero-background"></div>
-    
     <!-- 顶部声明 -->
     <div class="top-notice" id="topNotice" style="position:fixed;top:0;left:0;right:0;background:rgba(212,175,55,.12);border-bottom:1px solid var(--border-gold);backdrop-filter:blur(20px);z-index:100;padding:12px 24px;text-align:center;font-size:.875rem;color:var(--text-secondary)">
         <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:12px">
@@ -95,7 +92,6 @@
             <button id="noticeClose" style="background:transparent;border:1px solid var(--border-gold);color:var(--text-gold);width:24px;height:24px;border-radius:50%;cursor:pointer;transition:var(--transition)" aria-label="关闭">×</button>
         </div>
     </div>
-    
     <!-- 返回按钮 -->
     <a href="https://kuangketongxue.github.io/tongxuekuangke/Homepage.html" class="back-button" title="返回上一页">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -103,7 +99,6 @@
         </svg>
         <span>返回</span>
     </a>
-    
     <!-- 主内容 -->
     <div class="main-wrapper">
         <div class="container">
@@ -112,7 +107,6 @@
                 <h1 class="site-title">狂客空间</h1>
                 <p class="site-subtitle" style="font-size:1.125rem;color:var(--text-secondary);font-weight:300;letter-spacing:.2em">AI · 学习 · 定制</p>
             </header>
-            
             <!-- 探索区 -->
             <section class="section">
                 <h2 class="section-title" style="font-family:var(--font-serif);font-size:2rem;font-weight:600;text-align:center;color:var(--primary-gold);margin-bottom:32px;letter-spacing:.05em">发现</h2>
@@ -163,7 +157,8 @@
                         <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:600;margin-bottom:8px">视频剪辑作业</h3>
                         <p style="font-size:.9375rem;color:var(--text-secondary);line-height:1.7">实战案例与技巧分享</p>
                     </a>
-                    <a href="https://kuangketongxue.github.io/kuangke.github.io/games.html" class="card">
+                    <!-- 新增：自制游戏卡片 -->
+                    <a href="#" class="card">
                         <span style="font-size:2.5rem;margin-bottom:16px;display:block">🎮</span>
                         <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:600;margin-bottom:8px">自制游戏</h3>
                         <p style="font-size:.9375rem;color:var(--text-secondary);line-height:1.7">独立游戏开发项目</p>
@@ -210,9 +205,7 @@
                     </a>
                 </div>
             </section>
-            
             <div style="width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--primary-gold),transparent);margin:80px auto"></div>
-            
             <!-- 会员区 -->
             <section class="section">
                 <h2 class="section-title" style="font-family:var(--font-serif);font-size:2rem;font-weight:600;text-align:center;color:var(--primary-gold);margin-bottom:32px;letter-spacing:.05em">精英会</h2>
@@ -250,9 +243,7 @@
                     </a>
                 </div>
             </section>
-            
             <div style="width:80px;height:1px;background:linear-gradient(90deg,transparent,var(--primary-gold),transparent);margin:80px auto"></div>
-            
             <!-- 定制区 -->
             <section class="section">
                 <h2 class="section-title" style="font-family:var(--font-serif);font-size:2rem;font-weight:600;text-align:center;color:var(--primary-gold);margin-bottom:32px;letter-spacing:.05em">私享定制</h2>
@@ -279,7 +270,6 @@
                     </a>
                 </div>
             </section>
-            
             <!-- 页脚 -->
             <footer style="border-top:1px solid rgba(255,255,255,.1);padding:80px 0;text-align:center;margin-top:120px;background:rgba(0,0,0,.4);backdrop-filter:blur(10px)">
                 <h3 style="font-family:var(--font-serif);font-size:1.5rem;color:var(--primary-gold);margin-bottom:32px;font-weight:600">联系我们</h3>
@@ -298,10 +288,8 @@
             </footer>
         </div>
     </div>
-    
     <!-- 完整CSS延迟加载 -->
     <link rel="stylesheet" href="data:text/css;base64,LnRvcC1ub3RpY2V7dHJhbnNpdGlvbjpvcGFjaXR5IC40cyxoZWlnaHQgLjRzfS5ub3RpY2UtaGlkZGVue2Rpc3BsYXk6bm9uZX0ubm90aWNlLWNsb3NlOmhvdmVye2JhY2tncm91bmQ6cmdiYSgyMTIsMTc1LDU1LC4yKTt0cmFuc2Zvcm06cm90YXRlKDkwZGVnKX0uY2FyZC1pY29ue3otaW5kZXg6MTtwb3NpdGlvbjpyZWxhdGl2ZX0uY2FyZC10aXRsZSwuY2FyZC1kZXNje3otaW5kZXg6MTtwb3NpdGlvbjpyZWxhdGl2ZX0uc29jaWFsLWxpbms6aG92ZXJ7Ym9yZGVyLWNvbG9yOnZhcigtLXByaW1hcnktZ29sZCk7Y29sb3I6dmFyKC0tcHJpbWFyeS1nb2xkKTt0cmFuc2Zvcm06dHJhbnNsYXRlWSgtNHB4KX1AbWVkaWEobWF4LXdpZHRoOjc2OHB4KXsuY2FyZC1ncmlke2dyaWQtdGVtcGxhdGUtY29sdW1uczoxZnJ9LmNhcmQ6aG92ZXJ7dHJhbnNmb3JtOnRyYW5zbGF0ZVkoLTRweCkgc2NhbGUoMS4wMSl9fTo6LXdlYmtpdC1zY3JvbGxiYXJ7d2lkdGg6MTBweH06Oi13ZWJraXQtc2Nyb2xsYmFyLXRyYWNre2JhY2tncm91bmQ6IzBhMGEwYTtib3JkZXItbGVmdDoxcHggc29saWQgcmdiYSgyMTIsMTc1LDU1LC4xKX06Oi13ZWJraXQtc2Nyb2xsYmFyLXRodW1ie2JhY2tncm91bmQ6bGluZWFyLWdyYWRpZW50KDE4MGRlZywjZDRhZjM3LCNiODk0MWUpO2JvcmRlci1yYWRpdXM6NXB4O2JvcmRlcjoycHggc29saWQgIzBhMGEwYX06Oi13ZWJraXQtc2Nyb2xsYmFyLXRodW1iOmhvdmVye2JhY2tncm91bmQ6I2Q0YWYzN30=" media="print" onload="this.media='all'">
-    
     <!-- JavaScript异步加载 -->
     <script>
         !function(){"use strict";
@@ -312,7 +300,7 @@
         const n=new IntersectionObserver((e=>{e.forEach(((e,t)=>{e.isIntersecting&&(setTimeout((()=>{e.target.style.opacity="1",e.target.style.transform="translateY(0)"}),50*t),n.unobserve(e.target))}))}),{threshold:.1,rootMargin:"0px 0px -50px 0px"});
         document.querySelectorAll(".card").forEach((e=>{e.style.opacity="0",e.style.transform="translateY(30px)",e.style.transition="opacity .6s ease-out,transform .6s ease-out",n.observe(e)})),
         document.querySelectorAll('a[href^="http"]').forEach((e=>{e.hasAttribute("target")||(e.setAttribute("target","_blank"),e.setAttribute("rel","noopener noreferrer"))})),
-        "performance"in window&&"timing"in performance&&window.addEventListener("load",(()=>{const e=performance.timing.loadEventEnd-performance.timing.navigationStart;console.log`⚡ 页面加载时间: ${e}ms`}))
+        "performance"in window&&"timing"in performance&&window.addEventListener("load",(()=>{const e=performance.timing.loadEventEnd-performance.timing.navigationStart;console.log(`⚡ 页面加载时间: ${e}ms`)}))
         }();
     </script>
 </body>
