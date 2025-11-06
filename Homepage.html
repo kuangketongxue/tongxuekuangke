@@ -725,11 +725,7 @@
         async function fetchQWeather() {
             const weatherElement = document.getElementById('weather');
             // 检查API Key
-            if (QWEATHER_KEY === '2a7e3fb132e443ac965e50b001317f5f') {
-                console.warn('请先设置和风天气API Key');
-                showDefaultWeather();
-                return;
-            }
+           
             try {
                 // 获取用户位置
                 if ('geolocation' in navigator) {
