@@ -588,7 +588,8 @@
     </div>
     <script>
         // ========== 配置区域 ==========
-        const QWEATHER_KEY = '2a7e3fb132e443ac965e50b001317f5f'; // 请替换为您的和风天气 API Key
+        const QWEATHER_KEY = '2a7e3fb132e443ac965e50b001317f5f';
+        
         // 金句库
         const quotes = [
             { text: "有死之限是因为惧怕死亡<br>很怕死亡是因为有挂念的事与人吧", author: "原神" },
@@ -602,71 +603,25 @@
             { text: "愿你历尽千帆<br>归来仍是少年", author: "祝福语" },
             { text: "山高路远<br>我们慢慢来", author: "治愈系" }
         ];
+        
         // 和风天气图标映射
         const qweatherIcons = {
-            '100': '☀️', // 晴
-            '101': '☁️', // 多云
-            '102': '⛅', // 少云
-            '103': '⛅', // 晴间多云
-            '104': '☁️', // 阴
-            '150': '🌙', // 晴（夜间）
-            '151': '☁️', // 多云（夜间）
-            '152': '⛅', // 少云（夜间）
-            '153': '⛅', // 晴间多云（夜间）
-            '300': '🌦️', // 阵雨
-            '301': '⛈️', // 强阵雨
-            '302': '⚡', // 雷阵雨
-            '303': '⛈️', // 强雷阵雨
-            '304': '⛈️', // 雷阵雨伴有冰雹
-            '305': '🌧️', // 小雨
-            '306': '🌧️', // 中雨
-            '307': '🌧️', // 大雨
-            '308': '🌊', // 极端降雨
-            '309': '💧', // 毛毛雨
-            '310': '⛈️', // 暴雨
-            '311': '⛈️', // 大暴雨
-            '312': '⛈️', // 特大暴雨
-            '313': '🌧️', // 冻雨
-            '314': '🌧️', // 小到中雨
-            '315': '🌧️', // 中到大雨
-            '316': '⛈️', // 大到暴雨
-            '317': '⛈️', // 暴雨到大暴雨
-            '318': '⛈️', // 大暴雨到特大暴雨
-            '399': '🌧️', // 雨
-            '400': '❄️', // 小雪
-            '401': '❄️', // 中雪
-            '402': '❄️', // 大雪
-            '403': '❄️', // 暴雪
-            '404': '🌨️', // 雨夹雪
-            '405': '🌨️', // 雨雪天气
-            '406': '🌨️', // 阵雨夹雪
-            '407': '❄️', // 阵雪
-            '408': '❄️', // 小到中雪
-            '409': '❄️', // 中到大雪
-            '410': '❄️', // 大到暴雪
-            '499': '❄️', // 雪
-            '500': '🌫️', // 薄雾
-            '501': '🌫️', // 雾
-            '502': '😷', // 霾
-            '503': '🌪️', // 扬沙
-            '504': '🌪️', // 浮尘
-            '507': '🌪️', // 沙尘暴
-            '508': '🌪️', // 强沙尘暴
-            '509': '🌫️', // 浓雾
-            '510': '🌫️', // 强浓雾
-            '511': '🌫️', // 中度霾
-            '512': '😷', // 重度霾
-            '513': '😷', // 严重霾
-            '514': '🌫️', // 大雾
-            '515': '🌫️', // 特强浓雾
-            '900': '🔥', // 热
-            '901': '❄️', // 冷
-            '999': '🌈'  // 未知
+            '100': '☀️', '101': '☁️', '102': '⛅', '103': '⛅', '104': '☁️',
+            '150': '🌙', '151': '☁️', '152': '⛅', '153': '⛅',
+            '300': '🌦️', '301': '⛈️', '302': '⚡', '303': '⛈️', '304': '⛈️',
+            '305': '🌧️', '306': '🌧️', '307': '🌧️', '308': '🌊', '309': '💧',
+            '310': '⛈️', '311': '⛈️', '312': '⛈️', '313': '🌧️',
+            '400': '❄️', '401': '❄️', '402': '❄️', '403': '❄️', '404': '🌨️',
+            '500': '🌫️', '501': '🌫️', '502': '😷', '503': '🌪️', '504': '🌪️',
+            '507': '🌪️', '508': '🌪️', '509': '🌫️', '510': '🌫️',
+            '900': '🔥', '901': '❄️', '999': '🌈'
         };
+        
         // 获取和风天气图标
         function getQweatherIcon(code) {
             return qweatherIcons[code] || '🌈';
         }
+        
         // 随机选择金句
         function loadRandomQuote() {
             const randomIndex = Math.floor(Math.random() * quotes.length);
@@ -674,6 +629,7 @@
             document.getElementById('quote-text').innerHTML = quote.text;
             document.getElementById('quote-author').textContent = `— ${quote.author}`;
         }
+        
         // 获取时间问候语
         function getGreeting() {
             const hour = new Date().getHours();
@@ -684,10 +640,12 @@
             if (hour >= 18 && hour < 22) return '嘿晚上好';
             return '嘿深夜好';
         }
+        
         // 更新问候语
         function updateGreeting() {
             document.getElementById('greeting').textContent = getGreeting() + ' · 欢迎来到我的主页';
         }
+        
         // 实时时钟
         function updateClock() {
             const now = new Date();
@@ -696,6 +654,7 @@
             const seconds = String(now.getSeconds()).padStart(2, '0');
             document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
         }
+        
         // 更新日期
         function updateDate() {
             const now = new Date();
@@ -706,42 +665,29 @@
             const weekday = weekdays[now.getDay()];
             document.getElementById('date').textContent = `${year}年${month}月${day}日 ${weekday}`;
         }
-        // 获取城市ID（通过经纬度）
-        async function getCityId(lon, lat) {
-            try {
-                const url = `https://geoapi.qweather.com/v2/city/lookup?location=${lon},${lat}&key=${QWEATHER_KEY}`;
-                const response = await fetch(url);
-                const data = await response.json();
-                if (data.code === '200' && data.location && data.location.length > 0) {
-                    return data.location[0].id;
-                }
-                return null;
-            } catch (error) {
-                console.error('获取城市ID失败:', error);
-                return null;
-            }
-        }
-        // 获取和风天气实时数据
+        
+        // 获取和风天气实时数据（修复版）
         async function fetchQWeather() {
             const weatherElement = document.getElementById('weather');
-            // 检查API Key
-           
+            
             try {
-                // 获取用户位置
                 if ('geolocation' in navigator) {
                     navigator.geolocation.getCurrentPosition(
                         async (position) => {
                             const { latitude, longitude } = position.coords;
+                            
                             try {
-                                // 获取城市ID
-                                const cityId = await getCityId(longitude, latitude);
-                                if (!cityId) {
-                                    throw new Error('无法获取城市信息');
-                                }
-                                // 获取实时天气
-                                const weatherUrl = `https://devapi.qweather.com/v7/weather/now?location=${cityId}&key=${QWEATHER_KEY}`;
+                                // 直接使用经纬度查询天气
+                                const locationStr = `${longitude.toFixed(2)},${latitude.toFixed(2)}`;
+                                const weatherUrl = `https://devapi.qweather.com/v7/weather/now?location=${locationStr}&key=${QWEATHER_KEY}`;
+                                
+                                console.log('正在请求天气API:', weatherUrl);
+                                
                                 const response = await fetch(weatherUrl);
                                 const data = await response.json();
+                                
+                                console.log('天气API返回:', data);
+                                
                                 if (data.code === '200' && data.now) {
                                     const weather = data.now;
                                     const icon = getQweatherIcon(weather.icon);
@@ -765,10 +711,11 @@
                                         </div>
                                     `;
                                 } else {
-                                    throw new Error('天气数据获取失败');
+                                    console.error('天气数据返回错误:', data);
+                                    showDefaultWeather();
                                 }
                             } catch (error) {
-                                console.error('和风天气API调用失败:', error);
+                                console.error('天气API调用失败:', error);
                                 showDefaultWeather();
                             }
                         },
@@ -779,10 +726,11 @@
                         {
                             timeout: 10000,
                             enableHighAccuracy: false,
-                            maximumAge: 300000 // 5分钟缓存
+                            maximumAge: 300000
                         }
                     );
                 } else {
+                    console.warn('浏览器不支持地理定位');
                     showDefaultWeather();
                 }
             } catch (error) {
@@ -790,12 +738,13 @@
                 showDefaultWeather();
             }
         }
+        
         // 显示默认天气
         function showDefaultWeather() {
             const weatherElement = document.getElementById('weather');
             const hour = new Date().getHours();
             let weather, icon, temp;
-            // 根据时间显示合适的天气
+            
             if (hour >= 6 && hour < 18) {
                 weather = '天气晴朗';
                 icon = '☀️';
@@ -805,6 +754,7 @@
                 icon = '🌙';
                 temp = '18';
             }
+            
             weatherElement.innerHTML = `
                 <div class="weather-icon">${icon}</div>
                 <div style="font-size: 16px; margin-bottom: 8px;">
@@ -815,6 +765,7 @@
                 </div>
             `;
         }
+        
         // 初始化
         window.addEventListener('load', function() {
             loadRandomQuote();
@@ -822,12 +773,14 @@
             updateDate();
             updateClock();
             fetchQWeather();
+            
             // 定时更新
             setInterval(updateClock, 1000);
             setInterval(updateGreeting, 60000);
             setInterval(updateDate, 60000);
             // 每15分钟更新一次天气
             setInterval(fetchQWeather, 900000);
+            
             // 欢迎提示（延迟显示）
             const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
             setTimeout(() => {
@@ -835,6 +788,7 @@
                 alert(message);
             }, 800);
         });
+        
         // 添加页面可见性API，当页面重新可见时更新天气
         document.addEventListener('visibilitychange', function() {
             if (!document.hidden) {
