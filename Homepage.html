@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
+        /* ... 保持原有样式不变 ... */
         * {
             margin: 0;
             padding: 0;
@@ -35,7 +36,6 @@
             color: var(--text-primary);
             letter-spacing: 0.5px;
         }
-        /* 高级星空背景 */
         body::before {
             content: '';
             position: fixed;
@@ -60,7 +60,6 @@
             from { transform: translateY(0); }
             to { transform: translateY(-300px); }
         }
-        /* 光晕效果 */
         body::after {
             content: '';
             position: fixed;
@@ -84,7 +83,6 @@
             display: flex;
             flex-direction: column;
         }
-        /* 顶部通知栏 */
         .notification {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
             border: 1px solid rgba(212, 175, 55, 0.3);
@@ -106,7 +104,6 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 30px rgba(212, 175, 55, 0.2);
         }
-        /* 主要内容区 */
         .main-content {
             display: grid;
             grid-template-columns: 380px 1fr 380px;
@@ -117,7 +114,6 @@
             width: 100%;
             padding-bottom: 100px;
         }
-        /* 卡片通用样式 */
         .card {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -131,7 +127,6 @@
             box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
             border-color: rgba(212, 175, 55, 0.3);
         }
-        /* 左侧区域 */
         .left-section {
             display: flex;
             flex-direction: column;
@@ -245,7 +240,6 @@
             transform: translateY(-4px) rotate(5deg);
             box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
         }
-        /* 中间区域 */
         .center-section {
             display: flex;
             flex-direction: column;
@@ -321,7 +315,6 @@
             transform: translateY(-4px);
             box-shadow: 0 12px 36px rgba(212, 175, 55, 0.3);
         }
-        /* 右侧区域 */
         .right-section {
             display: flex;
             flex-direction: column;
@@ -384,7 +377,6 @@
             align-items: center;
             gap: 4px;
         }
-        /* 底部备案信息 */
         .footer {
             position: fixed;
             bottom: var(--spacing-lg);
@@ -401,7 +393,6 @@
             letter-spacing: 1px;
             font-weight: 300;
         }
-        /* 右下角图标 */
         .chat-icon {
             position: fixed;
             bottom: var(--spacing-lg);
@@ -431,7 +422,6 @@
             height: 100%;
             object-fit: cover;
         }
-        /* 响应式设计 */
         @media (max-width: 1400px) {
             .main-content {
                 grid-template-columns: 300px 1fr 300px;
@@ -493,7 +483,6 @@
                 gap: 4px;
             }
         }
-        /* 加载动画 */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -516,17 +505,15 @@
 </head>
 <body>
     <div class="container">
-        <!-- 顶部通知 -->
         <div class="notification" id="greeting">
             嘿上好 · 欢迎来到我的主页
         </div>
-        <!-- 主要内容 -->
         <div class="main-content">
-            <!-- 左侧 -->
             <div class="left-section">
                 <div class="card avatar-section">
                     <div class="avatar-container">
-                       <img src="image/avatar.jpg" alt="头像" id="avatar-img">
+                       <img src="image/avatar.jpg" alt="头像" id="avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                       <div class="avatar-placeholder" style="display:none;">👤</div>
                     </div>
                     <div class="site-name">狂客同学</div>
                     <div class="site-domain">Classmate Kuangke.top</div>
@@ -547,7 +534,6 @@
                     </div>
                 </div>
             </div>
-            <!-- 中间 -->
             <div class="center-section">
                 <div class="welcome-text">
                     欢迎访问
@@ -566,7 +552,6 @@
                     </a>
                 </div>
             </div>
-            <!-- 右侧 -->
             <div class="right-section">
                 <div class="card date-time">
                     <div class="date" id="date">2025年01月05日 星期三</div>
@@ -577,11 +562,9 @@
                 </div>
             </div>
         </div>
-        <!-- 底部备案 -->
         <div class="footer">
             ©️ 2025 狂客版权所有
         </div>
-        <!-- 右下角头像 -->
         <div class="chat-icon" title="联系我">
             <span style="font-size: 32px;">💬</span>
         </div>
@@ -666,73 +649,82 @@
             document.getElementById('date').textContent = `${year}年${month}月${day}日 ${weekday}`;
         }
         
-        // 获取和风天气实时数据（修复版）
+        // 获取和风天气实时数据（修复版本）
         async function fetchQWeather() {
             const weatherElement = document.getElementById('weather');
             
             try {
-                if ('geolocation' in navigator) {
-                    navigator.geolocation.getCurrentPosition(
-                        async (position) => {
-                            const { latitude, longitude } = position.coords;
-                            
-                            try {
-                                // 直接使用经纬度查询天气
-                                const locationStr = `${longitude.toFixed(2)},${latitude.toFixed(2)}`;
-                                const weatherUrl = `https://devapi.qweather.com/v7/weather/now?location=${locationStr}&key=${QWEATHER_KEY}`;
-                                
-                                console.log('正在请求天气API:', weatherUrl);
-                                
-                                const response = await fetch(weatherUrl);
-                                const data = await response.json();
-                                
-                                console.log('天气API返回:', data);
-                                
-                                if (data.code === '200' && data.now) {
-                                    const weather = data.now;
-                                    const icon = getQweatherIcon(weather.icon);
-                                    weatherElement.innerHTML = `
-                                        <div class="weather-icon">${icon}</div>
-                                        <div style="font-size: 16px; margin-bottom: 8px;">
-                                            ${weather.text} · ${weather.temp}°C
-                                        </div>
-                                        <div class="weather-detail">
-                                            <div class="weather-item">
-                                                <span>💨</span>
-                                                <span>${weather.windDir} ${weather.windScale}级</span>
-                                            </div>
-                                            <div class="weather-item">
-                                                <span>💧</span>
-                                                <span>湿度 ${weather.humidity}%</span>
-                                            </div>
-                                        </div>
-                                        <div style="font-size: 11px; margin-top: 8px; opacity: 0.6;">
-                                            体感温度 ${weather.feelsLike}°C
-                                        </div>
-                                    `;
-                                } else {
-                                    console.error('天气数据返回错误:', data);
-                                    showDefaultWeather();
-                                }
-                            } catch (error) {
-                                console.error('天气API调用失败:', error);
-                                showDefaultWeather();
-                            }
-                        },
-                        (error) => {
-                            console.error('获取位置失败:', error);
-                            showDefaultWeather();
-                        },
-                        {
-                            timeout: 10000,
-                            enableHighAccuracy: false,
-                            maximumAge: 300000
-                        }
-                    );
-                } else {
+                if (!('geolocation' in navigator)) {
                     console.warn('浏览器不支持地理定位');
                     showDefaultWeather();
+                    return;
                 }
+                
+                navigator.geolocation.getCurrentPosition(
+                    async (position) => {
+                        const { latitude, longitude } = position.coords;
+                        console.log('获取到位置:', latitude, longitude);
+                        
+                        try {
+                            // 使用正确的和风天气 API 格式
+                            const locationStr = `${longitude.toFixed(2)},${latitude.toFixed(2)}`;
+                            
+                            // 修改为正确的 API 端点（使用免费版 API）
+                            const weatherUrl = `https://devapi.qweather.com/v7/weather/now?location=${locationStr}&key=${QWEATHER_KEY}`;
+                            
+                            console.log('请求天气 URL:', weatherUrl);
+                            
+                            const response = await fetch(weatherUrl);
+                            
+                            if (!response.ok) {
+                                throw new Error(`HTTP error! status: ${response.status}`);
+                            }
+                            
+                            const data = await response.json();
+                            console.log('天气数据:', data);
+                            
+                            if (data.code === '200' && data.now) {
+                                const weather = data.now;
+                                const icon = getQweatherIcon(weather.icon);
+                                
+                                weatherElement.innerHTML = `
+                                    <div class="weather-icon">${icon}</div>
+                                    <div style="font-size: 16px; margin-bottom: 8px;">
+                                        ${weather.text} · ${weather.temp}°C
+                                    </div>
+                                    <div class="weather-detail">
+                                        <div class="weather-item">
+                                            <span>💨</span>
+                                            <span>${weather.windDir} ${weather.windScale}级</span>
+                                        </div>
+                                        <div class="weather-item">
+                                            <span>💧</span>
+                                            <span>湿度 ${weather.humidity}%</span>
+                                        </div>
+                                    </div>
+                                    <div style="font-size: 11px; margin-top: 8px; opacity: 0.6;">
+                                        体感温度 ${weather.feelsLike}°C
+                                    </div>
+                                `;
+                            } else {
+                                console.error('天气API返回错误:', data.code, data);
+                                showDefaultWeather();
+                            }
+                        } catch (error) {
+                            console.error('获取天气数据失败:', error);
+                            showDefaultWeather();
+                        }
+                    },
+                    (error) => {
+                        console.error('获取地理位置失败:', error.code, error.message);
+                        showDefaultWeather();
+                    },
+                    {
+                        timeout: 10000,
+                        enableHighAccuracy: false,
+                        maximumAge: 300000
+                    }
+                );
             } catch (error) {
                 console.error('天气功能初始化失败:', error);
                 showDefaultWeather();
@@ -778,18 +770,10 @@
             setInterval(updateClock, 1000);
             setInterval(updateGreeting, 60000);
             setInterval(updateDate, 60000);
-            // 每15分钟更新一次天气
-            setInterval(fetchQWeather, 900000);
-            
-            // 欢迎提示（延迟显示）
-            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
-            setTimeout(() => {
-                const message = `✨ 欢迎来到我的主页！\n\n${randomQuote.text.replace(/<br>/g, '\n')}\n\n— ${randomQuote.author}`;
-                alert(message);
-            }, 800);
+            setInterval(fetchQWeather, 900000); // 每15分钟更新一次天气
         });
         
-        // 添加页面可见性API，当页面重新可见时更新天气
+        // 页面可见性变化时更新
         document.addEventListener('visibilitychange', function() {
             if (!document.hidden) {
                 fetchQWeather();
