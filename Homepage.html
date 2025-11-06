@@ -433,35 +433,178 @@
             letter-spacing: 0.5px;
             font-weight: 300;
         }
-        .chat-icon {
+        
+        /* ========== 优化后的聊天图标样式 ========== */
+        .chat-icon-wrapper {
             position: fixed;
             bottom: var(--spacing-lg);
             right: var(--spacing-lg);
-            width: 56px;
-            height: 56px;
+            z-index: 100;
+        }
+        
+        .chat-icon {
+            position: relative;
+            width: 64px;
+            height: 64px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.08);
-            border: 1px solid rgba(212, 175, 55, 0.3);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2) 0%, rgba(212, 175, 55, 0.05) 100%);
+            border: 2px solid rgba(212, 175, 55, 0.4);
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            transition: all 0.3s ease;
-            overflow: hidden;
-            z-index: 10;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 0 0 rgba(212, 175, 55, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(20px);
+            overflow: visible;
         }
+        
+        /* 呼吸光环效果 */
+        .chat-icon::before {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, 
+                transparent, 
+                rgba(212, 175, 55, 0.3), 
+                transparent,
+                rgba(212, 175, 55, 0.3),
+                transparent
+            );
+            opacity: 0;
+            animation: breathe 3s ease-in-out infinite;
+            z-index: -1;
+        }
+        
+        /* 脉冲波纹效果 */
+        .chat-icon::after {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 2px solid rgba(212, 175, 55, 0.6);
+            opacity: 0;
+            animation: ripple 2s ease-out infinite;
+        }
+        
+        @keyframes breathe {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1) rotate(180deg);
+            }
+        }
+        
+        @keyframes ripple {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.5);
+            }
+        }
+        
         .chat-icon:hover {
-            transform: scale(1.1) rotate(360deg);
+            transform: translateY(-8px) scale(1.1);
             border-color: var(--primary-color);
-            box-shadow: 0 12px 48px rgba(212, 175, 55, 0.4);
+            box-shadow: 
+                0 16px 48px rgba(212, 175, 55, 0.4),
+                0 0 60px rgba(212, 175, 55, 0.3),
+                0 0 0 8px rgba(212, 175, 55, 0.1);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(212, 175, 55, 0.15) 100%);
         }
-        .chat-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+        
+        .chat-icon:hover::before {
+            animation: breathe 1.5s ease-in-out infinite;
         }
+        
+        .chat-icon:active {
+            transform: translateY(-6px) scale(1.05);
+        }
+        
+        /* 图标内容 */
+        .chat-icon-content {
+            position: relative;
+            z-index: 1;
+            font-size: 32px;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.3));
+        }
+        
+        .chat-icon:hover .chat-icon-content {
+            transform: scale(1.1) rotate(-10deg);
+            filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.5));
+        }
+        
+        /* 悬浮提示 */
+        .chat-tooltip {
+            position: absolute;
+            bottom: calc(100% + 12px);
+            right: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.95) 0%, rgba(212, 175, 55, 0.85) 100%);
+            color: var(--secondary-color);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            pointer-events: none;
+        }
+        
+        .chat-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            right: 20px;
+            border: 6px solid transparent;
+            border-top-color: rgba(212, 175, 55, 0.95);
+        }
+        
+        .chat-icon:hover .chat-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        /* 在线状态指示器 */
+        .online-indicator {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            width: 14px;
+            height: 14px;
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            border: 2px solid var(--secondary-color);
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
+            animation: pulse-indicator 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-indicator {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 20px rgba(74, 222, 128, 0.8);
+            }
+        }
+        
         @media (max-width: 1400px) {
             .main-content {
                 grid-template-columns: 320px 1fr 320px;
@@ -517,16 +660,35 @@
             .quote-box p {
                 font-size: 14px;
             }
-            .chat-icon {
-                width: 48px;
-                height: 48px;
-            }
             .weather-detail {
                 flex-direction: column;
                 gap: 4px;
             }
             .main-content {
                 gap: var(--spacing-lg);
+            }
+            .chat-icon-wrapper {
+                bottom: 80px;
+                right: var(--spacing-md);
+            }
+            
+            .chat-icon {
+                width: 56px;
+                height: 56px;
+            }
+            
+            .chat-icon-content {
+                font-size: 28px;
+            }
+            
+            .chat-tooltip {
+                font-size: 11px;
+                padding: 6px 12px;
+            }
+            
+            .online-indicator {
+                width: 12px;
+                height: 12px;
             }
         }
         @keyframes fadeIn {
@@ -553,7 +715,6 @@
     <!-- 动态背景容器 -->
     <div class="background-container" id="background-container"></div>
     <div class="background-overlay"></div>
-
     <div class="container">
         <div class="notification" id="greeting">
             嘿上好 · 欢迎来到我的主页
@@ -615,34 +776,45 @@
         <div class="footer">
             ©️ 2025 狂客版权所有
         </div>
-        <div class="chat-icon" title="联系我">
-            <span style="font-size: 28px;">💬</span>
+        
+        <!-- 优化后的聊天图标 -->
+        <div class="chat-icon-wrapper">
+            <div class="chat-icon" onclick="handleChatClick()">
+                <div class="online-indicator"></div>
+                <div class="chat-icon-content">💬</div>
+                <div class="chat-tooltip">联系我 · 在线咨询</div>
+            </div>
         </div>
     </div>
     <script>
         // ========== 配置区域 ==========
         const QWEATHER_KEY = '2a7e3fb132e443ac965e50b001317f5f';
         
-        // 动漫风格星空背景图片库 (使用高质量的动漫星空图片URL)
+        // 聊天图标点击事件
+        function handleChatClick() {
+            alert('💬 您可以通过以下方式联系我:\n\n📧 邮箱: your-email@example.com\n💬 微信: YourWeChatID\n🐦 Twitter: @yourusername');
+        }
+        
+        // 动漫风格星空背景图片库
         const animeStarryBackgrounds = [
-            'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1920&q=80', // 星空1
-            'https://images.unsplash.com/photo-1464802686167-b939a6910659?w=1920&q=80', // 星空2
-            'https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=1920&q=80', // 星空3
-            'https://images.unsplash.com/photo-1444080748397-f442aa95c3e5?w=1920&q=80', // 星空4
-            'https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=1920&q=80', // 星空5
-            'https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?w=1920&q=80', // 星空6
-            'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80', // 星空7
-            'https://images.unsplash.com/photo-1520034475321-cbe63696469a?w=1920&q=80', // 星空8
-            'https://images.unsplash.com/photo-1509773896068-7fd415d91e2e?w=1920&q=80', // 星空9
-            'https://images.unsplash.com/photo-1447433589675-4aaa569f3e05?w=1920&q=80', // 星空10
-            'https://images.unsplash.com/photo-1446941611757-91d2c3bd3d45?w=1920&q=80', // 星空11
-            'https://images.unsplash.com/photo-1465101162946-4377e57745c3?w=1920&q=80', // 星空12
-            'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=1920&q=80', // 星空13
-            'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1920&q=80', // 星空14
-            'https://images.unsplash.com/photo-1504333638930-c8787321eee0?w=1920&q=80'  // 星空15
+            'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1920&q=80',
+            'https://images.unsplash.com/photo-1464802686167-b939a6910659?w=1920&q=80',
+            'https://images.unsplash.com/photo-1506318137071-a8e063b4bec0?w=1920&q=80',
+            'https://images.unsplash.com/photo-1444080748397-f442aa95c3e5?w=1920&q=80',
+            'https://images.unsplash.com/photo-1502134249126-9f3755a50d78?w=1920&q=80',
+            'https://images.unsplash.com/photo-1475274047050-1d0c0975c63e?w=1920&q=80',
+            'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1920&q=80',
+            'https://images.unsplash.com/photo-1520034475321-cbe63696469a?w=1920&q=80',
+            'https://images.unsplash.com/photo-1509773896068-7fd415d91e2e?w=1920&q=80',
+            'https://images.unsplash.com/photo-1447433589675-4aaa569f3e05?w=1920&q=80',
+            'https://images.unsplash.com/photo-1446941611757-91d2c3bd3d45?w=1920&q=80',
+            'https://images.unsplash.com/photo-1465101162946-4377e57745c3?w=1920&q=80',
+            'https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=1920&q=80',
+            'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1920&q=80',
+            'https://images.unsplash.com/photo-1504333638930-c8787321eee0?w=1920&q=80'
         ];
-
-        // 埃隆·马斯克、史蒂夫·乔布斯和坎耶·韦斯特的金句库
+        
+        // 埃隆·马斯克、史蒂夫·乔布斯和坎耶·韦斯特的完整金句库 (130句)
         const quotes = [
             // 埃隆·马斯克 (Elon Musk) - 45句
             { text: "当某件事足够重要时<br>即使胜算不大,你也应该去做", author: "埃隆·马斯克" },
@@ -690,6 +862,7 @@
             { text: "我们正在建设通向未来的道路", author: "埃隆·马斯克" },
             { text: "你必须相信不可能", author: "埃隆·马斯克" },
             { text: "每一天都是新的开始", author: "埃隆·马斯克" },
+            
             // 史蒂夫·乔布斯 (Steve Jobs) - 45句
             { text: "求知若饥,虚心若愚", author: "史蒂夫·乔布斯" },
             { text: "活着就是为了改变世界", author: "史蒂夫·乔布斯" },
@@ -736,6 +909,7 @@
             { text: "一旦你发现这一点<br>你的生活将永远不同", author: "史蒂夫·乔布斯" },
             { text: "我们在这里短暂停留<br>你可能不能做很多事情", author: "史蒂夫·乔布斯" },
             { text: "所以你最好把它们做好", author: "史蒂夫·乔布斯" },
+            
             // 坎耶·韦斯特 (Kanye West) - 40句
             { text: "我拒绝接受他人对我能力的限制", author: "坎耶·韦斯特" },
             { text: "相信你的幻想", author: "坎耶·韦斯特" },
@@ -778,7 +952,7 @@
             { text: "我代表自由表达", author: "坎耶·韦斯特" },
             { text: "未来就是现在", author: "坎耶·韦斯特" }
         ];
-
+        
         // 和风天气图标映射
         const qweatherIcons = {
             '100': '☀️', '101': '☁️', '102': '⛅', '103': '⛅', '104': '☁️',
@@ -791,12 +965,10 @@
             '507': '🌪️', '508': '🌪️', '509': '🌫️', '510': '🌫️',
             '900': '🔥', '901': '❄️', '999': '🌈'
         };
-
-        // ========== 背景图片管理 ==========
+        
         let currentBackgroundIndex = -1;
         let usedBackgrounds = [];
-
-        // 初始化背景
+        
         function initBackground() {
             const container = document.getElementById('background-container');
             const randomBg = getRandomBackground();
@@ -804,45 +976,34 @@
             bgDiv.className = 'background-image active';
             bgDiv.style.backgroundImage = `url(${randomBg})`;
             container.appendChild(bgDiv);
-            
-            // 预加载其他图片
             preloadBackgrounds();
         }
-
-        // 获取随机背景(不重复)
+        
         function getRandomBackground() {
             if (usedBackgrounds.length === animeStarryBackgrounds.length) {
-                usedBackgrounds = []; // 全部用完后重置
+                usedBackgrounds = [];
             }
-            
             let randomIndex;
             do {
                 randomIndex = Math.floor(Math.random() * animeStarryBackgrounds.length);
             } while (usedBackgrounds.includes(randomIndex));
-            
             usedBackgrounds.push(randomIndex);
             currentBackgroundIndex = randomIndex;
-            
-            // 保存到localStorage
             localStorage.setItem('lastBackgroundIndex', randomIndex);
             localStorage.setItem('usedBackgrounds', JSON.stringify(usedBackgrounds));
-            
             return animeStarryBackgrounds[randomIndex];
         }
-
-        // 预加载背景图片
+        
         function preloadBackgrounds() {
             animeStarryBackgrounds.forEach(url => {
                 const img = new Image();
                 img.src = url;
             });
         }
-
-        // 从localStorage恢复状态
+        
         function restoreBackgroundState() {
             const lastIndex = localStorage.getItem('lastBackgroundIndex');
             const savedUsed = localStorage.getItem('usedBackgrounds');
-            
             if (lastIndex !== null) {
                 currentBackgroundIndex = parseInt(lastIndex);
             }
@@ -850,21 +1011,18 @@
                 usedBackgrounds = JSON.parse(savedUsed);
             }
         }
-
-        // 获取和风天气图标
+        
         function getQweatherIcon(code) {
             return qweatherIcons[code] || '🌈';
         }
-
-        // 随机选择金句
+        
         function loadRandomQuote() {
             const randomIndex = Math.floor(Math.random() * quotes.length);
             const quote = quotes[randomIndex];
             document.getElementById('quote-text').innerHTML = quote.text;
             document.getElementById('quote-author').textContent = `— ${quote.author}`;
         }
-
-        // 获取时间问候语
+        
         function getGreeting() {
             const hour = new Date().getHours();
             if (hour >= 5 && hour < 9) return '嘿早上好';
@@ -874,13 +1032,11 @@
             if (hour >= 18 && hour < 22) return '嘿晚上好';
             return '嘿深夜好';
         }
-
-        // 更新问候语
+        
         function updateGreeting() {
             document.getElementById('greeting').textContent = getGreeting() + ' · 欢迎来到我的主页';
         }
-
-        // 实时时钟
+        
         function updateClock() {
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
@@ -888,8 +1044,7 @@
             const seconds = String(now.getSeconds()).padStart(2, '0');
             document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
         }
-
-        // 更新日期
+        
         function updateDate() {
             const now = new Date();
             const year = now.getFullYear();
@@ -899,30 +1054,25 @@
             const weekday = weekdays[now.getDay()];
             document.getElementById('date').textContent = `${year}年${month}月${day}日 ${weekday}`;
         }
-
-        // 获取和风天气实时数据
+        
         async function fetchQWeather() {
             const weatherElement = document.getElementById('weather');
             try {
                 if (!('geolocation' in navigator)) {
-                    console.warn('浏览器不支持地理定位');
                     showDefaultWeather();
                     return;
                 }
                 navigator.geolocation.getCurrentPosition(
                     async (position) => {
                         const { latitude, longitude } = position.coords;
-                        console.log('获取到位置:', latitude, longitude);
                         try {
                             const locationStr = `${longitude.toFixed(2)},${latitude.toFixed(2)}`;
                             const weatherUrl = `https://devapi.qweather.com/v7/weather/now?location=${locationStr}&key=${QWEATHER_KEY}`;
-                            console.log('请求天气 URL:', weatherUrl);
                             const response = await fetch(weatherUrl);
                             if (!response.ok) {
                                 throw new Error(`HTTP error! status: ${response.status}`);
                             }
                             const data = await response.json();
-                            console.log('天气数据:', data);
                             if (data.code === '200' && data.now) {
                                 const weather = data.now;
                                 const icon = getQweatherIcon(weather.icon);
@@ -946,16 +1096,13 @@
                                     </div>
                                 `;
                             } else {
-                                console.error('天气API返回错误:', data.code, data);
                                 showDefaultWeather();
                             }
                         } catch (error) {
-                            console.error('获取天气数据失败:', error);
                             showDefaultWeather();
                         }
                     },
                     (error) => {
-                        console.error('获取地理位置失败:', error.code, error.message);
                         showDefaultWeather();
                     },
                     {
@@ -965,12 +1112,10 @@
                     }
                 );
             } catch (error) {
-                console.error('天气功能初始化失败:', error);
                 showDefaultWeather();
             }
         }
-
-        // 显示默认天气
+        
         function showDefaultWeather() {
             const weatherElement = document.getElementById('weather');
             const hour = new Date().getHours();
@@ -994,8 +1139,7 @@
                 </div>
             `;
         }
-
-        // 初始化
+        
         window.addEventListener('load', function() {
             restoreBackgroundState();
             initBackground();
@@ -1004,15 +1148,12 @@
             updateDate();
             updateClock();
             fetchQWeather();
-            
-            // 定时更新
             setInterval(updateClock, 1000);
             setInterval(updateGreeting, 60000);
             setInterval(updateDate, 60000);
-            setInterval(fetchQWeather, 900000); // 每15分钟更新一次天气
+            setInterval(fetchQWeather, 900000);
         });
-
-        // 页面可见性变化时更新
+        
         document.addEventListener('visibilitychange', function() {
             if (!document.hidden) {
                 fetchQWeather();
