@@ -142,6 +142,18 @@
                         <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:600;margin-bottom:8px">《自学突围》</h3>
                         <p style="font-size:.9375rem;color:var(--text-secondary);line-height:1.7">系统化自学方法论</p>
                     </a>
+                    <!-- 新增：高考助手 -->
+                    <a href="https://kuangketongxue.github.io/kuangke.github.io/ai.html" class="card">
+                        <span style="font-size:2.5rem;margin-bottom:16px;display:block">🎯</span>
+                        <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:600;margin-bottom:8px">高考助手</h3>
+                        <p style="font-size:.9375rem;color:var(--text-secondary);line-height:1.7">智能备考规划与资源</p>
+                    </a>
+                    <!-- 新增：知识体系 -->
+                    <a href="https://kuangketongxue.github.io/kuangke.github.io/concepts.html" class="card">
+                        <span style="font-size:2.5rem;margin-bottom:16px;display:block">🌳</span>
+                        <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:600;margin-bottom:8px">知识体系</h3>
+                        <p style="font-size:.9375rem;color:var(--text-secondary);line-height:1.7">系统化知识架构图谱</p>
+                    </a>
                     <a href="#" class="card">
                         <span style="font-size:2.5rem;margin-bottom:16px;display:block">🎨</span>
                         <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:600;margin-bottom:8px">设计工坊</h3>
@@ -157,7 +169,6 @@
                         <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:600;margin-bottom:8px">视频剪辑作业</h3>
                         <p style="font-size:.9375rem;color:var(--text-secondary);line-height:1.7">实战案例与技巧分享</p>
                     </a>
-                    <!-- 新增：自制游戏卡片 -->
                     <a href="https://kuangketongxue.github.io/kuangke.github.io/games.html" class="card">
                         <span style="font-size:2.5rem;margin-bottom:16px;display:block">🎮</span>
                         <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:600;margin-bottom:8px">自制游戏</h3>
@@ -300,7 +311,7 @@
         const n=new IntersectionObserver((e=>{e.forEach(((e,t)=>{e.isIntersecting&&(setTimeout((()=>{e.target.style.opacity="1",e.target.style.transform="translateY(0)"}),50*t),n.unobserve(e.target))}))}),{threshold:.1,rootMargin:"0px 0px -50px 0px"});
         document.querySelectorAll(".card").forEach((e=>{e.style.opacity="0",e.style.transform="translateY(30px)",e.style.transition="opacity .6s ease-out,transform .6s ease-out",n.observe(e)})),
         document.querySelectorAll('a[href^="http"]').forEach((e=>{e.hasAttribute("target")||(e.setAttribute("target","_blank"),e.setAttribute("rel","noopener noreferrer"))})),
-        "performance"in window&&"timing"in performance&&window.addEventListener("load",(()=>{const e=performance.timing.loadEventEnd-performance.timing.navigationStart;console.log(`⚡ 页面加载时间: ${e}ms`)}))
+        "performance"in window&&"timing"in performance&&window.addEventListener("load",(()=>{const e=performance.timing.loadEventEnd-performance.timing.navigationStart;console.log`⚡ 页面加载时间: ${e}ms`)}))
         }();
     </script>
 </body>
