@@ -12,7 +12,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* CSS部分保持不变 - 从你的代码中复制整个<style>标签内的内容 */
         * {
             margin: 0;
             padding: 0;
@@ -25,22 +24,888 @@
             --text-primary: #ffffff;
             --text-secondary: rgba(255, 255, 255, 0.8);
         }
-        /* ... 保持你原有的所有CSS ... */
-        /* 这里省略了CSS，使用你提供的完整CSS代码 */
+        body {
+            font-family: 'Noto Serif SC', 'Microsoft YaHei', serif;
+            min-height: 100vh;
+            overflow: hidden;
+            position: relative;
+            color: var(--text-primary);
+            letter-spacing: 0.5px;
+        }
+        /* 背景图片容器 */
+        .background-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+        .background-image.active {
+            opacity: 1;
+        }
+        /* 背景遮罩层 - 增加厚度 */
+        .background-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(10, 10, 15, 0.85) 0%, rgba(26, 26, 46, 0.8) 50%, rgba(22, 33, 62, 0.85) 100%);
+            z-index: 0;
+        }
+        /* 星星动画层 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image:
+                radial-gradient(2px 2px at 20% 30%, white, transparent),
+                radial-gradient(2px 2px at 60% 70%, white, transparent),
+                radial-gradient(1px 1px at 50% 50%, white, transparent),
+                radial-gradient(1px 1px at 80% 10%, white, transparent),
+                radial-gradient(2px 2px at 90% 60%, white, transparent),
+                radial-gradient(1px 1px at 33% 75%, white, transparent),
+                radial-gradient(2px 2px at 79% 53%, white, transparent);
+            background-size: 300px 300px;
+            animation: stars 30s linear infinite;
+            opacity: 0.3;
+            z-index: 1;
+            pointer-events: none;
+        }
+        @keyframes stars {
+            from { transform: translateY(0); }
+            to { transform: translateY(-300px); }
+        }
+        body::after {
+            content: '';
+            position: fixed;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at center, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
+            animation: rotate 40s linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        /* 主容器 */
+        .container {
+            position: relative;
+            z-index: 2;
+            width: 100vw;
+            height: 100vh;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 280px 1fr 320px;
+            grid-template-rows: auto 1fr auto;
+            gap: 24px;
+        }
+        /* 通用卡片样式 - 增加厚度 */
+        .card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 100%);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            backdrop-filter: blur(30px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+        }
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+            border-color: rgba(212, 175, 55, 0.4);
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
+        }
+        /* 左侧 - 头像区域 */
+        .avatar-section {
+            grid-column: 1;
+            grid-row: 1 / 3;
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: fit-content;
+        }
+        .avatar-container {
+            width: 120px;
+            height: 120px;
+            margin-bottom: 20px;
+            border-radius: 50%;
+            border: 3px solid rgba(212, 175, 55, 0.4);
+            overflow: hidden;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.25), rgba(212, 175, 55, 0.15));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.3);
+            transition: all 0.4s ease;
+        }
+        .avatar-container:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-color);
+            box-shadow: 0 12px 48px rgba(212, 175, 55, 0.5);
+        }
+        .avatar-container::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, transparent, var(--primary-color), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            animation: rotate 3s linear infinite;
+        }
+        .avatar-container:hover::before {
+            opacity: 0.6;
+        }
+        .avatar-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: relative;
+            z-index: 1;
+        }
+        .avatar-placeholder {
+            font-size: 50px;
+            color: var(--primary-color);
+        }
+        .site-logo {
+            color: var(--primary-color);
+            font-size: 28px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+        }
+        .site-domain {
+            color: var(--text-secondary);
+            font-size: 11px;
+            font-weight: 300;
+            letter-spacing: 1px;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+        }
+        /* 左侧 - 座右铭区域 */
+        .motto-section {
+            grid-column: 1;
+            grid-row: 3;
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .quote-mark {
+            font-size: 40px;
+            color: var(--primary-color);
+            line-height: 1;
+        }
+        .motto-title {
+            color: var(--primary-color);
+            font-size: 15px;
+            font-weight: 300;
+            font-style: italic;
+            letter-spacing: 1px;
+        }
+        .motto-text {
+            color: var(--text-secondary);
+            font-size: 12px;
+            line-height: 1.6;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+        .social-links {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-start;
+            flex-wrap: wrap;
+            margin-top: 8px;
+        }
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-primary);
+            font-size: 18px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+        .social-icon:hover {
+            background: rgba(212, 175, 55, 0.25);
+            border-color: var(--primary-color);
+            transform: translateY(-4px) rotate(5deg);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
+        }
+        /* 中间上方 - 名言卡片 */
+        .quote-card {
+            grid-column: 2 / 4;
+            grid-row: 1;
+            padding: 28px 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 140px;
+        }
+        .quote-card p {
+            color: var(--text-primary);
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 16px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+        .quote-author {
+            color: var(--primary-color);
+            font-size: 12px;
+            font-style: italic;
+            letter-spacing: 1px;
+            font-weight: 300;
+            text-align: right;
+        }
+        /* 中间中央 - 时钟区域 */
+        .clock-section {
+            grid-column: 2;
+            grid-row: 2;
+            padding: 48px 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .date {
+            color: var(--text-secondary);
+            font-size: 13px;
+            margin-bottom: 24px;
+            letter-spacing: 2px;
+            font-weight: 300;
+            text-align: center;
+        }
+        .time {
+            color: var(--primary-color);
+            font-size: 68px;
+            font-weight: 300;
+            font-family: 'Poppins', monospace;
+            letter-spacing: 6px;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
+            margin-bottom: 24px;
+        }
+        .weather {
+            color: var(--text-secondary);
+            font-size: 12px;
+            letter-spacing: 0.5px;
+            font-weight: 300;
+            line-height: 1.6;
+            text-align: center;
+        }
+        .weather-icon {
+            font-size: 28px;
+            margin-bottom: 8px;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .weather-loading {
+            color: var(--primary-color);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .weather-detail {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            font-size: 11px;
+            margin-top: 8px;
+            opacity: 0.7;
+        }
+        .weather-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        /* 右侧 - 网站列表 */
+        .links-section {
+            grid-column: 3;
+            grid-row: 2;
+            padding: 32px 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+        .links-title {
+            color: var(--text-primary);
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .link-button {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.08) 100%);
+            border: 2px solid rgba(212, 175, 55, 0.3);
+            padding: 16px 20px;
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            letter-spacing: 1px;
+            font-weight: 300;
+        }
+        .link-button:hover {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.15) 100%);
+            transform: translateX(4px);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+            border-color: rgba(212, 175, 55, 0.5);
+        }
+        .link-icon {
+            font-size: 20px;
+        }
+        /* 底部 - 页脚 */
+        .footer {
+            grid-column: 1 / 4;
+            grid-row: 4;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 11px;
+            letter-spacing: 0.5px;
+            font-weight: 300;
+            opacity: 0.6;
+            padding: 20px 0;
+        }
+        /* ========== 留言弹窗样式 ========== */
+        .message-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(15px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            animation: modalFadeIn 0.3s ease;
+        }
+        .message-modal.active {
+            display: flex;
+        }
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .message-container {
+            background: linear-gradient(135deg, rgba(26, 26, 46, 0.98) 0%, rgba(22, 33, 62, 0.98) 100%);
+            border: 3px solid rgba(212, 175, 55, 0.4);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+            position: relative;
+            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        .message-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+        }
+        .message-title {
+            color: var(--primary-color);
+            font-size: 24px;
+            font-weight: 400;
+            letter-spacing: 2px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .close-btn {
+            width: 36px;
+            height: 36px;
+            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-primary);
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .close-btn:hover {
+            background: rgba(212, 175, 55, 0.25);
+            border-color: var(--primary-color);
+            transform: rotate(90deg);
+        }
+        .message-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .form-label {
+            color: var(--text-secondary);
+            font-size: 13px;
+            font-weight: 300;
+            letter-spacing: 0.5px;
+        }
+        .form-input,
+        .form-textarea {
+            background: rgba(255, 255, 255, 0.08);
+            border: 2px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 14px 18px;
+            color: var(--text-primary);
+            font-size: 14px;
+            font-family: 'Noto Serif SC', sans-serif;
+            transition: all 0.3s ease;
+            resize: none;
+        }
+        .form-input:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background: rgba(212, 175, 55, 0.08);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.15);
+        }
+        .form-input::placeholder,
+        .form-textarea::placeholder {
+            color: rgba(255, 255, 255, 0.35);
+        }
+        .form-textarea {
+            min-height: 120px;
+            line-height: 1.6;
+        }
+        .char-count {
+            text-align: right;
+            font-size: 11px;
+            color: var(--text-secondary);
+            opacity: 0.6;
+        }
+        .submit-btn {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.9) 0%, rgba(212, 175, 55, 0.7) 100%);
+            border: 2px solid var(--primary-color);
+            border-radius: 12px;
+            padding: 14px 28px;
+            color: var(--secondary-color);
+            font-size: 15px;
+            font-weight: 500;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 8px;
+        }
+        .submit-btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, var(--primary-color) 0%, rgba(212, 175, 55, 0.8) 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.5);
+        }
+        .submit-btn:active:not(:disabled) {
+            transform: translateY(0);
+        }
+        .submit-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        .status-message {
+            padding: 12px 18px;
+            border-radius: 8px;
+            font-size: 13px;
+            text-align: center;
+            margin-top: 12px;
+            animation: modalFadeIn 0.3s ease;
+        }
+        .status-message.success {
+            background: rgba(34, 197, 94, 0.2);
+            border: 2px solid rgba(34, 197, 94, 0.4);
+            color: #4ade80;
+        }
+        .status-message.error {
+            background: rgba(239, 68, 68, 0.2);
+            border: 2px solid rgba(239, 68, 68, 0.4);
+            color: #f87171;
+        }
+        /* 聊天图标 */
+        .chat-icon-wrapper {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            z-index: 100;
+        }
+        .chat-icon {
+            position: relative;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.1) 100%);
+            border: 3px solid rgba(212, 175, 55, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(20px);
+        }
+        .chat-icon::before {
+            content: '';
+            position: absolute;
+            inset: -5px;
+            border-radius: 50%;
+            background: linear-gradient(45deg,
+                transparent,
+                rgba(212, 175, 55, 0.4),
+                transparent,
+                rgba(212, 175, 55, 0.4),
+                transparent
+            );
+            opacity: 0;
+            animation: breathe 3s ease-in-out infinite;
+            z-index: -1;
+        }
+        .chat-icon::after {
+            content: '';
+            position: absolute;
+            inset: -10px;
+            border-radius: 50%;
+            border: 3px solid rgba(212, 175, 55, 0.7);
+            opacity: 0;
+            animation: ripple 2s ease-out infinite;
+        }
+        @keyframes breathe {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(1) rotate(0deg);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.1) rotate(180deg);
+            }
+        }
+        @keyframes ripple {
+            0% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(1.5);
+            }
+        }
+        .chat-icon:hover {
+            transform: translateY(-8px) scale(1.1);
+            border-color: var(--primary-color);
+            box-shadow:
+                0 16px 48px rgba(212, 175, 55, 0.5),
+                0 0 60px rgba(212, 175, 55, 0.4);
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.35) 0%, rgba(212, 175, 55, 0.2) 100%);
+        }
+        .chat-icon-content {
+            position: relative;
+            z-index: 1;
+            font-size: 28px;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.4));
+        }
+        .chat-icon:hover .chat-icon-content {
+            transform: scale(1.1) rotate(-10deg);
+        }
+        .chat-tooltip {
+            position: absolute;
+            bottom: calc(100% + 12px);
+            right: 0;
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.95) 0%, rgba(212, 175, 55, 0.85) 100%);
+            color: var(--secondary-color);
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(8px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+            pointer-events: none;
+        }
+        .chat-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            right: 20px;
+            border: 6px solid transparent;
+            border-top-color: rgba(212, 175, 55, 0.95);
+        }
+        .chat-icon:hover .chat-tooltip {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .online-indicator {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 12px;
+            height: 12px;
+            background: linear-gradient(135deg, #4ade80, #22c55e);
+            border: 3px solid var(--secondary-color);
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(74, 222, 128, 0.7);
+            animation: pulse-indicator 2s ease-in-out infinite;
+        }
+        @keyframes pulse-indicator {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 0 12px rgba(74, 222, 128, 0.7);
+            }
+            50% {
+                transform: scale(1.1);
+                box-shadow: 0 0 20px rgba(74, 222, 128, 0.9);
+            }
+        }
+        /* 响应式设计 */
+        @media (max-width: 1400px) {
+            .container {
+                grid-template-columns: 260px 1fr 300px;
+                padding: 32px;
+                gap: 20px;
+            }
+            .time {
+                font-size: 56px;
+            }
+        }
+        @media (max-width: 1024px) {
+            .container {
+                grid-template-columns: 1fr;
+                grid-template-rows: auto auto auto auto auto;
+                padding: 24px;
+                gap: 16px;
+                overflow-y: auto;
+                height: auto;
+            }
+            .avatar-section {
+                grid-column: 1;
+                grid-row: 1;
+            }
+            .motto-section {
+                grid-column: 1;
+                grid-row: 2;
+            }
+            .quote-card {
+                grid-column: 1;
+                grid-row: 3;
+            }
+            .clock-section {
+                grid-column: 1;
+                grid-row: 4;
+            }
+            .links-section {
+                grid-column: 1;
+                grid-row: 5;
+            }
+            .footer {
+                grid-column: 1;
+                grid-row: 6;
+            }
+            .time {
+                font-size: 48px;
+            }
+        }
+        @media (max-width: 768px) {
+            .container {
+                padding: 16px;
+                gap: 12px;
+            }
+            .time {
+                font-size: 40px;
+                letter-spacing: 3px;
+            }
+            .avatar-container {
+                width: 100px;
+                height: 100px;
+            }
+            .site-logo {
+                font-size: 24px;
+            }
+            .chat-icon-wrapper {
+                bottom: 24px;
+                right: 24px;
+            }
+            .chat-icon {
+                width: 52px;
+                height: 52px;
+            }
+            .chat-icon-content {
+                font-size: 24px;
+            }
+            .message-container {
+                padding: 28px 24px;
+            }
+        }
+        /* 动画效果 */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .card {
+            animation: fadeIn 0.6s ease-out;
+        }
+        .avatar-section { animation-delay: 0.1s; }
+        .motto-section { animation-delay: 0.2s; }
+        .quote-card { animation-delay: 0.15s; }
+        .clock-section { animation-delay: 0.25s; }
+        .links-section { animation-delay: 0.3s; }
     </style>
 </head>
 <body>
-    <!-- HTML结构保持不变 - 从你的代码中复制 -->
+    <!-- 动态背景容器 -->
     <div class="background-container" id="background-container"></div>
     <div class="background-overlay"></div>
-    
     <div class="container">
-        <!-- 你的完整HTML结构 -->
+        <!-- 左上 - 头像卡片 -->
+        <div class="card avatar-section">
+            <div class="avatar-container">
+                <img src="image/avatar.jpg" alt="头像" id="avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                <div class="avatar-placeholder" style="display:none;">👤</div>
+            </div>
+            <div class="site-logo">狂客同学</div>
+            <div class="site-domain">Classmate Kuangke</div>
+        </div>
+        <!-- 左下 - 座右铭卡片 -->
+        <div class="card motto-section">
+            <div class="quote-mark">❝</div>
+            <h2 class="motto-title">Hello World!</h2>
+            <p class="motto-text">世界不死,理想不灭</p>
+            <div class="social-links">
+                <a href="https://github.com/kuangketongxue" class="social-icon" title="GitHub" target="_blank" rel="noopener">🐙</a>
+                <a href="https://open.weixin.qq.com/qr/code?username=gh_ba5b6bb6bd89" class="social-icon" title="微信" target="_blank" rel="noopener">💬</a>
+                <a href="https://x.com/kuangketongxue" class="social-icon" title="X" target="_blank" rel="noopener">❌</a>
+                <a href="mailto:19927675096@163.com" class="social-icon" title="邮箱" target="_blank" rel="noopener">📧</a>
+            </div>
+        </div>
+        <!-- 顶部 - 名言卡片 -->
+        <div class="card quote-card">
+            <p id="quote-text">加载中...</p>
+            <p class="quote-author" id="quote-author">—</p>
+        </div>
+        <!-- 中间 - 时钟卡片 -->
+        <div class="card clock-section">
+            <div class="date" id="date">2025年01月05日 星期三</div>
+            <div class="time" id="clock">20:56:19</div>
+            <div class="weather" id="weather">
+                <div class="weather-loading">⏳ 正在获取天气...</div>
+            </div>
+        </div>
+        <!-- 右侧 - 网站列表卡片 -->
+        <div class="card links-section">
+            <div class="links-title">
+                <span>🔗</span>
+                <span>网站列表</span>
+            </div>
+            <a href="https://kuangketongxue.github.io/tongxuekuangke/index.html" class="link-button" target="_blank" rel="noopener">
+                <span class="link-icon">🌟</span>
+                <span>星空</span>
+            </a>
+        </div>
+        <!-- 底部 - 页脚 -->
+        <div class="footer">
+            版权2025 狂客·银河版权所有
+        </div>
     </div>
     
     <!-- 留言弹窗 -->
     <div class="message-modal" id="messageModal">
-        <!-- 你的弹窗HTML -->
+        <div class="message-container">
+            <div class="message-header">
+                <div class="message-title">
+                    <span>✉️</span>
+                    <span>给我留言</span>
+                </div>
+                <div class="close-btn" onclick="closeMessageModal()">✕</div>
+            </div>
+            <form class="message-form" id="messageForm" onsubmit="submitMessage(event)">
+                <div class="form-group">
+                    <label class="form-label">昵称 *</label>
+                    <input type="text" class="form-input" id="userName" placeholder="请输入您的昵称" required maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">邮箱 (选填)</label>
+                    <input type="email" class="form-input" id="userEmail" placeholder="可选,填写后方便回复您">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">留言内容 *</label>
+                    <textarea class="form-textarea" id="messageContent" placeholder="写下您想说的话..." required maxlength="500" oninput="updateCharCount()"></textarea>
+                    <div class="char-count"><span id="charCount">0</span>/500</div>
+                </div>
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span id="submitBtnText">📤 发送留言</span>
+                </button>
+                <div id="statusMessage"></div>
+            </form>
+        </div>
     </div>
     
     <!-- 聊天图标 -->
@@ -51,12 +916,12 @@
             <div class="chat-tooltip">给我留言 · 在线咨询</div>
         </div>
     </div>
-    
+
     <script>
         // ========== 配置区域 ==========
         const QWEATHER_KEY = '2a7e3fb132e443ac965e50b001317f5f';
         
-        // 背景图片库
+        // 动漫风格星空背景图片库
         const animeStarryBackgrounds = [
             'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1920&q=80',
             'https://images.unsplash.com/photo-1464802686167-b939a6910659?w=1920&q=80',
@@ -94,7 +959,7 @@
             { text: "简单比复杂更难", author: "史蒂夫·乔布斯" }
         ];
         
-        // 天气图标映射
+        // 和风天气图标映射
         const qweatherIcons = {
             '100': '☀️', '101': '☁️', '102': '⛅', '103': '⛅', '104': '☁️',
             '150': '🌙', '151': '☁️', '152': '⛅', '153': '⛅',
