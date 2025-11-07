@@ -4,6 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>狂客同学 - 我的主页</title>
+    
+    <!-- 网站图标 -->
+    <link rel="icon" type="image/jpeg" href="image/avatar.jpg">
+    <link rel="shortcut icon" type="image/jpeg" href="image/avatar.jpg">
+    <link rel="apple-touch-icon" href="image/avatar.jpg">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;500;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -13,6 +19,7 @@
             padding: 0;
             box-sizing: border-box;
         }
+
         :root {
             --primary-color: #d4af37;
             --secondary-color: #1a1a2e;
@@ -26,14 +33,16 @@
             --spacing-xl: 60px;
             --spacing-2xl: 80px;
         }
+
         body {
             font-family: 'Noto Serif SC', 'Microsoft YaHei', serif;
             min-height: 100vh;
-            overflow-x: hidden;
+            overflow: hidden;
             position: relative;
             color: var(--text-primary);
             letter-spacing: 0.5px;
         }
+
         /* 背景图片容器 */
         .background-container {
             position: fixed;
@@ -44,6 +53,7 @@
             z-index: -1;
             overflow: hidden;
         }
+
         .background-image {
             position: absolute;
             top: 0;
@@ -56,9 +66,11 @@
             opacity: 0;
             transition: opacity 1.5s ease-in-out;
         }
+
         .background-image.active {
             opacity: 1;
         }
+
         /* 背景遮罩层 */
         .background-overlay {
             position: fixed;
@@ -69,6 +81,7 @@
             background: linear-gradient(135deg, rgba(10, 10, 15, 0.7) 0%, rgba(26, 26, 46, 0.6) 50%, rgba(22, 33, 62, 0.7) 100%);
             z-index: 0;
         }
+
         /* 星星动画层 */
         body::before {
             content: '';
@@ -91,10 +104,12 @@
             z-index: 1;
             pointer-events: none;
         }
+
         @keyframes stars {
             from { transform: translateY(0); }
             to { transform: translateY(-300px); }
         }
+
         body::after {
             content: '';
             position: fixed;
@@ -107,71 +122,50 @@
             z-index: 1;
             pointer-events: none;
         }
+
         @keyframes rotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
+
+        /* 主容器布局 */
         .container {
             position: relative;
             z-index: 2;
             min-height: 100vh;
-            padding: var(--spacing-2xl) var(--spacing-xl);
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            grid-template-rows: auto 1fr auto;
+            padding: var(--spacing-lg);
+            gap: var(--spacing-lg);
+        }
+
+        /* 左侧区域 */
+        .left-section {
+            grid-row: 1 / -1;
             display: flex;
             flex-direction: column;
+            gap: var(--spacing-xl);
+            padding: var(--spacing-md);
         }
-        .notification {
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            border-radius: 12px;
-            padding: var(--spacing-sm) var(--spacing-lg);
-            text-align: center;
-            color: var(--primary-color);
-            font-size: 13px;
-            font-weight: 300;
-            margin-bottom: var(--spacing-2xl);
-            max-width: 500px;
-            margin-left: auto;
-            margin-right: auto;
-            backdrop-filter: blur(20px);
-            letter-spacing: 2px;
-            transition: all 0.3s ease;
-        }
-        .notification:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(212, 175, 55, 0.2);
-        }
-        .main-content {
-            display: grid;
-            grid-template-columns: 380px 1fr 380px;
-            gap: 120px;
-            flex: 1;
-            max-width: 1800px;
-            margin: 0 auto;
-            width: 100%;
-            padding-bottom: 120px;
-        }
-        .card {
+
+        /* 头像卡片 */
+        .avatar-card {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             padding: var(--spacing-lg);
             backdrop-filter: blur(20px);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
         }
-        .card:hover {
+
+        .avatar-card:hover {
             transform: translateY(-4px);
             box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
             border-color: rgba(212, 175, 55, 0.3);
         }
-        .left-section {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-2xl);
-        }
-        .avatar-section {
-            text-align: center;
-            padding: var(--spacing-lg);
-        }
+
         .avatar-container {
             width: 140px;
             height: 140px;
@@ -187,11 +181,13 @@
             box-shadow: 0 8px 32px rgba(212, 175, 55, 0.2);
             transition: all 0.4s ease;
         }
+
         .avatar-container:hover {
             transform: scale(1.05);
             border-color: var(--primary-color);
             box-shadow: 0 12px 48px rgba(212, 175, 55, 0.4);
         }
+
         .avatar-container::before {
             content: '';
             position: absolute;
@@ -202,9 +198,11 @@
             transition: opacity 0.4s ease;
             animation: rotate 3s linear infinite;
         }
+
         .avatar-container:hover::before {
             opacity: 0.5;
         }
+
         .avatar-container img {
             width: 100%;
             height: 100%;
@@ -212,28 +210,53 @@
             position: relative;
             z-index: 1;
         }
+
         .avatar-placeholder {
             font-size: 60px;
             color: var(--primary-color);
         }
-        .site-name {
+
+        .site-logo {
             color: var(--primary-color);
-            font-size: 16px;
-            font-weight: 300;
-            letter-spacing: 2px;
-            margin-top: var(--spacing-md);
+            font-size: 24px;
+            font-weight: 400;
+            letter-spacing: 3px;
+            margin: var(--spacing-md) 0 var(--spacing-sm);
             font-family: 'Poppins', sans-serif;
         }
+
         .site-domain {
             color: var(--text-secondary);
             font-size: 12px;
             font-weight: 300;
-            margin-top: var(--spacing-sm);
-            font-family: 'Poppins', sans-serif;
             letter-spacing: 0.5px;
-            line-height: 1.6;
+            font-family: 'Poppins', sans-serif;
         }
-        .quote-section h2 {
+
+        /* 引号区域 */
+        .quote-section {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: var(--spacing-lg);
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .quote-section:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .quote-mark {
+            font-size: 48px;
+            color: var(--primary-color);
+            line-height: 1;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .quote-title {
             color: var(--primary-color);
             font-size: 16px;
             font-weight: 300;
@@ -241,20 +264,24 @@
             font-style: italic;
             letter-spacing: 1px;
         }
-        .quote-section p {
+
+        .quote-text {
             color: var(--text-secondary);
-            font-size: 12px;
+            font-size: 13px;
             line-height: 1.8;
             font-weight: 300;
             letter-spacing: 0.5px;
         }
+
+        /* 社交图标 */
         .social-links {
             display: flex;
             gap: var(--spacing-md);
-            margin-top: var(--spacing-lg);
             justify-content: center;
             flex-wrap: wrap;
+            margin-top: var(--spacing-md);
         }
+
         .social-icon {
             width: 48px;
             height: 48px;
@@ -270,73 +297,169 @@
             transition: all 0.3s ease;
             text-decoration: none;
         }
+
         .social-icon:hover {
             background: rgba(212, 175, 55, 0.2);
             border-color: var(--primary-color);
             transform: translateY(-4px) rotate(5deg);
             box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
         }
-        .center-section {
+
+        /* 右侧区域 */
+        .right-section {
             display: flex;
             flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            gap: var(--spacing-2xl);
-            padding: 0 var(--spacing-2xl);
+            padding: var(--spacing-md);
         }
-        .welcome-text {
-            color: var(--primary-color);
-            font-size: 32px;
-            text-align: center;
-            font-weight: 300;
-            letter-spacing: 6px;
-            margin-bottom: var(--spacing-sm);
-            font-family: 'Noto Serif SC', serif;
-            text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+
+        /* 名言卡片（右上角） */
+        .quote-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: var(--spacing-lg);
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            max-width: 450px;
+            margin-left: auto;
+            margin-bottom: var(--spacing-xl);
         }
-        .quote-box {
-            padding: var(--spacing-xl) var(--spacing-lg);
-            text-align: center;
-            min-height: 180px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            max-width: 700px;
+
+        .quote-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+            border-color: rgba(212, 175, 55, 0.3);
         }
-        .quote-box p {
+
+        .quote-card p {
             color: var(--text-primary);
-            font-size: 15px;
-            line-height: 2;
+            font-size: 14px;
+            line-height: 1.8;
             margin-bottom: var(--spacing-md);
             font-weight: 300;
             letter-spacing: 0.5px;
         }
+
         .quote-author {
             color: var(--primary-color);
             font-size: 12px;
             font-style: italic;
             letter-spacing: 1px;
             font-weight: 300;
+            text-align: right;
         }
-        .link-section {
-            padding: var(--spacing-lg);
-            max-width: 500px;
+
+        /* 中心区域（大时钟） */
+        .center-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-xl);
         }
-        .link-title {
-            color: var(--text-primary);
+
+        .clock-card {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.02) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: var(--spacing-2xl) var(--spacing-xl);
+            backdrop-filter: blur(20px);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            min-width: 500px;
+        }
+
+        .clock-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+
+        .date {
+            color: var(--text-secondary);
             font-size: 14px;
             margin-bottom: var(--spacing-md);
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-sm);
-            justify-content: center;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             font-weight: 300;
         }
-        .link-button {
+
+        .time {
+            color: var(--primary-color);
+            font-size: 72px;
+            font-weight: 300;
+            font-family: 'Poppins', monospace;
+            letter-spacing: 8px;
+            text-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+            margin: var(--spacing-md) 0;
+        }
+
+        .weather {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-top: var(--spacing-md);
+            letter-spacing: 0.5px;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+
+        .weather-icon {
+            font-size: 32px;
+            margin-bottom: var(--spacing-sm);
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .weather-loading {
+            color: var(--primary-color);
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .weather-detail {
+            display: flex;
+            justify-content: center;
+            gap: var(--spacing-md);
+            font-size: 11px;
+            margin-top: var(--spacing-sm);
+            opacity: 0.7;
+        }
+
+        .weather-item {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* 底部区域 */
+        .bottom-section {
+            grid-column: 2;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-lg);
+            padding-bottom: var(--spacing-lg);
+        }
+
+        /* 网站列表 */
+        .site-links {
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .site-button {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
             border: 1px solid rgba(212, 175, 55, 0.3);
-            padding: var(--spacing-md) var(--spacing-lg);
+            padding: var(--spacing-md) var(--spacing-xl);
             border-radius: 12px;
             color: var(--text-primary);
             font-size: 14px;
@@ -344,104 +467,37 @@
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: var(--spacing-sm);
             text-decoration: none;
             letter-spacing: 1px;
             font-weight: 300;
+            backdrop-filter: blur(20px);
         }
-        .link-button:hover {
+
+        .site-button:hover {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.15) 100%);
             transform: translateY(-4px);
             box-shadow: 0 12px 36px rgba(212, 175, 55, 0.3);
         }
-        .right-section {
-            display: flex;
-            flex-direction: column;
-            gap: var(--spacing-2xl);
-        }
-        .date-time {
+
+        /* 页脚 */
+        .footer {
             text-align: center;
-            padding: var(--spacing-xl) var(--spacing-lg);
-        }
-        .date {
-            color: var(--text-secondary);
-            font-size: 12px;
-            margin-bottom: var(--spacing-md);
-            letter-spacing: 1px;
-            font-weight: 300;
-        }
-        .time {
-            color: var(--primary-color);
-            font-size: 40px;
-            font-weight: 300;
-            font-family: 'Poppins', monospace;
-            letter-spacing: 3px;
-            text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
-        }
-        .weather {
             color: var(--text-secondary);
             font-size: 11px;
-            margin-top: var(--spacing-md);
             letter-spacing: 0.5px;
             font-weight: 300;
-            line-height: 1.6;
-        }
-        .weather-icon {
-            font-size: 32px;
-            margin-bottom: var(--spacing-sm);
-            animation: float 3s ease-in-out infinite;
-        }
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
-        }
-        .weather-loading {
-            color: var(--primary-color);
-            animation: pulse 1.5s ease-in-out infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        .weather-detail {
-            display: flex;
-            justify-content: center;
-            gap: var(--spacing-sm);
-            font-size: 10px;
-            margin-top: var(--spacing-sm);
             opacity: 0.7;
         }
-        .weather-item {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .footer {
-            position: fixed;
-            bottom: var(--spacing-lg);
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.05) 100%);
-            border: 1px solid rgba(212, 175, 55, 0.3);
-            padding: 10px var(--spacing-lg);
-            border-radius: 10px;
-            color: var(--text-secondary);
-            font-size: 11px;
-            z-index: 10;
-            backdrop-filter: blur(20px);
-            letter-spacing: 0.5px;
-            font-weight: 300;
-        }
-        
-        /* ========== 优化后的聊天图标样式 ========== */
+
+        /* 聊天图标 */
         .chat-icon-wrapper {
             position: fixed;
             bottom: var(--spacing-lg);
             right: var(--spacing-lg);
             z-index: 100;
         }
-        
+
         .chat-icon {
             position: relative;
             width: 64px;
@@ -453,23 +509,22 @@
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 
+            box-shadow:
                 0 8px 32px rgba(0, 0, 0, 0.3),
                 0 0 0 0 rgba(212, 175, 55, 0.4);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(20px);
             overflow: visible;
         }
-        
-        /* 呼吸光环效果 */
+
         .chat-icon::before {
             content: '';
             position: absolute;
             inset: -4px;
             border-radius: 50%;
-            background: linear-gradient(45deg, 
-                transparent, 
-                rgba(212, 175, 55, 0.3), 
+            background: linear-gradient(45deg,
+                transparent,
+                rgba(212, 175, 55, 0.3),
                 transparent,
                 rgba(212, 175, 55, 0.3),
                 transparent
@@ -478,8 +533,7 @@
             animation: breathe 3s ease-in-out infinite;
             z-index: -1;
         }
-        
-        /* 脉冲波纹效果 */
+
         .chat-icon::after {
             content: '';
             position: absolute;
@@ -489,7 +543,7 @@
             opacity: 0;
             animation: ripple 2s ease-out infinite;
         }
-        
+
         @keyframes breathe {
             0%, 100% {
                 opacity: 0;
@@ -500,7 +554,7 @@
                 transform: scale(1.1) rotate(180deg);
             }
         }
-        
+
         @keyframes ripple {
             0% {
                 opacity: 1;
@@ -511,26 +565,25 @@
                 transform: scale(1.5);
             }
         }
-        
+
         .chat-icon:hover {
             transform: translateY(-8px) scale(1.1);
             border-color: var(--primary-color);
-            box-shadow: 
+            box-shadow:
                 0 16px 48px rgba(212, 175, 55, 0.4),
                 0 0 60px rgba(212, 175, 55, 0.3),
                 0 0 0 8px rgba(212, 175, 55, 0.1);
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.3) 0%, rgba(212, 175, 55, 0.15) 100%);
         }
-        
+
         .chat-icon:hover::before {
             animation: breathe 1.5s ease-in-out infinite;
         }
-        
+
         .chat-icon:active {
             transform: translateY(-6px) scale(1.05);
         }
-        
-        /* 图标内容 */
+
         .chat-icon-content {
             position: relative;
             z-index: 1;
@@ -538,13 +591,12 @@
             transition: all 0.3s ease;
             filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.3));
         }
-        
+
         .chat-icon:hover .chat-icon-content {
             transform: scale(1.1) rotate(-10deg);
             filter: drop-shadow(0 4px 12px rgba(212, 175, 55, 0.5));
         }
-        
-        /* 悬浮提示 */
+
         .chat-tooltip {
             position: absolute;
             bottom: calc(100% + 12px);
@@ -564,7 +616,7 @@
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
             pointer-events: none;
         }
-        
+
         .chat-tooltip::after {
             content: '';
             position: absolute;
@@ -573,14 +625,13 @@
             border: 6px solid transparent;
             border-top-color: rgba(212, 175, 55, 0.95);
         }
-        
+
         .chat-icon:hover .chat-tooltip {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
-        
-        /* 在线状态指示器 */
+
         .online-indicator {
             position: absolute;
             top: 4px;
@@ -593,7 +644,7 @@
             box-shadow: 0 0 12px rgba(74, 222, 128, 0.6);
             animation: pulse-indicator 2s ease-in-out infinite;
         }
-        
+
         @keyframes pulse-indicator {
             0%, 100% {
                 transform: scale(1);
@@ -604,93 +655,114 @@
                 box-shadow: 0 0 20px rgba(74, 222, 128, 0.8);
             }
         }
-        
+
+        /* 响应式设计 */
         @media (max-width: 1400px) {
-            .main-content {
-                grid-template-columns: 320px 1fr 320px;
-                gap: 80px;
+            .container {
+                grid-template-columns: 300px 1fr;
+            }
+            
+            .clock-card {
+                min-width: 400px;
+            }
+            
+            .time {
+                font-size: 64px;
             }
         }
+
         @media (max-width: 1024px) {
             .container {
-                padding: var(--spacing-lg) var(--spacing-md);
-            }
-            .main-content {
                 grid-template-columns: 1fr;
-                gap: var(--spacing-xl);
-            }
-            .center-section {
-                padding: 0;
-            }
-            .welcome-text {
-                font-size: 28px;
-                letter-spacing: 4px;
-            }
-            .time {
-                font-size: 36px;
-            }
-            .footer {
-                width: calc(100% - 32px);
-                max-width: 500px;
-                text-align: center;
-            }
-        }
-        @media (max-width: 768px) {
-            .container {
-                padding: var(--spacing-md) var(--spacing-sm);
-            }
-            .card {
+                grid-template-rows: auto auto 1fr auto;
                 padding: var(--spacing-md);
             }
-            .welcome-text {
-                font-size: 24px;
-                letter-spacing: 2px;
+
+            .left-section {
+                grid-row: 1;
+                flex-direction: row;
+                justify-content: space-between;
+                gap: var(--spacing-md);
             }
+
+            .right-section {
+                grid-row: 2;
+            }
+
+            .center-section {
+                grid-row: 3;
+            }
+
+            .bottom-section {
+                grid-row: 4;
+                grid-column: 1;
+            }
+
+            .clock-card {
+                min-width: auto;
+                width: 100%;
+                max-width: 500px;
+            }
+
             .time {
-                font-size: 32px;
+                font-size: 56px;
             }
-            .avatar-container {
-                width: 120px;
-                height: 120px;
+
+            .quote-card {
+                max-width: 100%;
+                margin-left: 0;
             }
-            .notification {
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: var(--spacing-sm);
+                gap: var(--spacing-md);
+            }
+
+            .left-section {
+                flex-direction: column;
+            }
+
+            .time {
+                font-size: 48px;
+                letter-spacing: 4px;
+            }
+
+            .date {
                 font-size: 12px;
-                padding: var(--spacing-sm) var(--spacing-md);
             }
-            .quote-box p {
-                font-size: 14px;
+
+            .avatar-container {
+                width: 100px;
+                height: 100px;
             }
+
+            .site-logo {
+                font-size: 20px;
+            }
+
             .weather-detail {
                 flex-direction: column;
                 gap: 4px;
             }
-            .main-content {
-                gap: var(--spacing-lg);
-            }
+
             .chat-icon-wrapper {
-                bottom: 80px;
+                bottom: var(--spacing-md);
                 right: var(--spacing-md);
             }
-            
+
             .chat-icon {
                 width: 56px;
                 height: 56px;
             }
-            
+
             .chat-icon-content {
                 font-size: 28px;
             }
-            
-            .chat-tooltip {
-                font-size: 11px;
-                padding: 6px 12px;
-            }
-            
-            .online-indicator {
-                width: 12px;
-                height: 12px;
-            }
         }
+
+        /* 动画效果 */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -701,70 +773,62 @@
                 transform: translateY(0);
             }
         }
-        .card {
+
+        .avatar-card,
+        .quote-section,
+        .quote-card,
+        .clock-card,
+        .site-button {
             animation: fadeIn 0.6s ease-out;
         }
-        .left-section .card:nth-child(1) { animation-delay: 0.1s; }
-        .left-section .card:nth-child(2) { animation-delay: 0.2s; }
-        .center-section .card:nth-child(1) { animation-delay: 0.15s; }
-        .center-section .card:nth-child(2) { animation-delay: 0.25s; }
-        .right-section .card { animation-delay: 0.3s; }
+
+        .avatar-card { animation-delay: 0.1s; }
+        .quote-section { animation-delay: 0.2s; }
+        .quote-card { animation-delay: 0.15s; }
+        .clock-card { animation-delay: 0.25s; }
+        .site-button { animation-delay: 0.3s; }
     </style>
 </head>
 <body>
     <!-- 动态背景容器 -->
     <div class="background-container" id="background-container"></div>
     <div class="background-overlay"></div>
+
     <div class="container">
-        <div class="notification" id="greeting">
-            嘿上好 · 欢迎来到我的主页
+        <!-- 左侧区域：头像 + 座右铭 + 社交图标 -->
+        <div class="left-section">
+            <div class="avatar-card">
+                <div class="avatar-container">
+                    <img src="image/avatar.jpg" alt="头像" id="avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="avatar-placeholder" style="display:none;">👤</div>
+                </div>
+                <div class="site-logo">狂客同学</div>
+                <div class="site-domain">Classmate Kuangke.top</div>
+            </div>
+
+            <div class="quote-section">
+                <div class="quote-mark">❝</div>
+                <h2 class="quote-title">Hello World!</h2>
+                <p class="quote-text">世界不死，理想不灭</p>
+                <div class="social-links">
+                    <a href="https://github.com/kuangketongxue" class="social-icon" title="GitHub" target="_blank" rel="noopener">🐙</a>
+                    <a href="https://open.weixin.qq.com/qr/code?username=gh_ba5b6bb6bd89" class="social-icon" title="微信" target="_blank" rel="noopener">💬</a>
+                    <a href="https://x.com/kuangketongxue" class="social-icon" title="X" target="_blank" rel="noopener">❌</a>
+                </div>
+            </div>
         </div>
-        <div class="main-content">
-            <div class="left-section">
-                <div class="card avatar-section">
-                    <div class="avatar-container">
-                       <img src="image/avatar.jpg" alt="头像" id="avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                       <div class="avatar-placeholder" style="display:none;">👤</div>
-                    </div>
-                    <div class="site-name">狂客同学</div>
-                    <div class="site-domain">Classmate Kuangke.top</div>
-                </div>
-                <div class="card quote-section">
-                    <h2>❝ Hello World!</h2>
-                    <p>世界不死,理想不灭</p>
-                    <div class="social-links">
-                        <a href="https://github.com/kuangketongxue" class="social-icon" title="GitHub" target="_blank" rel="noopener">
-                            🐙
-                        </a>
-                        <a href="https://open.weixin.qq.com/qr/code?username=gh_ba5b6bb6bd89" class="social-icon" title="微信" target="_blank" rel="noopener">
-                            💬
-                        </a>
-                        <a href="https://x.com/kuangketongxue" class="social-icon" title="X" target="_blank" rel="noopener">
-                            ❌
-                        </a>
-                    </div>
-                </div>
+
+        <!-- 右侧区域：名言卡片 + 中心时钟 -->
+        <div class="right-section">
+            <!-- 名言卡片（右上角） -->
+            <div class="quote-card">
+                <p id="quote-text">加载中...</p>
+                <p class="quote-author" id="quote-author">—</p>
             </div>
+
+            <!-- 中心区域：大时钟 -->
             <div class="center-section">
-                <div class="welcome-text">
-                    欢迎访问
-                </div>
-                <div class="card quote-box">
-                    <p id="quote-text">加载中...</p>
-                    <p class="quote-author" id="quote-author">—</p>
-                </div>
-                <div class="card link-section">
-                    <div class="link-title">
-                        🔗 网站列表
-                    </div>
-                    <a href="https://kuangketongxue.github.io/tongxuekuangke/index.html" class="link-button" target="_blank" rel="noopener">
-                        <span>📡</span>
-                        <span>狂客空间</span>
-                    </a>
-                </div>
-            </div>
-            <div class="right-section">
-                <div class="card date-time">
+                <div class="clock-card">
                     <div class="date" id="date">2025年01月05日 星期三</div>
                     <div class="time" id="clock">20:56:19</div>
                     <div class="weather" id="weather">
@@ -773,28 +837,44 @@
                 </div>
             </div>
         </div>
-        <div class="footer">
-            ©️ 2025 狂客版权所有
-        </div>
-        
-        <!-- 优化后的聊天图标 -->
-        <div class="chat-icon-wrapper">
-            <div class="chat-icon" onclick="handleChatClick()">
-                <div class="online-indicator"></div>
-                <div class="chat-icon-content">💬</div>
-                <div class="chat-tooltip">联系我 · 在线咨询</div>
+
+        <!-- 底部区域：网站列表 + 页脚 -->
+        <div class="bottom-section">
+            <div class="site-links">
+                <a href="https://kuangketongxue.github.io/tongxuekuangke/index.html" class="site-button" target="_blank" rel="noopener">
+                    <span>🌟</span>
+                    <span>星空</span>
+                </a>
+                <a href="#" class="site-button" target="_blank" rel="noopener">
+                    <span>📡</span>
+                    <span>研级站</span>
+                </a>
+            </div>
+
+            <div class="footer">
+                ©️ 2025 狂客版权所有
             </div>
         </div>
     </div>
+
+    <!-- 聊天图标 -->
+    <div class="chat-icon-wrapper">
+        <div class="chat-icon" onclick="handleChatClick()">
+            <div class="online-indicator"></div>
+            <div class="chat-icon-content">💬</div>
+            <div class="chat-tooltip">联系我 · 在线咨询</div>
+        </div>
+    </div>
+
     <script>
         // ========== 配置区域 ==========
         const QWEATHER_KEY = '2a7e3fb132e443ac965e50b001317f5f';
-        
+
         // 聊天图标点击事件
         function handleChatClick() {
             alert('💬 您可以通过以下方式联系我:\n\n📧 邮箱: your-email@example.com\n💬 微信: YourWeChatID\n🐦 Twitter: @yourusername');
         }
-        
+
         // 动漫风格星空背景图片库
         const animeStarryBackgrounds = [
             'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1920&q=80',
@@ -813,146 +893,29 @@
             'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1920&q=80',
             'https://images.unsplash.com/photo-1504333638930-c8787321eee0?w=1920&q=80'
         ];
-        
-        // 埃隆·马斯克、史蒂夫·乔布斯和坎耶·韦斯特的完整金句库 (130句)
+
+        // 埃隆·马斯克、史蒂夫·乔布斯和坎耶·韦斯特的完整金句库
         const quotes = [
-            // 埃隆·马斯克 (Elon Musk) - 45句
+            // 埃隆·马斯克
             { text: "当某件事足够重要时<br>即使胜算不大,你也应该去做", author: "埃隆·马斯克" },
             { text: "失败是一个选项<br>如果你没有失败,说明你创新不够", author: "埃隆·马斯克" },
             { text: "我宁愿乐观而错误<br>也不愿悲观而正确", author: "埃隆·马斯克" },
             { text: "坚持是非常重要的<br>除非你被迫放弃,否则不要放弃", author: "埃隆·马斯克" },
             { text: "如果你早上醒来并认为未来会更好<br>那就是美好的一天", author: "埃隆·马斯克" },
-            { text: "我认为普通人可以选择不平凡", author: "埃隆·马斯克" },
-            { text: "人生太短暂<br>不能怀恨在心", author: "埃隆·马斯克" },
-            { text: "付出超常的努力是值得的<br>因为你的收获会超乎想象", author: "埃隆·马斯克" },
-            { text: "如果你需要鼓舞人心的话语<br>不要创业", author: "埃隆·马斯克" },
-            { text: "我不会放弃<br>我必须做出这些事情成真", author: "埃隆·马斯克" },
-            { text: "第一步是确定某件事是可能的<br>然后概率就会发生", author: "埃隆·马斯克" },
-            { text: "我可以有一个失败后的派对<br>或者我可以继续工作", author: "埃隆·马斯克" },
-            { text: "如果事情不失败<br>你就创新不够", author: "埃隆·马斯克" },
-            { text: "品牌只是人们对你公司的看法", author: "埃隆·马斯克" },
-            { text: "伟大的公司建立在伟大的产品之上", author: "埃隆·马斯克" },
-            { text: "我认为创业最重要的是<br>超级努力工作", author: "埃隆·马斯克" },
-            { text: "不要只是追随潮流<br>你也可以创造潮流", author: "埃隆·马斯克" },
-            { text: "如果你是一位联合创始人<br>你的工作时长应该翻倍", author: "埃隆·马斯克" },
-            { text: "我觉得一周工作80-100小时<br>会提高成功概率", author: "埃隆·马斯克" },
-            { text: "物理学教你推理<br>从第一性原理推理", author: "埃隆·马斯克" },
-            { text: "我们需要弄清楚如何让意识延续下去", author: "埃隆·马斯克" },
-            { text: "生命不能只是解决一个又一个悲惨的问题", author: "埃隆·马斯克" },
-            { text: "我们需要能让我们早上愿意醒来的东西", author: "埃隆·马斯克" },
-            { text: "创造比毁灭难得多", author: "埃隆·马斯克" },
-            { text: "如果你正在创造公司<br>你实际上是在创造一个产品", author: "埃隆·马斯克" },
-            { text: "重要的是对未来充满热情", author: "埃隆·马斯克" },
-            { text: "某些东西必须激励你", author: "埃隆·马斯克" },
-            { text: "我对未来感到非常兴奋", author: "埃隆·马斯克" },
-            { text: "最好的思考方式是<br>把知识看作一棵语义树", author: "埃隆·马斯克" },
-            { text: "确保你理解基本原理<br>然后才是细节", author: "埃隆·马斯克" },
-            { text: "我倾向于从物理学框架来处理事情", author: "埃隆·马斯克" },
-            { text: "不要害怕新事物", author: "埃隆·马斯克" },
-            { text: "我们应该思考未来<br>并让未来变得美好", author: "埃隆·马斯克" },
-            { text: "如果你想改变世界<br>就必须非常努力", author: "埃隆·马斯克" },
-            { text: "采取行动比完美重要", author: "埃隆·马斯克" },
-            { text: "我对火星充满热情", author: "埃隆·马斯克" },
-            { text: "人类需要成为多行星物种", author: "埃隆·马斯克" },
-            { text: "我认为人工智能是我们存在的最大风险", author: "埃隆·马斯克" },
-            { text: "批评是很重要的<br>寻求批评", author: "埃隆·马斯克" },
-            { text: "不要盲目跟随趋势", author: "埃隆·马斯克" },
-            { text: "质疑你的假设", author: "埃隆·马斯克" },
-            { text: "工程是最接近魔法的东西", author: "埃隆·马斯克" },
-            { text: "我们正在建设通向未来的道路", author: "埃隆·马斯克" },
-            { text: "你必须相信不可能", author: "埃隆·马斯克" },
-            { text: "每一天都是新的开始", author: "埃隆·马斯克" },
-            
-            // 史蒂夫·乔布斯 (Steve Jobs) - 45句
+            // 史蒂夫·乔布斯
             { text: "求知若饥,虚心若愚", author: "史蒂夫·乔布斯" },
             { text: "活着就是为了改变世界", author: "史蒂夫·乔布斯" },
             { text: "你的时间有限<br>不要浪费在重复他人的生活上", author: "史蒂夫·乔布斯" },
             { text: "创新区分领导者和跟随者", author: "史蒂夫·乔布斯" },
-            { text: "成为卓越的代名词<br>很多人并不适合需要卓越素质的环境", author: "史蒂夫·乔布斯" },
             { text: "唯一做伟大工作的方法<br>是热爱你所做的", author: "史蒂夫·乔布斯" },
-            { text: "设计不只是外表和感觉<br>设计是它如何工作", author: "史蒂夫·乔布斯" },
-            { text: "简单比复杂更难", author: "史蒂夫·乔布斯" },
-            { text: "专注和简单一直是我的秘诀之一", author: "史蒂夫·乔布斯" },
-            { text: "记住你即将死去<br>是我所知道的避免患得患失的最好方法", author: "史蒂夫·乔布斯" },
-            { text: "你不能连接前瞻性的点<br>只能回顾性地连接它们", author: "史蒂夫·乔布斯" },
-            { text: "质量比数量更重要", author: "史蒂夫·乔布斯" },
-            { text: "创新与你有多少研发资金无关", author: "史蒂夫·乔布斯" },
-            { text: "我想在宇宙中留下印记", author: "史蒂夫·乔布斯" },
-            { text: "我们来这里是为了在宇宙中留下痕迹", author: "史蒂夫·乔布斯" },
-            { text: "不要让他人的意见淹没你内心的声音", author: "史蒂夫·乔布斯" },
-            { text: "你的工作将占据你生活的很大一部分", author: "史蒂夫·乔布斯" },
-            { text: "真正满足的唯一方式<br>是做你认为伟大的工作", author: "史蒂夫·乔布斯" },
-            { text: "有时生活会用砖头打你的头<br>不要失去信心", author: "史蒂夫·乔布斯" },
-            { text: "我确信让我继续前进的唯一东西<br>是我热爱我所做的", author: "史蒂夫·乔布斯" },
-            { text: "对于我来说,营销是关于价值观的", author: "史蒂夫·乔布斯" },
-            { text: "我们的目标很简单<br>设计和制造世界上最好的产品", author: "史蒂夫·乔布斯" },
-            { text: "创新与说是无关<br>创新与说否有关", author: "史蒂夫·乔布斯" },
-            { text: "对一千件事情说不", author: "史蒂夫·乔布斯" },
-            { text: "细节很重要<br>值得等待把它做好", author: "史蒂夫·乔布斯" },
-            { text: "伟大的艺术家偷窃", author: "史蒂夫·乔布斯" },
-            { text: "真正的艺术家交付作品", author: "史蒂夫·乔布斯" },
-            { text: "我们正在制造工具<br>以增强人类能力", author: "史蒂夫·乔布斯" },
-            { text: "技术本身是不够的", author: "史蒂夫·乔布斯" },
-            { text: "技术必须与人文艺术结合", author: "史蒂夫·乔布斯" },
-            { text: "我们相信思考不同的人", author: "史蒂夫·乔布斯" },
-            { text: "疯狂到认为他们能改变世界的人<br>就是那些真正改变世界的人", author: "史蒂夫·乔布斯" },
-            { text: "客户体验从技术开始", author: "史蒂夫·乔布斯" },
-            { text: "你必须从客户体验开始<br>然后回到技术", author: "史蒂夫·乔布斯" },
-            { text: "我认为如果你做了一些好事<br>它应该留在你的心中一段时间", author: "史蒂夫·乔布斯" },
-            { text: "然后继续做下一个精彩的东西", author: "史蒂夫·乔布斯" },
-            { text: "不要沉湎于过去", author: "史蒂夫·乔布斯" },
-            { text: "勇于追随你的心和直觉", author: "史蒂夫·乔布斯" },
-            { text: "它们以某种方式知道你真正想成为什么", author: "史蒂夫·乔布斯" },
-            { text: "我们只是想制造伟大的产品", author: "史蒂夫·乔布斯" },
-            { text: "当你成长时你倾向于被告知<br>世界就是这样", author: "史蒂夫·乔布斯" },
-            { text: "生活可以更广阔", author: "史蒂夫·乔布斯" },
-            { text: "一旦你发现这一点<br>你的生活将永远不同", author: "史蒂夫·乔布斯" },
-            { text: "我们在这里短暂停留<br>你可能不能做很多事情", author: "史蒂夫·乔布斯" },
-            { text: "所以你最好把它们做好", author: "史蒂夫·乔布斯" },
-            
-            // 坎耶·韦斯特 (Kanye West) - 40句
+            // 坎耶·韦斯特
             { text: "我拒绝接受他人对我能力的限制", author: "坎耶·韦斯特" },
             { text: "相信你的幻想", author: "坎耶·韦斯特" },
-            { text: "我还没有开始到达我的巅峰", author: "坎耶·韦斯特" },
-            { text: "我是一个产品的产品", author: "坎耶·韦斯特" },
-            { text: "我会继续成为一个声音<br>一个梦想家", author: "坎耶·韦斯特" },
-            { text: "你不能看着Instagram<br>然后认为这就是真实生活", author: "坎耶·韦斯特" },
-            { text: "有时你必须摆脱一切<br>以便重新发现一切", author: "坎耶·韦斯特" },
-            { text: "我是全世界最伟大的", author: "坎耶·韦斯特" },
-            { text: "我的最大痛苦就是<br>我永远不会是我自己的粉丝", author: "坎耶·韦斯特" },
             { text: "创造力是人类最伟大的反叛", author: "坎耶·韦斯特" },
-            { text: "我必须表达我想要表达的一切", author: "坎耶·韦斯特" },
-            { text: "我总是想着未来", author: "坎耶·韦斯特" },
-            { text: "我来这里是为了战斗<br>为了未来", author: "坎耶·韦斯特" },
-            { text: "我不是一个商人<br>我是一门生意,伙计", author: "坎耶·韦斯特" },
-            { text: "你要么是天才<br>要么什么都不是", author: "坎耶·韦斯特" },
-            { text: "我喜欢听到有人说不", author: "坎耶·韦斯特" },
-            { text: "那就是我开始真正工作的时候", author: "坎耶·韦斯特" },
             { text: "成功的关键是相信自己", author: "坎耶·韦斯特" },
-            { text: "我的信心来自我的愿景", author: "坎耶·韦斯特" },
-            { text: "我不想活在过去<br>我想活在现在", author: "坎耶·韦斯特" },
-            { text: "艺术就是一切", author: "坎耶·韦斯特" },
-            { text: "我想让每个人都快乐", author: "坎耶·韦斯特" },
-            { text: "但这不可能<br>所以我只是继续做我的事", author: "坎耶·韦斯特" },
-            { text: "我在为人类而设计", author: "坎耶·韦斯特" },
-            { text: "我的目标不是当总统", author: "坎耶·韦斯特" },
-            { text: "我的目标是改变世界", author: "坎耶·韦斯特" },
-            { text: "我知道我不是完美的", author: "坎耶·韦斯特" },
-            { text: "但我正在努力做到最好", author: "坎耶·韦斯特" },
-            { text: "文化就是一切", author: "坎耶·韦斯特" },
-            { text: "我是个自由思想家", author: "坎耶·韦斯特" },
-            { text: "永远不要让别人告诉你<br>你不能做什么", author: "坎耶·韦斯特" },
-            { text: "我想创造只有我能创造的东西", author: "坎耶·韦斯特" },
-            { text: "我正在做一些<br>以前从未做过的事情", author: "坎耶·韦斯特" },
-            { text: "我的音乐就是我的真理", author: "坎耶·韦斯特" },
-            { text: "我不需要你的认可", author: "坎耶·韦斯特" },
-            { text: "我相信完美", author: "坎耶·韦斯特" },
-            { text: "我相信愿景<br>我相信梦想", author: "坎耶·韦斯特" },
-            { text: "天才和疯狂之间只有一线之隔", author: "坎耶·韦斯特" },
-            { text: "我代表自由表达", author: "坎耶·韦斯特" },
-            { text: "未来就是现在", author: "坎耶·韦斯特" }
+            { text: "永远不要让别人告诉你<br>你不能做什么", author: "坎耶·韦斯特" }
         ];
-        
+
         // 和风天气图标映射
         const qweatherIcons = {
             '100': '☀️', '101': '☁️', '102': '⛅', '103': '⛅', '104': '☁️',
@@ -965,10 +928,10 @@
             '507': '🌪️', '508': '🌪️', '509': '🌫️', '510': '🌫️',
             '900': '🔥', '901': '❄️', '999': '🌈'
         };
-        
+
         let currentBackgroundIndex = -1;
         let usedBackgrounds = [];
-        
+
         function initBackground() {
             const container = document.getElementById('background-container');
             const randomBg = getRandomBackground();
@@ -978,7 +941,7 @@
             container.appendChild(bgDiv);
             preloadBackgrounds();
         }
-        
+
         function getRandomBackground() {
             if (usedBackgrounds.length === animeStarryBackgrounds.length) {
                 usedBackgrounds = [];
@@ -993,14 +956,14 @@
             localStorage.setItem('usedBackgrounds', JSON.stringify(usedBackgrounds));
             return animeStarryBackgrounds[randomIndex];
         }
-        
+
         function preloadBackgrounds() {
             animeStarryBackgrounds.forEach(url => {
                 const img = new Image();
                 img.src = url;
             });
         }
-        
+
         function restoreBackgroundState() {
             const lastIndex = localStorage.getItem('lastBackgroundIndex');
             const savedUsed = localStorage.getItem('usedBackgrounds');
@@ -1011,32 +974,18 @@
                 usedBackgrounds = JSON.parse(savedUsed);
             }
         }
-        
+
         function getQweatherIcon(code) {
             return qweatherIcons[code] || '🌈';
         }
-        
+
         function loadRandomQuote() {
             const randomIndex = Math.floor(Math.random() * quotes.length);
             const quote = quotes[randomIndex];
             document.getElementById('quote-text').innerHTML = quote.text;
             document.getElementById('quote-author').textContent = `— ${quote.author}`;
         }
-        
-        function getGreeting() {
-            const hour = new Date().getHours();
-            if (hour >= 5 && hour < 9) return '嘿早上好';
-            if (hour >= 9 && hour < 11) return '嘿上午好';
-            if (hour >= 11 && hour < 14) return '嘿中午好';
-            if (hour >= 14 && hour < 18) return '嘿下午好';
-            if (hour >= 18 && hour < 22) return '嘿晚上好';
-            return '嘿深夜好';
-        }
-        
-        function updateGreeting() {
-            document.getElementById('greeting').textContent = getGreeting() + ' · 欢迎来到我的主页';
-        }
-        
+
         function updateClock() {
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
@@ -1044,7 +993,7 @@
             const seconds = String(now.getSeconds()).padStart(2, '0');
             document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
         }
-        
+
         function updateDate() {
             const now = new Date();
             const year = now.getFullYear();
@@ -1054,7 +1003,7 @@
             const weekday = weekdays[now.getDay()];
             document.getElementById('date').textContent = `${year}年${month}月${day}日 ${weekday}`;
         }
-        
+
         async function fetchQWeather() {
             const weatherElement = document.getElementById('weather');
             try {
@@ -1115,7 +1064,7 @@
                 showDefaultWeather();
             }
         }
-        
+
         function showDefaultWeather() {
             const weatherElement = document.getElementById('weather');
             const hour = new Date().getHours();
@@ -1139,25 +1088,22 @@
                 </div>
             `;
         }
-        
+
         window.addEventListener('load', function() {
             restoreBackgroundState();
             initBackground();
             loadRandomQuote();
-            updateGreeting();
             updateDate();
             updateClock();
             fetchQWeather();
             setInterval(updateClock, 1000);
-            setInterval(updateGreeting, 60000);
             setInterval(updateDate, 60000);
             setInterval(fetchQWeather, 900000);
         });
-        
+
         document.addEventListener('visibilitychange', function() {
             if (!document.hidden) {
                 fetchQWeather();
-                updateGreeting();
             }
         });
     </script>
