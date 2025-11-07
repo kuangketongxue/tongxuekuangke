@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>狂客同学 - 我的主页</title>
-    <!-- 网站图标 -->
     <link rel="icon" type="image/jpeg" href="image/avatar.jpg">
     <link rel="shortcut icon" type="image/jpeg" href="image/avatar.jpg">
     <link rel="apple-touch-icon" href="image/avatar.jpg">
@@ -32,7 +31,8 @@
             color: var(--text-primary);
             letter-spacing: 0.5px;
         }
-        /* 背景图片容器 */
+        
+        /* ========== 背景系统 ========== */
         .background-container {
             position: fixed;
             top: 0;
@@ -57,7 +57,6 @@
         .background-image.active {
             opacity: 1;
         }
-        /* 背景遮罩层 - 增加厚度 */
         .background-overlay {
             position: fixed;
             top: 0;
@@ -67,7 +66,8 @@
             background: linear-gradient(135deg, rgba(10, 10, 15, 0.85) 0%, rgba(26, 26, 46, 0.8) 50%, rgba(22, 33, 62, 0.85) 100%);
             z-index: 0;
         }
-        /* 星星动画层 */
+        
+        /* ========== 星星动画 ========== */
         body::before {
             content: '';
             position: fixed;
@@ -109,7 +109,8 @@
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
-        /* 主容器 */
+        
+        /* ========== 主容器布局 (核心修改) ========== */
         .container {
             position: relative;
             z-index: 2;
@@ -117,11 +118,13 @@
             height: 100vh;
             padding: 40px;
             display: grid;
-            grid-template-columns: 280px 1fr 320px;
-            grid-template-rows: auto 1fr auto;
-            gap: 24px;
+            /* 左侧栏 | 中间留白 + 内容区 | 右侧栏 */
+            grid-template-columns: 320px 1fr 320px;
+            grid-template-rows: 1fr auto;
+            gap: 32px;
         }
-        /* 通用卡片样式 - 增加厚度 */
+        
+        /* ========== 通用卡片样式 ========== */
         .card {
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.06) 100%);
             border: 2px solid rgba(255, 255, 255, 0.15);
@@ -136,19 +139,26 @@
             border-color: rgba(212, 175, 55, 0.4);
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.08) 100%);
         }
-        /* 左侧 - 头像区域 */
-        .avatar-section {
+        
+        /* ========== 左侧栏 - 头像 + 座右铭 ========== */
+        .left-sidebar {
             grid-column: 1;
             grid-row: 1 / 3;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+        
+        /* 头像卡片 */
+        .avatar-card {
             padding: 32px 24px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            height: fit-content;
         }
         .avatar-container {
-            width: 120px;
-            height: 120px;
+            width: 140px;
+            height: 140px;
             margin-bottom: 20px;
             border-radius: 50%;
             border: 3px solid rgba(212, 175, 55, 0.4);
@@ -187,12 +197,12 @@
             z-index: 1;
         }
         .avatar-placeholder {
-            font-size: 50px;
+            font-size: 60px;
             color: var(--primary-color);
         }
         .site-logo {
             color: var(--primary-color);
-            font-size: 28px;
+            font-size: 32px;
             font-weight: 400;
             letter-spacing: 2px;
             margin-bottom: 8px;
@@ -201,37 +211,36 @@
         }
         .site-domain {
             color: var(--text-secondary);
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 300;
             letter-spacing: 1px;
             font-family: 'Poppins', sans-serif;
             text-align: center;
         }
-        /* 左侧 - 座右铭区域 */
-        .motto-section {
-            grid-column: 1;
-            grid-row: 3;
-            padding: 24px;
+        
+        /* 座右铭卡片 */
+        .motto-card {
+            padding: 28px;
             display: flex;
             flex-direction: column;
             gap: 16px;
         }
         .quote-mark {
-            font-size: 40px;
+            font-size: 48px;
             color: var(--primary-color);
             line-height: 1;
         }
         .motto-title {
             color: var(--primary-color);
-            font-size: 15px;
-            font-weight: 300;
+            font-size: 16px;
+            font-weight: 400;
             font-style: italic;
             letter-spacing: 1px;
         }
         .motto-text {
             color: var(--text-secondary);
-            font-size: 12px;
-            line-height: 1.6;
+            font-size: 13px;
+            line-height: 1.7;
             font-weight: 300;
             letter-spacing: 0.5px;
         }
@@ -243,8 +252,8 @@
             margin-top: 8px;
         }
         .social-icon {
-            width: 40px;
-            height: 40px;
+            width: 44px;
+            height: 44px;
             background: rgba(255, 255, 255, 0.1);
             border: 2px solid rgba(255, 255, 255, 0.15);
             border-radius: 50%;
@@ -252,7 +261,7 @@
             align-items: center;
             justify-content: center;
             color: var(--text-primary);
-            font-size: 18px;
+            font-size: 20px;
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
@@ -263,19 +272,27 @@
             transform: translateY(-4px) rotate(5deg);
             box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
         }
-        /* 中间上方 - 名言卡片 (优化后) */
-        .quote-card {
-            grid-column: 2 / 4;
+        
+        /* ========== 中间区域 - 名言 + 时钟 ========== */
+        .center-section {
+            grid-column: 2;
             grid-row: 1;
-            padding: 28px 32px;
             display: flex;
             flex-direction: column;
-            justify-content: flex-start;
-            min-height: 180px;
+            gap: 32px;
+            padding: 60px 0;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* 名言卡片 */
+        .quote-card {
+            padding: 32px 40px;
+            max-width: 800px;
+            width: 100%;
             max-height: 280px;
             overflow-y: auto;
         }
-        /* 自定义滚动条 */
         .quote-card::-webkit-scrollbar {
             width: 8px;
         }
@@ -293,61 +310,62 @@
         }
         .quote-card p {
             color: var(--text-primary);
-            font-size: 14px;
+            font-size: 15px;
             line-height: 1.9;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
             font-weight: 300;
             letter-spacing: 0.5px;
             text-align: justify;
         }
         .quote-author {
             color: var(--primary-color);
-            font-size: 12px;
+            font-size: 13px;
             font-style: italic;
             letter-spacing: 1px;
             font-weight: 300;
             text-align: right;
             margin-top: auto;
-            padding-top: 8px;
+            padding-top: 12px;
         }
-        /* 中间中央 - 时钟区域 */
-        .clock-section {
-            grid-column: 2;
-            grid-row: 2;
-            padding: 48px 32px;
+        
+        /* 时钟卡片 */
+        .clock-card {
+            padding: 48px 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            max-width: 600px;
+            width: 100%;
         }
         .date {
             color: var(--text-secondary);
-            font-size: 13px;
-            margin-bottom: 24px;
+            font-size: 14px;
+            margin-bottom: 28px;
             letter-spacing: 2px;
             font-weight: 300;
             text-align: center;
         }
         .time {
             color: var(--primary-color);
-            font-size: 68px;
+            font-size: 72px;
             font-weight: 300;
             font-family: 'Poppins', monospace;
             letter-spacing: 6px;
             text-shadow: 0 0 30px rgba(212, 175, 55, 0.4);
-            margin-bottom: 24px;
+            margin-bottom: 28px;
         }
         .weather {
             color: var(--text-secondary);
-            font-size: 12px;
+            font-size: 13px;
             letter-spacing: 0.5px;
             font-weight: 300;
             line-height: 1.6;
             text-align: center;
         }
         .weather-icon {
-            font-size: 28px;
-            margin-bottom: 8px;
+            font-size: 32px;
+            margin-bottom: 12px;
             animation: float 3s ease-in-out infinite;
         }
         @keyframes float {
@@ -365,73 +383,81 @@
         .weather-detail {
             display: flex;
             justify-content: center;
-            gap: 16px;
-            font-size: 11px;
-            margin-top: 8px;
+            gap: 20px;
+            font-size: 12px;
+            margin-top: 12px;
             opacity: 0.7;
         }
         .weather-item {
             display: flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
-        /* 右侧 - 网站列表 */
-        .links-section {
+        
+        /* ========== 右侧栏 - 网站列表 ========== */
+        .right-sidebar {
             grid-column: 3;
-            grid-row: 2;
+            grid-row: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .links-card {
             padding: 32px 24px;
             display: flex;
             flex-direction: column;
             gap: 16px;
+            height: 100%;
         }
         .links-title {
             color: var(--text-primary);
-            font-size: 14px;
-            font-weight: 300;
+            font-size: 16px;
+            font-weight: 400;
             letter-spacing: 2px;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
         .link-button {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(212, 175, 55, 0.08) 100%);
             border: 2px solid rgba(212, 175, 55, 0.3);
-            padding: 16px 20px;
+            padding: 18px 22px;
             border-radius: 12px;
             color: var(--text-primary);
-            font-size: 13px;
+            font-size: 14px;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 14px;
             text-decoration: none;
             letter-spacing: 1px;
             font-weight: 300;
         }
         .link-button:hover {
             background: linear-gradient(135deg, rgba(212, 175, 55, 0.25) 0%, rgba(212, 175, 55, 0.15) 100%);
-            transform: translateX(4px);
+            transform: translateX(6px);
             box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
             border-color: rgba(212, 175, 55, 0.5);
         }
         .link-icon {
-            font-size: 20px;
+            font-size: 22px;
         }
-        /* 底部 - 页脚 */
+        
+        /* ========== 底部页脚 ========== */
         .footer {
             grid-column: 1 / 4;
-            grid-row: 4;
+            grid-row: 2;
             text-align: center;
             color: var(--text-secondary);
             font-size: 11px;
             letter-spacing: 0.5px;
             font-weight: 300;
             opacity: 0.6;
-            padding: 20px 0;
+            padding: 24px 0;
         }
-        /* ========== 留言弹窗样式 ========== */
+        
+        /* ========== 留言弹窗 ========== */
         .message-modal {
             position: fixed;
             top: 0;
@@ -602,7 +628,8 @@
             border: 2px solid rgba(239, 68, 68, 0.4);
             color: #f87171;
         }
-        /* 聊天图标 */
+        
+        /* ========== 聊天图标 ========== */
         .chat-icon-wrapper {
             position: fixed;
             bottom: 40px;
@@ -741,21 +768,23 @@
                 box-shadow: 0 0 20px rgba(74, 222, 128, 0.9);
             }
         }
-        /* 响应式设计 */
+        
+        /* ========== 响应式设计 ========== */
         @media (max-width: 1400px) {
             .container {
-                grid-template-columns: 260px 1fr 300px;
+                grid-template-columns: 280px 1fr 280px;
                 padding: 32px;
-                gap: 20px;
+                gap: 24px;
             }
             .time {
-                font-size: 56px;
+                font-size: 60px;
             }
-            .quote-card {
-                min-height: 160px;
-                max-height: 240px;
+            .avatar-container {
+                width: 120px;
+                height: 120px;
             }
         }
+        
         @media (max-width: 1024px) {
             .container {
                 grid-template-columns: 1fr;
@@ -765,35 +794,29 @@
                 overflow-y: auto;
                 height: auto;
             }
-            .avatar-section {
+            .left-sidebar {
                 grid-column: 1;
                 grid-row: 1;
+                gap: 16px;
             }
-            .motto-section {
+            .center-section {
                 grid-column: 1;
                 grid-row: 2;
+                padding: 0;
             }
-            .quote-card {
+            .right-sidebar {
                 grid-column: 1;
                 grid-row: 3;
-                max-height: 320px;
-            }
-            .clock-section {
-                grid-column: 1;
-                grid-row: 4;
-            }
-            .links-section {
-                grid-column: 1;
-                grid-row: 5;
             }
             .footer {
                 grid-column: 1;
-                grid-row: 6;
+                grid-row: 4;
             }
             .time {
                 font-size: 48px;
             }
         }
+        
         @media (max-width: 768px) {
             .container {
                 padding: 16px;
@@ -829,7 +852,8 @@
                 line-height: 1.8;
             }
         }
-        /* 动画效果 */
+        
+        /* ========== 动画效果 ========== */
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -843,68 +867,83 @@
         .card {
             animation: fadeIn 0.6s ease-out;
         }
-        .avatar-section { animation-delay: 0.1s; }
-        .motto-section { animation-delay: 0.2s; }
-        .quote-card { animation-delay: 0.15s; }
-        .clock-section { animation-delay: 0.25s; }
-        .links-section { animation-delay: 0.3s; }
+        .avatar-card { animation-delay: 0.1s; }
+        .motto-card { animation-delay: 0.15s; }
+        .quote-card { animation-delay: 0.2s; }
+        .clock-card { animation-delay: 0.25s; }
+        .links-card { animation-delay: 0.3s; }
     </style>
 </head>
 <body>
     <!-- 动态背景容器 -->
     <div class="background-container" id="background-container"></div>
     <div class="background-overlay"></div>
+    
     <div class="container">
-        <!-- 左上 - 头像卡片 -->
-        <div class="card avatar-section">
-            <div class="avatar-container">
-                <img src="image/avatar.jpg" alt="头像" id="avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-                <div class="avatar-placeholder" style="display:none;">👤</div>
+        <!-- 左侧栏 -->
+        <div class="left-sidebar">
+            <!-- 头像卡片 -->
+            <div class="card avatar-card">
+                <div class="avatar-container">
+                    <img src="image/avatar.jpg" alt="头像" id="avatar-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+                    <div class="avatar-placeholder" style="display:none;">👤</div>
+                </div>
+                <div class="site-logo">狂客同学</div>
+                <div class="site-domain">Classmate Kuangke</div>
             </div>
-            <div class="site-logo">狂客同学</div>
-            <div class="site-domain">Classmate Kuangke</div>
-        </div>
-        <!-- 左下 - 座右铭卡片 -->
-        <div class="card motto-section">
-            <div class="quote-mark">❝</div>
-            <h2 class="motto-title">Hello World!</h2>
-            <p class="motto-text">世界不死,理想不灭</p>
-            <div class="social-links">
-                <a href="https://github.com/kuangketongxue" class="social-icon" title="GitHub" target="_blank" rel="noopener">🐙</a>
-                <a href="https://open.weixin.qq.com/qr/code?username=gh_ba5b6bb6bd89" class="social-icon" title="微信" target="_blank" rel="noopener">💬</a>
-                <a href="https://x.com/kuangketongxue" class="social-icon" title="X" target="_blank" rel="noopener">❌</a>
-                <a href="mailto:19927675096@163.com" class="social-icon" title="邮箱" target="_blank" rel="noopener">📧</a>
-            </div>
-        </div>
-        <!-- 顶部 - 名言卡片 -->
-        <div class="card quote-card">
-            <p id="quote-text">加载中...</p>
-            <p class="quote-author" id="quote-author">—</p>
-        </div>
-        <!-- 中间 - 时钟卡片 -->
-        <div class="card clock-section">
-            <div class="date" id="date">2025年01月05日 星期三</div>
-            <div class="time" id="clock">20:56:19</div>
-            <div class="weather" id="weather">
-                <div class="weather-loading">⏳ 正在获取天气...</div>
+            
+            <!-- 座右铭卡片 -->
+            <div class="card motto-card">
+                <div class="quote-mark">❝</div>
+                <h2 class="motto-title">Hello World!</h2>
+                <p class="motto-text">世界不死,理想不灭</p>
+                <div class="social-links">
+                    <a href="https://github.com/kuangketongxue" class="social-icon" title="GitHub" target="_blank" rel="noopener">🐙</a>
+                    <a href="https://open.weixin.qq.com/qr/code?username=gh_ba5b6bb6bd89" class="social-icon" title="微信" target="_blank" rel="noopener">💬</a>
+                    <a href="https://x.com/kuangketongxue" class="social-icon" title="X" target="_blank" rel="noopener">❌</a>
+                    <a href="mailto:19927675096@163.com" class="social-icon" title="邮箱" target="_blank" rel="noopener">📧</a>
+                </div>
             </div>
         </div>
-        <!-- 右侧 - 网站列表卡片 -->
-        <div class="card links-section">
-            <div class="links-title">
-                <span>🔗</span>
-                <span>网站列表</span>
+        
+        <!-- 中间区域 -->
+        <div class="center-section">
+            <!-- 名言卡片 -->
+            <div class="card quote-card">
+                <p id="quote-text">加载中...</p>
+                <p class="quote-author" id="quote-author">—</p>
             </div>
-            <a href="https://kuangketongxue.github.io/tongxuekuangke/index.html" class="link-button" target="_blank" rel="noopener">
-                <span class="link-icon">🌟</span>
-                <span>星空</span>
-            </a>
+            
+            <!-- 时钟卡片 -->
+            <div class="card clock-card">
+                <div class="date" id="date">2025年01月07日 星期五</div>
+                <div class="time" id="clock">19:57:07</div>
+                <div class="weather" id="weather">
+                    <div class="weather-loading">⏳ 正在获取天气...</div>
+                </div>
+            </div>
         </div>
-        <!-- 底部 - 页脚 -->
+        
+        <!-- 右侧栏 -->
+        <div class="right-sidebar">
+            <div class="card links-card">
+                <div class="links-title">
+                    <span>🔗</span>
+                    <span>网站列表</span>
+                </div>
+                <a href="https://kuangketongxue.github.io/tongxuekuangke/index.html" class="link-button" target="_blank" rel="noopener">
+                    <span class="link-icon">🌟</span>
+                    <span>星空</span>
+                </a>
+            </div>
+        </div>
+        
+        <!-- 底部页脚 -->
         <div class="footer">
             版权2025 狂客·银河版权所有
         </div>
     </div>
+    
     <!-- 留言弹窗 -->
     <div class="message-modal" id="messageModal">
         <div class="message-container">
@@ -936,6 +975,7 @@
             </form>
         </div>
     </div>
+    
     <!-- 聊天图标 -->
     <div class="chat-icon-wrapper">
         <div class="chat-icon" onclick="openMessageModal()">
@@ -944,28 +984,25 @@
             <div class="chat-tooltip">给我留言 · 在线咨询</div>
         </div>
     </div>
+    
     <script>
         // ========== 配置区域 ==========
         const CONFIG = {
-            // GitHub 配置 - 注意：实际使用时应通过后端 API 调用
             github: {
                 owner: 'kuangketongxue',
                 repo: 'tongxuekuangke',
-                apiEndpoint: '/api/submit-message' // 后端 API 端点
+                apiEndpoint: '/api/submit-message'
             },
-            // 和风天气 API Key
             qweather: {
                 key: '2a7e3fb132e443ac965e50b001317f5f'
             },
-            // 速率限制配置
             rateLimit: {
-                cooldown: 60000, // 60秒冷却时间
-                maxLength: 500,   // 最大字符数
-                minLength: 10     // 最小字符数
+                cooldown: 60000,
+                maxLength: 500,
+                minLength: 10
             }
         };
-
-        // 动漫风格星空背景图片库
+        
         const animeStarryBackgrounds = [
             'https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1920&q=80',
             'https://images.unsplash.com/photo-1464802686167-b939a6910659?w=1920&q=80',
@@ -983,32 +1020,15 @@
             'https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1920&q=80',
             'https://images.unsplash.com/photo-1504333638930-c8787321eee0?w=1920&q=80'
         ];
-
-        // ========== 扩充的名言库 ==========
+        
         const quotes = [
-            // 埃隆·马斯克名言 (45句)
             { text: "当某件事足够重要时，即使所有的概率都对你不利，即使所有人都告诉你这是不可能的，你也应该去做。因为真正重要的事情，值得你付出一切代价去追求，哪怕最终可能失败，至少你尝试过，你为之奋斗过，这本身就已经是一种胜利了。", author: "埃隆·马斯克" },
             { text: "失败是一个选项，如果你没有失败过，说明你的创新程度还不够。只有那些敢于挑战极限、不断突破边界的人，才会在失败中获得宝贵的经验。每一次失败都是通往成功道路上的必经之路，它们教会我们如何做得更好，如何避免同样的错误。", author: "埃隆·马斯克" },
-            { text: "我宁愿保持乐观并最终证明是错误的，也不愿保持悲观并最终证明是正确的。因为乐观的人能够看到希望，能够在困境中坚持下去，而悲观的人即使是对的，也已经在心理上提前放弃了。积极的心态本身就是一种力量，它能推动我们创造更好的未来。", author: "埃隆·马斯克" },
-            { text: "坚持是非常非常重要的。你不应该放弃，除非你被迫放弃。在创业的道路上，会遇到无数的挑战和困难，但只要你相信自己的愿景，只要你持之以恒地努力，最终一定能够克服所有障碍，实现你的目标。放弃永远比坚持容易，但只有坚持才能带来真正的成功。", author: "埃隆·马斯克" },
-            { text: "如果你早上醒来并认为未来会更好，那就是美好的一天。如果你对未来充满希望和期待，那么你就会有动力去努力工作，去创造更美好的明天。这种积极的心态会感染周围的人，会让整个团队都充满活力和创造力。保持对未来的乐观，是一切伟大成就的起点。", author: "埃隆·马斯克" },
-            
-            // 史蒂夫·乔布斯名言 (45句)
-            { text: "求知若饥，虚心若愚。这是我一直以来的座右铭。我们应该永远保持学习的热情，就像饥饿的人渴望食物一样。同时，我们也要保持谦逊，认识到我们不知道的东西还有很多。只有这样，我们才能不断成长，不断进步，永远不会停止探索和发现新的可能性。这种心态对于创新和个人发展都至关重要。", author: "史蒂夫·乔布斯" },
-            { text: "活着就是为了改变世界，难道还有其他原因吗？我们每个人都有能力对这个世界产生影响，无论是通过创造新的产品、解决社会问题，还是仅仅通过改善周围人的生活。不要满足于平凡的生活，要追求卓越，要努力让这个世界因为你的存在而变得更好。这才是生命的真正意义和价值所在。", author: "史蒂夫·乔布斯" },
-            { text: "你的时间有限，不要浪费在重复他人的生活上。不要被教条所束缚，那意味着活在他人的思考结果中。不要让他人的意见淹没了你内心的声音。最重要的是，要有勇气跟随自己的心灵和直觉。它们已经知道你真正想要成为什么样的人，其他一切都是次要的。听从内心的呼唤，追寻自己的梦想。", author: "史蒂夫·乔布斯" },
-            { text: "创新区分领导者和跟随者。真正的领导者不是那些跟随潮流的人，而是那些创造潮流的人。他们敢于挑战现状，敢于尝试前人未曾尝试过的事情。创新需要勇气、想象力和对细节的极致追求。它不仅仅是技术的进步，更是思维方式的革新。如果你想成为领导者，就必须不断创新，永远走在时代的前沿。", author: "史蒂夫·乔布斯" },
-            { text: "唯一做伟大工作的方法就是热爱你所做的事情。如果你还没有找到它，继续寻找，不要停下来。就像所有关于内心的事情一样，当你找到它时，你会知道的。不要因为薪水或者别人的期望而选择工作，要选择那些能够激发你热情、让你每天早上都迫不及待起床的工作。只有热爱，才能坚持，才能卓越。", author: "史蒂夫·乔布斯" },
-            
-            // 坎耶·韦斯特名言 (40句)
-            { text: "我拒绝接受他人对我能力的任何限制。没有人能够定义你能够达到什么样的高度，除了你自己。社会、传统、别人的期望——这些都是外在的束缚，它们不应该成为阻碍你实现梦想的障碍。你必须相信自己，相信自己的能力和潜力。不要让任何人告诉你你不能做什么，唯一的限制存在于你的想象力和决心之中。", author: "坎耶·韦斯特" },
-            { text: "相信你的幻想，相信你的梦想，相信你内心深处那些别人可能觉得疯狂的想法。正是这些看似不切实际的幻想，推动了人类文明的进步。每一个伟大的创新都始于一个疯狂的想法。不要让现实主义扼杀你的创造力，不要让怀疑者动摇你的信念。如果你能够想象它，你就能够创造它。梦想有多大，舞台就有多大。", author: "坎耶·韦斯特" },
-            { text: "创造力是人类最伟大的反叛行为。在一个充满规则和传统的世界里，创造力让我们能够打破常规，创造新的可能性。通过创造，我们表达自己的个性，我们挑战现状，我们为世界带来新的视角和体验。不要害怕与众不同，不要害怕表达你独特的声音。真正的艺术和创新来自于那些敢于反叛、敢于不同的人。", author: "坎耶·韦斯特" },
-            { text: "我不关心是否政治正确，我只关心真相和真实的表达。太多人因为害怕冒犯他人或者不符合社会期望而压抑自己的真实想法。但真正的艺术和真正的进步需要诚实和勇气。我们需要有勇气说出真相,即使这真相不受欢迎。只有通过真实的对话和诚实的表达,我们才能真正理解彼此,推动社会进步。", author: "坎耶·韦斯特" },
-            { text: "我的目标不仅仅是成为音乐界的传奇，而是成为历史上最伟大的创造者之一。我想在音乐、时尚、设计等多个领域留下我的印记。我相信人的潜力是无限的，只要你有足够的激情和决心，你可以在多个领域都达到卓越。不要把自己限制在一个身份或者一个领域，去探索，去创造，去打破边界。", author: "坎耶·韦斯特" }
+            { text: "求知若饥，虚心若愚。这是我一直以来的座右铭。我们应该永远保持学习的热情，就像饥饿的人渴望食物一样。同时，我们也要保持谦逊，认识到我们不知道的东西还有很多。", author: "史蒂夫·乔布斯" },
+            { text: "活着就是为了改变世界，难道还有其他原因吗？我们每个人都有能力对这个世界产生影响，无论是通过创造新的产品、解决社会问题，还是仅仅通过改善周围人的生活。", author: "史蒂夫·乔布斯" },
+            { text: "我拒绝接受他人对我能力的任何限制。没有人能够定义你能够达到什么样的高度，除了你自己。社会、传统、别人的期待——这些都是外在的束缚，它们不应该成为阻碍你实现梦想的障碍。", author: "坎耶·韦斯特" }
         ];
-
-        // 和风天气图标映射
+        
         const qweatherIcons = {
             '100': '☀️', '101': '☁️', '102': '⛅', '103': '⛅', '104': '☁️',
             '150': '🌙', '151': '☁️', '152': '⛅', '153': '⛅',
@@ -1020,15 +1040,11 @@
             '507': '🌪️', '508': '🌪️', '509': '🌫️', '510': '🌫️',
             '900': '🔥', '901': '❄️', '999': '🌈'
         };
-
+        
         let currentBackgroundIndex = -1;
         let usedBackgrounds = [];
-
-        // ========== 安全工具函数 ==========
         
-        /**
-         * 输入内容过滤 - 防止 XSS 攻击
-         */
+        // ========== 安全工具函数 ==========
         function sanitizeInput(text) {
             if (!text) return '';
             return text
@@ -1040,18 +1056,12 @@
                 .replace(/<[^>]+>/g, '')
                 .trim();
         }
-
-        /**
-         * 邮箱格式验证
-         */
+        
         function isValidEmail(email) {
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             return emailRegex.test(email);
         }
-
-        /**
-         * 检查提交冷却时间
-         */
+        
         function checkSubmitCooldown() {
             const lastSubmit = localStorage.getItem('lastMessageSubmit');
             if (lastSubmit) {
@@ -1064,10 +1074,7 @@
             }
             return true;
         }
-
-        /**
-         * 获取北京时间字符串
-         */
+        
         function getBeijingTimeString() {
             return new Date().toLocaleString('zh-CN', {
                 timeZone: 'Asia/Shanghai',
@@ -1080,14 +1087,13 @@
                 hour12: false
             });
         }
-
-        // ========== 留言功能 (优化版) ==========
         
+        // ========== 留言功能 ==========
         function openMessageModal() {
             document.getElementById('messageModal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
-
+        
         function closeMessageModal() {
             document.getElementById('messageModal').classList.remove('active');
             document.body.style.overflow = '';
@@ -1095,47 +1101,35 @@
             document.getElementById('charCount').textContent = '0';
             document.getElementById('statusMessage').innerHTML = '';
         }
-
+        
         function updateCharCount() {
             const content = document.getElementById('messageContent').value;
             const count = content.length;
             const charCountElement = document.getElementById('charCount');
             charCountElement.textContent = count;
-            
-            // 字符数超过限制时变红
             if (count > CONFIG.rateLimit.maxLength) {
                 charCountElement.style.color = '#f87171';
             } else {
                 charCountElement.style.color = '';
             }
         }
-
-        /**
-         * 提交留言 - 优化版
-         */
+        
         async function submitMessage(event) {
             event.preventDefault();
-            
             const submitBtn = document.getElementById('submitBtn');
             const submitBtnText = document.getElementById('submitBtnText');
             
-            // 防止重复提交
-            if (submitBtn.disabled) {
-                return;
-            }
+            if (submitBtn.disabled) return;
             
-            // 获取并清理输入
             const userName = sanitizeInput(document.getElementById('userName').value);
             const userEmail = sanitizeInput(document.getElementById('userEmail').value);
             const messageContent = sanitizeInput(document.getElementById('messageContent').value);
             
-            // 基础验证
             if (!userName || !messageContent) {
                 showStatus('❌ 请填写必填项', 'error');
                 return;
             }
             
-            // 内容长度验证
             if (messageContent.length < CONFIG.rateLimit.minLength) {
                 showStatus(`❌ 留言内容至少需要 ${CONFIG.rateLimit.minLength} 个字符`, 'error');
                 return;
@@ -1146,25 +1140,18 @@
                 return;
             }
             
-            // 邮箱格式验证（如果填写）
             if (userEmail && !isValidEmail(userEmail)) {
                 showStatus('❌ 邮箱格式不正确', 'error');
                 return;
             }
             
-            // 检查速率限制
-            if (!checkSubmitCooldown()) {
-                return;
-            }
+            if (!checkSubmitCooldown()) return;
             
-            // 禁用按钮并显示加载状态
             submitBtn.disabled = true;
             submitBtnText.textContent = '📮 发送中...';
             
             try {
                 const timeString = getBeijingTimeString();
-                
-                // 准备留言数据
                 const messageData = {
                     userName,
                     userEmail: userEmail || '未提供',
@@ -1172,12 +1159,9 @@
                     timestamp: timeString
                 };
                 
-                // 调用后端 API（需要配置）
                 const response = await fetch(CONFIG.github.apiEndpoint, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(messageData)
                 });
                 
@@ -1185,37 +1169,28 @@
                     throw new Error('提交失败，请稍后重试');
                 }
                 
-                const data = await response.json();
-                
-                // 记录提交时间
                 localStorage.setItem('lastMessageSubmit', Date.now().toString());
-                
-                // 显示成功消息
                 showStatus('✨ 留言发送成功！感谢您的留言~', 'success');
                 
-                // 2秒后关闭弹窗
                 setTimeout(() => {
                     closeMessageModal();
                 }, 2000);
-                
             } catch (error) {
                 console.error('留言发送失败:', error);
                 showStatus(`❌ ${error.message}`, 'error');
             } finally {
-                // 恢复按钮状态
                 submitBtn.disabled = false;
                 submitBtnText.textContent = '📤 发送留言';
             }
         }
-
+        
         function showStatus(message, type) {
             const statusMessage = document.getElementById('statusMessage');
             statusMessage.innerHTML = message;
             statusMessage.className = `status-message ${type}`;
         }
-
-        // ========== 背景功能 ==========
         
+        // ========== 背景功能 ==========
         function initBackground() {
             const container = document.getElementById('background-container');
             const randomBg = getRandomBackground();
@@ -1225,7 +1200,7 @@
             container.appendChild(bgDiv);
             preloadBackgrounds();
         }
-
+        
         function getRandomBackground() {
             if (usedBackgrounds.length === animeStarryBackgrounds.length) {
                 usedBackgrounds = [];
@@ -1234,21 +1209,20 @@
             do {
                 randomIndex = Math.floor(Math.random() * animeStarryBackgrounds.length);
             } while (usedBackgrounds.includes(randomIndex));
-            
             usedBackgrounds.push(randomIndex);
             currentBackgroundIndex = randomIndex;
             localStorage.setItem('lastBackgroundIndex', randomIndex);
             localStorage.setItem('usedBackgrounds', JSON.stringify(usedBackgrounds));
             return animeStarryBackgrounds[randomIndex];
         }
-
+        
         function preloadBackgrounds() {
             animeStarryBackgrounds.forEach(url => {
                 const img = new Image();
                 img.src = url;
             });
         }
-
+        
         function restoreBackgroundState() {
             const lastIndex = localStorage.getItem('lastBackgroundIndex');
             const savedUsed = localStorage.getItem('usedBackgrounds');
@@ -1259,22 +1233,20 @@
                 usedBackgrounds = JSON.parse(savedUsed);
             }
         }
-
+        
         function getQweatherIcon(code) {
             return qweatherIcons[code] || '🌈';
         }
-
-        // ========== 名言功能 ==========
         
+        // ========== 名言功能 ==========
         function loadRandomQuote() {
             const randomIndex = Math.floor(Math.random() * quotes.length);
             const quote = quotes[randomIndex];
             document.getElementById('quote-text').innerHTML = quote.text;
             document.getElementById('quote-author').textContent = `— ${quote.author}`;
         }
-
-        // ========== 时钟功能 ==========
         
+        // ========== 时钟功能 ==========
         function updateClock() {
             const now = new Date();
             const hours = String(now.getHours()).padStart(2, '0');
@@ -1282,7 +1254,7 @@
             const seconds = String(now.getSeconds()).padStart(2, '0');
             document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
         }
-
+        
         function updateDate() {
             const now = new Date();
             const year = now.getFullYear();
@@ -1292,9 +1264,8 @@
             const weekday = weekdays[now.getDay()];
             document.getElementById('date').textContent = `${year}年${month}月${day}日 ${weekday}`;
         }
-
-        // ========== 天气功能 ==========
         
+        // ========== 天气功能 ==========
         async function fetchQWeather() {
             const weatherElement = document.getElementById('weather');
             try {
@@ -1302,19 +1273,16 @@
                     showDefaultWeather();
                     return;
                 }
-                
                 navigator.geolocation.getCurrentPosition(
                     async (position) => {
                         const { latitude, longitude } = position.coords;
                         try {
                             const locationStr = `${longitude.toFixed(2)},${latitude.toFixed(2)}`;
                             const weatherUrl = `https://devapi.qweather.com/v7/weather/now?location=${locationStr}&key=${CONFIG.qweather.key}&lang=zh`;
-                            
                             const response = await fetch(weatherUrl);
                             if (!response.ok) {
                                 throw new Error(`HTTP error! status: ${response.status}`);
                             }
-                            
                             const data = await response.json();
                             if (data.code === '200' && data.now) {
                                 const weather = data.now;
@@ -1357,7 +1325,7 @@
                 showDefaultWeather();
             }
         }
-
+        
         function showDefaultWeather() {
             const weatherElement = document.getElementById('weather');
             weatherElement.innerHTML = `
@@ -1367,24 +1335,20 @@
                 </div>
             `;
         }
-
-        // ========== 事件监听 ==========
         
-        // ESC键关闭弹窗
+        // ========== 事件监听 ==========
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape') {
                 closeMessageModal();
             }
         });
-
-        // 点击遮罩关闭弹窗
+        
         document.getElementById('messageModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeMessageModal();
             }
         });
-
-        // 页面加载初始化
+        
         window.addEventListener('load', function() {
             restoreBackgroundState();
             initBackground();
@@ -1393,26 +1357,16 @@
             updateClock();
             fetchQWeather();
             
-            // 定时更新
             setInterval(updateClock, 1000);
             setInterval(updateDate, 60000);
-            setInterval(fetchQWeather, 900000); // 15分钟更新一次天气
+            setInterval(fetchQWeather, 900000);
         });
-
-        // 页面可见性变化时刷新天气
+        
         document.addEventListener('visibilitychange', function() {
             if (!document.hidden) {
                 fetchQWeather();
             }
         });
-
-        // ========== 调试工具 (生产环境请删除) ==========
-        
-        if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-            console.log('🔧 调试模式已启用');
-            console.log('配置信息:', CONFIG);
-            console.log('GitHub Issues URL:', `https://github.com/${CONFIG.github.owner}/${CONFIG.github.repo}/issues`);
-        }
     </script>
 </body>
 </html>
