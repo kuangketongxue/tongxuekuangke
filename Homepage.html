@@ -1003,63 +1003,66 @@
             document.getElementById('charCount').textContent = content.length;
         }
         
-        async function submitMessage(event) {
-            event.preventDefault();
-            
-            const submitBtn = document.getElementById('submitBtn');
-            const submitBtnText = document.getElementById('submitBtnText');
-            const statusMessage = document.getElementById('statusMessage');
-            
-            // 获取表单数据
-            const userName = document.getElementById('userName').value.trim();
-            const userEmail = document.getElementById('userEmail').value.trim();
-            const messageContent = document.getElementById('messageContent').value.trim();
-            
-            if (!userName || !messageContent) {
-                showStatus('请填写必填项', 'error');
-                return;
-            }
-            
-            // 禁用提交按钮
-            submitBtn.disabled = true;
-            submitBtnText.textContent = '📮 发送中...';
-            
-            try {
-                // 使用GitHub Issues API保存留言
-                const issueData = {
-                    title: `留言来自: ${userName}`,
-                    body: `**昵称:** ${userName}\n**邮箱:** ${userEmail || '未提供'}\n**时间:** ${new Date().toLocaleString('zh-CN', {timeZone: 'Asia/Shanghai'})}\n**User Agent:** ${navigator.userAgent}\n\n---\n\n${messageContent}`,
-                    labels: ['留言', '待处理']
-                };
-                
-                const response = await fetch(`https://api.github.com/repos/${GITHUB_CONFIG.owner}/${GITHUB_CONFIG.repo}/issues`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `token ${GITHUB_CONFIG.token}`,
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/vnd.github.v3+json'
-                    },
-                    body: JSON.stringify(issueData)
-                });
-                
-                if (response.ok) {
-                    showStatus('✨ 留言发送成功!感谢您的留言~', 'success');
-                    setTimeout(() => {
-                        closeMessageModal();
-                    }, 2000);
-                } else {
-                    const errorData = await response.json();
-                    console.error('GitHub API Error:', errorData);
-                    throw new Error(errorData.message || '发送失败');
-                }
-            } catch (error) {
-                console.error('留言发送失败:', error);
-                showStatus('❌ 发送失败,请稍后重试或直接联系我', 'error');
-            } finally {
-                submitBtn.disabled = false;
-                submitBtnText.textContent = '📤 发送留言';
-            }
+      // ========== 配置区域 ==========
+const QWEATHER_KEY = '2a7e3fb132e443ac965e50b001317f5f';
+
+// ❌ 删除原来的GITHUB_CONFIG配置
+
+// ... 其他代码保持不变 ...
+
+// ========== 修改留言提交函数 ==========
+async function submitMessage(event) {
+    event.preventDefault();
+    
+    const submitBtn = document.getElementById('submitBtn');
+    const submitBtnText = document.getElementById('submitBtnText');
+    
+    // 获取表单数据
+    const userName = document.getElementById('userName').value.trim();
+    const userEmail = document.getElementById('userEmail').value.trim();
+    const messageContent = document.getElementById('messageContent').value.trim();
+    
+    if (!userName || !messageContent) {
+        showStatus('❌ 请填写必填项', 'error');
+        return;
+    }
+    
+    // 禁用提交按钮
+    submitBtn.disabled = true;
+    submitBtnText.textContent = '📮 发送中...';
+    
+    try {
+        // 调用Vercel API函数
+        const response = await fetch('/api/submit-message', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                userName,
+                userEmail,
+                messageContent
+            })
+        });
+        
+        const data = await response.json();
+        
+        if (response.ok && data.success) {
+            showStatus('✨ 留言发送成功!感谢您的留言~', 'success');
+            setTimeout(() => {
+                closeMessageModal();
+            }, 2000);
+        } else {
+            throw new Error(data.error || '发送失败');
         }
+    } catch (error) {
+        console.error('留言发送失败:', error);
+        showStatus('❌ ' + (error.message || '发送失败,请稍后重试'), 'error');
+    } finally {
+        submitBtn.disabled = false;
+        submitBtnText.textContent = '📤 发送留言';
+    }
+}
         
         function showStatus(message, type) {
             const statusMessage = document.getElementById('statusMessage');
