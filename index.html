@@ -14,9 +14,11 @@
     <!-- DNS预解析 -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
     <!-- 预连接 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
     <!-- 字体优化加载 -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
@@ -134,7 +136,7 @@
 
         .modal-content {
             position: relative;
-            max-width: 700px;
+            max-width: 800px;
             width: 100%;
             max-height: 85vh;
             background: linear-gradient(135deg, rgba(10, 10, 10, 0.98), rgba(20, 20, 20, 0.95));
@@ -230,61 +232,168 @@
             background: linear-gradient(180deg, #d4af37, #b8941e);
             border-radius: 3px;
         }
-
-        .principle-section {
-            margin-bottom: 32px;
-            padding: 24px;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 6px;
-            transition: var(--transition);
+        
+        /* Markdown内容样式 */
+        .markdown-content h1 {
+            font-family: var(--font-serif);
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            margin: 32px 0 16px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            letter-spacing: 0.05em;
         }
-
-        .principle-section:hover {
-            background: rgba(212, 175, 55, 0.05);
-            border-color: rgba(212, 175, 55, 0.2);
-            transform: translateX(4px);
+        
+        .markdown-content h1:first-child {
+            margin-top: 0;
         }
-
-        .principle-section h3 {
+        
+        .markdown-content h2 {
+            font-family: var(--font-serif);
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary-gold);
+            margin: 28px 0 14px;
+            letter-spacing: 0.03em;
+        }
+        
+        .markdown-content h3 {
             font-family: var(--font-serif);
             font-size: 1.25rem;
             font-weight: 600;
             color: var(--primary-gold);
-            margin-bottom: 12px;
+            margin: 24px 0 12px;
             display: flex;
             align-items: center;
             gap: 8px;
         }
-
-        .principle-section p {
+        
+        .markdown-content h4 {
+            font-size: 1.125rem;
+            font-weight: 500;
+            color: #f4e4b8;
+            margin: 20px 0 10px;
+        }
+        
+        .markdown-content p {
             font-size: 0.9375rem;
             line-height: 1.8;
             color: var(--text-secondary);
-            margin: 0;
+            margin: 12px 0;
         }
         
-        .principle-section ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .principle-section li {
-            font-size: 0.9375rem;
-            line-height: 1.8;
-            color: var(--text-secondary);
+        .markdown-content ul,
+        .markdown-content ol {
+            margin: 16px 0;
             padding-left: 24px;
-            position: relative;
-            margin-bottom: 8px;
         }
         
-        .principle-section li::before {
-            content: '▸';
-            position: absolute;
-            left: 0;
+        .markdown-content li {
+            font-size: 0.9375rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin: 8px 0;
+            position: relative;
+        }
+        
+        .markdown-content ul li::marker {
             color: var(--primary-gold);
-            font-weight: bold;
+        }
+        
+        .markdown-content ol li::marker {
+            color: var(--primary-gold);
+            font-weight: 600;
+        }
+        
+        .markdown-content strong {
+            color: var(--text-gold);
+            font-weight: 600;
+        }
+        
+        .markdown-content em {
+            color: #f4e4b8;
+            font-style: italic;
+        }
+        
+        .markdown-content code {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--text-gold);
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-size: 0.875rem;
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+        
+        .markdown-content pre {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 6px;
+            padding: 16px;
+            margin: 16px 0;
+            overflow-x: auto;
+        }
+        
+        .markdown-content pre code {
+            background: none;
+            padding: 0;
+            color: var(--text-secondary);
+        }
+        
+        .markdown-content blockquote {
+            border-left: 4px solid var(--primary-gold);
+            background: rgba(212, 175, 55, 0.05);
+            padding: 16px 20px;
+            margin: 16px 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .markdown-content blockquote p {
+            margin: 0;
+            color: #e0e0e0;
+            font-style: italic;
+        }
+        
+        .markdown-content hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+            margin: 32px 0;
+        }
+        
+        .markdown-content a {
+            color: var(--text-gold);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: var(--transition);
+        }
+        
+        .markdown-content a:hover {
+            border-bottom-color: var(--primary-gold);
+        }
+        
+        .markdown-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+            font-size: 0.9375rem;
+        }
+        
+        .markdown-content th,
+        .markdown-content td {
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            padding: 12px;
+            text-align: left;
+        }
+        
+        .markdown-content th {
+            background: rgba(212, 175, 55, 0.1);
+            color: var(--text-gold);
+            font-weight: 600;
+        }
+        
+        .markdown-content td {
+            color: var(--text-secondary);
         }
         
         .loading-text {
@@ -326,18 +435,21 @@
                 padding: 24px;
             }
             
-            .principle-section {
-                padding: 20px;
-                margin-bottom: 24px;
-            }
-            
-            .principle-section h3 {
-                font-size: 1.125rem;
-            }
-            
             .principle-btn {
                 padding: 10px 24px;
                 font-size: 0.875rem;
+            }
+            
+            .markdown-content h1 {
+                font-size: 1.5rem;
+            }
+            
+            .markdown-content h2 {
+                font-size: 1.25rem;
+            }
+            
+            .markdown-content h3 {
+                font-size: 1.125rem;
             }
         }
         
@@ -583,11 +695,16 @@
                 <h2>我的原则</h2>
                 <p class="modal-subtitle">Principles that guide my journey</p>
             </div>
-            <div class="modal-body" id="principleContent">
-                <p class="loading-text">⏳ 正在加载原则内容...</p>
+            <div class="modal-body">
+                <div id="principleContent" class="markdown-content">
+                    <p class="loading-text">⏳ 正在加载原则内容...</p>
+                </div>
             </div>
         </div>
     </div>
+    
+    <!-- Markdown解析库 (marked.js) -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
     
     <!-- 完整CSS延迟加载 -->
     <link rel="stylesheet" href="data:text/css;base64,LnRvcC1ub3RpY2V7dHJhbnNpdGlvbjpvcGFjaXR5IC40cyxoZWlnaHQgLjRzfS5ub3RpY2UtaGlkZGVue2Rpc3BsYXk6bm9uZX0ubm90aWNlLWNsb3NlOmhvdmVye2JhY2tncm91bmQ6cmdiYSgyMTIsMTc1LDU1LC4yKTt0cmFuc2Zvcm06cm90YXRlKDkwZGVnKX0uY2FyZC1pY29ue3otaW5kZXg6MTtwb3NpdGlvbjpyZWxhdGl2ZX0uY2FyZC10aXRsZSwuY2FyZC1kZXNje3otaW5kZXg6MTtwb3NpdGlvbjpyZWxhdGl2ZX0uc29jaWFsLWxpbms6aG92ZXJ7Ym9yZGVyLWNvbG9yOnZhcigtLXByaW1hcnktZ29sZCk7Y29sb3I6dmFyKC0tcHJpbWFyeS1nb2xkKTt0cmFuc2Zvcm06dHJhbnNsYXRlWSgtNHB4KX1AbWVkaWEobWF4LXdpZHRoOjc2OHB4KXsuY2FyZC1ncmlke2dyaWQtdGVtcGxhdGUtY29sdW1uczoxZnJ9LmNhcmQ6aG92ZXJ7dHJhbnNmb3JtOnRyYW5zbGF0ZVkoLTRweCkgc2NhbGUoMS4wMSl9fTo6LXdlYmtpdC1zY3JvbGxiYXJ7d2lkdGg6MTBweH06Oi13ZWJraXQtc2Nyb2xsYmFyLXRyYWNre2JhY2tncm91bmQ6IzBhMGEwYTtib3JkZXItbGVmdDoxcHggc29saWQgcmdiYSgyMTIsMTc1LDU1LC4xKX06Oi13ZWJraXQtc2Nyb2xsYmFyLXRodW1ie2JhY2tncm91bmQ6bGluZWFyLWdyYWRpZW50KDE4MGRlZywjZDRhZjM3LCNiODk0MWUpO2JvcmRlci1yYWRpdXM6NXB4O2JvcmRlcjoycHggc29saWQgIzBhMGEwYX06Oi13ZWJraXQtc2Nyb2xsYmFyLXRodW1iOmhvdmVye2JhY2tncm91bmQ6I2Q0YWYzN30=" media="print" onload="this.media='all'">
@@ -604,6 +721,15 @@
         document.querySelectorAll('a[href^="http"]').forEach((e=>{e.hasAttribute("target")||(e.setAttribute("target","_blank"),e.setAttribute("rel","noopener noreferrer"))})),
         "performance"in window&&"timing"in performance&&window.addEventListener("load",(()=>{const e=performance.timing.loadEventEnd-performance.timing.navigationStart;console.log`⚡ 页面加载时间: ${e}ms`}))
         
+        // 等待marked.js加载完成
+        function waitForMarked(callback) {
+            if (typeof marked !== 'undefined') {
+                callback();
+            } else {
+                setTimeout(() => waitForMarked(callback), 100);
+            }
+        }
+        
         // 原则弹窗功能
         const principleBtn = document.getElementById('principleBtn');
         const modal = document.getElementById('principleModal');
@@ -611,34 +737,28 @@
         const modalOverlay = modal?.querySelector('.modal-overlay');
         const principleContent = document.getElementById('principleContent');
         
-        // 加载原则内容
+        // 加载并解析Markdown内容
         async function loadPrinciples() {
             try {
-                const response = await fetch('principles.json');
+                const response = await fetch('principles.md');
                 if (!response.ok) throw new Error('加载失败');
-                const data = await response.json();
+                const markdown = await response.text();
                 
-                let html = '';
-                data.sections.forEach(section => {
-                    html += `
-                        <div class="principle-section">
-                            <h3>${section.icon} ${section.title}</h3>
-                    `;
+                // 等待marked加载完成后再解析
+                waitForMarked(() => {
+                    // 配置marked选项
+                    marked.setOptions({
+                        breaks: true,
+                        gfm: true,
+                        headerIds: false,
+                        mangle: false
+                    });
                     
-                    if (section.items && section.items.length > 0) {
-                        html += '<ul>';
-                        section.items.forEach(item => {
-                            html += `<li>${item}</li>`;
-                        });
-                        html += '</ul>';
-                    } else if (section.content) {
-                        html += `<p>${section.content}</p>`;
-                    }
-                    
-                    html += '</div>';
+                    // 解析Markdown并渲染
+                    const html = marked.parse(markdown);
+                    principleContent.innerHTML = html;
                 });
                 
-                principleContent.innerHTML = html;
             } catch (error) {
                 principleContent.innerHTML = '<p class="error-text">❌ 加载失败，请稍后重试</p>';
                 console.error('加载原则内容失败:', error);
