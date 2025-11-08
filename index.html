@@ -72,6 +72,235 @@
         .back-button:hover svg{
             transform:translateX(-2px);
         }
+        
+        /* 原则按钮样式 */
+        .principle-btn {
+            margin-top: 24px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid var(--border-gold);
+            border-radius: 4px;
+            color: var(--text-gold);
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+
+        .principle-btn:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: var(--primary-gold);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
+        }
+
+        .principle-btn svg {
+            transition: transform 0.3s ease;
+        }
+
+        .principle-btn:hover svg {
+            transform: scale(1.1);
+        }
+
+        /* 弹窗样式 */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(12px);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal-content {
+            position: relative;
+            max-width: 700px;
+            width: 100%;
+            max-height: 85vh;
+            background: linear-gradient(135deg, rgba(10, 10, 10, 0.98), rgba(20, 20, 20, 0.95));
+            border: 1px solid var(--border-gold);
+            border-radius: 8px;
+            box-shadow: 0 24px 64px rgba(0, 0, 0, 0.8), 0 0 80px rgba(212, 175, 55, 0.15);
+            animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        .modal-close:hover {
+            background: rgba(212, 175, 55, 0.2);
+            border-color: var(--primary-gold);
+            color: var(--primary-gold);
+            transform: rotate(90deg);
+        }
+
+        .modal-header {
+            padding: 48px 48px 32px;
+            border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+            text-align: center;
+        }
+
+        .modal-header h2 {
+            font-family: var(--font-serif);
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-gold);
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        .modal-subtitle {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 300;
+            font-style: italic;
+            letter-spacing: 0.1em;
+        }
+
+        .modal-body {
+            padding: 32px 48px 48px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .modal-body::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-body::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 3px;
+        }
+
+        .modal-body::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, #d4af37, #b8941e);
+            border-radius: 3px;
+        }
+
+        .principle-section {
+            margin-bottom: 32px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            transition: var(--transition);
+        }
+
+        .principle-section:hover {
+            background: rgba(212, 175, 55, 0.05);
+            border-color: rgba(212, 175, 55, 0.2);
+            transform: translateX(4px);
+        }
+
+        .principle-section h3 {
+            font-family: var(--font-serif);
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary-gold);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .principle-section p {
+            font-size: 0.9375rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin: 0;
+        }
+        
+        .principle-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .principle-section li {
+            font-size: 0.9375rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            padding-left: 24px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+        
+        .principle-section li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--primary-gold);
+            font-weight: bold;
+        }
+        
+        .loading-text {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            padding: 40px 0;
+        }
+        
+        .error-text {
+            text-align: center;
+            color: #ff6b6b;
+            font-size: 0.9375rem;
+            padding: 40px 0;
+        }
+        
         @media(max-width:768px){
             .back-button{
                 top:60px;
@@ -79,6 +308,41 @@
                 padding:10px 16px;
                 font-size:.8125rem;
             }
+            
+            .modal-content {
+                max-width: 95%;
+                max-height: 90vh;
+            }
+            
+            .modal-header {
+                padding: 32px 24px 24px;
+            }
+            
+            .modal-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .modal-body {
+                padding: 24px;
+            }
+            
+            .principle-section {
+                padding: 20px;
+                margin-bottom: 24px;
+            }
+            
+            .principle-section h3 {
+                font-size: 1.125rem;
+            }
+            
+            .principle-btn {
+                padding: 10px 24px;
+                font-size: 0.875rem;
+            }
+        }
+        
+        body.modal-open {
+            overflow: hidden;
         }
     </style>
 </head>
@@ -106,6 +370,13 @@
             <header class="site-header">
                 <h1 class="site-title">狂客空间</h1>
                 <p class="site-subtitle" style="font-size:1.125rem;color:var(--text-secondary);font-weight:300;letter-spacing:.2em">AI · 学习 · 定制</p>
+                <!-- 原则按钮 -->
+                <button id="principleBtn" class="principle-btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                    <span>原则</span>
+                </button>
             </header>
             <!-- 探索区 -->
             <section class="section">
@@ -142,13 +413,11 @@
                         <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:600;margin-bottom:8px">《自学突围》</h3>
                         <p style="font-size:.9375rem;color:var(--text-secondary);line-height:1.7">系统化自学方法论</p>
                     </a>
-                    <!-- 新增：高考助手 -->
                     <a href="https://kuangketongxue.github.io/kuangke.github.io/ai.html" class="card">
                         <span style="font-size:2.5rem;margin-bottom:16px;display:block">🎯</span>
                         <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:600;margin-bottom:8px">高考助手</h3>
                         <p style="font-size:.9375rem;color:var(--text-secondary);line-height:1.7">智能备考规划与资源</p>
                     </a>
-                    <!-- 新增：知识体系 -->
                     <a href="https://kuangketongxue.github.io/kuangke.github.io/concepts.html" class="card">
                         <span style="font-size:2.5rem;margin-bottom:16px;display:block">🌳</span>
                         <h3 style="font-family:var(--font-serif);font-size:1.25rem;font-weight:600;margin-bottom:8px">知识体系</h3>
@@ -299,8 +568,30 @@
             </footer>
         </div>
     </div>
+    
+    <!-- 原则弹窗 -->
+    <div id="principleModal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="关闭">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="modal-header">
+                <h2>我的原则</h2>
+                <p class="modal-subtitle">Principles that guide my journey</p>
+            </div>
+            <div class="modal-body" id="principleContent">
+                <p class="loading-text">⏳ 正在加载原则内容...</p>
+            </div>
+        </div>
+    </div>
+    
     <!-- 完整CSS延迟加载 -->
     <link rel="stylesheet" href="data:text/css;base64,LnRvcC1ub3RpY2V7dHJhbnNpdGlvbjpvcGFjaXR5IC40cyxoZWlnaHQgLjRzfS5ub3RpY2UtaGlkZGVue2Rpc3BsYXk6bm9uZX0ubm90aWNlLWNsb3NlOmhvdmVye2JhY2tncm91bmQ6cmdiYSgyMTIsMTc1LDU1LC4yKTt0cmFuc2Zvcm06cm90YXRlKDkwZGVnKX0uY2FyZC1pY29ue3otaW5kZXg6MTtwb3NpdGlvbjpyZWxhdGl2ZX0uY2FyZC10aXRsZSwuY2FyZC1kZXNje3otaW5kZXg6MTtwb3NpdGlvbjpyZWxhdGl2ZX0uc29jaWFsLWxpbms6aG92ZXJ7Ym9yZGVyLWNvbG9yOnZhcigtLXByaW1hcnktZ29sZCk7Y29sb3I6dmFyKC0tcHJpbWFyeS1nb2xkKTt0cmFuc2Zvcm06dHJhbnNsYXRlWSgtNHB4KX1AbWVkaWEobWF4LXdpZHRoOjc2OHB4KXsuY2FyZC1ncmlke2dyaWQtdGVtcGxhdGUtY29sdW1uczoxZnJ9LmNhcmQ6aG92ZXJ7dHJhbnNmb3JtOnRyYW5zbGF0ZVkoLTRweCkgc2NhbGUoMS4wMSl9fTo6LXdlYmtpdC1zY3JvbGxiYXJ7d2lkdGg6MTBweH06Oi13ZWJraXQtc2Nyb2xsYmFyLXRyYWNre2JhY2tncm91bmQ6IzBhMGEwYTtib3JkZXItbGVmdDoxcHggc29saWQgcmdiYSgyMTIsMTc1LDU1LC4xKX06Oi13ZWJraXQtc2Nyb2xsYmFyLXRodW1ie2JhY2tncm91bmQ6bGluZWFyLWdyYWRpZW50KDE4MGRlZywjZDRhZjM3LCNiODk0MWUpO2JvcmRlci1yYWRpdXM6NXB4O2JvcmRlcjoycHggc29saWQgIzBhMGEwYX06Oi13ZWJraXQtc2Nyb2xsYmFyLXRodW1iOmhvdmVye2JhY2tncm91bmQ6I2Q0YWYzN30=" media="print" onload="this.media='all'">
+    
     <!-- JavaScript异步加载 -->
     <script>
         !function(){"use strict";
@@ -311,7 +602,86 @@
         const n=new IntersectionObserver((e=>{e.forEach(((e,t)=>{e.isIntersecting&&(setTimeout((()=>{e.target.style.opacity="1",e.target.style.transform="translateY(0)"}),50*t),n.unobserve(e.target))}))}),{threshold:.1,rootMargin:"0px 0px -50px 0px"});
         document.querySelectorAll(".card").forEach((e=>{e.style.opacity="0",e.style.transform="translateY(30px)",e.style.transition="opacity .6s ease-out,transform .6s ease-out",n.observe(e)})),
         document.querySelectorAll('a[href^="http"]').forEach((e=>{e.hasAttribute("target")||(e.setAttribute("target","_blank"),e.setAttribute("rel","noopener noreferrer"))})),
-      "performance"in window&&"timing"in performance&&window.addEventListener("load",(()=>{const e=performance.timing.loadEventEnd-performance.timing.navigationStart;console.log(`⚡ 页面加载时间: ${e}ms`)}))
+        "performance"in window&&"timing"in performance&&window.addEventListener("load",(()=>{const e=performance.timing.loadEventEnd-performance.timing.navigationStart;console.log`⚡ 页面加载时间: ${e}ms`}))
+        
+        // 原则弹窗功能
+        const principleBtn = document.getElementById('principleBtn');
+        const modal = document.getElementById('principleModal');
+        const modalClose = modal?.querySelector('.modal-close');
+        const modalOverlay = modal?.querySelector('.modal-overlay');
+        const principleContent = document.getElementById('principleContent');
+        
+        // 加载原则内容
+        async function loadPrinciples() {
+            try {
+                const response = await fetch('principles.json');
+                if (!response.ok) throw new Error('加载失败');
+                const data = await response.json();
+                
+                let html = '';
+                data.sections.forEach(section => {
+                    html += `
+                        <div class="principle-section">
+                            <h3>${section.icon} ${section.title}</h3>
+                    `;
+                    
+                    if (section.items && section.items.length > 0) {
+                        html += '<ul>';
+                        section.items.forEach(item => {
+                            html += `<li>${item}</li>`;
+                        });
+                        html += '</ul>';
+                    } else if (section.content) {
+                        html += `<p>${section.content}</p>`;
+                    }
+                    
+                    html += '</div>';
+                });
+                
+                principleContent.innerHTML = html;
+            } catch (error) {
+                principleContent.innerHTML = '<p class="error-text">❌ 加载失败，请稍后重试</p>';
+                console.error('加载原则内容失败:', error);
+            }
+        }
+        
+        // 打开弹窗
+        function openModal() {
+            modal.classList.add('active');
+            document.body.classList.add('modal-open');
+            document.addEventListener('keydown', handleEscKey);
+            // 如果内容还未加载，则加载
+            if (principleContent.querySelector('.loading-text')) {
+                loadPrinciples();
+            }
+        }
+        
+        // 关闭弹窗
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.classList.remove('modal-open');
+            document.removeEventListener('keydown', handleEscKey);
+        }
+        
+        // ESC键关闭
+        function handleEscKey(e) {
+            if (e.key === 'Escape') {
+                closeModal();
+            }
+        }
+        
+        // 事件绑定
+        if (principleBtn && modal) {
+            principleBtn.addEventListener('click', openModal);
+            modalClose?.addEventListener('click', closeModal);
+            modalOverlay?.addEventListener('click', closeModal);
+            
+            // 防止点击弹窗内容时关闭
+            modal.querySelector('.modal-content')?.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        }
+        
         }();
     </script>
 </body>
