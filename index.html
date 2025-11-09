@@ -74,7 +74,6 @@
         .back-button:hover svg{
             transform:translateX(-2px);
         }
-        
         /* 原则按钮样式 */
         .principle-btn {
             margin-top: 24px;
@@ -92,22 +91,41 @@
             transition: var(--transition);
             backdrop-filter: blur(10px);
         }
-
         .principle-btn:hover {
             background: rgba(212, 175, 55, 0.2);
             border-color: var(--primary-gold);
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(212, 175, 55, 0.3);
         }
-
         .principle-btn svg {
             transition: transform 0.3s ease;
         }
-
         .principle-btn:hover svg {
             transform: scale(1.1);
         }
-
+        /* FAQ按钮样式 */
+        .faq-btn {
+            margin-left: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 28px;
+            background: rgba(100, 149, 237, 0.1);
+            border: 1px solid rgba(100, 149, 237, 0.3);
+            border-radius: 4px;
+            color: #6495ED;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
+        }
+        .faq-btn:hover {
+            background: rgba(100, 149, 237, 0.2);
+            border-color: #6495ED;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(100, 149, 237, 0.3);
+        }
         /* 弹窗样式 */
         .modal {
             position: fixed;
@@ -121,11 +139,9 @@
             justify-content: center;
             padding: 20px;
         }
-
         .modal.active {
             display: flex;
         }
-
         .modal-overlay {
             position: absolute;
             inset: 0;
@@ -133,12 +149,11 @@
             backdrop-filter: blur(12px);
             animation: fadeIn 0.3s ease;
         }
-
         .modal-content {
             position: relative;
-            max-width: 800px;
+            max-width: 900px;
             width: 100%;
-            max-height: 85vh;
+            max-height: 90vh;
             background: linear-gradient(135deg, rgba(10, 10, 10, 0.98), rgba(20, 20, 20, 0.95));
             border: 1px solid var(--border-gold);
             border-radius: 8px;
@@ -148,12 +163,10 @@
             display: flex;
             flex-direction: column;
         }
-
         @keyframes fadeIn {
             from { opacity: 0; }
             to { opacity: 1; }
         }
-
         @keyframes slideUp {
             from {
                 opacity: 0;
@@ -164,7 +177,6 @@
                 transform: translateY(0) scale(1);
             }
         }
-
         .modal-close {
             position: absolute;
             top: 20px;
@@ -182,20 +194,17 @@
             justify-content: center;
             z-index: 1;
         }
-
         .modal-close:hover {
             background: rgba(212, 175, 55, 0.2);
             border-color: var(--primary-gold);
             color: var(--primary-gold);
             transform: rotate(90deg);
         }
-
         .modal-header {
             padding: 48px 48px 32px;
             border-bottom: 1px solid rgba(212, 175, 55, 0.2);
             text-align: center;
         }
-
         .modal-header h2 {
             font-family: var(--font-serif);
             font-size: 2rem;
@@ -204,7 +213,6 @@
             margin-bottom: 8px;
             letter-spacing: 0.05em;
         }
-
         .modal-subtitle {
             font-size: 0.875rem;
             color: var(--text-secondary);
@@ -212,27 +220,22 @@
             font-style: italic;
             letter-spacing: 0.1em;
         }
-
         .modal-body {
             padding: 32px 48px 48px;
             overflow-y: auto;
             flex: 1;
         }
-
         .modal-body::-webkit-scrollbar {
             width: 6px;
         }
-
         .modal-body::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.05);
             border-radius: 3px;
         }
-
         .modal-body::-webkit-scrollbar-thumb {
             background: linear-gradient(180deg, #d4af37, #b8941e);
             border-radius: 3px;
         }
-        
         /* Markdown内容样式 */
         .markdown-content h1 {
             font-family: var(--font-serif);
@@ -244,11 +247,9 @@
             border-bottom: 2px solid rgba(212, 175, 55, 0.3);
             letter-spacing: 0.05em;
         }
-        
         .markdown-content h1:first-child {
             margin-top: 0;
         }
-        
         .markdown-content h2 {
             font-family: var(--font-serif);
             font-size: 1.5rem;
@@ -257,7 +258,6 @@
             margin: 28px 0 14px;
             letter-spacing: 0.03em;
         }
-        
         .markdown-content h3 {
             font-family: var(--font-serif);
             font-size: 1.25rem;
@@ -268,27 +268,23 @@
             align-items: center;
             gap: 8px;
         }
-        
         .markdown-content h4 {
             font-size: 1.125rem;
             font-weight: 500;
             color: #f4e4b8;
             margin: 20px 0 10px;
         }
-        
         .markdown-content p {
             font-size: 0.9375rem;
             line-height: 1.8;
             color: var(--text-secondary);
             margin: 12px 0;
         }
-        
         .markdown-content ul,
         .markdown-content ol {
             margin: 16px 0;
             padding-left: 24px;
         }
-        
         .markdown-content li {
             font-size: 0.9375rem;
             line-height: 1.8;
@@ -296,26 +292,21 @@
             margin: 8px 0;
             position: relative;
         }
-        
         .markdown-content ul li::marker {
             color: var(--primary-gold);
         }
-        
         .markdown-content ol li::marker {
             color: var(--primary-gold);
             font-weight: 600;
         }
-        
         .markdown-content strong {
             color: var(--text-gold);
             font-weight: 600;
         }
-        
         .markdown-content em {
             color: #f4e4b8;
             font-style: italic;
         }
-        
         .markdown-content code {
             background: rgba(212, 175, 55, 0.1);
             color: var(--text-gold);
@@ -324,7 +315,6 @@
             font-size: 0.875rem;
             font-family: 'Consolas', 'Monaco', monospace;
         }
-        
         .markdown-content pre {
             background: rgba(0, 0, 0, 0.4);
             border: 1px solid rgba(212, 175, 55, 0.2);
@@ -333,13 +323,11 @@
             margin: 16px 0;
             overflow-x: auto;
         }
-        
         .markdown-content pre code {
             background: none;
             padding: 0;
             color: var(--text-secondary);
         }
-        
         .markdown-content blockquote {
             border-left: 4px solid var(--primary-gold);
             background: rgba(212, 175, 55, 0.05);
@@ -347,69 +335,159 @@
             margin: 16px 0;
             border-radius: 0 4px 4px 0;
         }
-        
         .markdown-content blockquote p {
             margin: 0;
             color: #e0e0e0;
             font-style: italic;
         }
-        
         .markdown-content hr {
             border: none;
             height: 1px;
             background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
             margin: 32px 0;
         }
-        
         .markdown-content a {
             color: var(--text-gold);
             text-decoration: none;
             border-bottom: 1px solid transparent;
             transition: var(--transition);
         }
-        
         .markdown-content a:hover {
             border-bottom-color: var(--primary-gold);
         }
-        
         .markdown-content table {
             width: 100%;
             border-collapse: collapse;
             margin: 16px 0;
             font-size: 0.9375rem;
         }
-        
         .markdown-content th,
         .markdown-content td {
             border: 1px solid rgba(212, 175, 55, 0.2);
             padding: 12px;
             text-align: left;
         }
-        
         .markdown-content th {
             background: rgba(212, 175, 55, 0.1);
             color: var(--text-gold);
             font-weight: 600;
         }
-        
         .markdown-content td {
             color: var(--text-secondary);
         }
-        
+        /* 时间轴样式 */
+        .timeline {
+            position: relative;
+            padding: 20px 0;
+            margin: 32px 0;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary-gold), rgba(212, 175, 55, 0.3));
+        }
+        .timeline-item {
+            position: relative;
+            padding-left: 50px;
+            margin-bottom: 32px;
+        }
+        .timeline-dot {
+            position: absolute;
+            left: 12px;
+            top: 8px;
+            width: 16px;
+            height: 16px;
+            background: var(--primary-gold);
+            border: 3px solid rgba(10, 10, 10, 0.98);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2);
+        }
+        .timeline-date {
+            font-size: 0.875rem;
+            color: var(--primary-gold);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+        .timeline-content {
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 6px;
+            padding: 16px 20px;
+        }
+        .timeline-content h4 {
+            font-size: 1.125rem;
+            color: #f4e4b8;
+            margin: 0 0 8px 0;
+        }
+        .timeline-content p {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            margin: 0;
+            line-height: 1.6;
+        }
+        /* FAQ样式 */
+        .faq-item {
+            background: rgba(212, 175, 55, 0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+            border-radius: 6px;
+            margin-bottom: 16px;
+            overflow: hidden;
+        }
+        .faq-question {
+            padding: 16px 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: var(--transition);
+        }
+        .faq-question:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+        .faq-question h4 {
+            font-size: 1rem;
+            color: var(--text-gold);
+            margin: 0;
+            font-weight: 600;
+        }
+        .faq-icon {
+            width: 20px;
+            height: 20px;
+            transition: transform 0.3s ease;
+        }
+        .faq-item.active .faq-icon {
+            transform: rotate(180deg);
+        }
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+        .faq-answer-content {
+            padding: 0 20px 16px 20px;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
         .loading-text {
             text-align: center;
             color: var(--text-secondary);
             font-size: 0.9375rem;
             padding: 40px 0;
         }
-        
         .error-text {
             text-align: center;
             color: #ff6b6b;
             font-size: 0.9375rem;
             padding: 40px 0;
         }
-        
         @media(max-width:768px){
             .back-button{
                 top:60px;
@@ -417,42 +495,44 @@
                 padding:10px 16px;
                 font-size:.8125rem;
             }
-            
             .modal-content {
                 max-width: 95%;
                 max-height: 90vh;
             }
-            
             .modal-header {
                 padding: 32px 24px 24px;
             }
-            
             .modal-header h2 {
                 font-size: 1.5rem;
             }
-            
             .modal-body {
                 padding: 24px;
             }
-            
-            .principle-btn {
+            .principle-btn,
+            .faq-btn {
+                margin: 12px 8px 0;
                 padding: 10px 24px;
                 font-size: 0.875rem;
             }
-            
             .markdown-content h1 {
                 font-size: 1.5rem;
             }
-            
             .markdown-content h2 {
                 font-size: 1.25rem;
             }
-            
             .markdown-content h3 {
                 font-size: 1.125rem;
             }
+            .timeline::before {
+                left: 10px;
+            }
+            .timeline-item {
+                padding-left: 40px;
+            }
+            .timeline-dot {
+                left: 2px;
+            }
         }
-        
         body.modal-open {
             overflow: hidden;
         }
@@ -464,7 +544,7 @@
     <!-- 顶部声明 -->
     <div class="top-notice" id="topNotice" style="position:fixed;top:0;left:0;right:0;background:rgba(212,175,55,.12);border-bottom:1px solid var(--border-gold);backdrop-filter:blur(20px);z-index:100;padding:12px 24px;text-align:center;font-size:.875rem;color:var(--text-secondary)">
         <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:12px">
-            <span style="color:var(--text-gold);font-weight:500">⚠️ 部分内容尚未上架，敬请期待</span>
+            <span style="color:var(--text-gold);font-weight:500">⚠️ 部分内容尚未上架,敬请期待</span>
             <button id="noticeClose" style="background:transparent;border:1px solid var(--border-gold);color:var(--text-gold);width:24px;height:24px;border-radius:50%;cursor:pointer;transition:var(--transition)" aria-label="关闭">×</button>
         </div>
     </div>
@@ -482,13 +562,23 @@
             <header class="site-header">
                 <h1 class="site-title">狂客空间</h1>
                 <p class="site-subtitle" style="font-size:1.125rem;color:var(--text-secondary);font-weight:300;letter-spacing:.2em">AI · 学习 · 定制</p>
-                <!-- 原则按钮 -->
-                <button id="principleBtn" class="principle-btn">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
-                    </svg>
-                    <span>原则</span>
-                </button>
+                <!-- 按钮组 -->
+                <div style="margin-top: 24px;">
+                    <button id="principleBtn" class="principle-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                        <span>原则</span>
+                    </button>
+                    <button id="faqBtn" class="faq-btn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        <span>常见问题</span>
+                    </button>
+                </div>
             </header>
             <!-- 探索区 -->
             <section class="section">
@@ -680,7 +770,6 @@
             </footer>
         </div>
     </div>
-    
     <!-- 原则弹窗 -->
     <div id="principleModal" class="modal">
         <div class="modal-overlay"></div>
@@ -702,13 +791,31 @@
             </div>
         </div>
     </div>
-    
+    <!-- FAQ弹窗 -->
+    <div id="faqModal" class="modal">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" aria-label="关闭">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="modal-header">
+                <h2>关于狂客空间</h2>
+                <p class="modal-subtitle">About Us & FAQ</p>
+            </div>
+            <div class="modal-body">
+                <div id="faqContent" class="markdown-content">
+                    <p class="loading-text">⏳ 正在加载内容...</p>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Markdown解析库 (marked.js) -->
     <script src="https://cdn.jsdelivr.net/npm/marked@11.1.1/marked.min.js"></script>
-    
     <!-- 完整CSS延迟加载 -->
     <link rel="stylesheet" href="data:text/css;base64,LnRvcC1ub3RpY2V7dHJhbnNpdGlvbjpvcGFjaXR5IC40cyxoZWlnaHQgLjRzfS5ub3RpY2UtaGlkZGVue2Rpc3BsYXk6bm9uZX0ubm90aWNlLWNsb3NlOmhvdmVye2JhY2tncm91bmQ6cmdiYSgyMTIsMTc1LDU1LC4yKTt0cmFuc2Zvcm06cm90YXRlKDkwZGVnKX0uY2FyZC1pY29ue3otaW5kZXg6MTtwb3NpdGlvbjpyZWxhdGl2ZX0uY2FyZC10aXRsZSwuY2FyZC1kZXNje3otaW5kZXg6MTtwb3NpdGlvbjpyZWxhdGl2ZX0uc29jaWFsLWxpbms6aG92ZXJ7Ym9yZGVyLWNvbG9yOnZhcigtLXByaW1hcnktZ29sZCk7Y29sb3I6dmFyKC0tcHJpbWFyeS1nb2xkKTt0cmFuc2Zvcm06dHJhbnNsYXRlWSgtNHB4KX1AbWVkaWEobWF4LXdpZHRoOjc2OHB4KXsuY2FyZC1ncmlke2dyaWQtdGVtcGxhdGUtY29sdW1uczoxZnJ9LmNhcmQ6aG92ZXJ7dHJhbnNmb3JtOnRyYW5zbGF0ZVkoLTRweCkgc2NhbGUoMS4wMSl9fTo6LXdlYmtpdC1zY3JvbGxiYXJ7d2lkdGg6MTBweH06Oi13ZWJraXQtc2Nyb2xsYmFyLXRyYWNre2JhY2tncm91bmQ6IzBhMGEwYTtib3JkZXItbGVmdDoxcHggc29saWQgcmdiYSgyMTIsMTc1LDU1LC4xKX06Oi13ZWJraXQtc2Nyb2xsYmFyLXRodW1ie2JhY2tncm91bmQ6bGluZWFyLWdyYWRpZW50KDE4MGRlZywjZDRhZjM3LCNiODk0MWUpO2JvcmRlci1yYWRpdXM6NXB4O2JvcmRlcjoycHggc29saWQgIzBhMGEwYX06Oi13ZWJraXQtc2Nyb2xsYmFyLXRodW1iOmhvdmVye2JhY2tncm91bmQ6I2Q0YWYzN30=" media="print" onload="this.media='all'">
-    
     <!-- JavaScript异步加载 -->
     <script>
         !function(){"use strict";
@@ -719,7 +826,7 @@
         const n=new IntersectionObserver((e=>{e.forEach(((e,t)=>{e.isIntersecting&&(setTimeout((()=>{e.target.style.opacity="1",e.target.style.transform="translateY(0)"}),50*t),n.unobserve(e.target))}))}),{threshold:.1,rootMargin:"0px 0px -50px 0px"});
         document.querySelectorAll(".card").forEach((e=>{e.style.opacity="0",e.style.transform="translateY(30px)",e.style.transition="opacity .6s ease-out,transform .6s ease-out",n.observe(e)})),
         document.querySelectorAll('a[href^="http"]').forEach((e=>{e.hasAttribute("target")||(e.setAttribute("target","_blank"),e.setAttribute("rel","noopener noreferrer"))})),
-        "performance"in window&&"timing"in performance&&window.addEventListener("load",(()=>{const e=performance.timing.loadEventEnd-performance.timing.navigationStart;console.log`⚡ 页面加载时间: ${e}ms`}))
+        "performance"in window&&"timing"in performance&&window.addEventListener("load",(()=>{const e=performance.timing.loadEventEnd-performance.timing.navigationStart;console.log(`⚡ 页面加载时间: ${e}ms`)}))
         
         // 等待marked.js加载完成
         function waitForMarked(callback) {
@@ -730,77 +837,92 @@
             }
         }
         
-        // 原则弹窗功能
-        const principleBtn = document.getElementById('principleBtn');
-        const modal = document.getElementById('principleModal');
-        const modalClose = modal?.querySelector('.modal-close');
-        const modalOverlay = modal?.querySelector('.modal-overlay');
-        const principleContent = document.getElementById('principleContent');
-        
-        // 加载并解析Markdown内容
-        async function loadPrinciples() {
-            try {
-                const response = await fetch('principles.md');
-                if (!response.ok) throw new Error('加载失败');
-                const markdown = await response.text();
-                
-                // 等待marked加载完成后再解析
-                waitForMarked(() => {
-                    // 配置marked选项
-                    marked.setOptions({
-                        breaks: true,
-                        gfm: true,
-                        headerIds: false,
-                        mangle: false
-                    });
-                    
-                    // 解析Markdown并渲染
-                    const html = marked.parse(markdown);
-                    principleContent.innerHTML = html;
-                });
-                
-            } catch (error) {
-                principleContent.innerHTML = '<p class="error-text">❌ 加载失败，请稍后重试</p>';
-                console.error('加载原则内容失败:', error);
-            }
-        }
-        
-        // 打开弹窗
-        function openModal() {
-            modal.classList.add('active');
-            document.body.classList.add('modal-open');
-            document.addEventListener('keydown', handleEscKey);
-            // 如果内容还未加载，则加载
-            if (principleContent.querySelector('.loading-text')) {
-                loadPrinciples();
-            }
-        }
-        
-        // 关闭弹窗
-        function closeModal() {
-            modal.classList.remove('active');
-            document.body.classList.remove('modal-open');
-            document.removeEventListener('keydown', handleEscKey);
-        }
-        
-        // ESC键关闭
-        function handleEscKey(e) {
-            if (e.key === 'Escape') {
-                closeModal();
-            }
-        }
-        
-        // 事件绑定
-        if (principleBtn && modal) {
-            principleBtn.addEventListener('click', openModal);
-            modalClose?.addEventListener('click', closeModal);
-            modalOverlay?.addEventListener('click', closeModal);
+        // 通用弹窗功能
+        function setupModal(btnId, modalId, contentId, mdFile) {
+            const btn = document.getElementById(btnId);
+            const modal = document.getElementById(modalId);
+            const modalClose = modal?.querySelector('.modal-close');
+            const modalOverlay = modal?.querySelector('.modal-overlay');
+            const content = document.getElementById(contentId);
             
-            // 防止点击弹窗内容时关闭
-            modal.querySelector('.modal-content')?.addEventListener('click', (e) => {
-                e.stopPropagation();
+            // 加载并解析Markdown内容
+            async function loadContent() {
+                try {
+                    const response = await fetch(mdFile);
+                    if (!response.ok) throw new Error('加载失败');
+                    const markdown = await response.text();
+                    
+                    waitForMarked(() => {
+                        marked.setOptions({
+                            breaks: true,
+                            gfm: true,
+                            headerIds: false,
+                            mangle: false
+                        });
+                        const html = marked.parse(markdown);
+                        content.innerHTML = html;
+                        
+                        // 如果是FAQ,添加折叠功能
+                        if (contentId === 'faqContent') {
+                            setupFAQ();
+                        }
+                    });
+                } catch (error) {
+                    content.innerHTML = '<p class="error-text">❌ 加载失败,请稍后重试</p>';
+                    console.error('加载内容失败:', error);
+                }
+            }
+            
+            // 打开弹窗
+            function openModal() {
+                modal.classList.add('active');
+                document.body.classList.add('modal-open');
+                document.addEventListener('keydown', handleEscKey);
+                
+                if (content.querySelector('.loading-text')) {
+                    loadContent();
+                }
+            }
+            
+            // 关闭弹窗
+            function closeModal() {
+                modal.classList.remove('active');
+                document.body.classList.remove('modal-open');
+                document.removeEventListener('keydown', handleEscKey);
+            }
+            
+            // ESC键关闭
+            function handleEscKey(e) {
+                if (e.key === 'Escape') {
+                    closeModal();
+                }
+            }
+            
+            // 事件绑定
+            if (btn && modal) {
+                btn.addEventListener('click', openModal);
+                modalClose?.addEventListener('click', closeModal);
+                modalOverlay?.addEventListener('click', closeModal);
+                modal.querySelector('.modal-content')?.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
+            }
+        }
+        
+        // FAQ折叠功能
+        function setupFAQ() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question?.addEventListener('click', () => {
+                    item.classList.toggle('active');
+                });
             });
         }
+        
+        // 初始化弹窗
+        setupModal('principleBtn', 'principleModal', 'principleContent', 'principles.md');
+        setupModal('faqBtn', 'faqModal', 'faqContent', 'faq.md');
         
         }();
     </script>
