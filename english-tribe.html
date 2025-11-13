@@ -656,6 +656,12 @@
         .drama-card:nth-child(3) {
             animation-delay: 0.2s;
         }
+        .drama-card:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+        .drama-card:nth-child(5) {
+            animation-delay: 0.4s;
+        }
     </style>
 </head>
 <body>
@@ -668,7 +674,6 @@
             <i class="fas fa-pencil-alt"></i> 创作文稿
         </button>
     </div>
-
     <!-- 弹窗 -->
     <div class="modal-overlay" id="modalOverlay">
         <div class="modal-container">
@@ -691,13 +696,11 @@
             </div>
         </div>
     </div>
-
     <!-- 顶部导航 -->
     <header>
         <h1>英语阅读社群</h1>
         <p>品读世界  ·  欣赏精品</p>
     </header>
-
     <!-- 主容器 -->
     <div class="container">
         <!-- 今日推荐文章 -->
@@ -713,7 +716,6 @@
                 点击阅读全文 →
             </a>
         </section>
-
         <!-- 社群介绍和QQ群 -->
         <div class="community-section">
             <div class="section-card">
@@ -738,7 +740,6 @@
                 </div>
             </div>
         </div>
-
         <!-- 美剧推荐 -->
         <section class="drama-section">
             <h2>🎬 精品美剧推荐</h2>
@@ -761,10 +762,21 @@
                     <p>亿万 - 聚焦金融世界的权力游戏,精彩绝伦的剧情碰撞与对话。</p>
                     <a href="YOUR_BILLIONS_LINK" class="drama-link" target="_blank" rel="noopener">开始观看 →</a>
                 </div>
+                <div class="drama-card">
+                    <div class="drama-icon">🦅</div>
+                    <h3>The Shawshank Redemption</h3>
+                    <p>肖申克的救赎 - 关于希望与自由的永恒经典,展现人性光辉的不朽之作。</p>
+                    <a href="YOUR_SHAWSHANK_LINK" class="drama-link" target="_blank" rel="noopener">开始观看 →</a>
+                </div>
+                <div class="drama-card">
+                    <div class="drama-icon">👑</div>
+                    <h3>The Godfather</h3>
+                    <p>教父 - 黑帮电影的巅峰之作,权力、家族与命运的史诗级叙事。</p>
+                    <a href="YOUR_GODFATHER_LINK" class="drama-link" target="_blank" rel="noopener">开始观看 →</a>
+                </div>
             </div>
         </section>
     </div>
-
     <!-- 页脚 -->
     <footer class="social-footer" role="contentinfo">
         <div class="footer-container">
@@ -801,14 +813,12 @@
             <p class="copyright">© 2025 狂客·银河 版权所有</p>
         </div>
     </footer>
-
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
         // 显示当前日期（中文本地化）
         const today = new Date();
         const options = { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' };
         document.getElementById('today-date').textContent = today.toLocaleDateString('zh-CN', options);
-
         // 弹窗控制
         const openBtn = document.getElementById('openArticleBtn');
         const closeBtn = document.getElementById('closeModalBtn');
@@ -816,17 +826,14 @@
         const articleContent = document.getElementById('articleContent');
         const articleDate = document.getElementById('articleDate');
         const wordCount = document.getElementById('wordCount');
-
         // 配置你的 GitHub 信息
         const GITHUB_USERNAME = 'kuangketongxue'; // 替换为你的 GitHub 用户名
         const GITHUB_REPO = 'tongxuekuangke';     // 替换为你的仓库名
         const ARTICLE_PATH = 'articles/daily-article.md'; // 替换为你的文章路径
-
         // marked 配置（可选）
         if (window.marked) {
             marked.setOptions({ gfm: true, breaks: true });
         }
-
         // Base64(UTF-8) -> 字符串
         function base64ToUtf8(b64) {
             const clean = (b64 || '').replace(/\n/g, '');
@@ -834,21 +841,18 @@
             const bytes = Uint8Array.from(binary, ch => ch.charCodeAt(0));
             return new TextDecoder('utf-8').decode(bytes);
         }
-
-        // 统计“可读单位”：英文按词，中文按字
+        // 统计"可读单位"：英文按词，中文按字
         function countReadableUnits(text) {
             const englishWords = (text.match(/[A-Za-z]+(?:'[A-Za-z]+)?/g) || []).length;
             const chineseChars = (text.match(/[\u4E00-\u9FFF]/g) || []).length;
             return englishWords + chineseChars;
         }
-
         // 打开弹窗
         openBtn.addEventListener('click', async () => {
             modalOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
             await loadArticle();
         });
-
         // 关闭弹窗
         function closeModal() {
             modalOverlay.classList.remove('active');
@@ -861,7 +865,6 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && modalOverlay.classList.contains('active')) closeModal();
         });
-
         // 加载文章内容
         async function loadArticle() {
             try {
@@ -872,7 +875,6 @@
                     throw new Error(`GitHub API: ${response.status} ${response.statusText}`);
                 }
                 const data = await response.json();
-
                 // 正确解码 Base64 的 UTF-8 内容；失败则回退到 download_url
                 let content = '';
                 try {
@@ -882,7 +884,6 @@
                     if (!rawRes.ok) throw new Error('下载原始内容失败');
                     content = await rawRes.text();
                 }
-
                 // 获取最后更新时间
                 let lastUpdate = null;
                 try {
@@ -895,7 +896,6 @@
                 } catch (_) {
                     // 忽略提交时间错误，保持健壮性
                 }
-
                 // 计算字数(更友好)
                 const plainText = content
                     .replace(/```[\s\S]*?```/g, ' ')
@@ -905,13 +905,11 @@
                     .replace(/[#>*_\-+~|]/g, ' ')
                     .trim();
                 const units = countReadableUnits(plainText);
-
                 // 更新元信息
                 articleDate.textContent = lastUpdate
                     ? `最近更新: ${new Date(lastUpdate).toLocaleString('zh-CN')}`
                     : '最近更新: 未知';
                 wordCount.textContent = `字数: ${units} 字`;
-
                 // 使用 marked.js 渲染 Markdown
                 if (typeof marked !== 'undefined') {
                     articleContent.innerHTML = marked.parse(content);
