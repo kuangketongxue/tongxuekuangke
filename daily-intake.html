@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>每日信息摄入流程 | 狂客空间</title>
+    <meta name="description" content="每日信息摄入流程 - 30分钟看完优质信息源的昨日更新">
+    <meta name="keywords" content="信息摄入,流程,效率,每日例行,学习">
+    <meta name="author" content="狂客">
+    <meta name="robots" content="index,follow">
+    <meta name="theme-color" content="#000000">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+    <!-- DNS预解析 -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    <!-- 预连接 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    <!-- 字体优化加载 -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700&family=Noto+Sans+SC:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
+    <!-- 样式（延续主页基因 + 本页扩展） -->
+    <style>
+        :root{--primary-gold:#d4af37;--primary-black:#000;--primary-white:#fff;--bg-primary:#000;--text-primary:#fff;--text-secondary:#ccc;--text-gold:#d4af37;--border-gold:rgba(212,175,55,.2);--transition:.4s cubic-bezier(.4,0,.2,1);--font-serif:'Noto Serif SC',serif;--font-sans:'Noto Sans SC',sans-serif}
+        *{margin:0;padding:0;box-sizing:border-box}
+        html{font-size:16px;scroll-behavior:smooth;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+        body{font-family:var(--font-sans);background:var(--bg-primary);color:var(--text-primary);line-height:1.8;overflow-x:hidden}
+
+        .hero-background{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:0;overflow:hidden;will-change:transform}
+        .hero-background::before{content:'';position:absolute;inset:0;background:url('image/00294682dfcd997e226623d058d51aab.png') center/cover no-repeat fixed;filter:brightness(1.8) contrast(1.2);will-change:transform;animation:zoom 20s ease-in-out infinite alternate}
+        @keyframes zoom{to{transform:scale(1.05)}}
+        .hero-background::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.5) 100%);backdrop-filter:blur(.5px)}
+
+        .main-wrapper{position:relative;z-index:1;padding-top:48px;min-height:100vh}
+        .container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+        /* 返回按钮（与主页一致） */
+        .back-button{
+            position:fixed;
+            top:70px;
+            left:24px;
+            z-index:101;
+            display:flex;
+            align-items:center;
+            gap:8px;
+            padding:12px 20px;
+            background:rgba(0,0,0,.6);
+            border:1px solid var(--border-gold);
+            border-radius:4px;
+            color:var(--text-gold);
+            text-decoration:none;
+            font-size:.875rem;
+            font-weight:500;
+            backdrop-filter:blur(20px);
+            transition:var(--transition);
+            cursor:pointer;
+        }
+        .back-button:hover{
+            background:rgba(212,175,55,.2);
+            border-color:var(--primary-gold);
+            transform:translateX(-4px);
+            box-shadow:0 4px 16px rgba(212,175,55,.3);
+        }
+        .back-button svg{
+            width:16px;height:16px;transition:transform .3s ease;
+        }
+        .back-button:hover svg{transform:translateX(-2px)}
+        @media(max-width:768px){
+            .back-button{top:60px;left:16px;padding:10px 16px;font-size:.8125rem}
+        }
+
+        /* 顶部声明（与主页一致） */
+        .top-notice{position:fixed;top:0;left:0;right:0;background:rgba(212,175,55,.12);border-bottom:1px solid var(--border-gold);backdrop-filter:blur(20px);z-index:100;padding:12px 24px;text-align:center;font-size:.875rem;color:var(--text-secondary)}
+        .notice-close{background:transparent;border:1px solid var(--border-gold);color:var(--text-gold);width:24px;height:24px;border-radius:50%;cursor:pointer;transition:var(--transition)}
+
+        /* 页头 */
+        .page-header{padding:120px 0 40px;text-align:center}
+        .page-title{font-family:var(--font-serif);font-size:clamp(2rem,5vw,3rem);font-weight:700;color:var(--primary-gold);letter-spacing:.05em;margin-bottom:12px;background:linear-gradient(135deg,var(--primary-gold),#f4e4b8,var(--primary-gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:glow 3s ease-in-out infinite alternate}
+        @keyframes glow{to{filter:brightness(1.2) drop-shadow(0 0 30px rgba(212,175,55,.5))}}
+        .page-subtitle{color:var(--text-secondary);font-weight:300;letter-spacing:.15em}
+
+        /* 统计条 */
+        .intake-stats{
+            margin:32px auto 8px;
+            display:flex;gap:16px;justify-content:center;flex-wrap:wrap;
+            color:#ddd;font-size:.95rem
+        }
+        .stat-chip{
+            display:inline-flex;align-items:center;gap:8px;
+            padding:8px 14px;border:1px solid var(--border-gold);
+            border-radius:999px;background:rgba(255,255,255,.05);
+            backdrop-filter:blur(8px)
+        }
+        .stat-chip .dot{display:inline-block;width:8px;height:8px;border-radius:50%}
+        .dot-red{background:#ff4d4f}
+        .dot-gray{background:#888}
+
+        /* 流程区 */
+        .flow{
+            position:relative;max-width:900px;margin:32px auto 120px;padding:10px 0 10px 0
+        }
+        .flow::before{
+            content:'';position:absolute;left:30px;top:0;bottom:0;width:2px;
+            background:linear-gradient(180deg,var(--primary-gold),rgba(212,175,55,.2))
+        }
+        .shelf{
+            position:relative;display:flex;gap:16px;align-items:flex-start;
+            padding:16px 16px 16px 64px;margin:18px 0;
+            background:rgba(212,175,55,.05);border:1px solid var(--border-gold);border-radius:6px;
+            transition:var(--transition);
+        }
+        .shelf:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(212,175,55,.15)}
+        .shelf .status-dot{
+            position:absolute;left:22px;top:20px;width:16px;height:16px;border-radius:50%;
+            border:3px solid rgba(10,10,10,.98);box-shadow:0 0 0 4px rgba(212,175,55,.2);
+            background:#ff4d4f; /* 未看为红色 */
+        }
+        .shelf.visited .status-dot{background:#888} /* 已看为灰色 */
+        .shelf-icon{
+            width:40px;height:40px;border-radius:6px;display:flex;align-items:center;justify-content:center;
+            font-size:1.25rem;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.1)
+        }
+        .shelf-main{flex:1;min-width:0}
+        .shelf-title{
+            font-family:var(--font-serif);font-size:1.125rem;font-weight:600;color:#f4e4b8;margin-bottom:6px
+        }
+        .shelf-desc{color:var(--text-secondary);font-size:.92rem}
+        .shelf-actions{display:flex;align-items:center;gap:10px;margin-top:12px;flex-wrap:wrap}
+        .btn{
+            padding:8px 14px;border:1px solid var(--border-gold);border-radius:4px;
+            color:var(--text-gold);background:rgba(212,175,55,.08);cursor:pointer;transition:var(--transition);
+            text-decoration:none;font-size:.9rem
+        }
+        .btn:hover{background:rgba(212,175,55,.18);box-shadow:0 8px 20px rgba(212,175,55,.25)}
+        .badge{
+            padding:4px 10px;border-radius:999px;font-size:.75rem;border:1px solid rgba(255,255,255,.12);
+            color:#bbb;background:rgba(255,255,255,.04)
+        }
+        .shelf.visited{opacity:.7}
+
+        /* 页脚留白 */
+        .spacer{height:40px}
+        @media(max-width:768px){
+            .flow::before{left:20px}
+            .shelf{padding-left:56px}
+            .shelf .status-dot{left:12px}
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景图片 -->
+    <div class="hero-background"></div>
+
+    <!-- 顶部声明（与主页一致） -->
+    <div class="top-notice" id="topNotice">
+        <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:12px">
+            <span style="color:var(--text-gold);font-weight:500">⚠️ 每日流程页 · Beta 内测中</span>
+            <button id="noticeClose" class="notice-close" aria-label="关闭">×</button>
+        </div>
+    </div>
+
+    <!-- 返回按钮（需要输入安全码才可真正返回；链接留空待你填写） -->
+    <a href="" id="secureBack" class="back-button" title="返回上一页">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M19 12H5M12 19l-7-7 7-7"/>
+        </svg>
+        <span>返回</span>
+    </a>
+
+    <div class="main-wrapper">
+        <div class="container">
+            <header class="page-header">
+                <h1 class="page-title">每日信息摄入流程</h1>
+                <p class="page-subtitle">30分钟看完昨日优质信息源 · 然后安心工作一整天</p>
+
+                <div class="intake-stats" aria-live="polite">
+                    <span class="stat-chip"><span class="dot dot-red"></span> 未看</span>
+                    <span class="stat-chip"><span class="dot dot-gray"></span> 已看</span>
+                    <span class="stat-chip">今日已看到：<strong id="seenCount">0</strong> / <span id="totalCount">0</span></span>
+                    <span class="stat-chip">上次全看完：<span id="lastComplete">—</span></span>
+                </div>
+            </header>
+
+            <!-- 流程（书架） -->
+            <section class="flow" id="flow"></section>
+
+            <div class="spacer"></div>
+        </div>
+    </div>
+
+    <script>
+        (function(){
+            'use strict';
+
+            // ====== 可配置项 ======
+            // 返回链接留空，等你填写
+            const RETURN_URL = 'https://kuangketongxue.github.io/tongxuekuangke/'; // TODO: 填写你的返回链接，如 'Homepage.html'
+            // 安全码（用于返回确认）
+            const SECURITY_CODE = 'kuangke'; // TODO: 修改为你的安全码
+
+            // 信息源定义（按流程顺序）
+            const SOURCES = [
+                {
+                    id: 'lex',
+                    icon: '🎙️',
+                    name: 'Lex Fridman · YouTube',
+                    url: 'https://www.youtube.com/@lexfridman/videos',
+                    desc: '长访谈与AI前沿'
+                },
+                {
+                    id: 'elon',
+                    icon: '🚀',
+                    name: 'Elon Musk · X(推特)',
+                    url: 'https://x.com/elonmusk',
+                    desc: '行业动向与观点'
+                },
+                {
+                    id: 'diary-ceo',
+                    icon: '📈',
+                    name: 'The Diary Of A CEO · YouTube',
+                    url: 'https://www.youtube.com/@TheDiaryOfACEO/videos',
+                    desc: '商业与管理洞察'
+                }
+                // 如需追加更多「书架」，在此继续添加即可
+            ];
+
+            // ====== 顶部公告关闭（与主页一致） ======
+            const topNotice = document.getElementById('topNotice');
+            const noticeClose = document.getElementById('noticeClose');
+            if (topNotice && noticeClose) {
+                if (sessionStorage.getItem('intakeNoticeClosed') === 'true') {
+                    topNotice.style.display = 'none';
+                    document.querySelector('.main-wrapper').style.paddingTop = '48px';
+                }
+                const closeNotice = () => {
+                    sessionStorage.setItem('intakeNoticeClosed', 'true');
+                    topNotice.style.display = 'none';
+                    document.querySelector('.main-wrapper').style.paddingTop = '48px';
+                };
+                noticeClose.addEventListener('click', closeNotice);
+                setTimeout(closeNotice, 8000);
+            }
+
+            // ====== 返回按钮（需要安全码） ======
+            const backBtn = document.getElementById('secureBack');
+            if (backBtn) {
+                backBtn.addEventListener('click', function(e){
+                    e.preventDefault();
+                    const code = prompt('请输入安全码以返回：');
+                    if (code === null) return; // 取消
+                    if (code === SECURITY_CODE) {
+                        if (RETURN_URL && RETURN_URL.trim().length > 0) {
+                            window.location.href = RETURN_URL;
+                        } else {
+                            alert('已通过校验，但未设置返回链接。请在脚本中设置 RETURN_URL。');
+                        }
+                    } else {
+                        alert('安全码错误，无法返回。');
+                    }
+                });
+            }
+
+            // ====== 本地存储与日期处理 ======
+            const todayStr = new Date().toLocaleDateString('sv-SE'); // YYYY-MM-DD（本地时区）
+            const VISITED_KEY = `intake-visited:${todayStr}`;
+            const LAST_COMPLETE_KEY = 'intake-last-complete-at';
+
+            function getVisitedSet(){
+                try {
+                    const raw = localStorage.getItem(VISITED_KEY);
+                    const arr = raw ? JSON.parse(raw) : [];
+                    return new Set(Array.isArray(arr) ? arr : []);
+                } catch {
+                    return new Set();
+                }
+            }
+            function saveVisitedSet(set){
+                localStorage.setItem(VISITED_KEY, JSON.stringify(Array.from(set)));
+            }
+            function setLastComplete(nowISO){
+                localStorage.setItem(LAST_COMPLETE_KEY, nowISO);
+            }
+            function getLastComplete(){
+                return localStorage.getItem(LAST_COMPLETE_KEY) || '';
+            }
+            function formatTime(iso){
+                if (!iso) return '—';
+                try {
+                    const d = new Date(iso);
+                    const pad = n => String(n).padStart(2,'0');
+                    return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+                } catch { return '—'; }
+            }
+
+            // ====== 渲染流程（书架） ======
+            const flowEl = document.getElementById('flow');
+            const seenCountEl = document.getElementById('seenCount');
+            const totalCountEl = document.getElementById('totalCount');
+            const lastCompleteEl = document.getElementById('lastComplete');
+
+            totalCountEl.textContent = String(SOURCES.length);
+            lastCompleteEl.textContent = formatTime(getLastComplete());
+
+            let visited = getVisitedSet();
+            render();
+
+            function render(){
+                flowEl.innerHTML = '';
+                SOURCES.forEach((s, idx) => {
+                    const shelf = document.createElement('div');
+                    shelf.className = 'shelf';
+                    shelf.dataset.id = s.id;
+
+                    if (visited.has(s.id)) shelf.classList.add('visited');
+
+                    const status = document.createElement('span');
+                    status.className = 'status-dot';
+                    shelf.appendChild(status);
+
+                    const icon = document.createElement('div');
+                    icon.className = 'shelf-icon';
+                    icon.textContent = s.icon || '📚';
+
+                    const main = document.createElement('div');
+                    main.className = 'shelf-main';
+
+                    const title = document.createElement('div');
+                    title.className = 'shelf-title';
+                    title.textContent = s.name;
+
+                    const desc = document.createElement('div');
+                    desc.className = 'shelf-desc';
+                    desc.textContent = s.desc || '';
+
+                    const actions = document.createElement('div');
+                    actions.className = 'shelf-actions';
+
+                    const goBtn = document.createElement('button');
+                    goBtn.className = 'btn';
+                    goBtn.textContent = '去查看';
+                    goBtn.setAttribute('aria-label', `打开：${s.name}`);
+                    goBtn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        markVisitedAndOpen(s.id, s.url);
+                    });
+
+                    const stateBadge = document.createElement('span');
+                    stateBadge.className = 'badge';
+                    stateBadge.textContent = visited.has(s.id) ? '已看' : '未看';
+
+                    actions.appendChild(goBtn);
+                    actions.appendChild(stateBadge);
+
+                    main.appendChild(title);
+                    main.appendChild(desc);
+                    main.appendChild(actions);
+
+                    shelf.appendChild(icon);
+                    shelf.appendChild(main);
+
+                    // 整块可点击
+                    shelf.addEventListener('click', () => markVisitedAndOpen(s.id, s.url));
+
+                    flowEl.appendChild(shelf);
+                });
+
+                updateCounts();
+            }
+
+            function markVisitedAndOpen(id, url){
+                if (!visited.has(id)) {
+                    visited.add(id);
+                    saveVisitedSet(visited);
+                    // 更新UI
+                    const shelf = flowEl.querySelector(`.shelf[data-id="${id}"]`);
+                    if (shelf) {
+                        shelf.classList.add('visited');
+                        const badge = shelf.querySelector('.badge');
+                        if (badge) badge.textContent = '已看';
+                    }
+                    updateCounts(true);
+                }
+                // 新标签打开
+                try {
+                    window.open(url, '_blank', 'noopener');
+                } catch (err) {
+                    location.href = url;
+                }
+            }
+
+            function updateCounts(checkComplete=false){
+                seenCountEl.textContent = String(visited.size);
+                if (checkComplete && visited.size === SOURCES.length) {
+                    const nowISO = new Date().toISOString();
+                    setLastComplete(nowISO);
+                    lastCompleteEl.textContent = formatTime(nowISO);
+                }
+            }
+
+        })();
+    </script>
+</body>
+</html>
