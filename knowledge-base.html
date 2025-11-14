@@ -29,6 +29,7 @@
             --shimmer-gold: #FFFAED;
             --warm-copper: #CD8B3C;
             --deep-bronze: #9A6F3E;
+            
             /* 背景色 - 适配图片的深色调 */
             --bg-primary: #000000;
             --bg-secondary: #0F0F0F;
@@ -37,6 +38,7 @@
             --bg-card-hover: rgba(30, 35, 40, 0.94);
             --bg-overlay: rgba(15, 20, 25, 0.75);
             --bg-glass: rgba(255, 255, 255, 0.03);
+            
             /* 文字颜色 - 提升对比度 */
             --text-primary: #FFFFFF;
             --text-secondary: #E8E8E8;
@@ -45,11 +47,13 @@
             --text-gold: #E8B44C;
             --text-gold-light: #F4D084;
             --text-warm: #FFE6C7;
+            
             /* 边框 - 暖色调边框 */
             --border-gold: rgba(232, 180, 76, 0.35);
             --border-gold-strong: rgba(232, 180, 76, 0.65);
             --border-warm: rgba(255, 230, 199, 0.15);
             --border-copper: rgba(205, 139, 60, 0.40);
+            
             /* 阴影系统 - 增强深度 */
             --shadow-soft: 0 4px 24px rgba(0, 0, 0, 0.50);
             --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.60);
@@ -61,10 +65,12 @@
             --text-shadow: 0 3px 16px rgba(0, 0, 0, 0.90);
             --text-shadow-strong: 0 4px 20px rgba(0, 0, 0, 1);
             --text-glow: 0 0 20px rgba(232, 180, 76, 0.30);
+            
             /* 动画 */
             --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
             --transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            
             /* 间距系统 */
             --spacing-xs: 8px;
             --spacing-sm: 16px;
@@ -73,15 +79,18 @@
             --spacing-xl: 64px;
             --spacing-2xl: 96px;
             --spacing-3xl: 128px;
+            
             /* 圆角 */
             --radius-sm: 6px;
             --radius: 10px;
             --radius-lg: 14px;
             --radius-xl: 20px;
+            
             /* 字体 */
             --font-serif: 'Noto Serif SC', 'Georgia', 'Times New Roman', serif;
             --font-sans: 'Noto Sans SC', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
             --font-display: 'Noto Serif SC', serif;
+            
             /* 字体大小 */
             --text-xs: 0.75rem;
             --text-sm: 0.875rem;
@@ -93,6 +102,7 @@
             --text-4xl: 2.25rem;
             --text-5xl: 3rem;
             --text-6xl: 3.75rem;
+            
             /* 字重 */
             --font-thin: 200;
             --font-light: 300;
@@ -101,6 +111,7 @@
             --font-semibold: 600;
             --font-bold: 700;
             --font-black: 900;
+            
             /* 行高 */
             --leading-tight: 1.25;
             --leading-snug: 1.375;
@@ -108,12 +119,14 @@
             --leading-relaxed: 1.75;
             --leading-loose: 2;
         }
+
         /* ==================== 基础重置 ==================== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+
         html {
             font-size: 16px;
             scroll-behavior: smooth;
@@ -121,6 +134,7 @@
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
         }
+
         body {
             font-family: var(--font-sans);
             background: var(--bg-primary);
@@ -130,6 +144,7 @@
             font-weight: var(--font-normal);
             letter-spacing: 0.01em;
         }
+
         /* ==================== 背景图片区域 - 优化叠加效果 ==================== */
         .hero-background {
             position: fixed;
@@ -143,13 +158,11 @@
             image-rendering: high-quality;
             -ms-interpolation-mode: bicubic;
             background:
-                /* 深色渐变叠加层 - 增强文字可读性 */
                 linear-gradient(180deg,
                     rgba(0, 0, 0, 0.45) 0%,
                     rgba(10, 15, 20, 0.60) 30%,
                     rgba(15, 20, 25, 0.70) 60%,
                     rgba(0, 0, 0, 0.80) 100%),
-                /* 暖色调色彩叠加 - 与金色主题呼应 */
                 linear-gradient(135deg,
                     rgba(232, 180, 76, 0.08) 0%,
                     transparent 40%,
@@ -164,11 +177,10 @@
             will-change: transform;
             backface-visibility: hidden;
             -webkit-backface-visibility: hidden;
-            /* 优化图片显示 */
             filter: contrast(1.15) brightness(0.85) saturate(1.10);
             -webkit-filter: contrast(1.15) brightness(0.85) saturate(1.10);
         }
-        /* 添加背景纹理层 */
+
         .hero-background::after {
             content: '';
             position: absolute;
@@ -187,21 +199,7 @@
             opacity: 0.3;
             pointer-events: none;
         }
-        /* WebP格式支持 */
-        .hero-background {
-            background-image:
-                linear-gradient(180deg,
-                    rgba(0, 0, 0, 0.45) 0%,
-                    rgba(10, 15, 20, 0.60) 30%,
-                    rgba(15, 20, 25, 0.70) 60%,
-                    rgba(0, 0, 0, 0.80) 100%),
-                linear-gradient(135deg,
-                    rgba(232, 180, 76, 0.08) 0%,
-                    transparent 40%,
-                    rgba(205, 139, 60, 0.06) 100%),
-                url('image/646319e1a90b5935aee2d99bf472021f.png');
-        }
-        /* 高DPI屏幕优化 */
+
         @media
             (-webkit-min-device-pixel-ratio: 2),
             (min-resolution: 192dpi) {
@@ -219,6 +217,7 @@
                     url('image/646319e1a90b5935aee2d99bf472021f.png');
             }
         }
+
         /* ==================== 顶部声明条 ==================== */
         .top-notice {
             position: fixed;
@@ -237,6 +236,7 @@
             letter-spacing: 0.03em;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.40);
         }
+
         .notice-content {
             max-width: 1200px;
             margin: 0 auto;
@@ -245,12 +245,14 @@
             justify-content: center;
             gap: 16px;
         }
+
         .notice-text {
             color: var(--text-warm);
             font-weight: var(--font-medium);
             text-shadow: var(--text-shadow-subtle);
             letter-spacing: 0.05em;
         }
+
         .notice-close {
             background: transparent;
             border: 1px solid var(--border-gold);
@@ -266,26 +268,31 @@
             justify-content: center;
             font-weight: var(--font-light);
         }
+
         .notice-close:hover {
             background: rgba(232, 180, 76, 0.25);
             border-color: var(--border-gold-strong);
             transform: rotate(90deg) scale(1.1);
             box-shadow: var(--shadow-gold);
         }
+
         .notice-hidden {
             display: none;
         }
+
         /* ==================== 主容器 ==================== */
         .main-wrapper {
             position: relative;
             z-index: 1;
             padding-top: 56px;
         }
+
         .container {
             max-width: 1280px;
             margin: 0 auto;
             padding: 0 32px;
         }
+
         /* ==================== 页头 ==================== */
         .site-header {
             text-align: center;
@@ -300,7 +307,7 @@
             position: relative;
             overflow: hidden;
         }
-        /* 添加顶部光效 */
+
         .site-header::before {
             content: '';
             position: absolute;
@@ -314,6 +321,7 @@
                 transparent 100%);
             opacity: 0.6;
         }
+
         .site-title {
             font-family: var(--font-display);
             font-size: clamp(2.5rem, 6vw, 4.5rem);
@@ -337,6 +345,7 @@
             line-height: var(--leading-tight);
             text-shadow: var(--text-glow);
         }
+
         @keyframes shimmer {
             0%, 100% {
                 background-position: 0% center;
@@ -347,6 +356,7 @@
                 filter: drop-shadow(0 6px 28px rgba(244, 208, 132, 0.65));
             }
         }
+
         .site-subtitle {
             font-size: var(--text-xl);
             color: var(--text-warm);
@@ -356,6 +366,7 @@
             text-transform: uppercase;
             opacity: 0.95;
         }
+
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -375,6 +386,7 @@
             font-weight: var(--font-medium);
             letter-spacing: 0.05em;
         }
+
         .back-link:hover {
             color: var(--shimmer-gold);
             transform: translateX(-6px);
@@ -382,6 +394,7 @@
             border-color: var(--border-gold-strong);
             box-shadow: var(--shadow-gold);
         }
+
         /* ==================== 统计面板 ==================== */
         .stats-panel {
             display: grid;
@@ -389,6 +402,7 @@
             gap: var(--spacing-lg);
             margin-bottom: var(--spacing-2xl);
         }
+
         .stat-card {
             background: var(--bg-card);
             border: 1px solid var(--border-warm);
@@ -402,6 +416,7 @@
             overflow: hidden;
             box-shadow: var(--shadow-medium);
         }
+
         .stat-card::before {
             content: '';
             position: absolute;
@@ -412,20 +427,24 @@
             background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
             transition: var(--transition-slow);
         }
+
         .stat-card:hover {
             border-color: var(--border-gold-strong);
             background: var(--bg-card-hover);
             transform: translateY(-6px);
             box-shadow: var(--shadow-gold-strong);
         }
+
         .stat-card:hover::before {
             left: 100%;
         }
+
         .stat-icon {
             font-size: 3rem;
             margin-bottom: var(--spacing-sm);
             filter: drop-shadow(0 4px 12px rgba(232, 180, 76, 0.40));
         }
+
         .stat-value {
             font-family: var(--font-display);
             font-size: var(--text-5xl);
@@ -436,6 +455,7 @@
             line-height: var(--leading-tight);
             letter-spacing: 0.02em;
         }
+
         .stat-label {
             font-size: var(--text-base);
             color: var(--text-secondary);
@@ -443,6 +463,7 @@
             font-weight: var(--font-medium);
             letter-spacing: 0.05em;
         }
+
         .stat-date {
             font-size: var(--text-sm);
             color: var(--text-muted);
@@ -450,7 +471,8 @@
             text-shadow: var(--text-shadow-subtle);
             font-weight: var(--font-light);
         }
-        /* ==================== 新增：已添加内容板块样式 ==================== */
+
+        /* ==================== 已添加内容板块样式 ==================== */
         .added-content-card {
             background: var(--bg-card);
             border: 1px solid var(--border-warm);
@@ -464,6 +486,7 @@
             box-shadow: var(--shadow-medium);
             min-height: 200px;
         }
+
         .added-content-card::before {
             content: '';
             position: absolute;
@@ -474,14 +497,17 @@
             background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
             transition: var(--transition-slow);
         }
+
         .added-content-card:hover {
             border-color: var(--border-gold-strong);
             background: var(--bg-card-hover);
             box-shadow: var(--shadow-gold-strong);
         }
+
         .added-content-card:hover::before {
             left: 100%;
         }
+
         .added-content-title {
             font-family: var(--font-display);
             font-size: var(--text-2xl);
@@ -494,10 +520,12 @@
             align-items: center;
             gap: 12px;
         }
+
         .added-content-icon {
             font-size: 1.8rem;
             filter: drop-shadow(0 4px 12px rgba(232, 180, 76, 0.40));
         }
+
         .added-content-body {
             color: var(--text-secondary);
             font-size: var(--text-base);
@@ -506,20 +534,24 @@
             font-weight: var(--font-light);
             letter-spacing: 0.02em;
         }
+
         /* ==================== 搜索区域 ==================== */
         .search-section {
             margin-bottom: var(--spacing-2xl);
         }
+
         .search-container {
             max-width: 900px;
             margin: 0 auto;
         }
+
         .search-box {
             position: relative;
             display: flex;
             gap: var(--spacing-md);
             margin-bottom: var(--spacing-lg);
         }
+
         .search-input {
             flex: 1;
             background: var(--bg-card);
@@ -537,17 +569,20 @@
             letter-spacing: 0.02em;
             box-shadow: var(--shadow-soft);
         }
+
         .search-input:focus {
             outline: none;
             border-color: var(--border-gold-strong);
             background: var(--bg-card-hover);
             box-shadow: 0 0 0 3px rgba(232, 180, 76, 0.20), var(--shadow-gold);
         }
+
         .search-input::placeholder {
             color: var(--text-muted);
             font-weight: var(--font-light);
             letter-spacing: 0.03em;
         }
+
         .search-btn {
             background: linear-gradient(135deg,
                 var(--primary-gold-light) 0%,
@@ -567,6 +602,7 @@
             position: relative;
             overflow: hidden;
         }
+
         .search-btn::before {
             content: '';
             position: absolute;
@@ -580,9 +616,11 @@
                 transparent);
             transition: var(--transition-slow);
         }
+
         .search-btn:hover::before {
             left: 100%;
         }
+
         .search-btn:hover {
             background: linear-gradient(135deg,
                 var(--shimmer-gold) 0%,
@@ -591,9 +629,11 @@
             transform: translateY(-3px);
             box-shadow: var(--shadow-gold-strong);
         }
+
         .search-btn:active {
             transform: translateY(-1px);
         }
+
         .search-stats {
             text-align: center;
             color: var(--text-tertiary);
@@ -609,11 +649,13 @@
             letter-spacing: 0.05em;
             border: 1px solid var(--border-warm);
         }
+
         .search-stats span {
             color: var(--text-gold-light);
             font-weight: var(--font-semibold);
             text-shadow: var(--text-glow);
         }
+
         /* ==================== 工具栏 ==================== */
         .toolbar {
             display: flex;
@@ -630,11 +672,13 @@
             border: 1px solid var(--border-warm);
             box-shadow: var(--shadow-soft);
         }
+
         .sort-controls {
             display: flex;
             gap: var(--spacing-sm);
             align-items: center;
         }
+
         .sort-label {
             color: var(--text-secondary);
             font-size: var(--text-base);
@@ -642,6 +686,7 @@
             font-weight: var(--font-medium);
             letter-spacing: 0.05em;
         }
+
         .sort-btn {
             background: rgba(232, 180, 76, 0.08);
             border: 1px solid var(--border-warm);
@@ -658,11 +703,13 @@
             font-weight: var(--font-medium);
             letter-spacing: 0.03em;
         }
+
         .sort-btn:hover {
             border-color: var(--border-gold);
             color: var(--text-gold-light);
             background: rgba(232, 180, 76, 0.15);
         }
+
         .sort-btn.active {
             background: rgba(232, 180, 76, 0.28);
             border-color: var(--primary-gold);
@@ -670,6 +717,7 @@
             font-weight: var(--font-semibold);
             box-shadow: var(--shadow-gold);
         }
+
         /* ==================== 分类过滤 ==================== */
         .filter-section {
             display: flex;
@@ -685,6 +733,7 @@
             border: 1px solid var(--border-warm);
             box-shadow: var(--shadow-soft);
         }
+
         .filter-btn {
             background: rgba(232, 180, 76, 0.08);
             border: 1px solid var(--border-warm);
@@ -701,6 +750,7 @@
             font-weight: var(--font-medium);
             letter-spacing: 0.05em;
         }
+
         .filter-btn:hover {
             border-color: var(--border-gold);
             color: var(--text-gold-light);
@@ -708,6 +758,7 @@
             transform: translateY(-2px);
             box-shadow: var(--shadow-warm);
         }
+
         .filter-btn.active {
             background: rgba(232, 180, 76, 0.28);
             border-color: var(--primary-gold);
@@ -715,12 +766,15 @@
             font-weight: var(--font-semibold);
             box-shadow: var(--shadow-gold);
         }
-        /* ==================== 启发值筛选 ==================== */
+
+        /* ==================== 启发值筛选 - 优化为10分制 ==================== */
         .inspiration-filter {
             display: flex;
             gap: var(--spacing-sm);
             align-items: center;
+            flex-wrap: wrap;
         }
+
         .inspiration-label {
             color: var(--text-secondary);
             font-size: var(--text-base);
@@ -728,6 +782,7 @@
             font-weight: var(--font-medium);
             letter-spacing: 0.05em;
         }
+
         .inspiration-btn {
             background: rgba(232, 180, 76, 0.08);
             border: 1px solid var(--border-warm);
@@ -747,23 +802,29 @@
             font-weight: var(--font-medium);
             letter-spacing: 0.03em;
         }
+
         .inspiration-btn:hover {
             border-color: var(--border-gold);
             color: var(--text-gold-light);
             background: rgba(232, 180, 76, 0.15);
+            transform: translateY(-2px);
         }
+
         .inspiration-btn.active {
             background: rgba(232, 180, 76, 0.28);
             border-color: var(--primary-gold);
             color: var(--primary-gold-light);
             font-weight: var(--font-semibold);
+            box-shadow: var(--shadow-gold);
         }
+
         /* ==================== 知识点列表 ==================== */
         .knowledge-list {
             display: grid;
             gap: var(--spacing-lg);
             margin-bottom: var(--spacing-3xl);
         }
+
         .knowledge-item {
             background: var(--bg-card);
             border: 1px solid var(--border-warm);
@@ -776,6 +837,7 @@
             -webkit-backdrop-filter: blur(24px) saturate(140%);
             box-shadow: var(--shadow-soft);
         }
+
         .knowledge-item::before {
             content: '';
             position: absolute;
@@ -790,15 +852,18 @@
             opacity: 0;
             transition: var(--transition-slow);
         }
+
         .knowledge-item:hover {
             border-color: var(--border-gold-strong);
             background: var(--bg-card-hover);
             transform: translateY(-4px);
             box-shadow: var(--shadow-gold-strong);
         }
+
         .knowledge-item:hover::before {
             opacity: 1;
         }
+
         .knowledge-header {
             display: flex;
             justify-content: space-between;
@@ -806,6 +871,7 @@
             margin-bottom: var(--spacing-md);
             gap: var(--spacing-md);
         }
+
         .knowledge-title {
             font-family: var(--font-display);
             font-size: var(--text-2xl);
@@ -817,11 +883,14 @@
             line-height: var(--leading-snug);
             letter-spacing: 0.02em;
         }
+
         .knowledge-badges {
             display: flex;
             gap: var(--spacing-sm);
             align-items: center;
+            flex-wrap: wrap;
         }
+
         .knowledge-category {
             display: inline-block;
             background: rgba(232, 180, 76, 0.25);
@@ -837,21 +906,39 @@
             text-shadow: var(--text-shadow-subtle);
             letter-spacing: 0.05em;
         }
-        /* ==================== 启发值星级 ==================== */
+
+        /* ==================== 启发值星级显示 - 10分制 ==================== */
         .inspiration-rating {
             display: flex;
-            gap: 3px;
+            gap: 4px;
             align-items: center;
+            padding: 6px 14px;
+            background: rgba(232, 180, 76, 0.15);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-gold);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
         }
+
         .star {
             color: var(--primary-gold-light);
-            font-size: var(--text-base);
+            font-size: 0.85rem;
             filter: drop-shadow(0 2px 6px rgba(232, 180, 76, 0.70));
         }
+
         .star.empty {
             color: var(--text-muted);
             opacity: 0.25;
         }
+
+        .inspiration-score {
+            margin-left: 6px;
+            font-size: var(--text-sm);
+            font-weight: var(--font-bold);
+            color: var(--primary-gold-light);
+            text-shadow: var(--text-shadow-subtle);
+        }
+
         .knowledge-content {
             color: var(--text-secondary);
             font-size: var(--text-lg);
@@ -861,12 +948,14 @@
             font-weight: var(--font-light);
             letter-spacing: 0.02em;
         }
+
         .knowledge-meta {
             display: flex;
             flex-wrap: wrap;
             gap: var(--spacing-sm);
             align-items: center;
         }
+
         .knowledge-tag {
             background: rgba(232, 180, 76, 0.10);
             border: 1px solid var(--border-warm);
@@ -881,11 +970,13 @@
             letter-spacing: 0.03em;
             transition: var(--transition-fast);
         }
+
         .knowledge-tag:hover {
             border-color: var(--border-gold);
             color: var(--text-gold-light);
             background: rgba(232, 180, 76, 0.18);
         }
+
         .knowledge-date {
             color: var(--text-muted);
             font-size: var(--text-sm);
@@ -894,6 +985,7 @@
             font-weight: var(--font-light);
             letter-spacing: 0.03em;
         }
+
         /* ==================== 空状态 ==================== */
         .empty-state {
             text-align: center;
@@ -905,12 +997,14 @@
             border: 1px solid var(--border-warm);
             box-shadow: var(--shadow-soft);
         }
+
         .empty-icon {
             font-size: 5rem;
             margin-bottom: var(--spacing-lg);
             opacity: 0.25;
             filter: drop-shadow(0 4px 16px rgba(0, 0, 0, 0.8));
         }
+
         .empty-text {
             color: var(--text-muted);
             font-size: var(--text-xl);
@@ -918,11 +1012,13 @@
             font-weight: var(--font-light);
             letter-spacing: 0.05em;
         }
+
         /* ==================== 加载状态 ==================== */
         .loading {
             text-align: center;
             padding: var(--spacing-2xl) 0;
         }
+
         .loading-spinner {
             display: inline-block;
             width: 48px;
@@ -932,9 +1028,11 @@
             border-radius: 50%;
             animation: spin 1s linear infinite;
         }
+
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+
         /* ==================== 页脚 ==================== */
         .site-footer {
             border-top: 1px solid var(--border-warm);
@@ -947,6 +1045,7 @@
             border-radius: var(--radius-xl);
             box-shadow: var(--shadow-strong);
         }
+
         .footer-title {
             font-family: var(--font-display);
             font-size: var(--text-3xl);
@@ -956,12 +1055,14 @@
             text-shadow: var(--text-shadow), var(--text-glow);
             letter-spacing: 0.08em;
         }
+
         .social-links {
             display: flex;
             justify-content: center;
             gap: var(--spacing-lg);
             margin-bottom: var(--spacing-lg);
         }
+
         .social-link {
             width: 56px;
             height: 56px;
@@ -978,6 +1079,7 @@
             -webkit-backdrop-filter: blur(16px);
             background: rgba(232, 180, 76, 0.08);
         }
+
         .social-link:hover {
             border-color: var(--primary-gold);
             color: var(--primary-gold-light);
@@ -985,6 +1087,7 @@
             background: rgba(232, 180, 76, 0.20);
             box-shadow: var(--shadow-gold);
         }
+
         .copyright {
             color: var(--text-muted);
             font-size: var(--text-base);
@@ -992,6 +1095,7 @@
             text-shadow: var(--text-shadow-subtle);
             letter-spacing: 0.05em;
         }
+
         /* ==================== 高亮显示 ==================== */
         .highlight {
             background: rgba(232, 180, 76, 0.35);
@@ -1002,6 +1106,7 @@
             font-weight: var(--font-semibold);
             box-shadow: 0 0 12px rgba(232, 180, 76, 0.25);
         }
+
         /* ==================== 返回顶部按钮 ==================== */
         .back-to-top {
             position: fixed;
@@ -1029,11 +1134,13 @@
             justify-content: center;
             font-weight: var(--font-black);
         }
+
         .back-to-top.visible {
             opacity: 1;
             visibility: visible;
             transform: translateY(0);
         }
+
         .back-to-top:hover {
             background: linear-gradient(135deg,
                 var(--shimmer-gold) 0%,
@@ -1042,9 +1149,11 @@
             transform: translateY(-6px) scale(1.05);
             box-shadow: 0 12px 56px rgba(232, 180, 76, 0.50);
         }
+
         .back-to-top:active {
             transform: translateY(-4px) scale(1.02);
         }
+
         /* ==================== 移动端响应式优化 ==================== */
         @media (max-width: 768px) {
             :root {
@@ -1052,67 +1161,84 @@
                 --spacing-2xl: 64px;
                 --spacing-3xl: 80px;
             }
+
             .hero-background {
                 background-attachment: scroll;
                 background-size: cover;
                 background-position: center center;
             }
+
             .container {
                 padding: 0 20px;
             }
+
             .site-header {
                 padding: var(--spacing-xl) var(--spacing-md);
             }
+
             .site-title {
                 font-size: clamp(2rem, 8vw, 3rem);
                 letter-spacing: 0.05em;
             }
+
             .site-subtitle {
                 font-size: var(--text-base);
                 letter-spacing: 0.15em;
             }
+
             .search-box {
                 flex-direction: column;
                 gap: var(--spacing-sm);
             }
+
             .search-btn {
                 width: 100%;
             }
+
             .toolbar {
                 flex-direction: column;
                 align-items: stretch;
                 gap: var(--spacing-md);
             }
+
             .sort-controls,
             .inspiration-filter {
                 justify-content: center;
                 flex-wrap: wrap;
             }
+
             .filter-section {
                 gap: var(--spacing-sm);
                 padding: var(--spacing-md);
             }
+
             .filter-btn {
                 padding: 8px 16px;
                 font-size: var(--text-sm);
             }
+
             .knowledge-header {
                 flex-direction: column;
                 gap: var(--spacing-sm);
             }
+
             .knowledge-badges {
                 width: 100%;
                 justify-content: space-between;
             }
+
             .knowledge-title {
                 font-size: var(--text-xl);
             }
+
             .knowledge-content {
                 font-size: var(--text-base);
             }
+
             .knowledge-date {
                 margin-left: 0;
             }
+
             .back-to-top {
                 right: 20px;
                 bottom: 20px;
@@ -1120,22 +1246,27 @@
                 height: 56px;
                 font-size: var(--text-2xl);
             }
+
             .social-link {
                 width: 48px;
                 height: 48px;
                 font-size: var(--text-xl);
             }
+
             .stats-panel {
                 grid-template-columns: 1fr;
             }
         }
+
         /* ==================== 滚动条美化 ==================== */
         ::-webkit-scrollbar {
             width: 10px;
         }
+
         ::-webkit-scrollbar-track {
             background: var(--bg-secondary);
         }
+
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(180deg,
                 var(--primary-gold-light) 0%,
@@ -1143,23 +1274,27 @@
                 var(--warm-copper) 100%);
             border-radius: 5px;
         }
+
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(180deg,
                 var(--shimmer-gold) 0%,
                 var(--primary-gold-light) 50%,
                 var(--primary-gold) 100%);
         }
+
         /* ==================== 选中文本样式 ==================== */
         ::selection {
             background: rgba(232, 180, 76, 0.40);
             color: var(--text-primary);
             text-shadow: var(--text-shadow-subtle);
         }
+
         ::-moz-selection {
             background: rgba(232, 180, 76, 0.40);
             color: var(--text-primary);
             text-shadow: var(--text-shadow-subtle);
         }
+
         /* ==================== 平滑进入动画 ==================== */
         @keyframes fadeInUp {
             from {
@@ -1171,6 +1306,7 @@
                 transform: translateY(0);
             }
         }
+
         .site-header,
         .stats-panel,
         .search-section,
@@ -1179,6 +1315,7 @@
         .knowledge-item {
             animation: fadeInUp 0.6s ease-out forwards;
         }
+
         .stats-panel { animation-delay: 0.1s; }
         .search-section { animation-delay: 0.2s; }
         .toolbar { animation-delay: 0.3s; }
@@ -1188,6 +1325,7 @@
 <body>
     <!-- 背景图片 -->
     <div class="hero-background"></div>
+
     <!-- 顶部声明 -->
     <div class="top-notice" id="topNotice">
         <div class="notice-content">
@@ -1195,6 +1333,7 @@
             <button class="notice-close" id="noticeClose" aria-label="关闭">×</button>
         </div>
     </div>
+
     <!-- 主内容 -->
     <div class="main-wrapper">
         <div class="container">
@@ -1207,6 +1346,7 @@
                 <h1 class="site-title">弄潮先锋营</h1>
                 <p class="site-subtitle">前沿知识 · 智能检索</p>
             </header>
+
             <!-- 统计面板 -->
             <section class="stats-panel">
                 <div class="stat-card">
@@ -1225,7 +1365,7 @@
                     <div class="stat-label">最新更新</div>
                     <div class="stat-date" id="lastUpdateFull"></div>
                 </div>
-                <!-- 新增：已添加的内容卡片 -->
+                <!-- 已添加的内容卡片 -->
                 <div class="added-content-card">
                     <h3 class="added-content-title">
                         <span class="added-content-icon">📝</span>
@@ -1238,11 +1378,10 @@
                        <p>浪前1-阅读思维</p>
                        <p>前哨战2025.11.13</p>
                        <p>前哨战2024.10.13</p>
-                        
-                        
                     </div>
                 </div>
             </section>
+
             <!-- 搜索区域 -->
             <section class="search-section">
                 <div class="search-container">
@@ -1261,6 +1400,7 @@
                     </div>
                 </div>
             </section>
+
             <!-- 工具栏 -->
             <div class="toolbar">
                 <div class="sort-controls">
@@ -1270,22 +1410,27 @@
                 </div>
                 <div class="inspiration-filter">
                     <span class="inspiration-label">启发值筛选:</span>
-                    <button class="inspiration-btn active" data-stars="all">全部</button>
-                    <button class="inspiration-btn" data-stars="5">⭐5星</button>
-                    <button class="inspiration-btn" data-stars="4">⭐4星+</button>
-                    <button class="inspiration-btn" data-stars="3">⭐3星+</button>
+                    <button class="inspiration-btn active" data-min="0" data-max="10">全部</button>
+                    <button class="inspiration-btn" data-min="9" data-max="10">9-10分</button>
+                    <button class="inspiration-btn" data-min="8" data-max="10">8分+</button>
+                    <button class="inspiration-btn" data-min="7" data-max="10">7分+</button>
+                    <button class="inspiration-btn" data-min="6" data-max="10">6分+</button>
+                    <button class="inspiration-btn" data-min="0" data-max="5">低于6分</button>
                 </div>
             </div>
+
             <!-- 分类过滤 -->
             <section class="filter-section" id="filterSection">
                 <!-- 动态生成分类按钮 -->
             </section>
+
             <!-- 知识点列表 -->
             <section class="knowledge-list" id="knowledgeList">
                 <div class="loading">
                     <div class="loading-spinner"></div>
                 </div>
             </section>
+
             <!-- 页脚 -->
             <footer class="site-footer">
                 <h3 class="footer-title">联系我们</h3>
@@ -1322,12 +1467,15 @@
             </footer>
         </div>
     </div>
+
     <!-- 返回顶部按钮 -->
     <button class="back-to-top" id="backToTop" aria-label="返回顶部">
         ↑
     </button>
+
     <script>
         'use strict';
+
         // ==================== 知识库管理类 ====================
         class KnowledgeBase {
             constructor() {
@@ -1335,8 +1483,10 @@
                 this.filteredData = [];
                 this.currentCategory = 'all';
                 this.currentSort = 'date';
-                this.currentStarFilter = 'all';
+                this.currentInspirationMin = 0;
+                this.currentInspirationMax = 10;
                 this.searchQuery = '';
+
                 // DOM 元素
                 this.searchInput = document.getElementById('searchInput');
                 this.searchBtn = document.getElementById('searchBtn');
@@ -1344,13 +1494,16 @@
                 this.knowledgeList = document.getElementById('knowledgeList');
                 this.searchStats = document.getElementById('searchStats');
                 this.totalCount = document.getElementById('totalCount');
+
                 // 统计面板元素
                 this.totalKnowledge = document.getElementById('totalKnowledge');
                 this.avgInspiration = document.getElementById('avgInspiration');
                 this.lastUpdate = document.getElementById('lastUpdate');
                 this.lastUpdateFull = document.getElementById('lastUpdateFull');
+
                 this.init();
             }
+
             async init() {
                 await this.loadData();
                 this.setupEventListeners();
@@ -1358,6 +1511,7 @@
                 this.updateStats();
                 this.renderList();
             }
+
             // 加载数据
             async loadData() {
                 try {
@@ -1373,11 +1527,13 @@
                     this.showError('数据加载失败,请刷新页面重试');
                 }
             }
+
             // 更新统计信息
             updateStats() {
                 // 知识点总数
                 this.totalKnowledge.textContent = this.data.length;
-                // 计算平均启发值
+
+                // 计算平均启发值(10分制)
                 if (this.data.length > 0) {
                     const totalInspiration = this.data.reduce((sum, item) => {
                         return sum + (item.inspiration || 0);
@@ -1387,11 +1543,13 @@
                 } else {
                     this.avgInspiration.textContent = '0';
                 }
+
                 // 最新更新时间
                 const dates = this.data
                     .map(item => item.date)
                     .filter(Boolean)
                     .sort((a, b) => new Date(b) - new Date(a));
+
                 if (dates.length > 0) {
                     const latestDate = new Date(dates[0]);
                     this.lastUpdate.textContent = this.formatShortDate(latestDate);
@@ -1401,11 +1559,13 @@
                     this.lastUpdateFull.textContent = '暂无更新记录';
                 }
             }
+
             // 格式化短日期
             formatShortDate(date) {
                 const now = new Date();
                 const diff = now - date;
                 const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
                 if (days === 0) return '今天';
                 if (days === 1) return '昨天';
                 if (days < 7) return `${days}天前`;
@@ -1413,6 +1573,7 @@
                 if (days < 365) return `${Math.floor(days / 30)}月前`;
                 return `${Math.floor(days / 365)}年前`;
             }
+
             // 格式化完整日期
             formatFullDate(date) {
                 return date.toLocaleDateString('zh-CN', {
@@ -1421,16 +1582,19 @@
                     day: 'numeric'
                 });
             }
+
             // 设置事件监听
             setupEventListeners() {
                 // 搜索按钮
                 this.searchBtn.addEventListener('click', () => this.handleSearch());
+
                 // 回车搜索
                 this.searchInput.addEventListener('keypress', (e) => {
                     if (e.key === 'Enter') {
                         this.handleSearch();
                     }
                 });
+
                 // 实时搜索(输入延迟)
                 let searchTimeout;
                 this.searchInput.addEventListener('input', (e) => {
@@ -1440,6 +1604,7 @@
                         this.filterAndRender();
                     }, 300);
                 });
+
                 // 排序按钮
                 document.querySelectorAll('.sort-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
@@ -1449,21 +1614,25 @@
                         this.filterAndRender();
                     });
                 });
-                // 启发值筛选按钮
+
+                // 启发值筛选按钮(10分制)
                 document.querySelectorAll('.inspiration-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
-                        this.currentStarFilter = e.target.dataset.stars;
+                        this.currentInspirationMin = parseInt(e.target.dataset.min);
+                        this.currentInspirationMax = parseInt(e.target.dataset.max);
                         document.querySelectorAll('.inspiration-btn').forEach(b => b.classList.remove('active'));
                         e.target.classList.add('active');
                         this.filterAndRender();
                     });
                 });
             }
+
             // 处理搜索
             handleSearch() {
                 this.searchQuery = this.searchInput.value.trim();
                 this.filterAndRender();
             }
+
             // 渲染分类过滤按钮
             renderFilters() {
                 const categories = new Set(['all']);
@@ -1472,6 +1641,7 @@
                         categories.add(item.category);
                     }
                 });
+
                 const categoryNames = {
                     'all': '全部',
                     'ai': 'AI技术',
@@ -1482,6 +1652,7 @@
                     'tool': '工具应用',
                     'other': '其他'
                 };
+
                 this.filterSection.innerHTML = Array.from(categories).map(cat => `
                     <button
                         class="filter-btn ${cat === this.currentCategory ? 'active' : ''}"
@@ -1490,6 +1661,7 @@
                         ${categoryNames[cat] || cat}
                     </button>
                 `).join('');
+
                 // 绑定分类点击事件
                 this.filterSection.querySelectorAll('.filter-btn').forEach(btn => {
                     btn.addEventListener('click', (e) => {
@@ -1503,35 +1675,39 @@
                     });
                 });
             }
+
             // 过滤并渲染
             filterAndRender() {
                 this.filteredData = this.data.filter(item => {
                     // 分类过滤
                     const categoryMatch = this.currentCategory === 'all' ||
                                         item.category === this.currentCategory;
-                    // 启发值过滤
-                    let starMatch = true;
-                    if (this.currentStarFilter !== 'all') {
-                        const minStars = parseInt(this.currentStarFilter);
-                        const itemStars = item.inspiration || 0;
-                        starMatch = itemStars >= minStars;
-                    }
+
+                    // 启发值过滤(10分制)
+                    const itemInspiration = item.inspiration || 0;
+                    const inspirationMatch = itemInspiration >= this.currentInspirationMin &&
+                                           itemInspiration <= this.currentInspirationMax;
+
                     // 搜索过滤
                     if (!this.searchQuery) {
-                        return categoryMatch && starMatch;
+                        return categoryMatch && inspirationMatch;
                     }
+
                     const query = this.searchQuery.toLowerCase();
                     const titleMatch = item.title.toLowerCase().includes(query);
                     const contentMatch = item.content.toLowerCase().includes(query);
                     const tagsMatch = item.tags && item.tags.some(tag =>
                         tag.toLowerCase().includes(query)
                     );
-                    return categoryMatch && starMatch && (titleMatch || contentMatch || tagsMatch);
+
+                    return categoryMatch && inspirationMatch && (titleMatch || contentMatch || tagsMatch);
                 });
+
                 // 排序
                 this.sortData();
                 this.renderList();
             }
+
             // 排序数据
             sortData() {
                 if (this.currentSort === 'date') {
@@ -1548,16 +1724,19 @@
                     });
                 }
             }
+
             // 渲染知识点列表
             renderList() {
                 if (this.filteredData.length === 0) {
                     this.showEmpty();
                     return;
                 }
+
                 this.knowledgeList.innerHTML = this.filteredData.map(item => {
                     const highlightedTitle = this.highlightText(item.title);
                     const highlightedContent = this.highlightText(item.content);
                     const stars = this.renderStars(item.inspiration || 0);
+
                     return `
                         <article class="knowledge-item">
                             <div class="knowledge-header">
@@ -1577,29 +1756,47 @@
                         </article>
                     `;
                 }).join('');
+
                 // 更新统计信息
-                const resultText = this.searchQuery || this.currentStarFilter !== 'all' || this.currentCategory !== 'all' ?
+                const hasFilters = this.searchQuery ||
+                                 this.currentInspirationMin > 0 ||
+                                 this.currentInspirationMax < 10 ||
+                                 this.currentCategory !== 'all';
+
+                const resultText = hasFilters ?
                     `找到 <span>${this.filteredData.length}</span> 个相关结果` :
                     `共收录 <span>${this.data.length}</span> 个知识点`;
+
                 this.searchStats.innerHTML = resultText;
             }
-            // 渲染星级
-            renderStars(count) {
-                if (count === 0) return '';
-                const maxStars = 5;
+
+            // 渲染星级(10分制)
+            renderStars(score) {
+                if (score === 0) return '';
+
+                const maxStars = 10;
+                const fullStars = Math.floor(score);
                 let starsHtml = '<div class="inspiration-rating">';
+
+                // 渲染星星
                 for (let i = 1; i <= maxStars; i++) {
-                    starsHtml += `<span class="star ${i <= count ? '' : 'empty'}">★</span>`;
+                    starsHtml += `<span class="star ${i <= fullStars ? '' : 'empty'}">★</span>`;
                 }
+
+                // 显示数字分数
+                starsHtml += `<span class="inspiration-score">${score}/10</span>`;
                 starsHtml += '</div>';
+
                 return starsHtml;
             }
+
             // 高亮文本
             highlightText(text) {
                 if (!this.searchQuery) return text;
                 const regex = new RegExp(`(${this.searchQuery})`, 'gi');
                 return text.replace(regex, '<span class="highlight">$1</span>');
             }
+
             // 获取分类名称
             getCategoryName(category) {
                 const names = {
@@ -1613,6 +1810,7 @@
                 };
                 return names[category] || category;
             }
+
             // 显示空状态
             showEmpty() {
                 this.knowledgeList.innerHTML = `
@@ -1624,6 +1822,7 @@
                     </div>
                 `;
             }
+
             // 显示错误
             showError(message) {
                 this.knowledgeList.innerHTML = `
@@ -1634,6 +1833,7 @@
                 `;
             }
         }
+
         // ==================== 顶部声明管理 ====================
         class NoticeManager {
             constructor() {
@@ -1641,19 +1841,24 @@
                 this.closeBtn = document.getElementById('noticeClose');
                 this.init();
             }
+
             init() {
                 if (!this.notice || !this.closeBtn) return;
+
                 if (localStorage.getItem('knowledgeNoticeClose') === 'true') {
                     this.hide();
                     return;
                 }
+
                 this.closeBtn.addEventListener('click', () => this.close());
                 setTimeout(() => this.close(), 10000);
             }
+
             close() {
                 localStorage.setItem('knowledgeNoticeClose', 'true');
                 this.hide();
             }
+
             hide() {
                 if (this.notice) {
                     this.notice.classList.add('notice-hidden');
@@ -1661,12 +1866,15 @@
                 }
             }
         }
+
         // ==================== 初始化 ====================
         document.addEventListener('DOMContentLoaded', () => {
             new NoticeManager();
             new KnowledgeBase();
+
             // 返回顶部按钮
             const backToTopBtn = document.getElementById('backToTop');
+
             // 监听滚动事件
             let scrollTimeout;
             window.addEventListener('scroll', () => {
@@ -1679,6 +1887,7 @@
                     }
                 }, 100);
             });
+
             // 点击返回顶部
             backToTopBtn.addEventListener('click', () => {
                 window.scrollTo({
@@ -1686,6 +1895,7 @@
                     behavior: 'smooth'
                 });
             });
+
             // 平滑滚动
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
