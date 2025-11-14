@@ -1,0 +1,66 @@
+{
+  "metadata": {
+    "version": "1.0.0",
+    "lastUpdate": "2024-01-15",
+    "description": "每日信息摄入流程配置文件"
+  },
+  "settings": {
+    "returnUrl": "https://kuangketongxue.github.io/tongxuekuangke/",
+    "securityCode": "kuangke",
+    "dailyTimeLimit": 30,
+    "noticeText": "⚠️ 每日流程页 · Beta 内测中",
+    "noticeAutoCloseDelay": 8000
+  },
+  "sources": [
+    {
+      "id": "lex",
+      "icon": "🎙️",
+      "name": "Lex Fridman · YouTube",
+      "url": "https://www.youtube.com/@lexfridman/videos",
+      "desc": "长访谈与AI前沿",
+      "category": "视频",
+      "priority": 1,
+      "enabled": true
+    },
+    {
+      "id": "elon",
+      "icon": "🚀",
+      "name": "Elon Musk · X(推特)",
+      "url": "https://x.com/elonmusk",
+      "desc": "行业动向与观点",
+      "category": "社交媒体",
+      "priority": 2,
+      "enabled": true
+    },
+    {
+      "id": "diary-ceo",
+      "icon": "📈",
+      "name": "The Diary Of A CEO · YouTube",
+      "url": "https://www.youtube.com/@TheDiaryOfACEO/videos",
+      "desc": "商业与管理洞察",
+      "category": "视频",
+      "priority": 3,
+      "enabled": true
+    },
+    {
+      "id": "techcrunch",
+      "icon": "💻",
+      "name": "TechCrunch",
+      "url": "https://techcrunch.com/",
+      "desc": "科技资讯与创业动态",
+      "category": "新闻",
+      "priority": 4,
+      "enabled": true
+    },
+    {
+      "id": "hacker-news",
+      "icon": "🔥",
+      "name": "Hacker News",
+      "url": "https://news.ycombinator.com/",
+      "desc": "技术社区热门讨论",
+      "category": "社区",
+      "priority": 5,
+      "enabled": true
+    }
+  ]
+}
