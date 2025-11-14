@@ -1,7 +1,7 @@
 {
   "metadata": {
     "version": "1.0.0",
-    "lastUpdate": "2024-01-15",
+    "lastUpdate": "2025-11-14",
     "description": "每日信息摄入流程配置文件"
   },
   "settings": {
@@ -14,7 +14,7 @@
   "sources": [
     {
       "id": "lex",
-      "icon": "🎙️",
+      "icon": "🇱",
       "name": "Lex Fridman · YouTube",
       "url": "https://www.youtube.com/@lexfridman/videos",
       "desc": "长访谈与AI前沿",
@@ -24,7 +24,7 @@
     },
     {
       "id": "elon",
-      "icon": "🚀",
+      "icon": "🇪",
       "name": "Elon Musk · X(推特)",
       "url": "https://x.com/elonmusk",
       "desc": "行业动向与观点",
@@ -34,7 +34,7 @@
     },
     {
       "id": "diary-ceo",
-      "icon": "📈",
+      "icon": "🇹",
       "name": "The Diary Of A CEO · YouTube",
       "url": "https://www.youtube.com/@TheDiaryOfACEO/videos",
       "desc": "商业与管理洞察",
@@ -44,7 +44,7 @@
     },
     {
       "id": "techcrunch",
-      "icon": "💻",
+      "icon": "🇹",
       "name": "TechCrunch",
       "url": "https://techcrunch.com/",
       "desc": "科技资讯与创业动态",
@@ -54,12 +54,102 @@
     },
     {
       "id": "hacker-news",
-      "icon": "🔥",
+      "icon": "🇭",
       "name": "Hacker News",
       "url": "https://news.ycombinator.com/",
       "desc": "技术社区热门讨论",
       "category": "社区",
       "priority": 5,
+      "enabled": true
+    },
+    {
+      "id": "futurepedia",
+      "icon": "🇫",
+      "name": "Futurepedia",
+      "url": "https://www.futurepedia.io/",
+      "desc": "AI 工具与资源目录",
+      "category": "资源",
+      "priority": 6,
+      "enabled": true
+    },
+    {
+      "id": "openai",
+      "icon": "🇴",
+      "name": "OpenAI Blog",
+      "url": "https://openai.com/blog",
+      "desc": "官方研究、模型与产品更新",
+      "category": "博客",
+      "priority": 7,
+      "enabled": true
+    },
+    {
+      "id": "deepmind",
+      "icon": "🇩",
+      "name": "DeepMind Blog",
+      "url": "https://deepmind.google/discover/blog",
+      "desc": "前沿研究与科学突破",
+      "category": "研究",
+      "priority": 8,
+      "enabled": true
+    },
+    {
+      "id": "anthropic",
+      "icon": "🇦",
+      "name": "Anthropic Blog",
+      "url": "https://www.anthropic.com/news",
+      "desc": "对齐、安全与模型进展",
+      "category": "博客",
+      "priority": 9,
+      "enabled": true
+    },
+    {
+      "id": "google-ai-blog",
+      "icon": "🇬",
+      "name": "Google AI Blog",
+      "url": "https://ai.googleblog.com/",
+      "desc": "谷歌AI研究与工程实践",
+      "category": "博客",
+      "priority": 10,
+      "enabled": true
+    },
+    {
+      "id": "meta-ai",
+      "icon": "🇲",
+      "name": "Meta AI Blog",
+      "url": "https://ai.meta.com/blog/",
+      "desc": "开放研究、基准与系统",
+      "category": "研究",
+      "priority": 11,
+      "enabled": true
+    },
+    {
+      "id": "nvidia-research",
+      "icon": "🇳",
+      "name": "NVIDIA Research",
+      "url": "https://research.nvidia.com/",
+      "desc": "加速计算与生成式AI研究",
+      "category": "研究",
+      "priority": 12,
+      "enabled": true
+    },
+    {
+      "id": "mit-techreview-ai",
+      "icon": "🇲",
+      "name": "MIT Technology Review · AI",
+      "url": "https://www.technologyreview.com/ai/",
+      "desc": "AI 政策、产业与影响深度报道",
+      "category": "新闻",
+      "priority": 13,
+      "enabled": true
+    },
+    {
+      "id": "bair-blog",
+      "icon": "🇧",
+      "name": "BAIR Blog",
+      "url": "https://bair.berkeley.edu/blog/",
+      "desc": "伯克利AI研究论文解读与洞见",
+      "category": "研究",
+      "priority": 14,
       "enabled": true
     }
   ]
