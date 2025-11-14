@@ -11,18 +11,21 @@
     <meta name="robots" content="index,follow">
     <meta name="theme-color" content="#000000">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✦</text></svg>">
+    
     <!-- DNS预解析 -->
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+    
     <!-- 预连接 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+    
     <!-- 字体优化加载 -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
     <noscript><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet"></noscript>
-    <!-- 样式（延续主页基因 + 本页扩展） -->
+    
     <style>
         :root{
             --primary-gold:#d4af37;
@@ -48,6 +51,88 @@
             font-weight:500;
             text-shadow:0 1px 2px rgba(0,0,0,0.8);
         }
+        
+        /* 加载动画 */
+        .loading-overlay{
+            position:fixed;
+            inset:0;
+            background:rgba(0,0,0,.95);
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            z-index:9999;
+            transition:opacity .5s ease;
+        }
+        .loading-overlay.hidden{
+            opacity:0;
+            pointer-events:none;
+        }
+        .loader{
+            display:flex;
+            flex-direction:column;
+            align-items:center;
+            gap:20px;
+        }
+        .spinner{
+            width:60px;
+            height:60px;
+            border:4px solid rgba(212,175,55,.2);
+            border-top-color:var(--primary-gold);
+            border-radius:50%;
+            animation:spin 1s linear infinite;
+        }
+        @keyframes spin{to{transform:rotate(360deg)}}
+        .loading-text{
+            color:var(--text-gold);
+            font-size:1.1rem;
+            font-weight:600;
+            letter-spacing:.1em;
+        }
+        
+        /* 错误提示 */
+        .error-message{
+            position:fixed;
+            top:50%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            background:rgba(255,77,79,.15);
+            border:2px solid #ff4d4f;
+            border-radius:12px;
+            padding:32px 48px;
+            text-align:center;
+            z-index:9998;
+            backdrop-filter:blur(20px);
+            max-width:500px;
+            display:none;
+        }
+        .error-message.show{display:block}
+        .error-icon{font-size:3rem;margin-bottom:16px}
+        .error-title{
+            font-size:1.5rem;
+            font-weight:700;
+            color:#ff4d4f;
+            margin-bottom:12px;
+        }
+        .error-desc{
+            color:var(--text-secondary);
+            line-height:1.6;
+            margin-bottom:20px;
+        }
+        .error-btn{
+            padding:12px 24px;
+            background:rgba(212,175,55,.2);
+            border:2px solid var(--primary-gold);
+            border-radius:6px;
+            color:var(--text-gold);
+            font-weight:700;
+            cursor:pointer;
+            transition:var(--transition);
+        }
+        .error-btn:hover{
+            background:rgba(212,175,55,.35);
+            transform:translateY(-2px);
+        }
+        
         .hero-background{position:fixed;top:0;left:0;width:100%;height:100vh;z-index:0;overflow:hidden;will-change:transform}
         .hero-background::before{
             content:'';
@@ -66,9 +151,11 @@
             background:linear-gradient(180deg,rgba(0,0,0,.25) 0%,rgba(0,0,0,.65) 100%);
             backdrop-filter:blur(.5px)
         }
+        
         .main-wrapper{position:relative;z-index:1;padding-top:48px;min-height:100vh}
         .container{max-width:1200px;margin:0 auto;padding:0 24px}
-        /* 返回按钮（与主页一致） */
+        
+        /* 返回按钮 */
         .back-button{
             position:fixed;
             top:70px;
@@ -100,10 +187,8 @@
             width:16px;height:16px;transition:transform .3s ease;
         }
         .back-button:hover svg{transform:translateX(-2px)}
-        @media(max-width:768px){
-            .back-button{top:60px;left:16px;padding:10px 16px;font-size:.85rem}
-        }
-        /* 顶部声明（与主页一致） */
+        
+        /* 顶部声明 */
         .top-notice{
             position:fixed;
             top:0;
@@ -131,6 +216,7 @@
             transition:var(--transition);
             font-weight:700;
         }
+        
         /* 页头 */
         .page-header{padding:120px 0 40px;text-align:center}
         .page-title{
@@ -155,6 +241,7 @@
             font-size:1.05rem;
             text-shadow:0 2px 4px rgba(0,0,0,0.9);
         }
+        
         /* 统计条 */
         .intake-stats{
             margin:32px auto 8px;
@@ -174,6 +261,7 @@
         .stat-chip .dot{display:inline-block;width:10px;height:10px;border-radius:50%}
         .dot-red{background:#ff4d4f;box-shadow:0 0 8px rgba(255,77,79,0.6)}
         .dot-gray{background:#999;box-shadow:0 0 8px rgba(153,153,153,0.6)}
+        
         /* 流程区 */
         .flow{
             position:relative;max-width:900px;margin:32px auto 120px;padding:10px 0 10px 0
@@ -224,6 +312,14 @@
             line-height:1.6;
             text-shadow:0 1px 3px rgba(0,0,0,0.9);
         }
+        .shelf-meta{
+            display:flex;
+            align-items:center;
+            gap:8px;
+            margin-top:8px;
+            font-size:.85rem;
+            color:#aaa;
+        }
         .shelf-actions{display:flex;align-items:center;gap:12px;margin-top:14px;flex-wrap:wrap}
         .btn{
             padding:10px 18px;
@@ -254,232 +350,354 @@
             text-shadow:0 1px 2px rgba(0,0,0,0.9);
         }
         .shelf.visited{opacity:.75}
-        /* 页脚留白 */
+        
+        /* 分类标签 */
+        .category-tag{
+            padding:4px 10px;
+            border-radius:4px;
+            font-size:.75rem;
+            font-weight:600;
+            background:rgba(212,175,55,.15);
+            color:var(--text-gold);
+            border:1px solid rgba(212,175,55,.3);
+        }
+        
         .spacer{height:40px}
+        
         @media(max-width:768px){
             .flow::before{left:20px}
             .shelf{padding-left:60px;padding:18px 16px 18px 60px}
             .shelf .status-dot{left:12px}
             .shelf-title{font-size:1.15rem}
             .shelf-desc{font-size:.95rem}
+            .back-button{top:60px;left:16px;padding:10px 16px;font-size:.85rem}
         }
     </style>
 </head>
 <body>
+    <!-- 加载动画 -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loader">
+            <div class="spinner"></div>
+            <div class="loading-text">加载配置中...</div>
+        </div>
+    </div>
+    
+    <!-- 错误提示 -->
+    <div class="error-message" id="errorMessage">
+        <div class="error-icon">⚠️</div>
+        <div class="error-title">加载失败</div>
+        <div class="error-desc" id="errorDesc">无法加载配置文件,请检查网络连接或联系管理员</div>
+        <button class="error-btn" onclick="location.reload()">重新加载</button>
+    </div>
+    
     <!-- 背景图片 -->
     <div class="hero-background"></div>
-    <!-- 顶部声明（与主页一致） -->
+    
+    <!-- 顶部声明 -->
     <div class="top-notice" id="topNotice">
         <div style="max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:12px">
-            <span style="color:var(--text-gold);font-weight:700">⚠️ 每日流程页 · Beta 内测中</span>
+            <span style="color:var(--text-gold);font-weight:700" id="noticeText">⚠️ 每日流程页 · Beta 内测中</span>
             <button id="noticeClose" class="notice-close" aria-label="关闭">×</button>
         </div>
     </div>
-    <!-- 返回按钮（需要输入安全码才可真正返回；链接留空待你填写） -->
-    <a href="" id="secureBack" class="back-button" title="返回上一页">
+    
+    <!-- 返回按钮 -->
+    <a href="#" id="secureBack" class="back-button" title="返回上一页">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <path d="M19 12H5M12 19l-7-7 7-7"/>
         </svg>
         <span>返回</span>
     </a>
+    
     <div class="main-wrapper">
         <div class="container">
             <header class="page-header">
                 <h1 class="page-title">每日信息摄入流程</h1>
-                <p class="page-subtitle">30分钟看完昨日优质信息源 · 然后安心工作一整天</p>
+                <p class="page-subtitle" id="pageSubtitle">30分钟看完昨日优质信息源 · 然后安心工作一整天</p>
                 <div class="intake-stats" aria-live="polite">
                     <span class="stat-chip"><span class="dot dot-red"></span> 未看</span>
                     <span class="stat-chip"><span class="dot dot-gray"></span> 已看</span>
-                    <span class="stat-chip">今日已看到：<strong id="seenCount">0</strong> / <span id="totalCount">0</span></span>
-                    <span class="stat-chip">上次全看完：<span id="lastComplete">—</span></span>
+                    <span class="stat-chip">今日已看到:<strong id="seenCount">0</strong> / <span id="totalCount">0</span></span>
+                    <span class="stat-chip">上次全看完:<span id="lastComplete">—</span></span>
                 </div>
             </header>
-            <!-- 流程（书架） -->
+            
+            <!-- 流程区 -->
             <section class="flow" id="flow"></section>
             <div class="spacer"></div>
         </div>
     </div>
+    
     <script>
         (function(){
             'use strict';
-            // ====== 可配置项 ======
-            // 返回链接留空,等你填写
-            const RETURN_URL = 'https://kuangketongxue.github.io/tongxuekuangke/'; // TODO: 填写你的返回链接,如 'Homepage.html'
-            // 安全码(用于返回确认)
-            const SECURITY_CODE = 'kuangke'; // TODO: 修改为你的安全码
-            // 信息源定义(按流程顺序)
-            const SOURCES = [
-                {
-                    id: 'lex',
-                    icon: '🎙️',
-                    name: 'Lex Fridman · YouTube',
-                    url: 'https://www.youtube.com/@lexfridman/videos',
-                    desc: '长访谈与AI前沿'
-                },
-                {
-                    id: 'elon',
-                    icon: '🚀',
-                    name: 'Elon Musk · X(推特)',
-                    url: 'https://x.com/elonmusk',
-                    desc: '行业动向与观点'
-                },
-                {
-                    id: 'diary-ceo',
-                    icon: '📈',
-                    name: 'The Diary Of A CEO · YouTube',
-                    url: 'https://www.youtube.com/@TheDiaryOfACEO/videos',
-                    desc: '商业与管理洞察'
+            
+            // ====== 配置文件路径 ======
+            const CONFIG_PATH = './daily-intake-config.json'; // 根据实际路径调整
+            
+            let APP_CONFIG = null;
+            let SOURCES = [];
+            
+            // ====== 初始化 ======
+            async function init(){
+                try {
+                    const response = await fetch(CONFIG_PATH);
+                    if (!response.ok) {
+                        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                    }
+                    APP_CONFIG = await response.json();
+                    
+                    // 验证配置结构
+                    if (!APP_CONFIG.settings || !APP_CONFIG.sources) {
+                        throw new Error('配置文件格式错误');
+                    }
+                    
+                    // 只加载启用的源
+                    SOURCES = APP_CONFIG.sources
+                        .filter(s => s.enabled !== false)
+                        .sort((a, b) => (a.priority || 999) - (b.priority || 999));
+                    
+                    if (SOURCES.length === 0) {
+                        throw new Error('没有可用的信息源');
+                    }
+                    
+                    // 应用配置
+                    applyConfig();
+                    
+                    // 隐藏加载动画
+                    document.getElementById('loadingOverlay').classList.add('hidden');
+                    
+                    // 初始化应用
+                    initApp();
+                    
+                } catch (error) {
+                    console.error('配置加载失败:', error);
+                    showError(error.message);
                 }
-                // 如需追加更多「书架」,在此继续添加即可
-            ];
-            // ====== 顶部公告关闭(与主页一致) ======
-            const topNotice = document.getElementById('topNotice');
-            const noticeClose = document.getElementById('noticeClose');
-            if (topNotice && noticeClose) {
-                if (sessionStorage.getItem('intakeNoticeClosed') === 'true') {
-                    topNotice.style.display = 'none';
-                    document.querySelector('.main-wrapper').style.paddingTop = '48px';
-                }
-                const closeNotice = () => {
-                    sessionStorage.setItem('intakeNoticeClosed', 'true');
-                    topNotice.style.display = 'none';
-                    document.querySelector('.main-wrapper').style.paddingTop = '48px';
-                };
-                noticeClose.addEventListener('click', closeNotice);
-                setTimeout(closeNotice, 8000);
             }
-            // ====== 返回按钮(需要安全码) ======
-            const backBtn = document.getElementById('secureBack');
-            if (backBtn) {
-                backBtn.addEventListener('click', function(e){
-                    e.preventDefault();
-                    const code = prompt('请输入安全码以返回:');
-                    if (code === null) return; // 取消
-                    if (code === SECURITY_CODE) {
-                        if (RETURN_URL && RETURN_URL.trim().length > 0) {
-                            window.location.href = RETURN_URL;
+            
+            function showError(message){
+                document.getElementById('loadingOverlay').classList.add('hidden');
+                document.getElementById('errorDesc').textContent = message;
+                document.getElementById('errorMessage').classList.add('show');
+            }
+            
+            function applyConfig(){
+                const settings = APP_CONFIG.settings;
+                
+                // 更新公告文本
+                if (settings.noticeText) {
+                    document.getElementById('noticeText').textContent = settings.noticeText;
+                }
+                
+                // 更新副标题
+                if (settings.dailyTimeLimit) {
+                    const subtitle = `${settings.dailyTimeLimit}分钟看完昨日优质信息源 · 然后安心工作一整天`;
+                    document.getElementById('pageSubtitle').textContent = subtitle;
+                }
+            }
+            
+            // ====== 应用主逻辑 ======
+            function initApp(){
+                const settings = APP_CONFIG.settings;
+                
+                // 顶部公告处理
+                const topNotice = document.getElementById('topNotice');
+                const noticeClose = document.getElementById('noticeClose');
+                if (topNotice && noticeClose) {
+                    if (sessionStorage.getItem('intakeNoticeClosed') === 'true') {
+                        topNotice.style.display = 'none';
+                        document.querySelector('.main-wrapper').style.paddingTop = '48px';
+                    }
+                    const closeNotice = () => {
+                        sessionStorage.setItem('intakeNoticeClosed', 'true');
+                        topNotice.style.display = 'none';
+                        document.querySelector('.main-wrapper').style.paddingTop = '48px';
+                    };
+                    noticeClose.addEventListener('click', closeNotice);
+                    if (settings.noticeAutoCloseDelay) {
+                        setTimeout(closeNotice, settings.noticeAutoCloseDelay);
+                    }
+                }
+                
+                // 返回按钮处理
+                const backBtn = document.getElementById('secureBack');
+                if (backBtn) {
+                    backBtn.addEventListener('click', function(e){
+                        e.preventDefault();
+                        const code = prompt('请输入安全码以返回:');
+                        if (code === null) return;
+                        if (code === settings.securityCode) {
+                            if (settings.returnUrl && settings.returnUrl.trim().length > 0) {
+                                window.location.href = settings.returnUrl;
+                            } else {
+                                alert('已通过校验,但未设置返回链接。');
+                            }
                         } else {
-                            alert('已通过校验,但未设置返回链接。请在脚本中设置 RETURN_URL。');
+                            alert('安全码错误,无法返回。');
                         }
-                    } else {
-                        alert('安全码错误,无法返回。');
-                    }
-                });
-            }
-            // ====== 本地存储与日期处理 ======
-            const todayStr = new Date().toLocaleDateString('sv-SE'); // YYYY-MM-DD(本地时区)
-            const VISITED_KEY = `intake-visited:${todayStr}`;
-            const LAST_COMPLETE_KEY = 'intake-last-complete-at';
-            function getVisitedSet(){
-                try {
-                    const raw = localStorage.getItem(VISITED_KEY);
-                    const arr = raw ? JSON.parse(raw) : [];
-                    return new Set(Array.isArray(arr) ? arr : []);
-                } catch {
-                    return new Set();
-                }
-            }
-            function saveVisitedSet(set){
-                localStorage.setItem(VISITED_KEY, JSON.stringify(Array.from(set)));
-            }
-            function setLastComplete(nowISO){
-                localStorage.setItem(LAST_COMPLETE_KEY, nowISO);
-            }
-            function getLastComplete(){
-                return localStorage.getItem(LAST_COMPLETE_KEY) || '';
-            }
-            function formatTime(iso){
-                if (!iso) return '—';
-                try {
-                    const d = new Date(iso);
-                    const pad = n => String(n).padStart(2,'0');
-                    return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
-                } catch { return '—'; }
-            }
-            // ====== 渲染流程(书架) ======
-            const flowEl = document.getElementById('flow');
-            const seenCountEl = document.getElementById('seenCount');
-            const totalCountEl = document.getElementById('totalCount');
-            const lastCompleteEl = document.getElementById('lastComplete');
-            totalCountEl.textContent = String(SOURCES.length);
-            lastCompleteEl.textContent = formatTime(getLastComplete());
-            let visited = getVisitedSet();
-            render();
-            function render(){
-                flowEl.innerHTML = '';
-                SOURCES.forEach((s, idx) => {
-                    const shelf = document.createElement('div');
-                    shelf.className = 'shelf';
-                    shelf.dataset.id = s.id;
-                    if (visited.has(s.id)) shelf.classList.add('visited');
-                    const status = document.createElement('span');
-                    status.className = 'status-dot';
-                    shelf.appendChild(status);
-                    const icon = document.createElement('div');
-                    icon.className = 'shelf-icon';
-                    icon.textContent = s.icon || '📚';
-                    const main = document.createElement('div');
-                    main.className = 'shelf-main';
-                    const title = document.createElement('div');
-                    title.className = 'shelf-title';
-                    title.textContent = s.name;
-                    const desc = document.createElement('div');
-                    desc.className = 'shelf-desc';
-                    desc.textContent = s.desc || '';
-                    const actions = document.createElement('div');
-                    actions.className = 'shelf-actions';
-                    const goBtn = document.createElement('button');
-                    goBtn.className = 'btn';
-                    goBtn.textContent = '去查看';
-                    goBtn.setAttribute('aria-label', `打开:${s.name}`);
-                    goBtn.addEventListener('click', (e) => {
-                        e.stopPropagation();
-                        markVisitedAndOpen(s.id, s.url);
                     });
-                    const stateBadge = document.createElement('span');
-                    stateBadge.className = 'badge';
-                    stateBadge.textContent = visited.has(s.id) ? '已看' : '未看';
-                    actions.appendChild(goBtn);
-                    actions.appendChild(stateBadge);
-                    main.appendChild(title);
-                    main.appendChild(desc);
-                    main.appendChild(actions);
-                    shelf.appendChild(icon);
-                    shelf.appendChild(main);
-                    // 整块可点击
-                    shelf.addEventListener('click', () => markVisitedAndOpen(s.id, s.url));
-                    flowEl.appendChild(shelf);
-                });
-                updateCounts();
-            }
-            function markVisitedAndOpen(id, url){
-                if (!visited.has(id)) {
-                    visited.add(id);
-                    saveVisitedSet(visited);
-                    // 更新UI
-                    const shelf = flowEl.querySelector(`.shelf[data-id="${id}"]`);
-                    if (shelf) {
-                        shelf.classList.add('visited');
-                        const badge = shelf.querySelector('.badge');
-                        if (badge) badge.textContent = '已看';
+                }
+                
+                // 本地存储处理
+                const todayStr = new Date().toLocaleDateString('sv-SE');
+                const VISITED_KEY = `intake-visited:${todayStr}`;
+                const LAST_COMPLETE_KEY = 'intake-last-complete-at';
+                
+                function getVisitedSet(){
+                    try {
+                        const raw = localStorage.getItem(VISITED_KEY);
+                        const arr = raw ? JSON.parse(raw) : [];
+                        return new Set(Array.isArray(arr) ? arr : []);
+                    } catch {
+                        return new Set();
                     }
-                    updateCounts(true);
                 }
-                // 新标签打开
-                try {
-                    window.open(url, '_blank', 'noopener');
-                } catch (err) {
-                    location.href = url;
+                
+                function saveVisitedSet(set){
+                    localStorage.setItem(VISITED_KEY, JSON.stringify(Array.from(set)));
+                }
+                
+                function setLastComplete(nowISO){
+                    localStorage.setItem(LAST_COMPLETE_KEY, nowISO);
+                }
+                
+                function getLastComplete(){
+                    return localStorage.getItem(LAST_COMPLETE_KEY) || '';
+                }
+                
+                function formatTime(iso){
+                    if (!iso) return '—';
+                    try {
+                        const d = new Date(iso);
+                        const pad = n => String(n).padStart(2,'0');
+                        return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
+                    } catch { return '—'; }
+                }
+                
+                // UI元素
+                const flowEl = document.getElementById('flow');
+                const seenCountEl = document.getElementById('seenCount');
+                const totalCountEl = document.getElementById('totalCount');
+                const lastCompleteEl = document.getElementById('lastComplete');
+                
+                totalCountEl.textContent = String(SOURCES.length);
+                lastCompleteEl.textContent = formatTime(getLastComplete());
+                
+                let visited = getVisitedSet();
+                render();
+                
+                function render(){
+                    flowEl.innerHTML = '';
+                    SOURCES.forEach((s) => {
+                        const shelf = document.createElement('div');
+                        shelf.className = 'shelf';
+                        shelf.dataset.id = s.id;
+                        if (visited.has(s.id)) shelf.classList.add('visited');
+                        
+                        const status = document.createElement('span');
+                        status.className = 'status-dot';
+                        shelf.appendChild(status);
+                        
+                        const icon = document.createElement('div');
+                        icon.className = 'shelf-icon';
+                        icon.textContent = s.icon || '📚';
+                        
+                        const main = document.createElement('div');
+                        main.className = 'shelf-main';
+                        
+                        const title = document.createElement('div');
+                        title.className = 'shelf-title';
+                        title.textContent = s.name;
+                        
+                        const desc = document.createElement('div');
+                        desc.className = 'shelf-desc';
+                        desc.textContent = s.desc || '';
+                        
+                        // 元数据(分类等)
+                        if (s.category) {
+                            const meta = document.createElement('div');
+                            meta.className = 'shelf-meta';
+                            const catTag = document.createElement('span');
+                            catTag.className = 'category-tag';
+                            catTag.textContent = s.category;
+                            meta.appendChild(catTag);
+                            main.appendChild(title);
+                            main.appendChild(desc);
+                            main.appendChild(meta);
+                        } else {
+                            main.appendChild(title);
+                            main.appendChild(desc);
+                        }
+                        
+                        const actions = document.createElement('div');
+                        actions.className = 'shelf-actions';
+                        
+                        const goBtn = document.createElement('button');
+                        goBtn.className = 'btn';
+                        goBtn.textContent = '去查看';
+                        goBtn.setAttribute('aria-label', `打开:${s.name}`);
+                        goBtn.addEventListener('click', (e) => {
+                            e.stopPropagation();
+                            markVisitedAndOpen(s.id, s.url);
+                        });
+                        
+                        const stateBadge = document.createElement('span');
+                        stateBadge.className = 'badge';
+                        stateBadge.textContent = visited.has(s.id) ? '已看' : '未看';
+                        
+                        actions.appendChild(goBtn);
+                        actions.appendChild(stateBadge);
+                        main.appendChild(actions);
+                        
+                        shelf.appendChild(icon);
+                        shelf.appendChild(main);
+                        
+                        // 整块可点击
+                        shelf.addEventListener('click', () => markVisitedAndOpen(s.id, s.url));
+                        
+                        flowEl.appendChild(shelf);
+                    });
+                    updateCounts();
+                }
+                
+                function markVisitedAndOpen(id, url){
+                    if (!visited.has(id)) {
+                        visited.add(id);
+                        saveVisitedSet(visited);
+                        const shelf = flowEl.querySelector(`[data-id="${id}"]`);
+                        if (shelf) {
+                            shelf.classList.add('visited');
+                            const badge = shelf.querySelector('.badge');
+                            if (badge) badge.textContent = '已看';
+                        }
+                        updateCounts(true);
+                    }
+                    try {
+                        window.open(url, '_blank', 'noopener');
+                    } catch (err) {
+                        location.href = url;
+                    }
+                }
+                
+                function updateCounts(checkComplete=false){
+                    seenCountEl.textContent = String(visited.size);
+                    if (checkComplete && visited.size === SOURCES.length) {
+                        const nowISO = new Date().toISOString();
+                        setLastComplete(nowISO);
+                        lastCompleteEl.textContent = formatTime(nowISO);
+                    }
                 }
             }
-            function updateCounts(checkComplete=false){
-                seenCountEl.textContent = String(visited.size);
-                if (checkComplete && visited.size === SOURCES.length) {
-                    const nowISO = new Date().toISOString();
-                    setLastComplete(nowISO);
-                    lastCompleteEl.textContent = formatTime(nowISO);
-                }
+            
+            // 页面加载后初始化
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', init);
+            } else {
+                init();
             }
+            
         })();
     </script>
 </body>
