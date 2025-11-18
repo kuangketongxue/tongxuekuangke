@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-  <title>个人主页 - 狂客同学</title>
+  <title>狂客的主页</title>
+
   <!-- 字体（可按需调整或去掉） -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
@@ -21,6 +22,8 @@
       --card:#fff;
       --radius:12px;
       --max:1320px; /* 容器宽度 */
+      --success:#22c55e;
+      --danger:#ef4444;
     }
     *{box-sizing:border-box}
     html,body{height:100%}
@@ -132,7 +135,7 @@
     .btn{
       height:36px;padding:0 14px;border-radius:8px;border:1px solid var(--line);
       display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--text);
-      font-size:14px;transition:.2s;
+      font-size:14px;transition:.2s;cursor:pointer;
     }
     .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
     .btn.primary:hover{background:var(--brand-deep)}
@@ -239,13 +242,87 @@
       padding:14px;margin-bottom:12px;box-shadow:0 4px 14px rgba(0,0,0,.04)
     }
     .aside-title{font-weight:700;margin-bottom:10px}
-    .charge{
-      display:flex;align-items:center;justify-content:space-between;gap:10px
-    }
+
+    .charge{display:flex;align-items:center;justify-content:space-between;gap:10px}
     .charge .btn{height:34px}
+
     .profile-box{display:grid;gap:8px;color:var(--text-2);font-size:14px}
+
+    /* 时钟卡样式 */
+    .clock-box{display:grid;gap:6px;place-items:flex-start}
+    .clock-time{
+      font-size:32px;font-weight:700;letter-spacing:2px;color:var(--brand);
+    }
+    .clock-date{font-size:13px;color:var(--text-2)}
+
+    /* 天气卡样式 */
+    .weather-box{display:grid;gap:8px}
+    .weather-head{display:flex;align-items:center;gap:10px}
+    .weather-icon{font-size:28px}
+    .weather-sub{font-size:13px;color:var(--text-2)}
+    .weather-detail{display:flex;gap:14px;color:var(--text-3);font-size:12px}
+
+    /* 留言弹窗 */
+    .message-modal{
+      position:fixed;inset:0;
+      background:rgba(0,0,0,.65);
+      display:none;align-items:center;justify-content:center;
+      z-index:2000;
+    }
+    .message-modal.active{display:flex}
+    .message-container{
+      background:#fff;border:1px solid var(--line);border-radius:16px;
+      width:min(520px,92vw);max-height:88vh;overflow:auto;
+      padding:20px 20px 16px;box-shadow:0 20px 60px rgba(0,0,0,.25);
+      animation:modalIn .2s ease;
+    }
+    @keyframes modalIn{
+      from{opacity:0;transform:translateY(10px) scale(.98)}
+      to{opacity:1;transform:translateY(0) scale(1)}
+    }
+    .message-header{
+      display:flex;align-items:center;justify-content:space-between;margin-bottom:10px
+    }
+    .message-title{font-size:18px;font-weight:700;color:var(--text)}
+    .close-btn{
+      width:34px;height:34px;border-radius:50%;
+      display:grid;place-items:center;border:1px solid var(--line);cursor:pointer;background:#fff
+    }
+    .message-form{display:grid;gap:12px;margin-top:8px}
+    .form-group{display:grid;gap:6px}
+    .form-label{font-size:13px;color:var(--text-2)}
+    .form-input,.form-textarea{
+      width:100%;border:1px solid var(--line);border-radius:10px;background:#f9fafb;
+      padding:10px 12px;font-size:14px;color:var(--text);outline:none;transition:.15s
+    }
+    .form-input:focus,.form-textarea:focus{
+      background:#fff;border-color:var(--brand);box-shadow:0 0 0 3px rgba(0,174,236,.12)
+    }
+    .form-textarea{min-height:120px;resize:vertical;line-height:1.6}
+    .char-count{text-align:right;font-size:12px;color:var(--text-3)}
+    .submit-btn{
+      height:38px;border-radius:10px;border:1px solid var(--brand);background:var(--brand);color:#fff;
+      font-weight:700;letter-spacing:.5px;cursor:pointer
+    }
+    .submit-btn:disabled{opacity:.6;cursor:not-allowed}
+    .status-message{
+      margin-top:6px;padding:10px;border-radius:8px;font-size:13px;text-align:center;display:none
+    }
+    .status-message.show{display:block}
+    .status-message.success{background:rgba(34,197,94,.12);color:var(--success);border:1px solid rgba(34,197,94,.35)}
+    .status-message.error{background:rgba(239,68,68,.12);color:var(--danger);border:1px solid rgba(239,68,68,.35)}
+
+    /* 右下角留言快捷按钮 */
+    .float-chat{
+      position:fixed;right:18px;bottom:18px;z-index:1000;
+      width:54px;height:54px;border-radius:50%;
+      background:var(--brand);color:#fff;display:grid;place-items:center;
+      box-shadow:0 10px 24px rgba(0,174,236,.35);cursor:pointer
+    }
+
+    /* 返回旧版按钮（装饰） */
     .old-btn{
-      position:fixed;right:18px;bottom:18px;z-index:10;
+      position:fixed;right:18px;bottom:86px;z-index:10;
       background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 14px;color:var(--text-2);
       box-shadow:0 6px 18px rgba(0,0,0,.08);font-size:14px
     }
@@ -299,7 +376,7 @@
             <span class="u-level">LV5</span>
           </div>
           <!-- TODO: 个性签名/简介 -->
-          <div class="u-desc">平和</div>
+          <div class="u-desc">这里是个性签名，支持一行简短描述～</div>
           <div class="u-stats">
             <!-- TODO: 关注/粉丝/获赞/播放数据 -->
             <div><b>0</b> 关注数</div>
@@ -438,14 +515,298 @@
           <div>其他：——</div>
         </div>
       </div>
+
+      <!-- 现在时间 -->
+      <div class="aside-card">
+        <div class="aside-title">现在时间</div>
+        <div class="clock-box">
+          <div id="clockTime" class="clock-time">00:00:00</div>
+          <div id="clockDate" class="clock-date">0000年00月00日 星期一</div>
+        </div>
+      </div>
+
+      <!-- 天气 -->
+      <div class="aside-card">
+        <div class="aside-title">天气</div>
+        <div id="weatherBox" class="weather-box">
+          <div class="weather-sub">正在获取天气…</div>
+        </div>
+      </div>
+
+      <!-- 留言入口 -->
+      <div class="aside-card">
+        <div class="aside-title">给我留言</div>
+        <div style="color:var(--text-2);font-size:14px;margin-bottom:8px">
+          有想说的话欢迎留言，我会尽快回复你～
+        </div>
+        <button class="btn primary" onclick="openMessageModal()">打开留言框 ✉️</button>
+      </div>
     </aside>
   </div>
 
-  <!-- 右下角返回旧版按钮（装饰） -->
+  <!-- 返回旧版（装饰） -->
   <a class="old-btn" href="javascript:void(0)">返回旧版</a>
 
+  <!-- 悬浮留言按钮 -->
+  <div class="float-chat" title="留言" onclick="openMessageModal()">💬</div>
+
+  <!-- 留言弹窗 -->
+  <div class="message-modal" id="messageModal">
+    <div class="message-container">
+      <div class="message-header">
+        <div class="message-title">给我留言</div>
+        <div class="close-btn" onclick="closeMessageModal()">✕</div>
+      </div>
+
+      <form class="message-form" id="messageForm" onsubmit="submitMessage(event)">
+        <div class="form-group">
+          <label class="form-label">昵称 *</label>
+          <input class="form-input" id="userName" type="text" placeholder="请输入您的昵称" required maxlength="20"/>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">邮箱（选填）</label>
+          <input class="form-input" id="userEmail" type="email" placeholder="可选，填写后便于回复"/>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">留言内容 *</label>
+          <textarea class="form-textarea" id="messageContent" placeholder="写下您想说的话…" required maxlength="500"></textarea>
+          <div class="char-count"><span id="charCount">0</span>/500</div>
+        </div>
+
+        <button class="submit-btn" id="submitBtn" type="submit"><span id="submitBtnText">📤 发送留言</span></button>
+        <div id="statusMessage" class="status-message"></div>
+      </form>
+    </div>
+  </div>
+
   <script>
-    // 仅用于切换“选项卡/筛选”视觉激活态
+    // ========== 配置 ==========
+    const CONFIG = {
+      api: {
+        submitUrl: '' // TODO: 留言提交接口，如 '/api/submit-message'；留空则本地模拟成功
+      },
+      qweather: {
+        key: '' // TODO: 和风天气 Key；留空则显示“未配置”
+      },
+      rateLimit: {
+        cooldown: 60_000, // 60 秒
+        maxLength: 500,
+        minLength: 10
+      }
+    };
+
+    // ========== 工具 ==========
+    function sanitizeInput(text){
+      if(!text) return '';
+      return text
+        .replace(/<script[^>]*>.*?<\/script>/gi,'')
+        .replace(/<iframe[^>]*>.*?<\/iframe>/gi,'')
+        .replace(/<object[^>]*>.*?<\/object>/gi,'')
+        .replace(/<embed[^>]*>.*?<\/embed>/gi,'')
+        .replace(/on\w+\s*=\s*["'][^"']*["']/gi,'')
+        .replace(/<[^>]+>/g,'')
+        .trim();
+    }
+    function isValidEmail(email){
+      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    }
+    function showStatus(message,type){
+      const el = document.getElementById('statusMessage');
+      el.textContent = message;
+      el.className = 'status-message show ' + (type==='success'?'success':'error');
+    }
+    function checkSubmitCooldown(){
+      const last = localStorage.getItem('lastMessageSubmit');
+      if(last){
+        const passed = Date.now() - Number(last);
+        if(passed < CONFIG.rateLimit.cooldown){
+          const left = Math.ceil((CONFIG.rateLimit.cooldown - passed)/1000);
+          showStatus(`⏱️ 请等待 ${left} 秒后再次提交`, 'error');
+          return false;
+        }
+      }
+      return true;
+    }
+
+    // ========== 留言 ==========
+    function openMessageModal(){
+      document.getElementById('messageModal').classList.add('active');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMessageModal(){
+      document.getElementById('messageModal').classList.remove('active');
+      document.body.style.overflow = '';
+      document.getElementById('messageForm').reset();
+      document.getElementById('charCount').textContent = '0';
+      const el = document.getElementById('statusMessage');
+      el.textContent = ''; el.className = 'status-message';
+    }
+    document.getElementById('messageModal').addEventListener('click',e=>{
+      if(e.target === e.currentTarget) closeMessageModal();
+    });
+    document.addEventListener('keydown',e=>{
+      if(e.key==='Escape') closeMessageModal();
+    });
+    document.getElementById('messageContent').addEventListener('input',()=>{
+      const val = document.getElementById('messageContent').value;
+      const count = val.length;
+      document.getElementById('charCount').textContent = count;
+    });
+
+    async function submitMessage(e){
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const btnText = document.getElementById('submitBtnText');
+      if(btn.disabled) return;
+
+      const userName = sanitizeInput(document.getElementById('userName').value);
+      const userEmail = sanitizeInput(document.getElementById('userEmail').value);
+      const messageContent = sanitizeInput(document.getElementById('messageContent').value);
+
+      if(!userName || !messageContent){
+        showStatus('❌ 请填写必填项', 'error'); return;
+      }
+      if(messageContent.length < CONFIG.rateLimit.minLength){
+        showStatus(`❌ 留言内容至少需要 ${CONFIG.rateLimit.minLength} 个字符`, 'error'); return;
+      }
+      if(messageContent.length > CONFIG.rateLimit.maxLength){
+        showStatus(`❌ 留言内容不能超过 ${CONFIG.rateLimit.maxLength} 个字符`, 'error'); return;
+      }
+      if(userEmail && !isValidEmail(userEmail)){
+        showStatus('❌ 邮箱格式不正确', 'error'); return;
+      }
+      if(!checkSubmitCooldown()) return;
+
+      btn.disabled = true; btnText.textContent = '📮 发送中...';
+
+      try{
+        const payload = {
+          userName,
+          userEmail: userEmail || '未提供',
+          messageContent,
+          timestamp: new Date().toLocaleString('zh-CN',{hour12:false})
+        };
+
+        if(CONFIG.api.submitUrl){
+          const res = await fetch(CONFIG.api.submitUrl,{
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify(payload)
+          });
+          if(!res.ok) throw new Error('提交失败，请稍后重试');
+        }else{
+          // 本地模拟成功
+          await new Promise(r=>setTimeout(r,700));
+        }
+
+        localStorage.setItem('lastMessageSubmit', Date.now().toString());
+        showStatus('✨ 留言发送成功！感谢您的留言～', 'success');
+        setTimeout(closeMessageModal, 1500);
+      }catch(err){
+        console.error('留言发送失败:', err);
+        showStatus(`❌ ${err.message||'提交失败'}`, 'error');
+      }finally{
+        btn.disabled = false; btnText.textContent = '📤 发送留言';
+      }
+    }
+
+    // ========== 时钟（北京时间） ==========
+    function updateClock(){
+      const now = new Date();
+      // 使用本地时间显示，若需严格北京时间，可使用 Intl 指定时区分别格式化
+      const y = new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',year:'numeric'}).format(now);
+      const m = new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',month:'2-digit'}).format(now);
+      const d = new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',day:'2-digit'}).format(now);
+      const w = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'][
+        Number(new Intl.DateTimeFormat('zh-CN-u-ca-chinese',{timeZone:'Asia/Shanghai',weekday:'numeric'}).format(now)) % 7
+      ] || ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'][new Date(now.toLocaleString('en-US',{timeZone:'Asia/Shanghai'})).getDay()];
+
+      const timeParts = new Intl.DateTimeFormat('zh-CN',{
+        timeZone:'Asia/Shanghai',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false
+      }).formatToParts(now).reduce((acc,p)=>{acc[p.type]=p.value;return acc;}, {});
+      const hh = timeParts.hour || '00';
+      const mm = timeParts.minute || '00';
+      const ss = timeParts.second || '00';
+
+      document.getElementById('clockTime').textContent = `${hh}:${mm}:${ss}`;
+      document.getElementById('clockDate').textContent = `${y}年${m}月${d}日 ${w}`;
+    }
+
+    // ========== 天气（和风） ==========
+    const qweatherIcons = {
+      '100':'☀️','101':'☁️','102':'⛅','103':'⛅','104':'☁️',
+      '150':'🌙','151':'☁️','152':'⛅','153':'⛅',
+      '300':'🌦️','301':'⛈️','302':'⚡','303':'⛈️','304':'⛈️',
+      '305':'🌧️','306':'🌧️','307':'🌧️','308':'🌊','309':'💧',
+      '310':'⛈️','311':'⛈️','312':'⛈️','313':'🌧️',
+      '400':'❄️','401':'❄️','402':'❄️','403':'❄️','404':'🌨️',
+      '500':'🌫️','501':'🌫️','502':'😷','503':'🌪️','504':'🌪️',
+      '507':'🌪️','508':'🌪️','509':'🌫️','510':'🌫️',
+      '900':'🔥','901':'❄️','999':'🌈'
+    };
+    function weatherIcon(code){ return qweatherIcons[code] || '🌈'; }
+
+    function renderWeatherLoading(msg='正在获取天气…'){
+      const box = document.getElementById('weatherBox');
+      box.innerHTML = `<div class="weather-sub">${msg}</div>`;
+    }
+    function renderWeatherError(msg='天气数据获取失败'){
+      const box = document.getElementById('weatherBox');
+      box.innerHTML = `<div class="weather-sub">${msg}</div>`;
+    }
+    function renderWeather(data){
+      const box = document.getElementById('weatherBox');
+      const w = data.now;
+      const icon = weatherIcon(w.icon);
+      box.innerHTML = `
+        <div class="weather-head">
+          <div class="weather-icon">${icon}</div>
+          <div>
+            <div style="font-weight:700">${w.text} · ${w.temp}°C</div>
+            <div class="weather-sub">体感 ${w.feelsLike}°C · 能见度 ${w.vis||'-'}km</div>
+          </div>
+        </div>
+        <div class="weather-detail">
+          <div>💨 ${w.windDir} ${w.windScale}级</div>
+          <div>💧 湿度 ${w.humidity}%</div>
+          <div>🧭 气压 ${w.pressure||'-'}hPa</div>
+        </div>
+      `;
+    }
+
+    async function fetchQWeather(){
+      const key = CONFIG.qweather.key;
+      if(!key){ renderWeatherError('未配置天气 Key'); return; }
+      if(!('geolocation' in navigator)){
+        renderWeatherError('无法获取定位权限'); return;
+      }
+      renderWeatherLoading();
+      navigator.geolocation.getCurrentPosition(async pos=>{
+        try{
+          const {latitude, longitude} = pos.coords;
+          const loc = `${longitude.toFixed(2)},${latitude.toFixed(2)}`;
+          const url = `https://devapi.qweather.com/v7/weather/now?location=${loc}&key=${encodeURIComponent(key)}&lang=zh`;
+          const res = await fetch(url);
+          if(!res.ok) throw new Error(`HTTP ${res.status}`);
+          const data = await res.json();
+          if(data && data.code==='200' && data.now){
+            renderWeather(data);
+          }else{
+            renderWeatherError('天气返回异常');
+          }
+        }catch(err){
+          console.error(err);
+          renderWeatherError('天气请求失败');
+        }
+      },err=>{
+        console.error(err);
+        renderWeatherError('定位失败，无法获取天气');
+      },{timeout:10000,enableHighAccuracy:false,maximumAge:300000});
+    }
+
+    // ========== 交互微动效（Tabs/筛选） ==========
     const tabList = document.getElementById('tabList');
     tabList.addEventListener('click', (e)=>{
       const t = e.target.closest('.tab');
@@ -460,6 +821,15 @@
       [...chips.children].forEach(x=>x.classList.remove('active'));
       c.classList.add('active');
     });
+
+    // ========== 启动 ==========
+    function boot(){
+      updateClock();
+      setInterval(updateClock,1000);
+      fetchQWeather();
+      setInterval(fetchQWeather, 15*60*1000); // 15 分钟
+    }
+    window.addEventListener('load', boot);
   </script>
 </body>
 </html>
