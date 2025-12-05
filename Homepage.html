@@ -2,581 +2,554 @@
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1" />
-  <title>狂客的主页</title>
-
-  <!-- 字体（可按需调整或去掉） -->
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <title>狂客的朋友圈</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet"/>
-
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <style>
     :root{
-      --brand:#00AEEC;
-      --brand-deep:#0096ce;
-      --text:#18191c;
-      --text-2:#61666d;
-      --text-3:#8a8f98;
-      --line:#e3e5e7;
-      --bg:#f6f7f8;
-      --card:#fff;
-      --radius:12px;
-      --max:1320px; /* 容器宽度 */
-      --success:#22c55e;
-      --danger:#ef4444;
+      --wx-green:#07c160;
+      --wx-green-dark:#06ad56;
+      --wx-bg:#ededed;
+      --wx-card:#fff;
+      --text:#000;
+      --text-2:#576b95;
+      --text-3:#888;
+      --line:#e5e5e5;
+      --link:#576b95;
+      --radius:4px;
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+    html,body{height:100%;margin:0;padding:0}
     body{
-      margin:0;
-      font-family:'Noto Sans SC',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'PingFang SC','Microsoft YaHei',sans-serif;
-      color:var(--text);
-      background:var(--bg);
+      font-family:'Noto Sans SC',-apple-system,BlinkMacSystemFont,'Segoe UI','Helvetica Neue',Arial,sans-serif;
+      background:var(--wx-bg);color:var(--text);font-size:16px;line-height:1.6;
+      overflow-x:hidden;
     }
-    a{color:inherit;text-decoration:none}
+    a{color:var(--link);text-decoration:none}
     img{display:block;max-width:100%}
-
-    /* 顶部导航 */
-    .nav{
-      position:sticky;top:0;z-index:1000;
-      backdrop-filter:saturate(120%) blur(8px);
-      background:rgba(255,255,255,.92);
-      border-bottom:1px solid var(--line);
+    button{font-family:inherit}
+    
+    /* ========== 顶部导航栏 ========== */
+    .navbar{
+      position:fixed;top:0;left:0;right:0;z-index:999;
+      background:rgba(237,237,237,.98);backdrop-filter:blur(10px);
+      border-bottom:1px solid var(--line);height:44px;
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 16px;
     }
-    .nav-inner{
-      max-width:var(--max);margin:0 auto;
-      display:flex;align-items:center;gap:16px;
-      padding:12px 16px;
+    .nav-left{display:flex;align-items:center;gap:12px}
+    .nav-back{
+      font-size:18px;color:var(--text-2);cursor:pointer;
+      width:32px;height:32px;display:grid;place-items:center;border-radius:50%;
     }
-    .logo{
-      display:flex;align-items:center;gap:8px;
-      font-weight:700;color:var(--brand);
+    .nav-back:active{background:rgba(0,0,0,.05)}
+    .nav-title{font-size:17px;font-weight:600;color:var(--text)}
+    .nav-right{display:flex;align-items:center;gap:8px}
+    .nav-icon{
+      width:32px;height:32px;border-radius:50%;display:grid;place-items:center;
+      font-size:20px;color:var(--text-2);cursor:pointer;
     }
-    .logo-badge{
-      width:28px;height:28px;border-radius:6px;
-      background:var(--brand);display:grid;place-items:center;
-      color:#fff;font-weight:700
+    .nav-icon:active{background:rgba(0,0,0,.05)}
+    
+    /* ========== 顶部封面区 ========== */
+    .cover-wrap{
+      margin-top:44px;position:relative;
+      height:320px;background:#b0c4de url('') center/cover no-repeat; /* TODO: 封面图 */
     }
-    .nav-links{
-      display:flex;gap:14px;align-items:center;
-      color:var(--text-2);font-size:14px
-    }
-    .nav-links a{padding:6px 8px;border-radius:6px}
-    .nav-links a:hover{background:#f1f2f3}
-    .search{
-      flex:1;display:flex;align-items:center;gap:8px;
-      background:#f1f2f3;border:1px solid var(--line);
-      border-radius:999px;padding:8px 12px;
-    }
-    .search input{
-      flex:1;border:none;outline:none;background:transparent;
-      font-size:14px;color:var(--text)
-    }
-    .nav-right{
-      display:flex;align-items:center;gap:12px
-    }
-    .icon-btn{
-      width:36px;height:36px;border-radius:50%;
-      display:grid;place-items:center;color:var(--text-2);
-      border:1px solid var(--line);background:#fff;
-      transition:.2s;
-    }
-    .icon-btn:hover{color:var(--brand);border-color:var(--brand)}
-    .avatar-mini{
-      width:36px;height:36px;border-radius:50%;
-      background:#ddd;overflow:hidden;border:1px solid var(--line)
-    }
-
-    /* 顶部封面 */
-    .cover{
-      position:relative;
-      height:220px;
-      background:#cfd8e3 url('') center/cover no-repeat; /* TODO: 替换为你的封面图 URL */
-    }
-    .cover::after{
-      content:'';
+    .cover-mask{
       position:absolute;inset:0;
-      background:linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.35));
+      background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.3));
     }
-
-    /* 个人信息条 */
-    .profile-bar{
-      position:relative;z-index:1;
-      max-width:var(--max);margin:-42px auto 0;
-      padding:0 16px 12px;
+    .cover-actions{
+      position:absolute;right:16px;bottom:16px;z-index:2;
+      display:flex;gap:10px;
     }
-    .profile-card{
-      background:transparent;
-      display:flex;align-items:flex-end;justify-content:space-between;
-      gap:16px;
+    .cover-btn{
+      background:rgba(0,0,0,.5);backdrop-filter:blur(8px);
+      color:#fff;border:none;border-radius:4px;padding:6px 12px;
+      font-size:13px;display:flex;align-items:center;gap:6px;cursor:pointer;
     }
-    .profile-left{
-      display:flex;align-items:flex-end;gap:16px
+    .cover-btn:active{background:rgba(0,0,0,.65)}
+    
+    /* ========== 用户信息卡 ========== */
+    .user-info{
+      position:relative;z-index:3;
+      margin:-50px 16px 0;background:var(--wx-card);
+      border-radius:12px;padding:16px;box-shadow:0 2px 12px rgba(0,0,0,.08);
     }
-    .avatar{
-      width:88px;height:88px;border-radius:50%;
-      border:3px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.12);
-      background:#e5e7eb url('') center/cover no-repeat; /* TODO: 替换为你的头像 URL */
+    .user-top{display:flex;gap:12px;align-items:flex-start}
+    .user-avatar{
+      width:64px;height:64px;border-radius:8px;
+      background:#ddd url('') center/cover no-repeat; /* TODO: 头像 */
+      border:2px solid #fff;flex-shrink:0;
     }
-    .u-meta{
-      display:flex;flex-direction:column;gap:6px;color:#fff
+    .user-detail{flex:1;min-width:0}
+    .user-name{
+      font-size:20px;font-weight:700;color:var(--text);
+      display:flex;align-items:center;gap:8px;margin-bottom:4px;
     }
-    .u-name{
-      display:flex;align-items:center;gap:8px;font-size:22px;font-weight:700
+    .user-badge{
+      padding:2px 6px;border-radius:4px;background:#ff9500;
+      color:#fff;font-size:11px;font-weight:700;
     }
-    .u-level{
-      padding:2px 6px;border-radius:6px;background:#fff;color:#ff7a45;
-      font-weight:700;font-size:12px
+    .user-desc{font-size:14px;color:var(--text-3);margin-bottom:8px}
+    .user-meta{
+      display:flex;gap:16px;font-size:13px;color:var(--text-3);
     }
-    .u-desc{font-size:13px;color:#eef0f3}
-    .profile-actions{
-      display:flex;align-items:center;gap:8px;margin-bottom:6px
+    .user-meta b{color:var(--text);font-weight:600}
+    .user-actions{
+      display:flex;gap:8px;margin-top:12px;padding-top:12px;
+      border-top:1px solid var(--line);
     }
     .btn{
-      height:36px;padding:0 14px;border-radius:8px;border:1px solid var(--line);
-      display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--text);
-      font-size:14px;transition:.2s;cursor:pointer;
+      flex:1;height:36px;border-radius:6px;border:1px solid var(--line);
+      background:#fff;color:var(--text-2);font-size:14px;
+      display:flex;align-items:center;justify-content:center;gap:6px;
+      cursor:pointer;font-weight:500;
     }
-    .btn.primary{background:var(--brand);border-color:var(--brand);color:#fff}
-    .btn.primary:hover{background:var(--brand-deep)}
-    .btn:hover{box-shadow:0 2px 8px rgba(0,0,0,.06)}
-    .u-stats{
-      display:flex;gap:18px;margin-top:10px;color:#fff;font-size:13px
-    }
-    .u-stats b{font-size:16px;margin-right:4px}
-
-    /* 选项卡 */
+    .btn.primary{background:var(--wx-green);border-color:var(--wx-green);color:#fff}
+    .btn:active{opacity:.8}
+    
+    /* ========== Tabs ========== */
     .tabs{
-      max-width:var(--max);margin:18px auto 0;padding:0 16px;
-      border-bottom:1px solid var(--line);
-      display:flex;align-items:center;justify-content:space-between;gap:16px
+      position:sticky;top:44px;z-index:99;
+      background:var(--wx-card);border-bottom:1px solid var(--line);
+      display:flex;align-items:center;
+      padding:0 16px;
     }
-    .tab-list{display:flex;gap:18px}
     .tab{
-      position:relative;padding:12px 2px;color:var(--text-2);cursor:pointer;
-      font-weight:500
+      position:relative;padding:12px 0;margin-right:24px;
+      color:var(--text-3);font-size:15px;font-weight:500;cursor:pointer;
     }
-    .tab.active{color:var(--brand)}
+    .tab.active{color:var(--text)}
     .tab.active::after{
-      content:'';position:absolute;left:0;right:0;bottom:-1px;height:2px;background:var(--brand);
-      border-radius:2px
+      content:'';position:absolute;left:0;right:0;bottom:0;height:2px;
+      background:var(--wx-green);border-radius:2px;
     }
-    .tab-search{
-      width:280px;max-width:40%;
-      display:flex;gap:8px;align-items:center;
-      background:#f1f2f3;border:1px solid var(--line);border-radius:999px;padding:8px 12px
+    
+    /* ========== 主体内容 ========== */
+    .main{padding:12px 0 60px}
+    
+    /* ========== 朋友圈动态列表 ========== */
+    .moment{
+      background:var(--wx-card);border-bottom:1px solid var(--line);
+      padding:16px;display:flex;gap:12px;
     }
-    .tab-search input{flex:1;border:none;background:transparent;outline:none;font-size:14px}
-
-    /* 主体区域 */
-    .page{
-      max-width:var(--max);margin:18px auto 40px;padding:0 16px;
-      display:grid;grid-template-columns:1fr 300px;gap:16px
+    .moment-avatar{
+      width:44px;height:44px;border-radius:4px;
+      background:#ddd url('') center/cover no-repeat;
+      flex-shrink:0;cursor:pointer;
     }
-
-    /* 左侧 - 视频区 */
-    .section-card{
-      background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-      padding:14px;box-shadow:0 4px 14px rgba(0,0,0,.04)
+    .moment-content{flex:1;min-width:0}
+    .moment-user{
+      color:var(--link);font-size:15px;font-weight:600;
+      margin-bottom:4px;cursor:pointer;
     }
-    .sec-header{
-      display:flex;align-items:center;justify-content:space-between;margin-bottom:10px
+    .moment-text{
+      font-size:15px;color:var(--text);line-height:1.5;
+      margin-bottom:8px;word-wrap:break-word;
     }
-    .sec-title{font-size:18px;font-weight:700}
-    .filter{
-      display:flex;gap:8px;background:#f6f7f8;border-radius:999px;padding:4px
+    .moment-text.collapsed{
+      max-height:60px;overflow:hidden;position:relative;
     }
-    .chip{
-      padding:6px 10px;border-radius:999px;font-size:13px;color:var(--text-2);cursor:pointer
+    .moment-text.collapsed::after{
+      content:'';position:absolute;bottom:0;left:0;right:0;height:20px;
+      background:linear-gradient(transparent,var(--wx-card));
     }
-    .chip.active{background:#fff;border:1px solid var(--brand);color:var(--brand)}
-
-    .video-grid{
-      display:grid;gap:12px;
-      grid-template-columns:repeat(5,1fr);
+    .text-expand{
+      color:var(--link);font-size:14px;cursor:pointer;margin-top:4px;
     }
-    @media (max-width:1200px){
-      .video-grid{grid-template-columns:repeat(4,1fr)}
+    .moment-images{
+      display:grid;gap:4px;margin-bottom:8px;
     }
-    @media (max-width:992px){
-      .page{grid-template-columns:1fr}
-      .video-grid{grid-template-columns:repeat(3,1fr)}
-      .tab-search{max-width:none;width:220px}
+    .moment-images.grid-1{grid-template-columns:1fr;max-width:240px}
+    .moment-images.grid-2{grid-template-columns:repeat(2,1fr);max-width:240px}
+    .moment-images.grid-3{grid-template-columns:repeat(3,1fr)}
+    .moment-images.grid-4{grid-template-columns:repeat(2,1fr);max-width:240px}
+    .moment-images.grid-more{grid-template-columns:repeat(3,1fr)}
+    .moment-img{
+      aspect-ratio:1;background:#f0f0f0 url('') center/cover no-repeat;
+      border-radius:4px;cursor:pointer;position:relative;overflow:hidden;
     }
-    @media (max-width:640px){
-      .video-grid{grid-template-columns:repeat(2,1fr)}
-      .u-stats{flex-wrap:wrap}
-      .profile-actions{display:none}
+    .moment-img:active{opacity:.9}
+    .moment-video{
+      aspect-ratio:16/9;background:#000 url('') center/cover no-repeat;
+      border-radius:8px;position:relative;cursor:pointer;
     }
-
-    .v-item{
-      background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden;
-      transition:.2s;cursor:pointer
+    .moment-video::after{
+      content:'▶';position:absolute;inset:0;
+      display:grid;place-items:center;font-size:48px;color:#fff;
+      background:rgba(0,0,0,.25);
     }
-    .v-item:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(0,0,0,.08)}
-    .v-thumb{
-      position:relative;aspect-ratio:16/9;background:#dfe3e8 url('') center/cover no-repeat; /* TODO: 默认封面占位，可在每个视频项覆盖 */
+    .moment-meta{
+      display:flex;align-items:center;justify-content:space-between;
+      color:var(--text-3);font-size:13px;margin-top:6px;
     }
-    .v-mask{
-      position:absolute;inset:0;background:linear-gradient(180deg,transparent,rgba(0,0,0,.35));
-      opacity:0;transition:.2s
+    .moment-time{display:flex;align-items:center;gap:8px}
+    .moment-location{color:var(--link)}
+    .moment-more{
+      width:24px;height:24px;border-radius:50%;
+      display:grid;place-items:center;cursor:pointer;
     }
-    .v-item:hover .v-mask{opacity:1}
-    .v-duration{
-      position:absolute;right:8px;bottom:8px;
-      padding:2px 6px;border-radius:6px;background:rgba(0,0,0,.65);color:#fff;font-size:12px
+    .moment-more:active{background:rgba(0,0,0,.05)}
+    .moment-interact{
+      background:#f7f7f7;border-radius:4px;padding:8px 10px;
+      margin-top:8px;
     }
-    .v-stats{
-      position:absolute;left:8px;bottom:8px;display:flex;gap:10px;color:#fff;font-size:12px;opacity:.95
+    .moment-likes{
+      color:var(--link);font-size:14px;line-height:1.5;
+      display:flex;align-items:flex-start;gap:6px;
     }
-    .v-info{padding:8px 10px}
-    .v-title{
-      font-size:14px;color:var(--text);line-height:1.4;height:40px;overflow:hidden;display:-webkit-box;
-      -webkit-line-clamp:2;-webkit-box-orient:vertical;
+    .moment-likes::before{content:'❤️';flex-shrink:0}
+    .moment-comments{
+      border-top:1px solid var(--line);margin-top:6px;padding-top:6px;
     }
-    .v-meta{margin-top:6px;color:var(--text-3);font-size:12px}
-
-    /* 右侧 - 侧边栏 */
-    .aside-card{
-      background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
-      padding:14px;margin-bottom:12px;box-shadow:0 4px 14px rgba(0,0,0,.04)
+    .comment-item{
+      font-size:14px;color:var(--text);line-height:1.5;margin-bottom:4px;
     }
-    .aside-title{font-weight:700;margin-bottom:10px}
-
-    .charge{display:flex;align-items:center;justify-content:space-between;gap:10px}
-    .charge .btn{height:34px}
-
-    .profile-box{display:grid;gap:8px;color:var(--text-2);font-size:14px}
-
-    /* 时钟卡样式 */
-    .clock-box{display:grid;gap:6px;place-items:flex-start}
-    .clock-time{
-      font-size:32px;font-weight:700;letter-spacing:2px;color:var(--brand);
+    .comment-user{color:var(--link);font-weight:600}
+    .comment-reply{color:var(--link)}
+    
+    /* ========== 侧边栏（移动端底部固定） ========== */
+    .sidebar{
+      position:fixed;bottom:0;left:0;right:0;z-index:999;
+      background:var(--wx-card);border-top:1px solid var(--line);
+      padding:8px 16px;display:flex;justify-content:space-around;align-items:center;
+      box-shadow:0 -2px 8px rgba(0,0,0,.05);
     }
-    .clock-date{font-size:13px;color:var(--text-2)}
-
-    /* 天气卡样式 */
-    .weather-box{display:grid;gap:8px}
-    .weather-head{display:flex;align-items:center;gap:10px}
-    .weather-icon{font-size:28px}
-    .weather-sub{font-size:13px;color:var(--text-2)}
-    .weather-detail{display:flex;gap:14px;color:var(--text-3);font-size:12px}
-
-    /* 留言弹窗 */
-    .message-modal{
-      position:fixed;inset:0;
-      background:rgba(0,0,0,.65);
-      display:none;align-items:center;justify-content:center;
-      z-index:2000;
+    .sidebar-item{
+      display:flex;flex-direction:column;align-items:center;gap:4px;
+      color:var(--text-3);font-size:11px;cursor:pointer;
     }
-    .message-modal.active{display:flex}
-    .message-container{
-      background:#fff;border:1px solid var(--line);border-radius:16px;
-      width:min(520px,92vw);max-height:88vh;overflow:auto;
-      padding:20px 20px 16px;box-shadow:0 20px 60px rgba(0,0,0,.25);
-      animation:modalIn .2s ease;
+    .sidebar-icon{font-size:24px}
+    .sidebar-item.active{color:var(--wx-green)}
+    .sidebar-item.active .sidebar-icon{color:var(--wx-green)}
+    
+    /* ========== 留言弹窗 ========== */
+    .modal{
+      position:fixed;inset:0;z-index:9999;
+      background:rgba(0,0,0,.6);display:none;align-items:flex-end;
     }
-    @keyframes modalIn{
-      from{opacity:0;transform:translateY(10px) scale(.98)}
-      to{opacity:1;transform:translateY(0) scale(1)}
+    .modal.active{display:flex}
+    .modal-content{
+      background:var(--wx-card);border-radius:16px 16px 0 0;
+      width:100%;max-height:80vh;overflow:auto;
+      padding:20px 16px;animation:slideUp .3s ease;
     }
-    .message-header{
-      display:flex;align-items:center;justify-content:space-between;margin-bottom:10px
+    @keyframes slideUp{
+      from{transform:translateY(100%)}
+      to{transform:translateY(0)}
     }
-    .message-title{font-size:18px;font-weight:700;color:var(--text)}
-    .close-btn{
-      width:34px;height:34px;border-radius:50%;
-      display:grid;place-items:center;border:1px solid var(--line);cursor:pointer;background:#fff
+    .modal-header{
+      display:flex;align-items:center;justify-content:space-between;
+      margin-bottom:16px;
     }
-    .message-form{display:grid;gap:12px;margin-top:8px}
-    .form-group{display:grid;gap:6px}
-    .form-label{font-size:13px;color:var(--text-2)}
+    .modal-title{font-size:18px;font-weight:700}
+    .modal-close{
+      width:32px;height:32px;border-radius:50%;
+      display:grid;place-items:center;color:var(--text-3);
+      cursor:pointer;font-size:24px;
+    }
+    .modal-close:active{background:rgba(0,0,0,.05)}
+    .form-group{margin-bottom:16px}
+    .form-label{font-size:14px;color:var(--text-2);margin-bottom:6px;display:block}
     .form-input,.form-textarea{
-      width:100%;border:1px solid var(--line);border-radius:10px;background:#f9fafb;
-      padding:10px 12px;font-size:14px;color:var(--text);outline:none;transition:.15s
+      width:100%;border:1px solid var(--line);border-radius:8px;
+      padding:10px 12px;font-size:15px;background:#f7f7f7;
+      outline:none;transition:.2s;
     }
     .form-input:focus,.form-textarea:focus{
-      background:#fff;border-color:var(--brand);box-shadow:0 0 0 3px rgba(0,174,236,.12)
+      border-color:var(--wx-green);background:#fff;
+      box-shadow:0 0 0 3px rgba(7,193,96,.1);
     }
-    .form-textarea{min-height:120px;resize:vertical;line-height:1.6}
-    .char-count{text-align:right;font-size:12px;color:var(--text-3)}
+    .form-textarea{min-height:120px;resize:vertical;line-height:1.5}
+    .char-count{text-align:right;font-size:12px;color:var(--text-3);margin-top:4px}
     .submit-btn{
-      height:38px;border-radius:10px;border:1px solid var(--brand);background:var(--brand);color:#fff;
-      font-weight:700;letter-spacing:.5px;cursor:pointer
+      width:100%;height:44px;border-radius:8px;border:none;
+      background:var(--wx-green);color:#fff;font-size:16px;
+      font-weight:600;cursor:pointer;
     }
-    .submit-btn:disabled{opacity:.6;cursor:not-allowed}
-    .status-message{
-      margin-top:6px;padding:10px;border-radius:8px;font-size:13px;text-align:center;display:none
+    .submit-btn:active{background:var(--wx-green-dark)}
+    .submit-btn:disabled{opacity:.5;cursor:not-allowed}
+    .status-msg{
+      margin-top:12px;padding:10px;border-radius:8px;
+      text-align:center;font-size:14px;display:none;
     }
-    .status-message.show{display:block}
-    .status-message.success{background:rgba(34,197,94,.12);color:var(--success);border:1px solid rgba(34,197,94,.35)}
-    .status-message.error{background:rgba(239,68,68,.12);color:var(--danger);border:1px solid rgba(239,68,68,.35)}
-
-    /* 右下角留言快捷按钮 */
-    .float-chat{
-      position:fixed;right:18px;bottom:18px;z-index:1000;
-      width:54px;height:54px;border-radius:50%;
-      background:var(--brand);color:#fff;display:grid;place-items:center;
-      box-shadow:0 10px 24px rgba(0,174,236,.35);cursor:pointer
+    .status-msg.show{display:block}
+    .status-msg.success{background:#e6f7ed;color:var(--wx-green);border:1px solid #c3e8d1}
+    .status-msg.error{background:#feebeb;color:#fa5151;border:1px solid #fcd1d1}
+    
+    /* ========== 响应式 ========== */
+    @media (max-width:640px){
+      .user-meta{flex-wrap:wrap}
+      .moment-images.grid-more{grid-template-columns:repeat(3,1fr)}
     }
-
-    /* 返回旧版按钮（装饰） */
-    .old-btn{
-      position:fixed;right:18px;bottom:86px;z-index:10;
-      background:#fff;border:1px solid var(--line);border-radius:999px;padding:10px 14px;color:var(--text-2);
-      box-shadow:0 6px 18px rgba(0,0,0,.08);font-size:14px
-    }
+    
+    /* ========== 工具类 ========== */
+    .hidden{display:none !important}
   </style>
 </head>
 <body>
-
-  <!-- 顶部导航 -->
-  <nav class="nav">
-    <div class="nav-inner">
-      <div class="logo">
-        <div class="logo-badge">B</div>
-        <div>个人主页</div>
-      </div>
-      <div class="nav-links">
-        <a href="#">首页</a>
-        <a href="#">番剧</a>
-        <a href="#">直播</a>
-        <a href="#">游戏中心</a>
-        <a href="#">会员购</a>
-        <a href="#">漫画</a>
-        <a href="#">赛事</a>
-      </div>
-      <div class="search">
-        <span>🔍</span>
-        <input type="text" placeholder="搜索作品、视频、动态…"/>
-      </div>
-      <div class="nav-right">
-        <button class="icon-btn" title="历史">🕘</button>
-        <button class="icon-btn" title="消息">💬</button>
-        <button class="icon-btn" title="投稿">⬆️</button>
-        <div class="avatar-mini" title="登录/头像">
-          <!-- TODO: 登录后可放入 <img src="你的头像"> -->
-        </div>
-      </div>
+  <!-- 导航栏 -->
+  <nav class="navbar">
+    <div class="nav-left">
+      <div class="nav-back" onclick="history.back()">‹</div>
+      <div class="nav-title">朋友圈</div>
+    </div>
+    <div class="nav-right">
+      <div class="nav-icon" title="相机" onclick="alert('相机功能')">📷</div>
     </div>
   </nav>
 
-  <!-- 顶部封面（右侧人物插画可直接做在封面图里） -->
-  <div class="cover"><!-- TODO: 修改 .cover 背景图 URL --></div>
+  <!-- 顶部封面 -->
+  <div class="cover-wrap">
+    <div class="cover-mask"></div>
+    <div class="cover-actions">
+      <button class="cover-btn">✏️ 更换封面</button>
+    </div>
+  </div>
 
-  <!-- 个人信息条 -->
-  <div class="profile-bar">
-    <div class="profile-card">
-      <div class="profile-left">
-        <div class="avatar"><!-- TODO: 修改 .avatar 背景图 URL --></div>
-        <div class="u-meta">
-          <div class="u-name">
-            <!-- TODO: 昵称 -->
-            <span>狂客同学</span>
-            <span class="u-level">LV5</span>
-          </div>
-          <!-- TODO: 个性签名/简介 -->
-          <div class="u-desc">这里是个性签名，支持一行简短描述～</div>
-          <div class="u-stats">
-            <!-- TODO: 关注/粉丝/获赞/播放数据 -->
-            <div><b>0</b> 关注数</div>
-            <div><b>0</b> 粉丝数</div>
-            <div><b>0</b> 获赞数</div>
-            <div><b>0</b> 播放数</div>
-          </div>
+  <!-- 用户信息卡 -->
+  <div class="user-info">
+    <div class="user-top">
+      <div class="user-avatar"></div>
+      <div class="user-detail">
+        <div class="user-name">
+          <span>狂客同学</span>
+          <span class="user-badge">VIP</span>
+        </div>
+        <div class="user-desc">这里是个性签名，支持一行简短描述～</div>
+        <div class="user-meta">
+          <div><b>128</b> 朋友</div>
+          <div><b>256</b> 动态</div>
+          <div><b>1.2K</b> 获赞</div>
         </div>
       </div>
-      <div class="profile-actions">
-        <a class="btn primary">+ 关注</a>
-        <a class="btn">发消息</a>
-        <a class="btn" title="更多">⋯</a>
-      </div>
+    </div>
+    <div class="user-actions">
+      <button class="btn">💬 发消息</button>
+      <button class="btn primary">➕ 添加好友</button>
+      <button class="btn" onclick="openMessageModal()">✉️ 留言</button>
     </div>
   </div>
 
   <!-- Tabs -->
   <div class="tabs">
-    <div class="tab-list" id="tabList">
-      <div class="tab active">主页</div>
-      <div class="tab">动态</div>
-      <div class="tab">投稿</div>
-      <div class="tab">合集</div>
-    </div>
-    <div class="tab-search">
-      <span>🔎</span>
-      <input type="text" placeholder="搜索视频、动态"/>
-    </div>
+    <div class="tab active">动态</div>
+    <div class="tab">相册</div>
+    <div class="tab">视频</div>
   </div>
 
-  <!-- 页面主体 -->
-  <div class="page">
-    <!-- 左侧：视频区 -->
-    <section class="section-card">
-      <div class="sec-header">
-        <div class="sec-title">视频 · <span style="color:var(--text-3);font-weight:400">共 0 个</span><!-- TODO: 数量 --></div>
-        <div class="filter" id="filterChips">
-          <div class="chip active">最新发布</div>
-          <div class="chip">最多播放</div>
-          <div class="chip">最多收藏</div>
+  <!-- 主体内容 -->
+  <main class="main">
+    <!-- 动态 1 - 纯文本 -->
+    <article class="moment">
+      <div class="moment-avatar" style="background-image:url('https://i.pravatar.cc/150?img=1')"></div>
+      <div class="moment-content">
+        <div class="moment-user">狂客同学</div>
+        <div class="moment-text">
+          今天天气真好，适合出去走走！分享一下今天的好心情 😊
+        </div>
+        <div class="moment-meta">
+          <div class="moment-time">
+            <span>2小时前</span>
+            <span class="moment-location">📍 北京·朝阳区</span>
+          </div>
+          <div class="moment-more">⋯</div>
+        </div>
+        <div class="moment-interact">
+          <div class="moment-likes">张三、李四、王五 等12人觉得很赞</div>
+          <div class="moment-comments">
+            <div class="comment-item">
+              <span class="comment-user">张三</span>：确实不错！
+            </div>
+            <div class="comment-item">
+              <span class="comment-user">李四</span> 回复 <span class="comment-reply">张三</span>：+1
+            </div>
+          </div>
         </div>
       </div>
+    </article>
 
-      <div class="video-grid">
-        <!-- 每个视频项（复制粘贴以补满），仅占位。TODO：逐个替换封面、标题、时长、播放/弹幕/日期 -->
-        <article class="v-item">
-          <div class="v-thumb" style="background-image:url('https://picsum.photos/seed/kv1/640/360')">
-            <div class="v-mask"></div>
-            <div class="v-stats"><span>▶️ 0</span><span>💬 0</span></div>
-            <div class="v-duration">00:00</div>
+    <!-- 动态 2 - 单图 -->
+    <article class="moment">
+      <div class="moment-avatar" style="background-image:url('https://i.pravatar.cc/150?img=2')"></div>
+      <div class="moment-content">
+        <div class="moment-user">狂客同学</div>
+        <div class="moment-text">落日余晖 🌅</div>
+        <div class="moment-images grid-1">
+          <div class="moment-img" style="background-image:url('https://picsum.photos/seed/sunset/600/600')"></div>
+        </div>
+        <div class="moment-meta">
+          <div class="moment-time">
+            <span>5小时前</span>
           </div>
-          <div class="v-info">
-            <div class="v-title">视频标题占位（可两行显示，超出省略）</div>
-            <div class="v-meta">11-14 发布</div>
-          </div>
-        </article>
-
-        <article class="v-item">
-          <div class="v-thumb" style="background-image:url('https://picsum.photos/seed/kv2/640/360')">
-            <div class="v-mask"></div>
-            <div class="v-stats"><span>▶️ 0</span><span>💬 0</span></div>
-            <div class="v-duration">00:00</div>
-          </div>
-          <div class="v-info">
-            <div class="v-title">第二条视频标题占位</div>
-            <div class="v-meta">11-09 发布</div>
-          </div>
-        </article>
-
-        <article class="v-item">
-          <div class="v-thumb" style="background-image:url('https://picsum.photos/seed/kv3/640/360')">
-            <div class="v-mask"></div>
-            <div class="v-stats"><span>▶️ 0</span><span>💬 0</span></div>
-            <div class="v-duration">00:00</div>
-          </div>
-          <div class="v-info">
-            <div class="v-title">第三条视频标题占位</div>
-            <div class="v-meta">10-29 发布</div>
-          </div>
-        </article>
-
-        <article class="v-item">
-          <div class="v-thumb" style="background-image:url('https://picsum.photos/seed/kv4/640/360')">
-            <div class="v-mask"></div>
-            <div class="v-stats"><span>▶️ 0</span><span>💬 0</span></div>
-            <div class="v-duration">00:00</div>
-          </div>
-          <div class="v-info">
-            <div class="v-title">第四条视频标题占位</div>
-            <div class="v-meta">10-27 发布</div>
-          </div>
-        </article>
-
-        <article class="v-item">
-          <div class="v-thumb" style="background-image:url('https://picsum.photos/seed/kv5/640/360')">
-            <div class="v-mask"></div>
-            <div class="v-stats"><span>▶️ 0</span><span>💬 0</span></div>
-            <div class="v-duration">00:00</div>
-          </div>
-          <div class="v-info">
-            <div class="v-title">第五条视频标题占位</div>
-            <div class="v-meta">10-23 发布</div>
-          </div>
-        </article>
-
-        <!-- 继续复制更多占位卡片 ... -->
-      </div>
-    </section>
-
-    <!-- 右侧：侧边栏 -->
-    <aside>
-      <div class="aside-card">
-        <div class="aside-title">充电</div>
-        <div class="charge">
-          <div style="color:var(--text-2)">已有 <b>0</b> 人为TA充电<!-- TODO: 数字 --></div>
-          <a class="btn primary">去充电 ⚡</a>
+          <div class="moment-more">⋯</div>
+        </div>
+        <div class="moment-interact">
+          <div class="moment-likes">王五 等5人觉得很赞</div>
         </div>
       </div>
+    </article>
 
-      <div class="aside-card">
-        <div class="aside-title">直播间</div>
-        <div style="color:var(--text-2);font-size:14px">主播不在，开播时会在动态通知你哦～</div>
-        <div style="margin-top:8px">
-          <a class="btn">前往TA的直播间</a>
+    <!-- 动态 3 - 三图 -->
+    <article class="moment">
+      <div class="moment-avatar" style="background-image:url('https://i.pravatar.cc/150?img=3')"></div>
+      <div class="moment-content">
+        <div class="moment-user">狂客同学</div>
+        <div class="moment-text">周末聚餐 🍜🍕🍰</div>
+        <div class="moment-images grid-3">
+          <div class="moment-img" style="background-image:url('https://picsum.photos/seed/food1/400/400')"></div>
+          <div class="moment-img" style="background-image:url('https://picsum.photos/seed/food2/400/400')"></div>
+          <div class="moment-img" style="background-image:url('https://picsum.photos/seed/food3/400/400')"></div>
+        </div>
+        <div class="moment-meta">
+          <div class="moment-time">
+            <span>昨天 18:30</span>
+            <span class="moment-location">📍 三里屯</span>
+          </div>
+          <div class="moment-more">⋯</div>
+        </div>
+        <div class="moment-interact">
+          <div class="moment-likes">赵六、钱七 等8人觉得很赞</div>
+          <div class="moment-comments">
+            <div class="comment-item">
+              <span class="comment-user">赵六</span>：看起来好好吃！
+            </div>
+          </div>
         </div>
       </div>
+    </article>
 
-      <div class="aside-card">
-        <div class="aside-title">个人资料</div>
-        <div class="profile-box">
-          <!-- TODO: 按需填写 -->
-          <div>UID：——</div>
-          <div>注册时间：——</div>
-          <div>所在地：——</div>
-          <div>其他：——</div>
+    <!-- 动态 4 - 视频 -->
+    <article class="moment">
+      <div class="moment-avatar" style="background-image:url('https://i.pravatar.cc/150?img=4')"></div>
+      <div class="moment-content">
+        <div class="moment-user">狂客同学</div>
+        <div class="moment-text">分享一段日常 vlog 📹</div>
+        <div class="moment-video" style="background-image:url('https://picsum.photos/seed/video/800/450')"></div>
+        <div class="moment-meta">
+          <div class="moment-time">
+            <span>3天前</span>
+          </div>
+          <div class="moment-more">⋯</div>
+        </div>
+        <div class="moment-interact">
+          <div class="moment-likes">孙八 等15人觉得很赞</div>
+          <div class="moment-comments">
+            <div class="comment-item">
+              <span class="comment-user">孙八</span>：拍得不错！
+            </div>
+            <div class="comment-item">
+              <span class="comment-user">周九</span>：期待下一期
+            </div>
+          </div>
         </div>
       </div>
+    </article>
 
-      <!-- 现在时间 -->
-      <div class="aside-card">
-        <div class="aside-title">现在时间</div>
-        <div class="clock-box">
-          <div id="clockTime" class="clock-time">00:00:00</div>
-          <div id="clockDate" class="clock-date">0000年00月00日 星期一</div>
+    <!-- 动态 5 - 九图 -->
+    <article class="moment">
+      <div class="moment-avatar" style="background-image:url('https://i.pravatar.cc/150?img=5')"></div>
+      <div class="moment-content">
+        <div class="moment-user">狂客同学</div>
+        <div class="moment-text">旅行记录 | 云南大理 🏔️ 这次旅行真的太美了，每一帧都是壁纸级别的风景...</div>
+        <div class="moment-images grid-more">
+          <div class="moment-img" style="background-image:url('https://picsum.photos/seed/travel1/400/400')"></div>
+          <div class="moment-img" style="background-image:url('https://picsum.photos/seed/travel2/400/400')"></div>
+          <div class="moment-img" style="background-image:url('https://picsum.photos/seed/travel3/400/400')"></div>
+          <div class="moment-img" style="background-image:url('https://picsum.photos/seed/travel4/400/400')"></div>
+          <div class="moment-img" style="background-image:url('https://picsum.photos/seed/travel5/400/400')"></div>
+          <div class="moment-img" style="background-image:url('https://picsum.photos/seed/travel6/400/400')"></div>
+          <div class="moment-img" style="background-image:url('https://picsum.photos/seed/travel7/400/400')"></div>
+          <div class="moment-img" style="background-image:url('https://picsum.photos/seed/travel8/400/400')"></div>
+          <div class="moment-img" style="background-image:url('https://picsum.photos/seed/travel9/400/400')"></div>
+        </div>
+        <div class="moment-meta">
+          <div class="moment-time">
+            <span>1周前</span>
+            <span class="moment-location">📍 云南·大理</span>
+          </div>
+          <div class="moment-more">⋯</div>
+        </div>
+        <div class="moment-interact">
+          <div class="moment-likes">吴十、郑十一 等28人觉得很赞</div>
+          <div class="moment-comments">
+            <div class="comment-item">
+              <span class="comment-user">吴十</span>：太美了！
+            </div>
+            <div class="comment-item">
+              <span class="comment-user">郑十一</span>：下次带上我！
+            </div>
+            <div class="comment-item">
+              <span class="comment-user">狂客同学</span> 回复 <span class="comment-reply">郑十一</span>：好的哈哈
+            </div>
+          </div>
         </div>
       </div>
+    </article>
 
-      <!-- 天气 -->
-      <div class="aside-card">
-        <div class="aside-title">天气</div>
-        <div id="weatherBox" class="weather-box">
-          <div class="weather-sub">正在获取天气…</div>
+    <!-- 更多动态占位 -->
+    <article class="moment">
+      <div class="moment-avatar" style="background-image:url('https://i.pravatar.cc/150?img=6')"></div>
+      <div class="moment-content">
+        <div class="moment-user">狂客同学</div>
+        <div class="moment-text">早安 ☀️</div>
+        <div class="moment-meta">
+          <div class="moment-time"><span>2周前</span></div>
+          <div class="moment-more">⋯</div>
         </div>
       </div>
+    </article>
+  </main>
 
-      <!-- 留言入口 -->
-      <div class="aside-card">
-        <div class="aside-title">给我留言</div>
-        <div style="color:var(--text-2);font-size:14px;margin-bottom:8px">
-          有想说的话欢迎留言，我会尽快回复你～
-        </div>
-        <button class="btn primary" onclick="openMessageModal()">打开留言框 ✉️</button>
-      </div>
-    </aside>
+  <!-- 底部导航栏 -->
+  <div class="sidebar">
+    <div class="sidebar-item active">
+      <div class="sidebar-icon">🏠</div>
+      <div>动态</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="sidebar-icon">🔍</div>
+      <div>发现</div>
+    </div>
+    <div class="sidebar-item" onclick="openMessageModal()">
+      <div class="sidebar-icon">✉️</div>
+      <div>留言</div>
+    </div>
+    <div class="sidebar-item">
+      <div class="sidebar-icon">👤</div>
+      <div>我的</div>
+    </div>
   </div>
-
-  <!-- 返回旧版（装饰） -->
-  <a class="old-btn" href="javascript:void(0)">返回旧版</a>
-
-  <!-- 悬浮留言按钮 -->
-  <div class="float-chat" title="留言" onclick="openMessageModal()">💬</div>
 
   <!-- 留言弹窗 -->
-  <div class="message-modal" id="messageModal">
-    <div class="message-container">
-      <div class="message-header">
-        <div class="message-title">给我留言</div>
-        <div class="close-btn" onclick="closeMessageModal()">✕</div>
+  <div class="modal" id="messageModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title">给我留言</div>
+        <div class="modal-close" onclick="closeMessageModal()">×</div>
       </div>
-
-      <form class="message-form" id="messageForm" onsubmit="submitMessage(event)">
+      <form id="messageForm" onsubmit="submitMessage(event)">
         <div class="form-group">
           <label class="form-label">昵称 *</label>
           <input class="form-input" id="userName" type="text" placeholder="请输入您的昵称" required maxlength="20"/>
         </div>
-
         <div class="form-group">
-          <label class="form-label">邮箱（选填）</label>
-          <input class="form-input" id="userEmail" type="email" placeholder="可选，填写后便于回复"/>
+          <label class="form-label">微信号（选填）</label>
+          <input class="form-input" id="userWechat" type="text" placeholder="方便回复时联系您"/>
         </div>
-
         <div class="form-group">
           <label class="form-label">留言内容 *</label>
-          <textarea class="form-textarea" id="messageContent" placeholder="写下您想说的话…" required maxlength="500"></textarea>
+          <textarea class="form-textarea" id="messageContent" placeholder="写下您想说的话..." required maxlength="500"></textarea>
           <div class="char-count"><span id="charCount">0</span>/500</div>
         </div>
-
-        <button class="submit-btn" id="submitBtn" type="submit"><span id="submitBtnText">📤 发送留言</span></button>
-        <div id="statusMessage" class="status-message"></div>
+        <button class="submit-btn" id="submitBtn" type="submit">
+          <span id="submitBtnText">发送</span>
+        </button>
+        <div id="statusMessage" class="status-msg"></div>
       </form>
     </div>
   </div>
@@ -585,44 +558,36 @@
     // ========== 配置 ==========
     const CONFIG = {
       api: {
-        submitUrl: '' // TODO: 留言提交接口，如 '/api/submit-message'；留空则本地模拟成功
-      },
-      qweather: {
-        key: '' // TODO: 和风天气 Key；留空则显示“未配置”
+        submitUrl: '' // TODO: 留言提交接口
       },
       rateLimit: {
-        cooldown: 60_000, // 60 秒
+        cooldown: 60000,
         maxLength: 500,
-        minLength: 10
+        minLength: 5
       }
     };
 
-    // ========== 工具 ==========
-    function sanitizeInput(text){
-      if(!text) return '';
+    // ========== 工具函数 ==========
+    function sanitizeInput(text) {
+      if (!text) return '';
       return text
-        .replace(/<script[^>]*>.*?<\/script>/gi,'')
-        .replace(/<iframe[^>]*>.*?<\/iframe>/gi,'')
-        .replace(/<object[^>]*>.*?<\/object>/gi,'')
-        .replace(/<embed[^>]*>.*?<\/embed>/gi,'')
-        .replace(/on\w+\s*=\s*["'][^"']*["']/gi,'')
-        .replace(/<[^>]+>/g,'')
+        .replace(/<script[^>]*>.*?<\/script>/gi, '')
+        .replace(/<[^>]+>/g, '')
         .trim();
     }
-    function isValidEmail(email){
-      return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-    function showStatus(message,type){
+
+    function showStatus(message, type) {
       const el = document.getElementById('statusMessage');
       el.textContent = message;
-      el.className = 'status-message show ' + (type==='success'?'success':'error');
+      el.className = 'status-msg show ' + type;
     }
-    function checkSubmitCooldown(){
+
+    function checkCooldown() {
       const last = localStorage.getItem('lastMessageSubmit');
-      if(last){
+      if (last) {
         const passed = Date.now() - Number(last);
-        if(passed < CONFIG.rateLimit.cooldown){
-          const left = Math.ceil((CONFIG.rateLimit.cooldown - passed)/1000);
+        if (passed < CONFIG.rateLimit.cooldown) {
+          const left = Math.ceil((CONFIG.rateLimit.cooldown - passed) / 1000);
           showStatus(`⏱️ 请等待 ${left} 秒后再次提交`, 'error');
           return false;
         }
@@ -630,206 +595,125 @@
       return true;
     }
 
-    // ========== 留言 ==========
-    function openMessageModal(){
+    // ========== 留言弹窗 ==========
+    function openMessageModal() {
       document.getElementById('messageModal').classList.add('active');
       document.body.style.overflow = 'hidden';
     }
-    function closeMessageModal(){
+
+    function closeMessageModal() {
       document.getElementById('messageModal').classList.remove('active');
       document.body.style.overflow = '';
       document.getElementById('messageForm').reset();
       document.getElementById('charCount').textContent = '0';
       const el = document.getElementById('statusMessage');
-      el.textContent = ''; el.className = 'status-message';
+      el.textContent = '';
+      el.className = 'status-msg';
     }
-    document.getElementById('messageModal').addEventListener('click',e=>{
-      if(e.target === e.currentTarget) closeMessageModal();
-    });
-    document.addEventListener('keydown',e=>{
-      if(e.key==='Escape') closeMessageModal();
-    });
-    document.getElementById('messageContent').addEventListener('input',()=>{
-      const val = document.getElementById('messageContent').value;
-      const count = val.length;
-      document.getElementById('charCount').textContent = count;
+
+    document.getElementById('messageModal').addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeMessageModal();
     });
 
-    async function submitMessage(e){
+    document.getElementById('messageContent').addEventListener('input', () => {
+      const val = document.getElementById('messageContent').value;
+      document.getElementById('charCount').textContent = val.length;
+    });
+
+    async function submitMessage(e) {
       e.preventDefault();
       const btn = document.getElementById('submitBtn');
       const btnText = document.getElementById('submitBtnText');
-      if(btn.disabled) return;
+      
+      if (btn.disabled) return;
 
       const userName = sanitizeInput(document.getElementById('userName').value);
-      const userEmail = sanitizeInput(document.getElementById('userEmail').value);
+      const userWechat = sanitizeInput(document.getElementById('userWechat').value);
       const messageContent = sanitizeInput(document.getElementById('messageContent').value);
 
-      if(!userName || !messageContent){
-        showStatus('❌ 请填写必填项', 'error'); return;
+      if (!userName || !messageContent) {
+        showStatus('❌ 请填写必填项', 'error');
+        return;
       }
-      if(messageContent.length < CONFIG.rateLimit.minLength){
-        showStatus(`❌ 留言内容至少需要 ${CONFIG.rateLimit.minLength} 个字符`, 'error'); return;
-      }
-      if(messageContent.length > CONFIG.rateLimit.maxLength){
-        showStatus(`❌ 留言内容不能超过 ${CONFIG.rateLimit.maxLength} 个字符`, 'error'); return;
-      }
-      if(userEmail && !isValidEmail(userEmail)){
-        showStatus('❌ 邮箱格式不正确', 'error'); return;
-      }
-      if(!checkSubmitCooldown()) return;
 
-      btn.disabled = true; btnText.textContent = '📮 发送中...';
+      if (messageContent.length < CONFIG.rateLimit.minLength) {
+        showStatus(`❌ 留言内容至少需要 ${CONFIG.rateLimit.minLength} 个字符`, 'error');
+        return;
+      }
 
-      try{
+      if (!checkCooldown()) return;
+
+      btn.disabled = true;
+      btnText.textContent = '发送中...';
+
+      try {
         const payload = {
           userName,
-          userEmail: userEmail || '未提供',
+          userWechat: userWechat || '未提供',
           messageContent,
-          timestamp: new Date().toLocaleString('zh-CN',{hour12:false})
+          timestamp: new Date().toLocaleString('zh-CN', { hour12: false })
         };
 
-        if(CONFIG.api.submitUrl){
-          const res = await fetch(CONFIG.api.submitUrl,{
-            method:'POST',
-            headers:{'Content-Type':'application/json'},
-            body:JSON.stringify(payload)
+        if (CONFIG.api.submitUrl) {
+          const res = await fetch(CONFIG.api.submitUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
           });
-          if(!res.ok) throw new Error('提交失败，请稍后重试');
-        }else{
-          // 本地模拟成功
-          await new Promise(r=>setTimeout(r,700));
+          if (!res.ok) throw new Error('提交失败');
+        } else {
+          await new Promise(r => setTimeout(r, 800));
         }
 
         localStorage.setItem('lastMessageSubmit', Date.now().toString());
-        showStatus('✨ 留言发送成功！感谢您的留言～', 'success');
+        showStatus('✨ 留言发送成功！', 'success');
         setTimeout(closeMessageModal, 1500);
-      }catch(err){
-        console.error('留言发送失败:', err);
-        showStatus(`❌ ${err.message||'提交失败'}`, 'error');
-      }finally{
-        btn.disabled = false; btnText.textContent = '📤 发送留言';
-      }
-    }
-
-    // ========== 时钟（北京时间） ==========
-    function updateClock(){
-      const now = new Date();
-      // 使用本地时间显示，若需严格北京时间，可使用 Intl 指定时区分别格式化
-      const y = new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',year:'numeric'}).format(now);
-      const m = new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',month:'2-digit'}).format(now);
-      const d = new Intl.DateTimeFormat('zh-CN',{timeZone:'Asia/Shanghai',day:'2-digit'}).format(now);
-      const w = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'][
-        Number(new Intl.DateTimeFormat('zh-CN-u-ca-chinese',{timeZone:'Asia/Shanghai',weekday:'numeric'}).format(now)) % 7
-      ] || ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'][new Date(now.toLocaleString('en-US',{timeZone:'Asia/Shanghai'})).getDay()];
-
-      const timeParts = new Intl.DateTimeFormat('zh-CN',{
-        timeZone:'Asia/Shanghai',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false
-      }).formatToParts(now).reduce((acc,p)=>{acc[p.type]=p.value;return acc;}, {});
-      const hh = timeParts.hour || '00';
-      const mm = timeParts.minute || '00';
-      const ss = timeParts.second || '00';
-
-      document.getElementById('clockTime').textContent = `${hh}:${mm}:${ss}`;
-      document.getElementById('clockDate').textContent = `${y}年${m}月${d}日 ${w}`;
-    }
-
-    // ========== 天气（和风） ==========
-    const qweatherIcons = {
-      '100':'☀️','101':'☁️','102':'⛅','103':'⛅','104':'☁️',
-      '150':'🌙','151':'☁️','152':'⛅','153':'⛅',
-      '300':'🌦️','301':'⛈️','302':'⚡','303':'⛈️','304':'⛈️',
-      '305':'🌧️','306':'🌧️','307':'🌧️','308':'🌊','309':'💧',
-      '310':'⛈️','311':'⛈️','312':'⛈️','313':'🌧️',
-      '400':'❄️','401':'❄️','402':'❄️','403':'❄️','404':'🌨️',
-      '500':'🌫️','501':'🌫️','502':'😷','503':'🌪️','504':'🌪️',
-      '507':'🌪️','508':'🌪️','509':'🌫️','510':'🌫️',
-      '900':'🔥','901':'❄️','999':'🌈'
-    };
-    function weatherIcon(code){ return qweatherIcons[code] || '🌈'; }
-
-    function renderWeatherLoading(msg='正在获取天气…'){
-      const box = document.getElementById('weatherBox');
-      box.innerHTML = `<div class="weather-sub">${msg}</div>`;
-    }
-    function renderWeatherError(msg='天气数据获取失败'){
-      const box = document.getElementById('weatherBox');
-      box.innerHTML = `<div class="weather-sub">${msg}</div>`;
-    }
-    function renderWeather(data){
-      const box = document.getElementById('weatherBox');
-      const w = data.now;
-      const icon = weatherIcon(w.icon);
-      box.innerHTML = `
-        <div class="weather-head">
-          <div class="weather-icon">${icon}</div>
-          <div>
-            <div style="font-weight:700">${w.text} · ${w.temp}°C</div>
-            <div class="weather-sub">体感 ${w.feelsLike}°C · 能见度 ${w.vis||'-'}km</div>
-          </div>
-        </div>
-        <div class="weather-detail">
-          <div>💨 ${w.windDir} ${w.windScale}级</div>
-          <div>💧 湿度 ${w.humidity}%</div>
-          <div>🧭 气压 ${w.pressure||'-'}hPa</div>
-        </div>
-      `;
-    }
-
-    async function fetchQWeather(){
-      const key = CONFIG.qweather.key;
-      if(!key){ renderWeatherError('未配置天气 Key'); return; }
-      if(!('geolocation' in navigator)){
-        renderWeatherError('无法获取定位权限'); return;
-      }
-      renderWeatherLoading();
-      navigator.geolocation.getCurrentPosition(async pos=>{
-        try{
-          const {latitude, longitude} = pos.coords;
-          const loc = `${longitude.toFixed(2)},${latitude.toFixed(2)}`;
-          const url = `https://devapi.qweather.com/v7/weather/now?location=${loc}&key=${encodeURIComponent(key)}&lang=zh`;
-          const res = await fetch(url);
-          if(!res.ok) throw new Error(`HTTP ${res.status}`);
-          const data = await res.json();
-          if(data && data.code==='200' && data.now){
-            renderWeather(data);
-          }else{
-            renderWeatherError('天气返回异常');
-          }
-        }catch(err){
-          console.error(err);
-          renderWeatherError('天气请求失败');
-        }
-      },err=>{
+      } catch (err) {
         console.error(err);
-        renderWeatherError('定位失败，无法获取天气');
-      },{timeout:10000,enableHighAccuracy:false,maximumAge:300000});
+        showStatus('❌ 提交失败，请稍后重试', 'error');
+      } finally {
+        btn.disabled = false;
+        btnText.textContent = '发送';
+      }
     }
 
-    // ========== 交互微动效（Tabs/筛选） ==========
-    const tabList = document.getElementById('tabList');
-    tabList.addEventListener('click', (e)=>{
-      const t = e.target.closest('.tab');
-      if(!t) return;
-      [...tabList.children].forEach(x=>x.classList.remove('active'));
-      t.classList.add('active');
-    });
-    const chips = document.getElementById('filterChips');
-    chips.addEventListener('click',(e)=>{
-      const c = e.target.closest('.chip');
-      if(!c) return;
-      [...chips.children].forEach(x=>x.classList.remove('active'));
-      c.classList.add('active');
+    // ========== Tabs切换 ==========
+    document.querySelectorAll('.tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+      });
     });
 
-    // ========== 启动 ==========
-    function boot(){
-      updateClock();
-      setInterval(updateClock,1000);
-      fetchQWeather();
-      setInterval(fetchQWeather, 15*60*1000); // 15 分钟
-    }
-    window.addEventListener('load', boot);
+    // ========== 底部导航切换 ==========
+    document.querySelectorAll('.sidebar-item').forEach(item => {
+      item.addEventListener('click', function() {
+        if (this.textContent.includes('留言')) return;
+        document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('active'));
+        this.classList.add('active');
+      });
+    });
+
+    // ========== 文本展开/收起 ==========
+    document.querySelectorAll('.moment-text').forEach(text => {
+      if (text.scrollHeight > 60) {
+        text.classList.add('collapsed');
+        const expandBtn = document.createElement('div');
+        expandBtn.className = 'text-expand';
+        expandBtn.textContent = '展开';
+        text.parentElement.insertBefore(expandBtn, text.nextSibling);
+        
+        expandBtn.addEventListener('click', () => {
+          if (text.classList.contains('collapsed')) {
+            text.classList.remove('collapsed');
+            expandBtn.textContent = '收起';
+          } else {
+            text.classList.add('collapsed');
+            expandBtn.textContent = '展开';
+          }
+        });
+      }
+    });
   </script>
 </body>
 </html>
